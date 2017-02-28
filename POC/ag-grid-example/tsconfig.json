@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "outDir": "lib",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "core-js"
+    ]
+  },
+  "files": [
+    "app/boot.ts",
+    "app/app.module.ts",
+    "app/app.component.ts",
+    "app/clickable.component.ts",
+    "app/clickable.parent.component.ts",
+    "app/from-component.component.ts",
+    "app/from-rich.component.ts",
+    "app/from-template.component.ts",
+    "app/proficiencyFilter.ts",
+    "app/ratio.component.ts",
+    "app/ratio.module.ts",
+    "app/clickable.module.ts",
+    "app/ratio.parent.component.ts",
+    "app/refData.ts",
+    "app/rich-grid.component.ts",
+    "app/skillFilter.ts",
+    "app/editor-component.component.ts",
+    "app/floating-row-renderer.component.ts",
+    "app/full-width-renderer.component.ts",
+    "app/group-row-renderer.component.ts",
+    "app/filter-component.component.ts",
+    "app/rich-grid-declarative.component.ts"
+  ]
+}
