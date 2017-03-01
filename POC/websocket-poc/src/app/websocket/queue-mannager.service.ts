@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { WebsocketService } from './websocket.service';
 import { Observable } from 'rxjs/Observable';
+import { WebsocketService } from './websocket.service';
 import { PulseService } from './pulse.service';
 
 @Injectable()
