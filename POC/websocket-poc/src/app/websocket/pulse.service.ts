@@ -1,34 +1,37 @@
 import { Injectable } from '@angular/core';
 import { WebsocketService } from './websocket.service';
 
+const TIME_INTERVAL = 5000; // 1000 * 5
+const MAX_HEARTBEATS = 5;
+
 @Injectable()
 export class PulseService {
 	private pulseInterval; 
-	private missedPulses = 0;
+	private heartbeats = 0;
 	constructor() { }
 
 	public sendPulse(wsService: WebsocketService) {
-		const ws = wsService.ws;
+		const ws = wsService.getWebSocket();
 		this.pulseInterval = setInterval(() => {
-		this.missedPulses++;
+		this.heartbeats++;
 		
-		if (this.missedPulses >= 5) {
-			ws.close();
+		if (this.heartbeats >= MAX_HEARTBEATS) {
+			wsService.closeWebSocket(ws);
 			clearInterval(this.pulseInterval);
 			console.log('Connection Disconnected.');
 			return;
 		}
 
-		ws.send(this.missedPulses);
-		console.log('Pulse sent: ' + this.missedPulses);
-		}, 5000);
+		wsService.sendToWebSocket(ws, this.heartbeats);
+		console.log('[PulseGenerator] Pulse sent: ' + this.heartbeats);
+		}, TIME_INTERVAL);
 	}
 
 	public resetPulse(wsService: WebsocketService) {
 		// TODO: [Lahiru] Refactor once the log module is completed
-		console.log('Pulse Resetting...');
+		console.log('[PulseGenerator] Pulse Resetting..');
 		clearInterval(this.pulseInterval);
-		this.missedPulses = 0;
+		this.heartbeats = 0;
 		this.sendPulse(wsService);
 	}
 }

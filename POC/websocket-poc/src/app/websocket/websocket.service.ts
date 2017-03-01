@@ -4,7 +4,7 @@ import { PulseService } from './pulse.service';
 
 @Injectable()
 export class WebsocketService {
-	public ws;
+	private ws;
 	public pulseGenerator;
 	private socket: Rx.Subject<MessageEvent>;
 	constructor() { }
@@ -41,5 +41,17 @@ export class WebsocketService {
 		};
 
 		return Rx.Subject.create(observer, observable);
+	}
+
+	public getWebSocket() {
+		return this.ws;
+	}
+
+	public closeWebSocket(ws: WebSocket) {
+		ws.close();
+	}
+
+	public sendToWebSocket(ws: WebSocket, message) {
+		ws.send(message);
 	}
 }
