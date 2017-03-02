@@ -1,26 +1,18 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserModule }        from '@angular/platform-browser';
-import { FormsModule }          from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
-import { AppComponent }          from './app.component';
-import { PageNotFoundComponent } from './not-found.component';
-import { PriceWidgetsModule }     from './PriceWidgets/pricewidgets.module';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
-const appRoutes: Routes = [
-  { path: '',   redirectTo: '/watchlist', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
-];
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PageNotFoundComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    PriceWidgetsModule,
-    RouterModule.forRoot(appRoutes)
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
