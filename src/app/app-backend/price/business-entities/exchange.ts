@@ -1,6 +1,6 @@
 export class Exchange {
 	// Meta
-	exchangeCode: string;
+	code: string;
     longDesc: string;
 	shortDesc: string;
     dispExgCode: string;

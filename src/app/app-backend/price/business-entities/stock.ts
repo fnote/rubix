@@ -1,10 +1,10 @@
 export class Stock {
 	// Meta
-    symbolCode: string;
+    code: string;
 	exchangeCode: string;
     longDesc: string;
 	shortDesc: string;
-    dispSymbCode: string;
+    dispCode: string;
 
 	// Realtime
 	lastTradePrice: number;
