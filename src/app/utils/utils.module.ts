@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UtilsService } from './utils.service';
-import { HelperService } from './helper/helper.service';
+import { CommonHelperService } from './helper/common-helper.service';
 import { TradeHelperService } from './helper/trade-helper.service';
 
 @NgModule({
@@ -9,7 +9,7 @@ import { TradeHelperService } from './helper/trade-helper.service';
   declarations: [],
   providers: [
     UtilsService,
-    HelperService
+    CommonHelperService
     ],
 })
 export class UtilsModule { }

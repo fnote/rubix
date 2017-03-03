@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {UtilsService} from './utils/utils.service';
-import {HelperService} from './utils/helper/helper.service';
+import {CommonHelperService} from './utils/helper/common-helper.service';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +13,10 @@ export class AppComponent {
   result: string;
   inputValues: string;
 
-  constructor( private helperService: HelperService) {}
+  constructor( private commonHelperService: CommonHelperService) {}
 
   convert(): void {
-    console.log(this.helperService.getMonth('Jan'));
-    console.log(this.helperService.formatDate('20170218142324' , 'yyyy-MM-dd h:mm:ss' , {hour : 1 , min : 1}));
+    console.log(this.commonHelperService.getMonth('Jan'));
+    console.log(this.commonHelperService.formatDate('20170218142324' , 'yyyy-MM-dd h:mm:ss' , {hour : 1 , min : 1}));
   }
 }

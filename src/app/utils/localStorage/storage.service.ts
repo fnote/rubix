@@ -23,9 +23,13 @@ persistIteration = 1;
     }
    }
 
+  getCurrentDate(): number {
+    return new Date().getTime();
+  }
+
   saveData(key: string , dataObj: any): void {
     if (typeof localStorage !== 'undefined') {
-      dataObj.persistTime = new Date().getTime();
+      dataObj.persistTime = this.getCurrentDate();
       this.addToPersistTimeArr(key , dataObj.persistTime);
       localStorage.setItem(key, JSON.stringify(dataObj));
     }
