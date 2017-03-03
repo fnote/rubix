@@ -1,20 +1,24 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
+
 import { AppComponent } from './app.component';
-import { UtilsModule } from './utils/utils.module';
+import { CacheModule } from './cache/cache.module';
+import { CacheService } from './cache/cache.service';
+import { CommunicationService } from './communication/communication.service';
 
 @NgModule({
   declarations: [ AppComponent ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    UtilsModule
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    CacheService,
+    CommunicationService
+    ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
