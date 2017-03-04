@@ -1,13 +1,14 @@
 export class Market {
+
     // Meta
-    code: string;
-	exchangeCode: string;
+	exchangeCode : string;
+	code : string;
 
 	// Realtime
-	volume: number;
-	turnover: number;
+	volume : number;
+	turnover : number;
 
-    constructor(values: Object = {}) {
-        Object.assign(this, values);
-    }
+	constructor(values : Object = {}) {
+		Object.assign(this, values);
+	}
 }

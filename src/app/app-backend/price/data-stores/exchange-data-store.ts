@@ -1,23 +1,23 @@
 import { Exchange } from '../business-entities/exchange';
 
 export class ExchangeDataStore {
-    private allExchangeStore = {};
+	private allExchangeStore = {};
     
-    constructor() {
-        this.allExchangeStore = {};
-    }
+	constructor() {
+		this.allExchangeStore = {};
+	}
 
-    public getOrAddExchange(exchangeCode) {
-        let exgObj = this.allExchangeStore[exchangeCode];
+	public getOrAddExchange(exchangeCode) {
+		let exgObj = this.allExchangeStore[exchangeCode];
 
-        if (!exgObj) {
-            exgObj = new Exchange({
-                code: exchangeCode
-            });
+		if (!exgObj) {
+			exgObj = new Exchange({
+				code: exchangeCode
+			});
 
-            this.allExchangeStore[exchangeCode] = exgObj;
-        }
+			this.allExchangeStore[exchangeCode] = exgObj;
+		}
 
-        return exgObj;
-    }
+		return exgObj;
+	}
 }
