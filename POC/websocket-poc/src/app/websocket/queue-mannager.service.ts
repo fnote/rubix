@@ -13,8 +13,10 @@ interface Connection {
 	url: string;
 	connectedSocket: Rx.Subject<MessageEvent>;
 	sendMessageQueue: Array<any>;
+	recivedMessageQueue: Array<any>;
 	isConnected: boolean;
-	queueProcessInterval: any;
+	sendQueueProcessInterval: any;
+	recivedQueueProcessInterval: any;
 	subscription: any;
 }
 
@@ -41,21 +43,24 @@ export class QueueMannagerService {
 				url: connection.url,
 				connectedSocket: null,
 				sendMessageQueue: [],
+				recivedMessageQueue: [],
 				isConnected: false,
-				queueProcessInterval: null,
+				sendQueueProcessInterval: null,
+				recivedQueueProcessInterval: null,
 				subscription: null
 			};
 			this.connectedSocketPool.push(connConfig);
 		});
 	}
 
-	private enQueuesendMessage(message: Object, sendMessageQueue: Array<any>): void {
-		sendMessageQueue.push(message);
+	private enQueueMessage(message: Object, messageQueue: Array<any>): void {
+		messageQueue.push(message);
 	}
 
-	private deQueueSendMessage(sendMessageQueue: Array<any>): any {
-		return sendMessageQueue.shift();
+	private deQueueMessage(messageQueue: Array<any>): any {
+		return messageQueue.shift();
 	}
+
 
 	public getConnectionByIndex(index: number): Connection {
 		return this.connectedSocketPool[index];
@@ -70,10 +75,11 @@ export class QueueMannagerService {
 				connection.isConnected = true;
 				this.subscribeForConnected(connectionConfig.index);
 				this.activateSendFromQueue(connection);
+				this.activateReviceFromQueue(connection);
 			}).catch(error => {
 				console.log('[QueueMannagerService] error occured..' + connectionConfig.channel );
 			});
-		} else {
+		}else {
 			console.log('[QueueMannagerService] allready connected..' + connectionConfig.channel );
 		}
 	}
@@ -82,20 +88,31 @@ export class QueueMannagerService {
 		const connection = this.getConnectionByIndex(connectionConfig.index);
 		const sendMessageQueue = connection.sendMessageQueue;
 		const socket = connection.connectedSocket;
-		connection.queueProcessInterval = setInterval(() => {
+		connection.sendQueueProcessInterval = setInterval(() => {
 			if ( sendMessageQueue.length > 0 ) {
-				const msg = this.deQueueSendMessage(sendMessageQueue);
+				const msg = this.deQueueMessage(sendMessageQueue);
 				connection.connectedSocket.next(<MessageEvent>{data: msg});
+				console.log('[QueueMannagerService] Request sent. ' + connectionConfig.channel);
+			}
+		}, TIME_INTERVAL);
+	}
+
+	private activateReviceFromQueue(connectionConfig: Connection): void {
+		const connection = this.getConnectionByIndex(connectionConfig.index);
+		const recivedMessageQueue = connection.recivedMessageQueue;
+		connection.recivedQueueProcessInterval = setInterval(() => {
+			if ( recivedMessageQueue.length > 0 ) {
+				const msg = this.deQueueMessage(recivedMessageQueue);
+				this.response$.next(msg);
 			}
 		}, TIME_INTERVAL);
 	}
 
 	private subscribeForConnected(index) {
 		const connection = this.getConnectionByIndex(index);
-		if (connection.connectedSocket && !connection.subscription) {
+		if (connection.connectedSocket && !connection.subscription ) {
 			connection.subscription = connection.connectedSocket.subscribe(msg => {
-													console.log('[QueueMannagerService] response recived from ' + connection.channel );
-													this.response$.next(msg);
+													this.enQueueMessage(msg, connection.recivedMessageQueue);
 												}, error => {
 													console.log('[QueueMannagerService] error occured..' + error );
 												}, () => {
@@ -108,16 +125,17 @@ export class QueueMannagerService {
 		const connection = this.getConnectionByIndex(index);
 		if (connection.isConnected && connection.subscription) {
 			connection.isConnected = false;
-			// connection.subscription.unsubscribe();
+			connection.subscription.unsubscribe();
 			connection.subscription = null;
-			clearInterval(connection.queueProcessInterval);
-			connection.queueProcessInterval = null;
+			clearInterval(connection.sendQueueProcessInterval);
+			clearInterval(connection.recivedQueueProcessInterval);
+			connection.sendQueueProcessInterval = null;
 		}
 	}
 
 	public addMessageToQueue(data): void {
 		const connection = this.getConnectionByIndex(data.index);
-		this.enQueuesendMessage(data.data, connection.sendMessageQueue);
+		this.enQueueMessage(data.data, connection.sendMessageQueue);
 		if (!connection.isConnected) {
 			this.connect(data);
 		}
