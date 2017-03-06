@@ -1,5 +1,12 @@
-<h1>Angular Router</h1>
-    <nav>
-      <a routerLink="/watchlist" routerLinkActive="active">Watchlist</a>
-    </nav>
-    <router-outlet></router-outlet>
+<h1>
+  {{title}}
+</h1>
+
+<div>
+  <label>Input </label>
+  <input [(ngModel)]="inputValues" placeholder="input" />
+</div>
+<div>
+  <label>Result : </label>{{result}}
+</div>
+<button (click)="convert()">Convert</button>
