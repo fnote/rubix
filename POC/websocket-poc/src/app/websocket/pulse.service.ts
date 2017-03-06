@@ -4,8 +4,15 @@ import { WebsocketService } from './websocket.service';
 const TIME_INTERVAL = 5000; // 1000 * 5
 const MAX_HEARTBEATS = 5;
 
+interface PulseConfig {
+	index: number;
+	channel: string;
+}
+
 @Injectable()
 export class PulseService {
+	public pulseGenerator;
+	private pulseObj: PulseConfig;
 	private pulseInterval; 
 	private heartbeats = 0;
 	constructor(private ws: WebSocket, private wsService: WebsocketService) {
@@ -14,17 +21,23 @@ export class PulseService {
 
 	public sendPulse() {
 		this.pulseInterval = setInterval(() => {
-		this.heartbeats++;
+			this.heartbeats++;
+			this.pulseObj = {
+				index: this.heartbeats,
+				channel: 'pulse'
+			};
 		
-		if (this.heartbeats >= MAX_HEARTBEATS) {
-			this.wsService.closeWebSocket(this.ws);
-			clearInterval(this.pulseInterval);
-			console.log('Connection Disconnected.');
-			return;
-		}
+			if (this.heartbeats >= MAX_HEARTBEATS) {
+				this.wsService.closeWebSocket(this.ws);
+				clearInterval(this.pulseInterval);
+				// TODO: [Lahiru] Refactor once the log module is completed
+				console.log('Connection Disconnected.');
+				return;
+			}
 
-		this.wsService.sendToWebSocket(this.ws, this.heartbeats);
-		console.log('[PulseGenerator] Pulse sent: ' + this.heartbeats);
+			this.wsService.sendToWebSocket(this.ws, this.pulseObj);
+			// TODO: [Lahiru] Refactor once the log module is completed
+			console.log('[PulseGenerator] Pulse sent to ' + this.ws.url);
 		}, TIME_INTERVAL);
 	}
 
