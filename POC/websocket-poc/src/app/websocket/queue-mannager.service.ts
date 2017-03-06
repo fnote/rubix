@@ -74,8 +74,8 @@ export class QueueMannagerService {
 				connection.connectedSocket = socket;
 				connection.isConnected = true;
 				this.subscribeForConnected(connectionConfig.index);
-				this.activateSentReciveFromQueue(connection.sendMessageQueue,connection.sendQueueProcessInterval,connection.connectedSocket);
-				this.activateSentReciveFromQueue(connection.recivedMessageQueue,connection.recivedQueueProcessInterval,this.response$);
+				this.activateSentReciveFromQueue(connection.sendMessageQueue, connection.sendQueueProcessInterval, connection.connectedSocket);
+				this.activateSentReciveFromQueue(connection.recivedMessageQueue, connection.recivedQueueProcessInterval, this.response$);
 			}).catch(error => {
 				console.log('[QueueMannagerService] error occured..' + connectionConfig.channel );
 			});
@@ -84,7 +84,7 @@ export class QueueMannagerService {
 		}
 	}
 
-	private activateSentReciveFromQueue(messageQueue:Array<any>, timeIntervalProcess:any, socket:Rx.Subject<MessageEvent> ):void {
+	private activateSentReciveFromQueue(messageQueue: Array<any>, timeIntervalProcess: any, socket: Rx.Subject<MessageEvent> ): void {
 		timeIntervalProcess = setInterval(() => {
 			if ( messageQueue.length > 0 ) {
 				const msg = this.deQueueMessage(messageQueue);
