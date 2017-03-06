@@ -6,16 +6,15 @@ import { DataService } from './data.service';
 import { ConfigService } from '../config/config.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [],
-  providers: [
-    WebsocketService,
+	imports: [
+		CommonModule
+	],
+	declarations: [],
+	providers: [
+		WebsocketService,
 		QueueMannagerService,
 		DataService,
 		ConfigService
-  ],
-
+	],
 })
 export class CommunicationModule { }
