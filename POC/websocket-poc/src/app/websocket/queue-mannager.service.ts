@@ -18,6 +18,7 @@ interface Connection {
 	sendQueueProcessInterval: any;
 	recivedQueueProcessInterval: any;
 	subscription: any;
+	pulseService: PulseService;
 }
 
 @Injectable()
@@ -47,7 +48,8 @@ export class QueueMannagerService {
 				isConnected: false,
 				sendQueueProcessInterval: null,
 				recivedQueueProcessInterval: null,
-				subscription: null
+				subscription: null,
+				pulseService: null
 			};
 			this.connectedSocketPool.push(connConfig);
 		});
@@ -97,11 +99,15 @@ export class QueueMannagerService {
 		const connection = this.getConnectionByIndex(index);
 		if (connection.connectedSocket && !connection.subscription ) {
 			connection.subscription = connection.connectedSocket.subscribe(msg => {
-													this.enQueueMessage(msg, connection.recivedMessageQueue);
+													if (JSON.parse(msg.data).channel !== 'pulse') {
+														this.enQueueMessage(msg, connection.recivedMessageQueue);
+													}
+													connection.pulseService.resetPulse();
 												}, error => {
 													console.log('[QueueMannagerService] error occured..' + error );
 												}, () => {
-													console.log('[QueueMannagerService] disconnected..' + connection.channel );
+													this.unsubcribeConnection(connection.index);
+													console.log('[QueueMannagerService] disconnected.. ' + connection.channel );
 												});
 		}
 	}

@@ -31,13 +31,13 @@ export class PulseService {
 				this.wsService.closeWebSocket(this.ws);
 				clearInterval(this.pulseInterval);
 				// TODO: [Lahiru] Refactor once the log module is completed
-				console.log('Connection Disconnected.');
+				console.log('Disconnected. ' + this.ws.url);
 				return;
 			}
 
-			this.wsService.sendToWebSocket(this.ws, this.pulseObj);
+			this.wsService.sendToWebSocket(this.ws, JSON.stringify(this.pulseObj));
 			// TODO: [Lahiru] Refactor once the log module is completed
-			console.log('[PulseGenerator] Pulse sent to ' + this.ws.url);
+			console.log('[PulseGenerator] Pulse sent to ' + this.ws.url + ': ' + this.pulseObj.index);
 		}, TIME_INTERVAL);
 	}
 

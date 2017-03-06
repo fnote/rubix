@@ -11,7 +11,7 @@ export class WebsocketService {
 		const ws = new WebSocket(connection.url);
 		const promise  = new Promise((resolve, reject) => {
 			ws.onopen = (res) => {
-				// new PulseService(ws, this);
+				connection.pulseService = new PulseService(ws, this);
 				console.log('[WebsocketService] connected to ' + connection.url );
 				resolve(ws);
 			};
