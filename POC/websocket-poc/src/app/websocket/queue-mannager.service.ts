@@ -74,8 +74,8 @@ export class QueueMannagerService {
 				connection.connectedSocket = socket;
 				connection.isConnected = true;
 				this.subscribeForConnected(connectionConfig.index);
-				this.activateSendFromQueue(connection);
-				this.activateReviceFromQueue(connection);
+				this.activateSentReciveFromQueue(connection.sendMessageQueue,connection.sendQueueProcessInterval,connection.connectedSocket);
+				this.activateSentReciveFromQueue(connection.recivedMessageQueue,connection.recivedQueueProcessInterval,this.response$);
 			}).catch(error => {
 				console.log('[QueueMannagerService] error occured..' + connectionConfig.channel );
 			});
@@ -83,30 +83,15 @@ export class QueueMannagerService {
 			console.log('[QueueMannagerService] allready connected..' + connectionConfig.channel );
 		}
 	}
-	 
-	private activateSendFromQueue(connectionConfig: Connection): void {
-		const connection = this.getConnectionByIndex(connectionConfig.index);
-		const sendMessageQueue = connection.sendMessageQueue;
-		const socket = connection.connectedSocket;
-		connection.sendQueueProcessInterval = setInterval(() => {
-			if ( sendMessageQueue.length > 0 ) {
-				const msg = this.deQueueMessage(sendMessageQueue);
-				connection.connectedSocket.next(<MessageEvent>{data: msg});
-				console.log('[QueueMannagerService] Request sent. ' + connectionConfig.channel);
-			}
-		}, TIME_INTERVAL);
-	}
 
-	private activateReviceFromQueue(connectionConfig: Connection): void {
-		const connection = this.getConnectionByIndex(connectionConfig.index);
-		const recivedMessageQueue = connection.recivedMessageQueue;
-		connection.recivedQueueProcessInterval = setInterval(() => {
-			if ( recivedMessageQueue.length > 0 ) {
-				const msg = this.deQueueMessage(recivedMessageQueue);
-				this.response$.next(msg);
+	private activateSentReciveFromQueue(messageQueue:Array<any>, timeIntervalProcess:any, socket:Rx.Subject<MessageEvent> ):void {
+		timeIntervalProcess = setInterval(() => {
+			if ( messageQueue.length > 0 ) {
+				const msg = this.deQueueMessage(messageQueue);
+				socket.next(<MessageEvent>{data: msg});
 			}
 		}, TIME_INTERVAL);
-	}
+	} 
 
 	private subscribeForConnected(index) {
 		const connection = this.getConnectionByIndex(index);

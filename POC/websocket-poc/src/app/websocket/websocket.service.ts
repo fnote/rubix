@@ -33,6 +33,7 @@ export class WebsocketService {
 			next: (data: Object) => {
 				if (socket.readyState === WebSocket.OPEN) {
 					socket.send(JSON.stringify(data));
+					console.log('[WebsocketService] sent to '+ socket.url + " " + data );
 				}
 			}
 		};
