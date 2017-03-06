@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import * as Rx from 'rxjs/Rx';
 import { WebsocketService } from './websocket.service';
 import { PulseService } from './pulse.service';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '../../config/config.service';
 
 const TIME_INTERVAL = 3000; // 1000 * 3
 
