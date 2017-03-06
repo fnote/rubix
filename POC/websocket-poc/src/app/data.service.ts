@@ -5,62 +5,28 @@ import {QueueMannagerService} from './websocket/queue-mannager.service';
 @Injectable()
 export class DataService {
 
-	public subscribedConnections= [];
-
+	private subscribedConnections = [];
 	constructor(private queueMannagerService: QueueMannagerService) {
+		this.init();
 	}
 
-	public getSubscribeConnectionByChannel(channel) {
-		return this.subscribedConnections.filter(connection => connection.channel === channel).pop();
+	private init() {
+		this.getResponseData();
 	}
 
-	public subscribeConnections(connectionConfigs) {
-		connectionConfigs.forEach(config => {
-			this.subscribeConnection(config);
+	public send(data) {
+		this.queueMannagerService.addMessageToQueue(data);
+	}
+
+	public unsubscribeConnection(index: number): void {
+		this.queueMannagerService.unsubcribeConnection(index);
+	}
+
+	private getResponseData() {
+		this.queueMannagerService.getResponse().subscribe(msg => {
+			// TODO: [Chandana] Refactor once the log module is completed
+			console.log('[DataService] response recived..' + msg );
 		});
 	}
 
-	public subscribeConnection(connectionConfig) {
-		const isConnected = this.queueMannagerService.getConnectedSocketByChanel(connectionConfig.channel);
-		let isSubscribed = false;
-		if (!isConnected) {
-			this.queueMannagerService.connectPoolConnectionByChannel(connectionConfig);
-		}
-		isSubscribed = this.getSubscribeConnectionByChannel(connectionConfig.channel);
-		if (!isSubscribed) {
-			return this.subscribeConnectionByChannel(connectionConfig.channel);
-		}
-		return new Promise((resolve) => {
-			resolve(isSubscribed);
-		});
-	}
-
-	public unsubscribeConnection(connectionConfig) {
-		this.getSubscribeConnectionByChannel(connectionConfig.channel).subscribe.unsubscribe();
-	}
-
-	public sendMessage(message, connectionConfig) {
-		this.subscribeConnection(connectionConfig).then(() => {
-			this.queueMannagerService.sendMessage(message);
-		}).catch((error => {
-			console.log(error + 'promise rejected');
-		}));
-	}
-
-	private  subscribeConnectionByChannel(channel) {
-		const connecedSocket = this.queueMannagerService.getConnectedSocketByChanel(channel);
-		const subscribeOb = {
-			channel: channel,
-			subscribe: connecedSocket.socket.subscribe(msg => {
-					console.log('Response: ' + msg);
-				}, error => {
-					console.log('Error: ' + error);
-				}, () => {
-					console.log('Disconnected');
-				})
-		};
-		return new Promise((resolve, reject) => {
-			resolve(this.subscribedConnections.push(subscribeOb));
-		});
-	}
 }

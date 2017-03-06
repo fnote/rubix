@@ -6,6 +6,7 @@ import { WebsocketService } from './websocket/websocket.service';
 import { QueueMannagerService } from './websocket/queue-mannager.service';
 import { DataService } from './data.service';
 import { AppComponent } from './app.component';
+import { ConfigService } from './config/config.service';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -17,7 +18,8 @@ import { AppComponent } from './app.component';
 	providers: [
 		WebsocketService,
 		QueueMannagerService,
-		DataService
+		DataService,
+		ConfigService
 		],
 	bootstrap: [AppComponent]
 })

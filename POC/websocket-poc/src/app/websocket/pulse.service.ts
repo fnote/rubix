@@ -8,30 +8,31 @@ const MAX_HEARTBEATS = 5;
 export class PulseService {
 	private pulseInterval; 
 	private heartbeats = 0;
-	constructor() { }
+	constructor(private ws: WebSocket, private wsService: WebsocketService) {
+		this.sendPulse();
+	}
 
-	public sendPulse(wsService: WebsocketService) {
-		const ws = wsService.getWebSocket();
+	public sendPulse() {
 		this.pulseInterval = setInterval(() => {
 		this.heartbeats++;
 		
 		if (this.heartbeats >= MAX_HEARTBEATS) {
-			wsService.closeWebSocket(ws);
+			this.wsService.closeWebSocket(this.ws);
 			clearInterval(this.pulseInterval);
 			console.log('Connection Disconnected.');
 			return;
 		}
 
-		wsService.sendToWebSocket(ws, this.heartbeats);
+		this.wsService.sendToWebSocket(this.ws, this.heartbeats);
 		console.log('[PulseGenerator] Pulse sent: ' + this.heartbeats);
 		}, TIME_INTERVAL);
 	}
 
-	public resetPulse(wsService: WebsocketService) {
+	public resetPulse() {
 		// TODO: [Lahiru] Refactor once the log module is completed
 		console.log('[PulseGenerator] Pulse Resetting..');
 		clearInterval(this.pulseInterval);
 		this.heartbeats = 0;
-		this.sendPulse(wsService);
+		this.sendPulse();
 	}
 }

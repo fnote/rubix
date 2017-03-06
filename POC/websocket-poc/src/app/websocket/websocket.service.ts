@@ -4,47 +4,39 @@ import { PulseService } from './pulse.service';
 
 @Injectable()
 export class WebsocketService {
-	private ws;
-	public pulseGenerator;
 	private socket: Rx.Subject<MessageEvent>;
 	constructor() { }
 
-	public connect(conOb): Rx.Subject<MessageEvent> {
-		this.socket = this.create(conOb.url);
-		console.log('Connecting...');
-		return this.socket;
+	public initConnection(connection): Promise<WebSocket> {
+		const ws = new WebSocket(connection.url);
+		const promise  = new Promise((resolve, reject) => {
+			ws.onopen = (res) => {
+				// new PulseService(ws, this);
+				console.log('[WebsocketService] connected to ' + connection.url );
+				resolve(ws);
+			};
+		});
+		return promise;	
 	}
 
-	private create(url): Rx.Subject<MessageEvent> {
-		this.ws = new WebSocket(url);
+	public createConnection(socket: WebSocket): Rx.Subject<MessageEvent> {
 
 		const observable = Rx.Observable.create(
 			(obs: Rx.Observer<MessageEvent>) => {
-				this.ws.onopen = (evt) => {
-					this.pulseGenerator = new PulseService();
-					this.pulseGenerator.sendPulse(this);
-					console.log('Connected: ' + url);
-				};
-				this.ws.onmessage = obs.next.bind(obs);
-				this.ws.onerror = obs.error.bind(obs);
-				this.ws.onclose = obs.complete.bind(obs);
-				
-				return this.ws.close.bind(this.ws);
+				socket.onmessage = obs.next.bind(obs);
+				socket.onerror = obs.error.bind(obs);
+				socket.onclose = obs.complete.bind(obs);
+				return socket.close.bind(socket);
 		});
 
 		const observer = {
 			next: (data: Object) => {
-				if (this.ws.readyState === WebSocket.OPEN) {
-					this.ws.send(JSON.stringify(data));
+				if (socket.readyState === WebSocket.OPEN) {
+					socket.send(JSON.stringify(data));
 				}
 			}
 		};
-
 		return Rx.Subject.create(observer, observable);
-	}
-
-	public getWebSocket() {
-		return this.ws;
 	}
 
 	public closeWebSocket(ws: WebSocket) {
@@ -54,4 +46,5 @@ export class WebsocketService {
 	public sendToWebSocket(ws: WebSocket, message) {
 		ws.send(message);
 	}
+
 }
