@@ -1,32 +1,36 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {QueueMannagerService} from './websocket/queue-mannager.service';
+import { Observable } from 'rxjs/Observable';
+import { QueueMannagerService } from './websocket/queue-mannager.service';
+import { AjaxService } from './ajax/ajax.service';
 
 @Injectable()
 export class DataService {
 
-	private subscribedConnections = [];
-	constructor(private queueMannagerService: QueueMannagerService) {
+	constructor(private queueMannagerService: QueueMannagerService, private ajaxService: AjaxService) {
 		this.init();
 	}
 
 	private init() {
-		this.getResponseData();
+		this.getWsResponse();
 	}
 
-	public send(data) {
+	public sendToWs(data): void {
 		this.queueMannagerService.addMessageToQueue(data);
 	}
 
-	public unsubscribeConnection(index: number): void {
+	public unsubscribeWsConnection(index: number): void {
 		this.queueMannagerService.unsubcribeConnection(index);
 	}
 
-	private getResponseData() {
+	private getWsResponse(): void {
 		this.queueMannagerService.getResponse().subscribe(msg => {
 			// TODO: [Chandana] Refactor once the log module is completed
 			console.log('[DataService] response recived..' + msg );
 		});
+	}
+
+	public sendAjaxRequest(requestOptions): Promise<any> {
+		return this.ajaxService.send(requestOptions);
 	}
 
 }
