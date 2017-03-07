@@ -90,7 +90,7 @@ export class CommonHelperService {
       if (App.language.languageCode === 'AR') {
         if (hourDiff >= 24) { // more than a day
           days = Math.floor(hourDiff / 24);
-          if (hrs > 0) {
+		if (hrs > 0) {
             formattedValue = App.language.labels.DT_AGO + ' ' +  days + ' ' +
             ( days > 1 ? App.language.labels.DT_DAYS  : App.language.labels.DT_DAY);
           } else {
