@@ -8,7 +8,10 @@ export class PriceService {
 
 	constructor() { }
 
-    // Expose data managers
+	/**
+     * Fetch data managers
+     * @param dmID Data Manager ID number
+     */
 	public getDataManager (dmID : number) {
 		let dtStore : BaseDataStore = null;
 
@@ -23,4 +26,64 @@ export class PriceService {
 
 		return dtStore;
 	}
+
+	//
+	// API to handle authentication
+	//
+
+	/**
+     * Authenticate with username and password
+     * @param authParams An object with following properties set
+	 * 						channel		: Value Defined at Channels Enum. Mandatory
+     *                      username    : Username. Mandatory.
+     *                      password    : Password. Mandatory.
+     *                      loginIP     : Machine IP
+     *                      appVersion  : Application version
+     *                      lan         : Current Language. Mandatory.
+     */
+	public authenticateWithUsernameAndPassword (authParams : Object = {}) {
+        // let request = <Price Request Generator>.generateRetailAuthRequest(authParams);
+        // talk to the communication service and send the auth request
+	}
+
+	/**
+     * Authenticate with SSO token
+     * @param authParams An object with following properties set
+     *                      channel		: Value Defined at Channels Enum. Mandatory
+     *                      sso token	: SSO token. Mandatory
+     *                      loginIP     : Machine IP
+     *                      appVersion  : Application version
+     *                      lan         : Current Language. Mandatory.
+     */
+	public authenticateWithSsoToken (authParams : Object = {}) {
+	}
+
+	//
+	// API to handle price related meta and streaming
+	//
+
+	/**
+     * Subscribe and Un-subscribe from exchange updates
+     * @param exchange Exchange code string
+     */
+	public addExchangeRequest (exchange) {
+	}
+
+	public removeExchangeRequest (exchange) {
+	}
+
+    /**
+     * Subscribe and Un-subscribe from symbol updates
+     * @param exchange Exchange Code string
+     * @param symbol Symbol Code string
+     */
+	public addSymbolRequest (exchange, symbol) {
+	}
+
+	public removeSymbolRequest (exchange, symbol) {
+	}
+
+	//
+	// API to handle trade related meta and streaming
+	//
 }
