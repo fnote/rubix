@@ -9,7 +9,7 @@ describe('AjaxService', () => {
 		});
 	});
 
-	it('should ...', inject([AjaxService], (service: AjaxService) => {
+	it('should ...', inject([AjaxService], (service : AjaxService) => {
 		expect(service).toBeTruthy();
 	}));
 });
