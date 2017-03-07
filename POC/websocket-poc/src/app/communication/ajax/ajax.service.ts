@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import * as Rx from 'rxjs/Rx';
-import {RequestOptions, Request,Http} from '@angular/http';
+import {RequestOptions, Request, Http} from '@angular/http';
 
 @Injectable()
 export class AjaxService {
 
-	constructor(private http:Http) {}
+	constructor(private http: Http) {}
 
-	public send(requestOptions):Promise<any>{
+	public send(requestOptions): Promise<any> {
 		const options = new RequestOptions({
 						method: requestOptions.method,
 						url: requestOptions.url,
