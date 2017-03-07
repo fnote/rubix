@@ -1,4 +1,7 @@
-export class Exchange {
+import { BaseEntity } from './base-entity';
+
+export class ExchangeEntity extends BaseEntity {
+
 	// Meta
 	code : string;
 	longDesc : string;
@@ -24,6 +27,7 @@ export class Exchange {
 	symbolsTraded : number;
 
 	constructor(values : Object = {}) {
+		super();
 		Object.assign(this, values);
 	}
 }

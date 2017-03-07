@@ -1,17 +1,29 @@
-import { Exchange } from '../business-entities/exchange';
+import { BaseDataStore } from './base-data-store';
+import { ExchangeEntity } from '../business-entities/exchange-entity';
 
-export class ExchangeDataStore {
+export class ExchangeDataStore extends BaseDataStore {
+
+	private static _instance : ExchangeDataStore = new ExchangeDataStore();
 	private allExchangeStore = {};
-    
-	constructor() {
-		this.allExchangeStore = {};
+
+	public static getInstance() : ExchangeDataStore {
+		return ExchangeDataStore._instance;
 	}
 
-	public getOrAddExchange(exchangeCode) {
+	constructor() {
+		super();
+		if (ExchangeDataStore._instance) {
+			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
+		}
+        
+		ExchangeDataStore._instance = this;
+	}
+
+	private getOrAddExchange(exchangeCode) {
 		let exgObj = this.allExchangeStore[exchangeCode];
 
 		if (!exgObj) {
-			exgObj = new Exchange({
+			exgObj = new ExchangeEntity({
 				code: exchangeCode
 			});
 
