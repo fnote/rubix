@@ -1,4 +1,7 @@
-export class Stock {
+import { BaseEntity } from './base-entity';
+
+export class StockEntity extends BaseEntity {
+
 	// Meta
 	code : string;
 	exchangeCode : string;
@@ -14,6 +17,7 @@ export class Stock {
 	closePrice : number;
 
 	constructor(values : Object = {}) {
+		super();
 		Object.assign(this, values);
 	}
 }

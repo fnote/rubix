@@ -1,25 +1,26 @@
-import { Stock } from '../business-entities/stock';
+import { BaseDataStore } from './base-data-store';
+import { StockEntity } from '../business-entities/stock-entity';
 
-export class StockDataStore {
+export class StockDataStore extends BaseDataStore {
+
+	private static _instance : StockDataStore = new StockDataStore();
 	private allStockStore = {};
-	public instance : StockDataStore = null;
 
     // TODO: [Amila] implement the below when needed
     // private allStockStoreByExhcange = {};
     // private allIndexStoreByExhcange = {};
-	
-	constructor() {
-		this.allStockStore = {};
-        // this.allStockStoreByExhcange = {};
-        // this.allIndexStoreByExhcange = {};
+
+	public static getInstance() : StockDataStore {
+		return StockDataStore._instance;
 	}
 
-	public getInstance () {
-		if (this.instance) {
-			this.instance = new StockDataStore();
+	constructor() {
+		super();
+		if (StockDataStore._instance) {
+			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
 		}
-
-		return this.instance;
+        
+		StockDataStore._instance = this;
 	}
 
 	private getOrAddStock(exchangeCode, stockCode) {
@@ -28,7 +29,7 @@ export class StockDataStore {
 		let stockObj = this.allStockStore[key];
 
 		if (!stockObj) {
-			stockObj = new Stock({
+			stockObj = new StockEntity({
 				code: stockCode,
 				exchangeCode: exchangeCode,
 			});

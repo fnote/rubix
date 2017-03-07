@@ -1,8 +1,8 @@
-import { DataStore } from './data-store';
+import { BaseEntity } from './base-entity';
 
-export class Market extends DataStore {
+export class MarketEntity extends BaseEntity {
 
-    // Meta
+	// Meta
 	exchangeCode : string;
 	code : string;
 
