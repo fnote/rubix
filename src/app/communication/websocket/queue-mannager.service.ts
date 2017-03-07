@@ -8,34 +8,34 @@ import { ConfigService } from '../../config/config.service';
 const TIME_INTERVAL = 3000; // 1000 * 3
 
 interface Connection {
-	channel: string;
-	index: number;
-	url: string;
-	connectedSocket: Rx.Subject<MessageEvent>;
-	sendMessageQueue: Array<any>;
-	recivedMessageQueue: Array<any>;
-	isConnected: boolean;
-	sendQueueProcessInterval: any;
-	recivedQueueProcessInterval: any;
-	subscription: any;
-	pulseService: PulseService;
+	channel : string;
+	index : number;
+	url : string;
+	connectedSocket : Rx.Subject<MessageEvent>;
+	sendMessageQueue : Array<any>;
+	recivedMessageQueue : Array<any>;
+	isConnected : boolean;
+	sendQueueProcessInterval : any;
+	recivedQueueProcessInterval : any;
+	subscription : any;
+	pulseService : PulseService;
 }
 
 @Injectable()
 export class QueueMannagerService {
-	private connectedSocketPool: Array<Connection> = [];
-	private response$: Rx.Subject<any> ;
+	private connectedSocketPool : Array<Connection> = [];
+	private response$ : Rx.Subject<any> ;
 
-	constructor(private configService: ConfigService, private websocketService: WebsocketService) {
+	constructor(private configService : ConfigService, private websocketService : WebsocketService) {
 		this.response$ = new Rx.Subject();
 		this.init();
 	}
 
-	public getResponse(): Rx.Subject<any> {
+	public getResponse() : Rx.Subject<any> {
 		return this.response$;
 	}
 
-	private init(): void {
+	private init() : void {
 		const connectionConfig = this.configService.getConnectionConfig();
 		connectionConfig.forEach(connection => {
 			const connConfig = {
@@ -55,20 +55,20 @@ export class QueueMannagerService {
 		});
 	}
 
-	private enQueueMessage(message: Object, messageQueue: Array<any>): void {
+	private enQueueMessage(message : Object, messageQueue : Array<any>) : void {
 		messageQueue.push(message);
 	}
 
-	private deQueueMessage(messageQueue: Array<any>): any {
+	private deQueueMessage(messageQueue : Array<any>) : any {
 		return messageQueue.shift();
 	}
 
 
-	public getConnectionByIndex(index: number): Connection {
+	public getConnectionByIndex(index : number) : Connection {
 		return this.connectedSocketPool[index];
 	}
 
-	private connect(connectionConfig): void {
+	private connect(connectionConfig) : void {
 		const connection = this.getConnectionByIndex(connectionConfig.index);
 		if (!connection.isConnected) {
 			this.websocketService.initConnection(connection).then(sockt => {
@@ -86,14 +86,14 @@ export class QueueMannagerService {
 		}
 	}
 
-	private activateSentReciveFromQueue(messageQueue: Array<any>, timeIntervalProcess: any, socket: Rx.Subject<MessageEvent> ): void {
+	private activateSentReciveFromQueue(messageQueue : Array<any>, timeIntervalProcess : any, socket : Rx.Subject<MessageEvent> ) : void {
 		timeIntervalProcess = setInterval(() => {
 			if ( messageQueue.length > 0 ) {
 				const msg = this.deQueueMessage(messageQueue);
 				socket.next(<MessageEvent>{data: msg});
 			}
 		}, TIME_INTERVAL);
-	} 
+	}
 
 	private subscribeForConnected(index) {
 		const connection = this.getConnectionByIndex(index);
@@ -112,7 +112,7 @@ export class QueueMannagerService {
 		}
 	}
 
-	public unsubcribeConnection(index: number): void {
+	public unsubcribeConnection(index : number) : void {
 		const connection = this.getConnectionByIndex(index);
 		if (connection.isConnected && connection.subscription) {
 			connection.isConnected = false;
@@ -124,7 +124,7 @@ export class QueueMannagerService {
 		}
 	}
 
-	public addMessageToQueue(data): void {
+	public addMessageToQueue(data) : void {
 		const connection = this.getConnectionByIndex(data.index);
 		this.enQueueMessage(data.data, connection.sendMessageQueue);
 		if (!connection.isConnected) {

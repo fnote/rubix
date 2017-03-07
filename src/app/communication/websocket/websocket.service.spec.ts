@@ -10,7 +10,7 @@ describe('WebsocketService', () => {
 		});
 	});
 
-	it('should ...', inject([WebsocketService], (service: WebsocketService) => {
+	it('should ...', inject([WebsocketService], (service : WebsocketService) => {
 		expect(service).toBeTruthy();
 	}));
 });

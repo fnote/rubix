@@ -5,17 +5,17 @@ const TIME_INTERVAL = 5000; // 1000 * 5
 const MAX_HEARTBEATS = 5;
 
 interface PulseConfig {
-	index: number;
-	channel: string;
+	index : number;
+	channel : string;
 }
 
 @Injectable()
 export class PulseService {
 	public pulseGenerator;
-	private pulseObj: PulseConfig;
-	private pulseInterval; 
+	private pulseObj : PulseConfig;
+	private pulseInterval;
 	private heartbeats = 0;
-	constructor(private ws: WebSocket, private wsService: WebsocketService) {
+	constructor(private ws : WebSocket, private wsService : WebsocketService) {
 		this.sendPulse();
 	}
 
@@ -26,7 +26,7 @@ export class PulseService {
 				index: this.heartbeats,
 				channel: 'pulse'
 			};
-		
+
 			if (this.heartbeats >= MAX_HEARTBEATS) {
 				this.wsService.closeWebSocket(this.ws);
 				clearInterval(this.pulseInterval);

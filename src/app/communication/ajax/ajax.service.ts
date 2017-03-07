@@ -21,3 +21,4 @@ export class AjaxService {
 		return this.http.request(request).toPromise();
 	}
 }
+

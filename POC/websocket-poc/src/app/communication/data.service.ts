@@ -6,7 +6,7 @@ import { AjaxService } from './ajax/ajax.service';
 @Injectable()
 export class DataService {
 
-	constructor(private queueMannagerService: QueueMannagerService, private ajaxService: AjaxService) {
+	constructor(private queueMannagerService : QueueMannagerService, private ajaxService : AjaxService) {
 		this.init();
 	}
 
@@ -14,22 +14,22 @@ export class DataService {
 		this.getWsResponse();
 	}
 
-	public sendToWs(data): void {
+	public sendToWs(data) : void {
 		this.queueMannagerService.addMessageToQueue(data);
 	}
 
-	public unsubscribeWsConnection(index: number): void {
+	public unsubscribeWsConnection(index : number) : void {
 		this.queueMannagerService.unsubcribeConnection(index);
 	}
 
-	private getWsResponse(): void {
+	private getWsResponse() : void {
 		this.queueMannagerService.getResponse().subscribe(msg => {
 			// TODO: [Chandana] Refactor once the log module is completed
 			console.log('[DataService] response recived..' + msg );
 		});
 	}
 
-	public sendAjaxRequest(requestOptions): Promise<any> {
+	public sendAjaxRequest(requestOptions) : Promise<any> {
 		return this.ajaxService.send(requestOptions);
 	}
 
