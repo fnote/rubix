@@ -19,7 +19,7 @@ export class StockDataStore extends BaseDataStore {
 		if (StockDataStore._instance) {
 			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
 		}
-        
+
 		StockDataStore._instance = this;
 	}
 

@@ -15,7 +15,7 @@ export class ExchangeDataStore extends BaseDataStore {
 		if (ExchangeDataStore._instance) {
 			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
 		}
-        
+
 		ExchangeDataStore._instance = this;
 	}
 
