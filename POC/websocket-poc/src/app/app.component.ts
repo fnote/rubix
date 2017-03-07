@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
 		};
 		this.dataService.sendAjaxRequest(samplePostReq).then(response => {
 			console.log(response);
-		}).catch(error=>{
+		}).catch(error => {
 			console.log('[AppComponent] Ajax post request error ' + error);
 		});
 
@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
 
 		this.dataService.sendAjaxRequest(sampleGetReq).then(response => {
 			console.log(response);
-		}).catch(error=>{
+		}).catch(error => {
 			console.log('[AppComponent] Ajax get request error ' + error);
 		});
 	}
