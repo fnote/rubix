@@ -1,4 +1,6 @@
-export class Market {
+import { DataStore } from './data-store';
+
+export class Market extends DataStore {
 
     // Meta
 	exchangeCode : string;
@@ -9,6 +11,7 @@ export class Market {
 	turnover : number;
 
 	constructor(values : Object = {}) {
+		super();
 		Object.assign(this, values);
 	}
 }
