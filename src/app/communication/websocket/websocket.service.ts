@@ -4,10 +4,10 @@ import { PulseService } from './pulse.service';
 
 @Injectable()
 export class WebsocketService {
-	private socket: Rx.Subject<MessageEvent>;
+	private socket : Rx.Subject<MessageEvent>;
 	constructor() { }
 
-	public initConnection(connection): Promise<WebSocket> {
+	public initConnection(connection) : Promise<WebSocket> {
 		const ws = new WebSocket(connection.url);
 		const promise  = new Promise((resolve, reject) => {
 			ws.onopen = (res) => {
@@ -16,13 +16,13 @@ export class WebsocketService {
 				resolve(ws);
 			};
 		});
-		return promise;	
+		return promise;
 	}
 
-	public createConnection(socket: WebSocket): Rx.Subject<MessageEvent> {
+	public createConnection(socket : WebSocket) : Rx.Subject<MessageEvent> {
 
 		const observable = Rx.Observable.create(
-			(obs: Rx.Observer<MessageEvent>) => {
+			(obs : Rx.Observer<MessageEvent>) => {
 				socket.onmessage = obs.next.bind(obs);
 				socket.onerror = obs.error.bind(obs);
 				socket.onclose = obs.complete.bind(obs);
@@ -30,7 +30,7 @@ export class WebsocketService {
 		});
 
 		const observer = {
-			next: (data: Object) => {
+			next: (data : Object) => {
 				if (socket.readyState === WebSocket.OPEN) {
 					socket.send(JSON.stringify(data));
 					console.log('[WebsocketService] sent to ' + socket.url + ' ' + data );
@@ -40,11 +40,11 @@ export class WebsocketService {
 		return Rx.Subject.create(observer, observable);
 	}
 
-	public closeWebSocket(ws: WebSocket) {
+	public closeWebSocket(ws : WebSocket) {
 		ws.close();
 	}
 
-	public sendToWebSocket(ws: WebSocket, message) {
+	public sendToWebSocket(ws : WebSocket, message) {
 		ws.send(message);
 	}
 

@@ -12,10 +12,10 @@ import { DataService } from './communication/data.service';
 export class AppComponent implements OnInit {
 
 	private textValue;
-	private connectedPool: any;
+	private connectedPool : any;
 	public response;
 
-	constructor(private dataService: DataService) { }
+	constructor(private dataService : DataService) { }
 
 	ngOnInit() { }
 
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
 				},
 				HED: {
 					CHNL_ID: 25,
-					CL_IP: '', 
+					CL_IP: '',
 					CL_REQ_ID: '\'\'',
 					CL_VER: '1.0.2.08',
 					LANG_ID: 'EN',

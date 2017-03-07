@@ -10,7 +10,7 @@ describe('QueueMannagerService', () => {
 		});
 	});
 
-	it('should ...', inject([QueueMannagerService], (service: QueueMannagerService) => {
+	it('should ...', inject([QueueMannagerService], (service : QueueMannagerService) => {
 		expect(service).toBeTruthy();
 	}));
 });

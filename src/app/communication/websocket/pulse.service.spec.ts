@@ -10,7 +10,7 @@ describe('PulseService', () => {
 		});
 	});
 
-	it('should ...', inject([PulseService], (service: PulseService) => {
+	it('should ...', inject([PulseService], (service : PulseService) => {
 		expect(service).toBeTruthy();
 	}));
 });
