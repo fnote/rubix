@@ -5,6 +5,7 @@ import { StockDataStore } from './data-stores/stock-data-store';
 @Injectable()
 export class PriceService {
 
+
 	constructor() { }
 
     // Expose data managers
