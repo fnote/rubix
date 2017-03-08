@@ -60,7 +60,11 @@
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
-    "no-inferrable-types": true,
+    "no-inferrable-types": [
+      true,
+      "ignore-params",
+      "ignore-properties"
+    ],
     "no-magic-numbers": true,
     "no-shadowed-variable": true,
     "no-string-literal": false,
