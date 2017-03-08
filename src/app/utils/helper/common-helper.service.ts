@@ -77,7 +77,7 @@ export class CommonHelperService {
 			parseInt(lastUpdated.substring(6, 8), 10), parseInt(lastUpdated.substring(8, 10), 10), parseInt(lastUpdated.substring(10, 12), 10)),
 			minDiff = (currentDate.getTime() - lastUpdatedDate.getTime()) / MIN,
 			hourDiff = minDiff / 60, monthDiff = hourDiff / HOURS_PER_MONTH;
-		let  hrs, days, min, formattedValue = '';
+		let hrs, days, min, formattedValue = '';
 		const App = { // TODO: [Malindu] Move localization to correct place
 			language : {
 				languageCode : 'AR',
