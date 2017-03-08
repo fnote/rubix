@@ -3,6 +3,18 @@
     "node_modules/codelyzer"
   ],
   "rules": {
+    "typedef": [
+      true,
+      "call-signature",
+      "arrow-call-signature",
+      "parameter",
+      "arrow-parameter",
+      "variable-declaration",
+      "property-declaration",
+      "member-variable-declaration",
+      "object-destructuring",
+      "array-destructuring"
+    ],
     "callable-types": true,
     "class-name": true,
     "comment-format": [
@@ -24,7 +36,10 @@
       true,
       140
     ],
-    "member-access": false,
+    "member-access": [
+      true,
+      "check-accessor"
+    ],
     "member-ordering": [
       true,
       "static-before-instance",
@@ -47,6 +62,7 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": true,
+    "no-magic-numbers": true,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
