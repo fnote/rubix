@@ -5,36 +5,36 @@ import { LocalizationService } from './localization/localization.service';
 @Injectable()
 export class UtilsService {
 
-  storageManager: StorageService;
+	storageManager : StorageService;
 
-  localizationManager: LocalizationService;
+	localizationManager : LocalizationService;
 
-  constructor() {
-    this.initialize();
-  }
+	constructor() {
+		this.initialize();
+	}
 
-  private initialize(): void {
-    this.storageManager = new StorageService();
-    this.localizationManager = new LocalizationService();
-  }
+	private initialize() : void {
+		this.storageManager = new StorageService();
+		this.localizationManager = new LocalizationService();
+	}
 
-  formatText(input: string): string {
-    return 'formatted text';
-  }
+	formatText(input : string) : string {
+		return 'formatted text';
+	}
 
-  getStorageManager(): StorageService {
-    return this.storageManager;
-  }
+	getStorageManager() : StorageService {
+		return this.storageManager;
+	}
 
-  getHelperManager(): any {
-    return null;
-  }
+	getHelperManager() : any {
+		return null;
+	}
 
-  geTradeHelperManager(): any {
-    return null;
-  }
+	geTradeHelperManager() : any {
+		return null;
+	}
 
-   geLocalizationManager(): LocalizationService {
-    return this.localizationManager;
-  }
+	geLocalizationManager() : LocalizationService {
+		return this.localizationManager;
+	}
 }

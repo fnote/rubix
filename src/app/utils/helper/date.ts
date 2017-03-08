@@ -1,3 +1,3 @@
 export interface Date {
-  format(string) : string;
+	format(string) : string;
 }
