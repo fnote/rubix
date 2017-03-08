@@ -12,7 +12,7 @@ export class PriceService {
      * Fetch data managers
      * @param dmID Data Manager ID number
      */
-	public getDataManager (dmID : number) {
+	public getDataManager (dmID : number) : BaseDataStore {
 		let dtStore : BaseDataStore = null;
 
 		switch (dmID) {
