@@ -4,7 +4,7 @@ import { PulseService } from './pulse.service';
 
 @Injectable()
 export class WebsocketService {
-	private socket : Rx.Subject<MessageEvent>;
+	
 	constructor() { }
 
 	public initConnection(connection) : Promise<WebSocket> {
