@@ -1,5 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuard }  from './auth-guard-service';
+import { LoginComponent } from './Components/LoginComponent/login-component';
 import { WatchlistComponent } from './Components/WatchlistComponent/watchlist-component';
 import { OrderTicketComponent } from './Components/OrderTicketComponent/order-ticket-component';
 import { NewsComponent } from './Components/NewsComponent/news-component';
@@ -21,8 +23,9 @@ const appRoutes: Routes = [
         component: WatchlistComponent,
       },
       {
-        path : 'ot',
-        component: OrderTicketComponent,
+          path : 'ot',
+          canActivate: [AuthGuard],
+          component: OrderTicketComponent,
       },
       {
         path : 'nws',
@@ -39,8 +42,13 @@ const appRoutes: Routes = [
     component: WatchlistComponent,
   },
   {
-    path : 'ot',
-    component: OrderTicketComponent,
+    path : 'login',
+    component: LoginComponent,
+  },
+  {
+      path : 'ot',
+      canActivate: [AuthGuard],
+      component: OrderTicketComponent,
   },
   {
     path : 'nws',
