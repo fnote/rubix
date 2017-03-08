@@ -10,7 +10,7 @@ describe('DataService', () => {
 		});
 	});
 
-	it('should ...', inject([DataService], (service: DataService) => {
+	it('should ...', inject([DataService], (service : DataService) => {
 		expect(service).toBeTruthy();
 	}));
 });
