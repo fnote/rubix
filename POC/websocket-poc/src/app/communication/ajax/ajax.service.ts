@@ -5,9 +5,9 @@ import { RequestOptions, Request, Http } from '@angular/http';
 @Injectable()
 export class AjaxService {
 
-	constructor(private http: Http) { }
+	constructor(private http : Http) { }
 
-	public send(requestOptions): Promise<any> {
+	public send(requestOptions) : Promise<any> {
 		const options = new RequestOptions({
 						method: requestOptions.method,
 						url: requestOptions.url,
@@ -18,7 +18,7 @@ export class AjaxService {
 						responseType: requestOptions.responseType ? requestOptions.responseType : null
 					});
 		const request = new Request(options);
-		return this.http.request(request).map(response=>{
+		return this.http.request(request).map(response => {
 			return response.json();
 		}).toPromise();
 	}
