@@ -3,7 +3,7 @@ import { StockEntity } from '../business-entities/stock-entity';
 
 export class StockDataStore extends BaseDataStore {
 
-	private static _instance : StockDataStore = new StockDataStore();
+	private static instance : StockDataStore;
 	private allStockStore = {};
 
     // TODO: [Amila] implement the below when needed
@@ -11,16 +11,15 @@ export class StockDataStore extends BaseDataStore {
     // private allIndexStoreByExhcange = {};
 
 	public static getInstance() : StockDataStore {
-		return StockDataStore._instance;
+		StockDataStore.instance = StockDataStore.instance || new StockDataStore();
+		return StockDataStore.instance;
 	}
 
 	constructor() {
 		super();
-		if (StockDataStore._instance) {
+		if (StockDataStore.instance) {
 			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
 		}
-
-		StockDataStore._instance = this;
 	}
 
 	private getOrAddStock(exchangeCode, stockCode) {
