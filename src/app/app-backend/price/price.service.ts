@@ -55,7 +55,7 @@ export class PriceService {
      *                      appVersion  : Application version
      *                      lan         : Current Language. Mandatory.
      */
-	public authenticateWithSsoToken (authParams : Object = {}) {
+	public authenticateWithSSOToken (authParams : Object = {}) {
 	}
 
 	//
