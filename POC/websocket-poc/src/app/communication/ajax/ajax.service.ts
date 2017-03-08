@@ -18,7 +18,9 @@ export class AjaxService {
 						responseType: requestOptions.responseType ? requestOptions.responseType : null
 					});
 		const request = new Request(options);
-		return this.http.request(request).toPromise();
+		return this.http.request(request).map(response=>{
+			return response.json();
+		}).toPromise();
 	}
 }
 
