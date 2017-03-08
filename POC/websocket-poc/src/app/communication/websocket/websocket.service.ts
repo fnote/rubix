@@ -10,8 +10,8 @@ export class WebsocketService {
 
 	public initConnection(connection : Connection) : Promise<WebSocket> {
 		const ws : WebSocket = new WebSocket(connection.url);
-		const promise : Promise<WebSocket> = new Promise((resolve, reject) => {
-			ws.onopen = () => {
+		const promise : Promise<WebSocket> = new Promise((resolve, reject) : void => {
+			ws.onopen = () : void => {
 				connection.pulseService = new PulseService(ws, this);
 				console.log('[WebsocketService] connected to ' + connection.url );
 				resolve(ws);
@@ -22,7 +22,7 @@ export class WebsocketService {
 
 	public createConnection(socket : WebSocket) : Rx.Subject<MessageEvent> {
 
-		const observable : Rx.Observable = Rx.Observable.create(
+		const observable : any = Rx.Observable.create(
 			(obs : Rx.Observer<MessageEvent>) => {
 				socket.onmessage = obs.next.bind(obs);
 				socket.onerror = obs.error.bind(obs);
@@ -31,7 +31,7 @@ export class WebsocketService {
 		});
 
 		const observer : any = {
-			next: ( data : Object ) => {
+			next: (data : Object) : void => {
 				if (socket.readyState === WebSocket.OPEN) {
 					socket.send(JSON.stringify(data));
 					console.log('[WebsocketService] sent to ' + socket.url + ' ' + data );
