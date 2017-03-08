@@ -7,17 +7,17 @@ export class AjaxService {
 
 	constructor(private http : Http) { }
 
-	public send(requestOptions) : Promise<any> {
-		const options = new RequestOptions({
+	public send(requestOptions : RequestOptions) : Promise<any> {
+		const options : RequestOptions = new RequestOptions({
 						method: requestOptions.method,
 						url: requestOptions.url,
-						body: requestOptions.data ? requestOptions.data : null ,
+						body: requestOptions.body ? requestOptions.body : null ,
 						search: requestOptions.search ? requestOptions.search : null,
 						headers: requestOptions.headers ? requestOptions.headers : null,
 						withCredentials: requestOptions.withCredentials ? requestOptions.withCredentials : false,
 						responseType: requestOptions.responseType ? requestOptions.responseType : null
 					});
-		const request = new Request(options);
+		const request : Request = new Request(options);
 		return this.http.request(request).map(response => {
 			return response.json();
 		}).toPromise();
