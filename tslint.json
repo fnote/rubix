@@ -8,9 +8,9 @@
       "call-signature",
       "arrow-call-signature",
       "parameter",
-      "variable-declaration",
+      //"variable-declaration",
       "property-declaration",
-      "member-variable-declaration",
+      //"member-variable-declaration",
       "object-destructuring",
       "array-destructuring"
     ],
