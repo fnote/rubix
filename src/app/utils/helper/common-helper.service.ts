@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
+import 'moment/locale/ar-ma';
 import { TradeHelperService } from './trade-helper.service';
 
 const MIN = 60000; // 1000 * 60
 const HOUR = 3600000; // 1000 * 60 * 60
 const HOURS_PER_MONTH = 720; // 30 * 24
+const INPUT_DATE_FORMAT = 'YYYYMMDDhhmmss';
 @Injectable()
 export class CommonHelperService {
-	tradeHelperManager : TradeHelperService;
+	private tradeHelperManager : TradeHelperService;
 	constructor() {}
 
 	////////////////////// Date Formatters //////////////////////
@@ -15,7 +18,7 @@ export class CommonHelperService {
 	* Return the month as a number
 	* @param month Month as a string
 	*/
-	getMonth(month : string) : string {
+	public getMonth(month : string) : string {
 
 		let month_num : string;
 
@@ -70,158 +73,31 @@ export class CommonHelperService {
 	* @param lastUpdated Last updated time
 	* @param exchange Corresponding exchange data store
 	*/
-	getTimeOffsetString(lastUpdated : string , exchange) : string {
-		const tempDate = new Date(), currentDate = new Date(tempDate.getUTCFullYear(),
-			tempDate.getUTCMonth(), tempDate.getUTCDate(), tempDate.getUTCHours(), tempDate.getUTCMinutes()),
-			lastUpdatedDate = new Date(parseInt(lastUpdated.substring(0, 4), 10), (parseInt(lastUpdated.substring(4 , 6) , 10) - 1),
-			parseInt(lastUpdated.substring(6, 8), 10), parseInt(lastUpdated.substring(8, 10), 10), parseInt(lastUpdated.substring(10, 12), 10)),
-			minDiff = (currentDate.getTime() - lastUpdatedDate.getTime()) / MIN,
-			hourDiff = minDiff / 60, monthDiff = hourDiff / HOURS_PER_MONTH;
-		let hrs, days, min, formattedValue = '';
-		const App = { // TODO: [Malindu] Move localization to correct place
-			language : {
-				languageCode : 'AR',
-				labels : {
-					DT_AGO : 'DT_AGO',
-					DT_DAYS : 'DT_DAYS',
-					DT_DAY : 'DT_DAY',
-					DT_HR : 'DT_HR',
-					DT_MIN : 'DT_MIN',
-					DT_NOW : 'DT_NOW',
-					DT_HRS : 'DT_HRS',
-					DT_MINS : 'DT_MINS'
-				}
-			}
-		};
-		if (monthDiff < 1) {// within a month
-			hrs = Math.floor(hourDiff % 24);
-			min = Math.floor(minDiff % 60);
-			if (App.language.languageCode === 'AR') {
-				if (hourDiff >= 24) { // more than a day
-					days = Math.floor(hourDiff / 24);
-		if (hrs > 0) {
-						formattedValue = App.language.labels.DT_AGO + ' ' +  days + ' ' +
-						( days > 1 ? App.language.labels.DT_DAYS  : App.language.labels.DT_DAY);
-					} else {
-						formattedValue = App.language.labels.DT_AGO + ' ' +  days + ' ' +
-						( days > 1 ? App.language.labels.DT_DAYS  : App.language.labels.DT_DAY);
-					}
-				}else { // within a day
-					if (minDiff > 60) {// more than a hour
-						if (minDiff % 60 > 0) {
-							formattedValue = App.language.labels.DT_AGO + ' ' +  hrs + ' ' +
-							(hrs > 1 ?  App.language.labels.DT_HRS  : App.language.labels.DT_HR);
-						} else {
-							formattedValue =  App.language.labels.DT_AGO + ' ' +  hrs + ' ' +
-							(hrs > 1 ?  App.language.labels.DT_HRS  : App.language.labels.DT_HR);
-						}
-					}else { // within a hour
-						if (min >= 1) {// more than a minute
-							formattedValue = App.language.labels.DT_AGO + ' ' +  min + ' ' +
-							(min > 1 ? App.language.labels.DT_MINS : App.language.labels.DT_MIN);
-						} else {// within a minute
-							formattedValue = App.language.labels.DT_NOW;
-						}
-					}
-				}
-
-			}else {
-				if (hourDiff >= 24) { // more than a day
-					days = Math.floor(hourDiff / 24);
-					if (hrs > 0) {
-						formattedValue =  days + ' ' + ( days > 1 ? App.language.labels.DT_DAYS  : App.language.labels.DT_DAY) +
-						' ' + App.language.labels.DT_AGO;
-					} else {
-						formattedValue = days + ' ' + ( days > 1 ?  App.language.labels.DT_DAYS  : App.language.labels.DT_DAY)
-						+ ' ' + App.language.labels.DT_AGO;
-					}
-				}  else { // within a day
-					if (minDiff > 60) {// more than a hour
-						if (minDiff % 60 > 0) {
-							formattedValue = hrs + ' ' + (hrs > 1 ? App.language.labels.DT_HRS  : App.language.labels.DT_HR) + ' '
-							+ App.language.labels.DT_AGO;
-						} else {
-							formattedValue =  hrs + ' ' + (hrs > 1 ? App.language.labels.DT_HRS  : App.language.labels.DT_HR) + ' '
-							+ App.language.labels.DT_AGO;
-						}
-					}else { // within a hour
-						if (min >= 1) {// more than a minute
-							formattedValue = min + ' ' + (min > 1 ? App.language.labels.DT_MINS : App.language.labels.DT_MIN) + ' '
-							+ App.language.labels.DT_AGO;
-						} else {// within a minute
-							formattedValue = App.language.labels.DT_NOW;
-						}
-					}
-				}
-			}
-		}else { // more than a month
-			let offset;
-			if (exchange) {
-				offset =  this.getTimeZoneOffSet(lastUpdated , exchange);
-			}
-			formattedValue = this.formatDate(lastUpdated , '' , offset );
-		}
-		return formattedValue;
+	public getTimeOffsetString(lastUpdated : string , exchange : any ) : string { // TODO: [Malindu] add correct type for exchange
+		// moment.locale('ar-ma'); TODO: [Malindu] change language accordingly
+		const timeZoneOffSet : number = this.getTimeZoneOffSet(lastUpdated , exchange);
+		return moment.utc(lastUpdated , INPUT_DATE_FORMAT).utcOffset(timeZoneOffSet).fromNow();
 	}
 
 	/**
 	* Format the data in the provided pattern
 	* @param date Date to be formatted
 	* @param pattern Format pattern
-	* @param offset Timezone offset
+	* @param exchange Exchange
 	*/
-	formatDate(date : string , pattern : string , offset) : string {
-		let dateMills : number;
-		date = date.substring(0, 4) + '-' + date.substring(4, 6) + '-' + date.substring(6, 8) + ' ' + date.substring(8, 10) + ':'
-		+  date.substring(10, 12)  + ':' + date.substring(12, 14);
-		dateMills = Date.parse(date);
-		if (!pattern) {
-			pattern = 'yyyy-MM-dd h:mm:ss';
-		}
-		if (offset) {
-			if (offset.hour) {
-				dateMills = dateMills + offset.hour * HOUR;
-			}
-			if (offset.min) {
-				dateMills = dateMills + offset.min * MIN;
-			}
-		}
-		Date.prototype.format = function(format)
-		{
-			const o = {
-				'M+' : this.getMonth() + 1, // month
-				'd+' : this.getDate(),    // day
-				'h+' : this.getHours(),   // hour
-				'm+' : this.getMinutes(), // minute
-				's+' : this.getSeconds(), // second
-				'q+' : Math.floor((this.getMonth() + 3) / 3),  // quarter
-				'S' : this.getMilliseconds() // millisecond
-			};
-			if (/(y+)/.test(format)) {
-				format = format.replace(RegExp.$1,
-					(this.getFullYear() + '').substr(4 - RegExp.$1.length));
-			}
-			for (const k in o) {
-				if (new RegExp('(' + k + ')').test(format)) {
-					format = format.replace(RegExp.$1,
-						RegExp.$1.length === 1 ? o[k] :
-							('00' + o[k]).substr(('' + o[k]).length));
-				}
-			}
-			return format;
-		};
-		return new Date(dateMills).format(pattern);
+	public formatDate(date : string , pattern : string , exchange : any) : string { // TODO: [Malindu] add correct type for exchange
+		const timeZoneOffSet : number = this.getTimeZoneOffSet(date , exchange) || 0;
+		return moment.utc(date , INPUT_DATE_FORMAT).utcOffset(timeZoneOffSet).format(pattern);
 	}
-
 	/**
 	* Return the timezone offset for the exchange compared to GMT
 	* @param date Date to be formatted
 	* @param exchange Corresponding Exchange
 	*/
 	// TODO: [Malindu] refer the correct timeZoneMap
-	getTimeZoneOffSet(date : string , exchange) : Object {
-		const offSet = {hour : 0, min : 0} , timeZoneMap = {};
-		let timeZone, tzo, adjTzo, sd, ed , dateInteger;
+	public getTimeZoneOffSet(date : string , exchange : any) : number { // TODO: [Malindu] add correct type for exchange
+		const timeZoneMap = {};
+		let timeZone, tzo , adjTzo , sd : number, ed : number , dateInteger : number , offSet : number;
 		if (!date) {
 			date = exchange.MDATE;
 		}
@@ -236,13 +112,11 @@ export class CommonHelperService {
 				tzo = exchange.TZO;
 			}
 			if (tzo) {
-				offSet.hour += tzo.hour;
-				offSet.min += tzo.min;
+				offSet += tzo.hour * 60 + tzo.min;
 			}
 			dateInteger = (date && date.length === 8 ? parseInt(date.substring(4, 8), 10) : undefined);
 			if (!isNaN(dateInteger) && adjTzo && adjTzo !== {} && !isNaN(sd) && !isNaN(ed) && (dateInteger >= sd) && (dateInteger <= ed)) {
-				offSet.hour += adjTzo.hour;
-				offSet.min += adjTzo.min;
+				offSet += adjTzo.hour * 60 + adjTzo.min;
 			}
 		}
 		return offSet;
@@ -257,14 +131,14 @@ export class CommonHelperService {
 	* @param num Number to be rounded
 	* @param dec Number of decimal places
 	*/
-	roundNumber(num : number , dec : number) : number {
-		let result;
+	public roundNumber(num : number , dec : number) : number {
+		let result : string;
 		if (dec < 0) {
 			dec = 1;
 		}
 		result = (this.toFixed((Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)))).toString();
 		if ((result.split('.')).length !== 1) {
-			const floatNum = result.split('.')[1];
+			const floatNum : string = result.split('.')[1];
 			if (floatNum.length < dec) {
 				for (let i = 0; i < (dec - floatNum.length); i++) {
 					result += '0';
@@ -278,8 +152,8 @@ export class CommonHelperService {
 	* Convert a number to a fixed number
 	* @param num Input number
 	*/
-	toFixed(num : number) : number {
-		let e;
+	public toFixed(num : number) : number {
+		let e : number;
 		if (Math.abs(num) < 1.0) {
 			e = parseInt(num.toString().split('e-')[1], 10);
 			if (e) {
@@ -337,18 +211,13 @@ export class CommonHelperService {
 	* @param num Number to be formatted
 	* @param dec Number of decimal places
 	*/
-	formatNumberInMillions(num : number , dec : number) : string {
-		const formattedValue = '0';
-		if (num) {
-			const x = Math.abs(num);
-			if (x <= 999999) {
-				return this.roundNumber(num, dec).toString();
-			}
-			if (x > 999999) {
-				return this.roundNumber(num / 1000000, 2) + ' M';
-			}
-		}else {
-			return formattedValue;
+	public formatNumberInMillions(num : number , dec : number) : string {
+		const x : number = Math.abs(num);
+		if (x <= 999999) {
+			return this.roundNumber(num, dec).toString();
+		}
+		if (x > 999999) {
+			return this.roundNumber(num / 1000000, 2) + ' M';
 		}
 	}
 
@@ -358,7 +227,7 @@ export class CommonHelperService {
 	* Add a class according to positive/negativeness of an input value
 	* @param val Value to be formatted
 	*/
-	upsAndDownsFormatter(val : number) : string {
+	public upsAndDownsFormatter(val : number) : string {
 		if (val > 0) {
 			return '<span class=\'green_text\'>' + val + '</span>';
 		}
@@ -369,9 +238,9 @@ export class CommonHelperService {
 	* Returns wether a string is right to left
 	* @param str Input string
 	*/
-	isRTL(str : string) : boolean {
-		const ltrChars    = '\u0000-\u0040\u005B-\u0060\u007B-\u00BF\u00D7\u00F7\u02B9-\u02FF\u2000-\u2BFF\u2010-\u2029\u202C\u202F-\u2BFF',
-			rtlChars    = '\u0591-\u07FF\u200F\u202B\u202E\uFB1D-\uFDFD\uFE70-\uFEFC',
+	public isRTL(str : string) : boolean {
+		const ltrChars = '\u0000-\u0040\u005B-\u0060\u007B-\u00BF\u00D7\u00F7\u02B9-\u02FF\u2000-\u2BFF\u2010-\u2029\u202C\u202F-\u2BFF',
+			rtlChars = '\u0591-\u07FF\u200F\u202B\u202E\uFB1D-\uFDFD\uFE70-\uFEFC',
 			rtlDirCheck = new RegExp('^[' + ltrChars + ']*[' + rtlChars + ']');
 		return rtlDirCheck.test(str);
 	}
@@ -383,7 +252,7 @@ export class CommonHelperService {
 	* @param curr Currency
 	* @param lotSize Lot size
 	*/
-	getOrderValue(price : number , qty : number , curr : number , lotSize : number) : number {
+	public getOrderValue(price : number , qty : number , curr : number , lotSize : number) : number {
 		lotSize = lotSize > 0 ? lotSize : 1;
 		if (price > 0 && qty > 0) {
 			return price * qty * this.tradeHelperManager.getPriceRatios(curr , false) * lotSize;
@@ -397,9 +266,9 @@ export class CommonHelperService {
 	* @param pageSize Number of records per page
 	* @param totalRecords Total recordes
 	*/
-	getPagesCount(pageSize : number , totalRecords : number) : number {
-		let pages = Math.floor(totalRecords / pageSize);
-		const remain = totalRecords % pageSize;
+	public getPagesCount(pageSize : number , totalRecords : number) : number {
+		let pages : number = Math.floor(totalRecords / pageSize);
+		const remain : number = totalRecords % pageSize;
 		if (remain !== 0) {
 			pages++;
 		}

@@ -5,9 +5,9 @@ import { AR } from './ar';
 
 @Injectable()
 export class LocalizationService {
-	private language;
-	private translationObject;
-	private layout;
+	private language : string;
+	public translationObject;
+	private layout : string;
 	private AR = AR;
 	private EN = EN;
 	private supportedLanguages = {

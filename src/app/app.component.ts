@@ -9,7 +9,7 @@ import {CommonHelperService} from './utils/helper/common-helper.service';
 })
 export class AppComponent {
 
-	private title = 'Rubix test page';
+	private title : string = 'Rubix test page';
 	private result : string;
 	private inputValues : string;
 
@@ -17,7 +17,7 @@ export class AppComponent {
 
 	public convert() : void {
 		console.log(this.commonHelperService.getMonth('Jan'));
-		console.log(this.commonHelperService.formatDate('20170218142324' , 'yyyy-MM-dd h:mm:ss' , {hour : 1 , min : 1}));
+		console.log(this.commonHelperService.formatDate('20170218142324' , 'YYYY-MM-DD hh:mm:ss' , {}));
 	}
 
 	public changeLang() : void {
