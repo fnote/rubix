@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WebsocketService } from './websocket.service';
 
-const TIME_INTERVAL = 5000; // 1000 * 5
-const MAX_HEARTBEATS = 5;
-
 interface PulseConfig {
 	index : number;
 	channel : string;
@@ -11,15 +8,17 @@ interface PulseConfig {
 
 @Injectable()
 export class PulseService {
-	public pulseGenerator;
+	private TIME_INTERVAL : number = 5000; // 1000 * 5
+	private MAX_HEARTBEATS : number = 5;
 	private pulseObj : PulseConfig;
-	private pulseInterval;
-	private heartbeats = 0;
+	private pulseInterval : NodeJS.Timer;
+	private heartbeats : number = 0;
+
 	constructor(private ws : WebSocket, private wsService : WebsocketService) {
 		this.sendPulse();
 	}
 
-	public sendPulse() {
+	public sendPulse() : void {
 		this.pulseInterval = setInterval(() => {
 			this.heartbeats++;
 			this.pulseObj = {
@@ -27,7 +26,7 @@ export class PulseService {
 				channel: 'pulse'
 			};
 
-			if (this.heartbeats >= MAX_HEARTBEATS) {
+			if (this.heartbeats >= this.MAX_HEARTBEATS) {
 				this.wsService.closeWebSocket(this.ws);
 				clearInterval(this.pulseInterval);
 				// TODO: [Lahiru] Refactor once the log module is completed
@@ -38,10 +37,10 @@ export class PulseService {
 			this.wsService.sendToWebSocket(this.ws, JSON.stringify(this.pulseObj));
 			// TODO: [Lahiru] Refactor once the log module is completed
 			console.log('[PulseGenerator] Pulse sent to ' + this.ws.url + ': ' + this.pulseObj.index);
-		}, TIME_INTERVAL);
+		}, this.TIME_INTERVAL);
 	}
 
-	public resetPulse() {
+	public resetPulse() : void {
 		// TODO: [Lahiru] Refactor once the log module is completed
 		console.log('[PulseGenerator] Pulse Resetting..');
 		clearInterval(this.pulseInterval);

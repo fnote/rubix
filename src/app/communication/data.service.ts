@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {QueueMannagerService} from './websocket/queue-mannager.service';
+import { RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { QueueMannagerService } from './websocket/queue-mannager.service';
 import { AjaxService } from './ajax/ajax.service';
 
 @Injectable()
@@ -9,7 +10,7 @@ export class DataService {
 		this.init();
 	}
 
-	private init() {
+	private init() : void {
 		this.getWsResponse();
 	}
 
@@ -20,7 +21,7 @@ export class DataService {
      *                      data    : Data to send. Mandatory.
      */
 
-	public sendToWs(data) : void {
+	public sendToWs(data : any) : void {
 		this.queueMannagerService.addMessageToQueue(data);
 	}
 
@@ -44,7 +45,7 @@ export class DataService {
      *						responseType: ResponseContentType;
      */
 
-	public sendAjaxRequest(requestOptions) : Promise<any> {
+	public sendAjaxRequest(requestOptions : any ) : Promise<any> {
 		return this.ajaxService.send(requestOptions);
 	}
 
