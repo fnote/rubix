@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RequestMethod } from '@angular/http';
 import { DataService } from './communication/data.service';
 
@@ -9,42 +9,38 @@ import { DataService } from './communication/data.service';
 	providers: [ DataService ]
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-	private textValue;
-	private connectedPool : any;
-	public response;
+	private textValue : string;
 
 	constructor(private dataService : DataService) { }
 
-	ngOnInit() { }
-
-	sendMsgToChatServer() {
-		const sendMessage = {
+	private sendMsgToChatServer() : void {
+		const sendMessage : any = {
 			index: 1,
 			data: this.textValue
 		};
 		this.dataService.sendToWs(sendMessage);
 	}
 
-	unsubscribeChatServer() {
+	private unsubscribeChatServer() : void {
 		this.dataService.unsubscribeWsConnection(1);
 	}
 
-	sendMsgToEchoServer() {
-		const sendMessage = {
+	private sendMsgToEchoServer() : void {
+		const sendMessage : any = {
 			index: 0,
 			data: this.textValue
 		};
 		this.dataService.sendToWs(sendMessage);
 	}
 
-	unsubscribeEchoServer() {
+	private unsubscribeEchoServer() : void {
 		this.dataService.unsubscribeWsConnection(0);
 	}
 
-	sendAjaxRequest() {
-		const data = {
+	private sendAjaxRequest() : void {
+		const data : Object = {
 				DAT: {
 					EMAIL: 'aa@aa.aa',
 					FIRST_NME: 'Chandana',
@@ -63,10 +59,10 @@ export class AppComponent implements OnInit {
 					VER: 'DFN_JSON_1.0'
 				}
 		};
-		const samplePostReq = {
+		const samplePostReq : any = {
 			method: RequestMethod.Post,
 			url: 'http://mtplusglobal-uat.mubashertrade.com/tmpassword',
-			data: data
+			body: data
 		};
 		this.dataService.sendAjaxRequest(samplePostReq).then(response => {
 			console.log(response);
@@ -74,7 +70,7 @@ export class AppComponent implements OnInit {
 			console.log('[AppComponent] Ajax post request error ' + error);
 		});
 
-		const sampleGetReq = {
+		const sampleGetReq : any = {
 			method: RequestMethod.Get,
 			url: 'http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1'
 		};

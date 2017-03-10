@@ -45,7 +45,7 @@ export class DataService {
      *						responseType: ResponseContentType;
      */
 
-	public sendAjaxRequest(requestOptions : RequestOptions) : Promise<any> {
+	public sendAjaxRequest(requestOptions : any ) : Promise<any> {
 		return this.ajaxService.send(requestOptions);
 	}
 
