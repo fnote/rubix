@@ -71,7 +71,7 @@ export class QueueMannagerService {
 		}
 	}
 
-	private activateSentReciveFromQueue(messageQueue : Array<any>, timeIntervalProcess : number , socket : Rx.Subject<MessageEvent> ) : void {
+	private activateSentReciveFromQueue(messageQueue : Array<any>, timeIntervalProcess : NodeJS.Timer , socket : Rx.Subject<MessageEvent> ) : void {
 		timeIntervalProcess = setInterval(() => {
 			if ( messageQueue.length > 0 ) {
 				const msg : any = this.deQueueMessage(messageQueue);
