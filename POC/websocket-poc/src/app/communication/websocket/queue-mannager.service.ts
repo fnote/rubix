@@ -7,7 +7,9 @@ import { ConfigService } from '../../config/config.service';
 import { Connection } from '../connection';
 
 @Injectable()
+
 export class QueueMannagerService {
+
 	private TIME_INTERVAL : number = 3000; // 1000 * 3
 	private connectedSocketPool : Array<Connection> = [];
 	private response$ : Rx.Subject<any> ;
@@ -64,10 +66,10 @@ export class QueueMannagerService {
 				this.activateSentReceive(connection.sendMessageQueue, connection.sendQueueProcessInterval, connection.connectedSocket);
 				this.activateSentReceive(connection.recivedMessageQueue, connection.recivedQueueProcessInterval, this.response$);
 			}).catch(error => {
-				console.log('[QueueMannagerService] error occured..' + connectionConfig.channel );
+				console.log('[QueueMannagerService] error occured..' + connection.channel + error );
 			});
 		}else {
-			console.log('[QueueMannagerService] allready connected..' + connectionConfig.channel );
+			console.log('[QueueMannagerService] allready connected..' + connection.channel );
 		}
 	}
 

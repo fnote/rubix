@@ -16,6 +16,9 @@ export class WebsocketService {
 				console.log('[WebsocketService] connected to ' + connection.url );
 				resolve(ws);
 			};
+			ws.onerror = (error) : void => {
+				reject(error);
+			};
 		});
 		return promise;
 	}
