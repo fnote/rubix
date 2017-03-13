@@ -54,5 +54,4 @@ export class DataService {
 			console.log('[DataService] response recived..' + msg );
 		});
 	}
-
 }

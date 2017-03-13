@@ -8,7 +8,6 @@ export class AjaxService {
 	constructor(private http : Http) { }
 
 	public send(requestParams : any) : Promise<any> {
-
 		const requestOptions : RequestOptions = new RequestOptions({
 			method: requestParams.method,
 			url: requestParams.url,
@@ -18,7 +17,6 @@ export class AjaxService {
 			withCredentials: requestParams.withCredentials ? requestParams.withCredentials : false,
 			responseType: requestParams.responseType ? requestParams.responseType : null
 		});
-
 		const request : Request = new Request(requestOptions);
 
 		return this.http.request(request).map(response => {
