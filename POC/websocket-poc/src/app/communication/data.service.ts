@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { QueueMannagerService } from './websocket/queue-mannager.service';
 import { AjaxService } from './ajax/ajax.service';
