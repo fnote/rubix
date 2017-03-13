@@ -8,6 +8,7 @@ interface PulseConfig {
 
 @Injectable()
 export class PulseService {
+	
 	private TIME_INTERVAL : number = 5000; // 1000 * 5
 	private MAX_HEARTBEATS : number = 5;
 	private pulseObj : PulseConfig;

@@ -51,5 +51,4 @@ export class WebsocketService {
 	public sendToWebSocket(ws : WebSocket, message : any) : void {
 		ws.send(message);
 	}
-
 }

@@ -5,6 +5,7 @@ import { AjaxService } from './ajax/ajax.service';
 
 @Injectable()
 export class DataService {
+
 	constructor(private queueMannagerService : QueueMannagerService, private ajaxService : AjaxService) {
 		this.init();
 	}
@@ -41,7 +42,7 @@ export class DataService {
      *						headers: Headers;
      *						body: any(Content - Mandatory(Except for Get Request);
      *						withCredentials: boolean;
-     *						responseType: ResponseContentType;
+     *						responseType: Response content Type;
      */
 
 	public sendAjaxRequest(requestOptions : any ) : Promise<any> {
