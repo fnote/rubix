@@ -1,16 +1,16 @@
-export class RequestHandler {
-	private static _instance : RequestHandler = new RequestHandler();
+export class PriceStreamingRequestHandler {
+	private static _instance : PriceStreamingRequestHandler = new PriceStreamingRequestHandler();
 
-	public static getInstance() : RequestHandler {
-		return RequestHandler._instance;
+	public static getInstance() : PriceStreamingRequestHandler {
+		return PriceStreamingRequestHandler._instance;
 	}
 
 	constructor() {
-		if (RequestHandler._instance) {
+		if (PriceStreamingRequestHandler._instance) {
 			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
 		}
 
-		RequestHandler._instance = this;
+		PriceStreamingRequestHandler._instance = this;
 	}
 
 	private generateAuthRequest(authParams : Object = {}) : string {

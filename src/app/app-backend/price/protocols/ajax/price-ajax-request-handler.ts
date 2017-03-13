@@ -1,16 +1,16 @@
-export class RequestHandler {
-	private static _instance : RequestHandler = new RequestHandler();
+export class PriceAjaxRequestHandler {
+	private static _instance : PriceAjaxRequestHandler = new PriceAjaxRequestHandler();
 
-	public static getInstance() : RequestHandler {
-		return RequestHandler._instance;
+	public static getInstance() : PriceAjaxRequestHandler {
+		return PriceAjaxRequestHandler._instance;
 	}
 
 	constructor() {
-		if (RequestHandler._instance) {
+		if (PriceAjaxRequestHandler._instance) {
 			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
 		}
 
-		RequestHandler._instance = this;
+		PriceAjaxRequestHandler._instance = this;
 	}
 
 	private generateExchangeMetaRequest(params : Object = {}) : string {
