@@ -42,7 +42,7 @@ export class PriceService {
      *                      appVersion  : Application version
      *                      lan         : Current Language. Mandatory.
      */
-	public authenticateWithUsernameAndPassword (authParams : Object = {}) {
+	public authenticateWithUsernameAndPassword (authParams : Object = {}) : void  {
         // let request = <Price Request Generator>.generateRetailAuthRequest(authParams);
         // talk to the communication service and send the auth request
 	}
@@ -56,7 +56,7 @@ export class PriceService {
      *                      appVersion  : Application version
      *                      lan         : Current Language. Mandatory.
      */
-	public authenticateWithSSOToken (authParams : Object = {}) {
+	public authenticateWithSSOToken (authParams : Object = {}) : void  {
 	}
 
 	//
@@ -68,11 +68,11 @@ export class PriceService {
      * @param exchange Exchange code string
      */
 	public addExchangeRequest (exchange : string) : void {
-		PriceStreamingRequestHandler.getInstance().generateAddRequest({MT: 17, PRM: exchange});
+		PriceStreamingRequestHandler.getInstance().generateAddRequest({MT: '17', PRM: exchange});
 	}
 
 	public removeExchangeRequest (exchange : string) : void {
-		PriceStreamingRequestHandler.getInstance().generateRemoveRequest({MT: 17, PRM: exchange});
+		PriceStreamingRequestHandler.getInstance().generateRemoveRequest({MT: '17', PRM: exchange});
 	}
 
     /**
