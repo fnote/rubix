@@ -13,15 +13,19 @@ export class PriceStreamingRequestHandler {
 		PriceStreamingRequestHandler._instance = this;
 	}
 
-	private generateAuthRequest(authParams : Object = {}) : string {
+	public generateAuthRequest(authParams : Object = {}) : string {
 		return 'auth request';
 	}
 
-	private generateSSOAuthRequest(authParams : Object = {}) : string {
+	public generateSSOAuthRequest(authParams : Object = {}) : string {
 		return 'sso auth request';
 	}
 
-	private generateAddExchangeRequest(params : Object = {}) : string {
-		return 'add exchange request';
+	public generateAddRequest(params : Object = {}) : string {
+		return ['{"RT":"1","MT":"', params.MT, '","PRM":"', params.PRM, '"]}'].join('');
+	}
+
+	public generateRemoveRequest(params : Object = {}) : string {
+		return ['{"RT":"0","MT":"', params.MT, '","PRM":"', params.PRM, '"]}'].join('');
 	}
 }

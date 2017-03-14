@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DataManagers } from '../../utils/enums/data-managers.enum';
 import { BaseDataStore } from './data-stores/base-data-store';
 import { StockDataStore } from './data-stores/stock-data-store';
+import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';
 
 @Injectable()
 export class PriceService {
@@ -66,10 +67,12 @@ export class PriceService {
      * Subscribe and Un-subscribe from exchange updates
      * @param exchange Exchange code string
      */
-	public addExchangeRequest (exchange) {
+	public addExchangeRequest (exchange : string) : void {
+		PriceStreamingRequestHandler.getInstance().generateAddRequest({MT: 17, PRM: exchange});
 	}
 
-	public removeExchangeRequest (exchange) {
+	public removeExchangeRequest (exchange : string) : void {
+		PriceStreamingRequestHandler.getInstance().generateRemoveRequest({MT: 17, PRM: exchange});
 	}
 
     /**
@@ -77,10 +80,12 @@ export class PriceService {
      * @param exchange Exchange Code string
      * @param symbol Symbol Code string
      */
-	public addSymbolRequest (exchange, symbol) {
+	public addSymbolRequest (symbol : string) : void {
+		PriceStreamingRequestHandler.getInstance().generateAddRequest({MT: 10, PRM: symbol});
 	}
 
-	public removeSymbolRequest (exchange, symbol) {
+	public removeSymbolRequest (symbol : string) : void {
+		PriceStreamingRequestHandler.getInstance().generateRemoveRequest({MT: 10, PRM: symbol});
 	}
 
 	//
