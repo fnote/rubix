@@ -1,0 +1,16 @@
+<h1>Angular Router</h1>
+    <nav>
+      <a routerLink="/watchlist" routerLinkActive="active">Watchlist</a>
+      <a routerLink="/tradewidgets" routerLinkActive="active">Trade widgets</a>
+    </nav>
+    <div style="width:50%; height: 50%; float:left">
+      <router-outlet></router-outlet>
+      <a [routerLink]="[{ outlets: { popup: ['compose'] } }]">Contact</a>
+    </div>
+    <div style="width:50%; height: 50%; float:left">
+      <router-outlet name="popup"></router-outlet>
+    </div>
+    <div style="width:50%; height: 50%; float:right">
+      <router-outlet name="trade"></router-outlet>
+    </div>
+
