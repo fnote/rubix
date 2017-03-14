@@ -81,11 +81,11 @@ export class PriceService {
      * @param symbol Symbol Code string
      */
 	public addSymbolRequest (symbol : string) : void {
-		PriceStreamingRequestHandler.getInstance().generateAddRequest({MT: 10, PRM: symbol});
+		PriceStreamingRequestHandler.getInstance().generateAddRequest({MT: '10', PRM: symbol});
 	}
 
 	public removeSymbolRequest (symbol : string) : void {
-		PriceStreamingRequestHandler.getInstance().generateRemoveRequest({MT: 10, PRM: symbol});
+		PriceStreamingRequestHandler.getInstance().generateRemoveRequest({MT: '10', PRM: symbol});
 	}
 
 	//

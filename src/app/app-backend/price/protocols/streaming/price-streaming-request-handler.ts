@@ -21,11 +21,11 @@ export class PriceStreamingRequestHandler {
 		return 'sso auth request';
 	}
 
-	public generateAddRequest(params : Object = {}) : string {
+	public generateAddRequest(params : {MT : string, PRM : string}) : string {
 		return ['{"RT":"1","MT":"', params.MT, '","PRM":"', params.PRM, '"]}'].join('');
 	}
 
-	public generateRemoveRequest(params : Object = {}) : string {
+	public generateRemoveRequest(params : {MT : string, PRM : string}) : string {
 		return ['{"RT":"0","MT":"', params.MT, '","PRM":"', params.PRM, '"]}'].join('');
 	}
 }
