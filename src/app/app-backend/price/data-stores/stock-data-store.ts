@@ -22,7 +22,7 @@ export class StockDataStore extends BaseDataStore {
 		}
 	}
 
-	private getOrAddStock(exchangeCode, stockCode) {
+	private getOrAddStock(exchangeCode : string , stockCode : string) : Object {
         // TODO: [Amila] implement a common "keyGenerator" in utils package
 		const key : string = exchangeCode + '~' + stockCode; // utils.keyGenerator.getKey(exchange, stockCode);
 		let stockObj = this.allStockStore[key];
