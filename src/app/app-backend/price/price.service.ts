@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DataManagers } from '../../utils/enums/data-managers.enum';
+import { DataManagers } from '../../constants/enums/data-managers.enum';
 import { BaseDataStore } from './data-stores/base-data-store';
 import { StockDataStore } from './data-stores/stock-data-store';
 import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';
