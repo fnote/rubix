@@ -1,11 +1,3 @@
-<h1>
-  {{title}}
-</h1>
-
-{{this.utilsService.geLocalizationManager().translationObject.labels.TOP_STOCKS}}
-<br>
-{{this.utilsService.geLocalizationManager().translationObject.tradeText.ORD_SIDE[1]}}
-
 <div>
   <label>Input </label>
   <input [(ngModel)]="inputValues" placeholder="input" />
@@ -15,4 +7,6 @@
 </div>
 <button (click)="convert()">Convert</button>
 <button (click)="changeLang()">Change lang</button>
+<br><br><br>
+<app-child></app-child>
 

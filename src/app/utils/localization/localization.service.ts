@@ -1,30 +1,31 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EN } from './en';
 import { AR } from './ar';
 
 @Injectable()
 export class LocalizationService {
+
 	private language : string;
+	private languageObservable = new BehaviorSubject('AR');
 	public translationObject;
+	public translationObjectObservable =  new BehaviorSubject('');
 	private layout : string;
 	private AR = AR;
 	private EN = EN;
-	private supportedLanguages = {
-	EN: {des: 'English' , layout: 'ltr'},
-	AR: {des: 'Arabic' , layout: 'rtl'}
-	};
 
 	constructor() {
 		this.setActiveLanguage('AR');
 	}
 
 	public setActiveLanguage(lanCode : string) : void {
-		const activeLanguage = this.supportedLanguages[lanCode];
+		const activeLanguage = this[lanCode];
 		if (activeLanguage) {
 			this.language = lanCode;
+			this.languageObservable.next(lanCode);
 			this.layout = activeLanguage.layout;
-			this.updateTranslationObject(lanCode);
+			this.updateTranslationObject(activeLanguage);
 		}
 	}
 
@@ -32,16 +33,28 @@ export class LocalizationService {
 		return this.language;
 	}
 
-	public getLayout() : string {
-		return this.layout;
+	public getActiveLanguageObservable() : Observable<string> {
+		return this.languageObservable;
+	}
+
+	public getTranslationObject() : any {
+		return this.translationObject;
+	}
+
+	public getTranslationObjectObservable() : any {
+		return this.translationObjectObservable;
+	}
+
+
+	public isRTL() : boolean {
+		return this.layout === 'rtl';
 	}
 
 	public changeActiveLanguage(lanCode : string) : void {
 		this.setActiveLanguage(lanCode);
 	}
 
-	private updateTranslationObject(selectedLanguage) : void {
-		const selectedLanguageObject = this[selectedLanguage];
+	private updateTranslationObject(selectedLanguageObject : any) : void {
 		this.translationObject = {
 			labels : {
 				TOP_STOCKS : selectedLanguageObject.TOP_STOCKS,
@@ -60,5 +73,6 @@ export class LocalizationService {
 				}
 			}
 		};
+	this.translationObjectObservable.next(this.translationObject);
 	}
 }

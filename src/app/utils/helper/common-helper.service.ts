@@ -6,95 +6,30 @@ import { TradeHelperService } from './trade-helper.service';
 const MIN = 60000; // 1000 * 60
 const HOUR = 3600000; // 1000 * 60 * 60
 const HOURS_PER_MONTH = 720; // 30 * 24
-const INPUT_DATE_FORMAT = 'YYYYMMDDhhmmss';
 @Injectable()
 export class CommonHelperService {
+
 	private tradeHelperManager : TradeHelperService;
+
 	constructor() {}
 
 	////////////////////// Date Formatters //////////////////////
 
-	/**
-	* Return the month as a number
-	* @param month Month as a string
-	*/
-	public getMonth(month : string) : string {
-
-		let month_num : string;
-
-		switch (month) {
-			case 'Jan':
-				month_num = '01';
-				break;
-			case 'Feb':
-				month_num = '02';
-				break;
-			case 'Mar':
-				month_num = '03';
-				break;
-			case 'Apr':
-				month_num = '04';
-				break;
-			case 'May':
-				month_num = '05';
-				break;
-			case 'Jun':
-				month_num = '06';
-				break;
-			case 'Jul':
-				month_num = '07';
-				break;
-			case 'Aug':
-				month_num = '08';
-				break;
-			case 'Sep':
-				month_num = '09';
-				break;
-			case 'Oct':
-				month_num = '10';
-				break;
-			case 'Nov':
-				month_num = '11';
-				break;
-			case 'Dec':
-				month_num = '12';
-				break;
-			default:
-				// TODO: [Malindu] integrate with logger implementation
-				// App.util.log("Error in Util getMonth - Invalid Month", App.LogLevel.ERROR);
-				break;
-		}
-
-		return month_num;
-	}
-
-	/**
-	* Return the time difference as a string
-	* @param lastUpdated Last updated time
-	* @param exchange Corresponding exchange data store
-	*/
-	public getTimeOffsetString(lastUpdated : string , exchange : any ) : string { // TODO: [Malindu] add correct type for exchange
+	public getTimeOffsetString(lastUpdated : number , exchange : any , factor : number ) : string {
+		// TODO: [Malindu] add correct type for exchange
 		// moment.locale('ar-ma'); TODO: [Malindu] change language accordingly
-		const timeZoneOffSet : number = this.getTimeZoneOffSet(lastUpdated , exchange);
-		return moment.utc(lastUpdated , INPUT_DATE_FORMAT).utcOffset(timeZoneOffSet).fromNow();
+	lastUpdated = lastUpdated * factor;
+		const timeZoneOffSet : number = this.getTimeZoneOffSet(lastUpdated.toString() , exchange);
+		return moment.utc(lastUpdated).utcOffset(timeZoneOffSet).fromNow();
 	}
 
-	/**
-	* Format the data in the provided pattern
-	* @param date Date to be formatted
-	* @param pattern Format pattern
-	* @param exchange Exchange
-	*/
-	public formatDate(date : string , pattern : string , exchange : any) : string { // TODO: [Malindu] add correct type for exchange
-		const timeZoneOffSet : number = this.getTimeZoneOffSet(date , exchange) || 0;
-		return moment.utc(date , INPUT_DATE_FORMAT).utcOffset(timeZoneOffSet).format(pattern);
+	public formatDate(date : number , pattern : string , exchange : any , factor : number) : string {
+		// TODO: [Malindu] add correct type for exchange
+		const timeZoneOffSet : number = this.getTimeZoneOffSet(date.toString() , exchange) || 0;
+		return moment.utc(date * factor).utcOffset(timeZoneOffSet).format(pattern);
 	}
-	/**
-	* Return the timezone offset for the exchange compared to GMT
-	* @param date Date to be formatted
-	* @param exchange Corresponding Exchange
-	*/
-	// TODO: [Malindu] refer the correct timeZoneMap
+
+	// TODO: [Malindu] rewrite this
 	public getTimeZoneOffSet(date : string , exchange : any) : number { // TODO: [Malindu] add correct type for exchange
 		const timeZoneMap = {};
 		let timeZone, tzo , adjTzo , sd : number, ed : number , dateInteger : number , offSet : number;
@@ -119,6 +54,7 @@ export class CommonHelperService {
 				offSet += adjTzo.hour * 60 + adjTzo.min;
 			}
 		}
+
 		return offSet;
 	}
 
@@ -126,11 +62,6 @@ export class CommonHelperService {
 
 	////////////////////// Number Formatters //////////////////////
 
-	/**
-	* Round number to given decimal places
-	* @param num Number to be rounded
-	* @param dec Number of decimal places
-	*/
 	public roundNumber(num : number , dec : number) : number {
 		let result : string;
 		if (dec < 0) {
@@ -145,13 +76,10 @@ export class CommonHelperService {
 				}
 			}
 		}
+
 		return parseFloat(result);
 	}
 
-	/**
-	* Convert a number to a fixed number
-	* @param num Input number
-	*/
 	public toFixed(num : number) : number {
 		let e : number;
 		if (Math.abs(num) < 1.0) {
@@ -168,6 +96,7 @@ export class CommonHelperService {
 				num += parseInt((new Array(e + 1)).join('0'), 10);
 			}
 		}
+
 		return num;
 	}
 
@@ -206,11 +135,6 @@ export class CommonHelperService {
 	//   return formNum;
 	// }
 
-	/**
-	* Format a number in Millions
-	* @param num Number to be formatted
-	* @param dec Number of decimal places
-	*/
 	public formatNumberInMillions(num : number , dec : number) : string {
 		const x : number = Math.abs(num);
 		if (x <= 999999) {
@@ -223,35 +147,14 @@ export class CommonHelperService {
 
 	////////////////////// Number Formatters END //////////////////////
 
-	/**
-	* Add a class according to positive/negativeness of an input value
-	* @param val Value to be formatted
-	*/
-	public upsAndDownsFormatter(val : number) : string {
-		if (val > 0) {
-			return '<span class=\'green_text\'>' + val + '</span>';
-		}
-		return '<span class=\'red_text\'>' + val + '</span>';
-	}
-
-	/**
-	* Returns wether a string is right to left
-	* @param str Input string
-	*/
-	public isRTL(str : string) : boolean {
+	public isRTLText(str : string) : boolean {
 		const ltrChars = '\u0000-\u0040\u005B-\u0060\u007B-\u00BF\u00D7\u00F7\u02B9-\u02FF\u2000-\u2BFF\u2010-\u2029\u202C\u202F-\u2BFF',
 			rtlChars = '\u0591-\u07FF\u200F\u202B\u202E\uFB1D-\uFDFD\uFE70-\uFEFC',
 			rtlDirCheck = new RegExp('^[' + ltrChars + ']*[' + rtlChars + ']');
+
 		return rtlDirCheck.test(str);
 	}
 
-	/**
-	* Returns order value
-	* @param price Price
-	* @param qty Quantity
-	* @param curr Currency
-	* @param lotSize Lot size
-	*/
 	public getOrderValue(price : number , qty : number , curr : number , lotSize : number) : number {
 		lotSize = lotSize > 0 ? lotSize : 1;
 		if (price > 0 && qty > 0) {
@@ -261,17 +164,18 @@ export class CommonHelperService {
 		}
 	}
 
-	/**
-	* Returns number of pages
-	* @param pageSize Number of records per page
-	* @param totalRecords Total recordes
-	*/
 	public getPagesCount(pageSize : number , totalRecords : number) : number {
 		let pages : number = Math.floor(totalRecords / pageSize);
 		const remain : number = totalRecords % pageSize;
 		if (remain !== 0) {
 			pages++;
 		}
+
 		return pages;
+	}
+
+	public getCurrentDate() : number {
+
+	return new Date().getTime();
 	}
 }

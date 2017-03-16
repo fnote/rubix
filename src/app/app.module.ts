@@ -6,9 +6,11 @@ import { HttpModule } from '@angular/http';
 import { UtilsModule } from './utils/utils.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { ChildComponent } from './child/child.component';
 
 @NgModule({
-	declarations: [ AppComponent ],
+	declarations: [ AppComponent ,
+					ChildComponent ],
 	imports: [
 		BrowserModule,
 		FormsModule,
