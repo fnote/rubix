@@ -1,4 +1,7 @@
 export const AR = {
+	des : 'Arabic',
+	layout : 'rtl',
+
 	TOP_STOCKS: 'AR - Top Stocks',
 	NEWS: 'AR - News',
 	HIGH_TO_LOW: 'AR - High to Low',

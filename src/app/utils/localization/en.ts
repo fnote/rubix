@@ -1,4 +1,7 @@
 export const EN = {
+	des : 'English',
+	layout : 'ltr',
+
 	TOP_STOCKS: 'Top Stock',
 	NEWS: 'News',
 	HIGH_TO_LOW: 'High to Low',

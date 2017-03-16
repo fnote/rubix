@@ -1,0 +1,10 @@
+<p>
+  child works!
+  {{(translationObjectObservable|async).labels.TOP_STOCKS}}
+  <br>
+  combined
+  {{combinedTranslation | async}}
+  <br>
+  <button (click)="changeLang()">Change lang</button>
+  <button (click)="testFun()">testFun</button>
+</p>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , ChangeDetectionStrategy } from '@angular/core';
 import { UtilsService } from './utils/utils.service';
 import { CommonHelperService } from './utils/helper/common-helper.service';
 import { PriceService } from './app-backend/price/price.service';
@@ -7,7 +7,8 @@ import { LoggerService } from './utils/logger.service';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+	styleUrls: ['./app.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class AppComponent {
@@ -24,15 +25,15 @@ export class AppComponent {
 
 	public convert() : void {
 		// console.log(this.commonHelperService.getMonth('Jan'));
-		this.result = this.commonHelperService.formatDate('20170218142324' , 'YYYY-MM-DD hh:mm:ss' , {});
-		this.inputValues = this.commonHelperService.getMonth('Jan');
+		// this.result = this.utilsService.formatDate('20170218142324' , 'YYYY-MM-DD hh:mm:ss' , {});
+		// this.inputValues = this.commonHelperService.getMonth('Jan');
 	}
 
 	public changeLang() : void {
-		if (this.utilsService.geLocalizationManager().getActiveLanguage() === 'EN') {
-			this.utilsService.geLocalizationManager().setActiveLanguage('AR');
+		if (this.utilsService.getActiveLanguage() === 'EN') {
+			this.utilsService.setActiveLanguage('AR');
 		} else {
-			this.utilsService.geLocalizationManager().setActiveLanguage('EN');
+			this.utilsService.setActiveLanguage('EN');
 		}
 	}
 

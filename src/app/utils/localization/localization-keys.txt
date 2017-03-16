@@ -1,4 +1,4 @@
 export const () = {
-    TOP_STOCKS: (1),
-    NEWS: (2)
+    TOP_STOCKS: [1],
+    NEWS: [2]
 };
