@@ -3,5 +3,5 @@ export enum DataManagers {
 	Exchange,
 	Market,
 	Depth,
-	TimeNSales
+	TimeNSales,
 }
