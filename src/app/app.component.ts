@@ -1,6 +1,6 @@
 import { Component , ChangeDetectionStrategy } from '@angular/core';
 import { UtilsService } from './utils/utils.service';
-mport { ThemeService } from './utils/theme/theme.service';
+import { ThemeService } from './utils/theme/theme.service';
 import { CommonHelperService } from './utils/helper/common-helper.service';
 import { PriceService } from './app-backend/price/price.service';
 import { LoggerService } from './utils/logger.service';
