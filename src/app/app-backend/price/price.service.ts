@@ -91,7 +91,7 @@ export class PriceService {
      * Subscribe and Un-subscribe from exchange updates
      * @param exchange Exchange code string
      */
-	public addExchzangeRequest (exchange : string) : void {
+	public addExchangeRequest (exchange : string) : void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.Exchange, exchange)) {
 			const req = new PriceRequest;
 			req.mt = PriceRequestTypes.Exchange;
