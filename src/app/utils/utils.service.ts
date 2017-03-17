@@ -9,9 +9,9 @@ import { StorageService } from './localStorage/storage.service';
 export class UtilsService {
 
 	constructor(private commonHelperService : CommonHelperService,
-							private tradeHelperService : TradeHelperService,
-							private localizationService : LocalizationService,
-							private storageService : StorageService) {}
+				private tradeHelperService : TradeHelperService,
+				private localizationService : LocalizationService,
+				private storageService : StorageService) {}
 
 	/////////////////////////////////////////////// Common Helpers - Date Formatters /////////////////////////////////////
 

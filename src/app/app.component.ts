@@ -1,6 +1,9 @@
-import { Component , ChangeDetectionStrategy} from '@angular/core';
+import { Component , ChangeDetectionStrategy } from '@angular/core';
 import { UtilsService } from './utils/utils.service';
-import { ThemeService } from './utils/theme/theme.service';
+mport { ThemeService } from './utils/theme/theme.service';
+import { CommonHelperService } from './utils/helper/common-helper.service';
+import { PriceService } from './app-backend/price/price.service';
+import { LoggerService } from './utils/logger.service';
 
 @Component({
 	selector: 'app-root',
@@ -8,16 +11,24 @@ import { ThemeService } from './utils/theme/theme.service';
 	styleUrls: ['./app.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class AppComponent {
 
 	private title = 'Rubix test page';
 	private result : string;
 	private inputValues : string;
 
-	constructor(private utilsService : UtilsService , private themeService : ThemeService) {}
+	constructor(
+		private commonHelperService : CommonHelperService ,
+    private themeService : ThemeService,
+		private utilsService : UtilsService ,
+		private priceService : PriceService,
+		private loggerService : LoggerService) {}
 
 	public convert() : void {
-		console.log(this.utilsService.formatDate(24826369496 , 'YYYY-MM-DD hh:mm:ss' , {} , 60));
+		// console.log(this.commonHelperService.getMonth('Jan'));
+		// this.result = this.utilsService.formatDate('20170218142324' , 'YYYY-MM-DD hh:mm:ss' , {});
+		// this.inputValues = this.commonHelperService.getMonth('Jan');
 	}
 
 	public changeLang() : void {
@@ -26,6 +37,11 @@ export class AppComponent {
 		}else {
 			this.utilsService.setActiveLanguage('EN');
 		}
+	}
+
+	private getPrice() : void {
+		this.loggerService.logInfo(this.inputValues);
+		this.priceService.addSymbolRequest(this.inputValues);
 	}
 }
 

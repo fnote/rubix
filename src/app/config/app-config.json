@@ -1,0 +1,6 @@
+{
+	"loggerConfig" : {
+		"appLogLevel" : 6,
+		"serverLogLevel" : 0
+	}
+}

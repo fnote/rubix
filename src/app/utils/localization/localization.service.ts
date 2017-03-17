@@ -45,7 +45,6 @@ export class LocalizationService {
 		return this.translationObjectObservable;
 	}
 
-
 	public isRTL() : boolean {
 		return this.layout === 'rtl';
 	}
@@ -73,6 +72,7 @@ export class LocalizationService {
 				}
 			}
 		};
-	this.translationObjectObservable.next(this.translationObject);
+
+		this.translationObjectObservable.next(this.translationObject);
 	}
 }
