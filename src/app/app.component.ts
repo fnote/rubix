@@ -1,6 +1,6 @@
 import { Component , ChangeDetectionStrategy } from '@angular/core';
 
-import { ThemeService } from './utils/theme/theme.service';
+import { ThemeService } from './utils/theme.service';
 import { PriceService } from './app-backend/price/price.service';
 import { LoggerService } from './utils/logger.service';
 import { CommonHelperService } from './utils/helper/common-helper.service';
@@ -22,8 +22,8 @@ export class AppComponent {
 	private result : string;
 	private response : Array<any> = [] ;
 	private inputValues : string;
-	private userName : string = '';
-	private password : string = '';
+	private userName = '';
+	private password = '';
 
 	constructor(
 		private commonHelperService : CommonHelperService,
@@ -57,7 +57,7 @@ export class AppComponent {
 	private getPrice() : void {
 		this.loggerService.logInfo(this.inputValues);
 		this.priceService.addSymbolRequest('TDWL', '1010');
-		/* this.priceService.addExchangeRequest('TDWL'); */
+		this.priceService.addExchangeRequest('TDWL');
 		this.priceService.addSymbolListRequest(['TDWL', 'TDWL', 'DFM'], ['1010', '1020', 'EMAAR']);
 		this.priceService.addExchangeListRequest(['TDWL', 'DFM', 'LKCSE']);
 	}

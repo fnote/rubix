@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { CommonHelperService } from '../utils/helper/common-helper.service';
-import { ThemeService } from '../utils/theme/theme.service';
+import { ThemeService } from '../utils/theme.service';
 import { LocalizationService } from '../utils/localization/localization.service';
 
 @Component({

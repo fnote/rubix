@@ -6,6 +6,7 @@ import { TradeHelperService } from './trade-helper.service';
 const MIN = 60000; // 1000 * 60
 const HOUR = 3600000; // 1000 * 60 * 60
 const HOURS_PER_MONTH = 720; // 30 * 24
+
 @Injectable()
 export class CommonHelperService {
 

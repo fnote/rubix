@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
-import { StreamRouteService } from '../../../stream-route.service';
+import { StreamRouteService } from '../../../communication/stream-route.service';
 
 @Injectable()
 

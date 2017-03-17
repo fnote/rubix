@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
-import { DataService } from './communication/data.service';
-import { Channels } from '../constants/enums/channels.enum';
+import { DataService } from './data.service';
+import { Channels } from '../../constants/enums/channels.enum';
 
 @Injectable()
 export class StreamRouteService {

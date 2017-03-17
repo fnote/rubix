@@ -8,17 +8,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { PriceModule } from './app-backend/price/price.module';
 import { CommunicationModule } from './app-backend/communication/communication.module';
+import { UtilsModule } from './utils/utils.module';
 
-import { StreamRouteService } from './app-backend/stream-route.service';
-import { PriceService } from './app-backend/price/price.service';
-import { LoggerService } from './utils/logger.service';
 import { ConfigService } from './config/config.service';
 import { ChildComponent } from './child/child.component';
-import { ThemeService } from './utils/theme/theme.service';
-import { CommonHelperService } from './utils/helper/common-helper.service';
-import { TradeHelperService } from './utils/helper/trade-helper.service';
-import { LocalizationService } from './utils/localization/localization.service';
-import { StorageService } from './utils/storage.service';
 
 @NgModule({
 	declarations: [
@@ -31,19 +24,11 @@ import { StorageService } from './utils/storage.service';
 		HttpModule,
 		AppRoutingModule,
 		CommunicationModule,
-		AppRoutingModule,
-        PriceModule
+		PriceModule,
+		UtilsModule
 	],
 	providers: [
-		ConfigService,
-		LoggerService,
-		PriceService,
-		StreamRouteService,
-		ThemeService,
-		CommonHelperService,
-		TradeHelperService,
-		LocalizationService,
-		StorageService
+		ConfigService
 	],
 	bootstrap: [ AppComponent ]
 })

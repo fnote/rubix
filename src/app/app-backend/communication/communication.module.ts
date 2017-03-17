@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { WebsocketService } from './websocket/websocket.service';
 import { AjaxService } from './ajax/ajax.service';
 import { QueueMannagerService } from './websocket/queue-mannager.service';
 import { DataService } from './data.service';
+import { StreamRouteService } from './stream-route.service';
 
 @NgModule({
 	imports: [
@@ -14,7 +16,8 @@ import { DataService } from './data.service';
 		WebsocketService,
 		AjaxService,
 		QueueMannagerService,
-		DataService
+		DataService,
+		StreamRouteService
 	],
 })
 export class CommunicationModule { }
