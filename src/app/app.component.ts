@@ -1,9 +1,11 @@
 import { Component , ChangeDetectionStrategy } from '@angular/core';
-import { UtilsService } from './utils/utils.service';
 import { ThemeService } from './utils/theme/theme.service';
-import { CommonHelperService } from './utils/helper/common-helper.service';
 import { PriceService } from './app-backend/price/price.service';
 import { LoggerService } from './utils/logger.service';
+import { CommonHelperService } from './utils/helper/common-helper.service';
+import { TradeHelperService } from './utils/helper/trade-helper.service';
+import { LocalizationService } from './utils/localization/localization.service';
+import { StorageService } from './utils/storage.service';
 
 @Component({
 	selector: 'app-root',
@@ -19,11 +21,11 @@ export class AppComponent {
 	private inputValues : string;
 
 	constructor(
-		private commonHelperService : CommonHelperService ,
-    private themeService : ThemeService,
-		private utilsService : UtilsService ,
+		private commonHelperService : CommonHelperService,
+		private themeService : ThemeService,
 		private priceService : PriceService,
-		private loggerService : LoggerService) {}
+		private loggerService : LoggerService,
+		private localizationService : LocalizationService) {}
 
 	public convert() : void {
 		// console.log(this.commonHelperService.getMonth('Jan'));
@@ -32,10 +34,10 @@ export class AppComponent {
 	}
 
 	public changeLang() : void {
-		if (this.utilsService.getActiveLanguage() === 'EN') {
-			this.utilsService.setActiveLanguage('AR');
+		if (this.localizationService.getActiveLanguage() === 'EN') {
+			this.localizationService.setActiveLanguage('AR');
 		}else {
-			this.utilsService.setActiveLanguage('EN');
+			this.localizationService.setActiveLanguage('EN');
 		}
 	}
 

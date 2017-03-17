@@ -4,6 +4,11 @@ import { Injectable } from '@angular/core';
 export class TradeHelperService {
 
 	// TODO: [Malindu] Complete this
+	/**
+	* Return price ratio
+	* @param value Input value
+	* @param isExg Is exchange
+	*/
 	public getPriceRatios(value : number , isExg : boolean) : number {
 		const rate = 1;
 

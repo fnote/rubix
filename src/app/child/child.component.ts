@@ -2,9 +2,9 @@ import { Component , ChangeDetectionStrategy} from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { UtilsService } from '../utils/utils.service';
 import { CommonHelperService } from '../utils/helper/common-helper.service';
 import { ThemeService } from '../utils/theme/theme.service';
+import { LocalizationService } from '../utils/localization/localization.service';
 
 @Component({
 	selector: 'app-child',
@@ -15,23 +15,23 @@ import { ThemeService } from '../utils/theme/theme.service';
 export class ChildComponent {
 
 	private name = 'Chandana';
-	private translationObjectObservable = this.utilsService.getTranslationObjectObservable();
-	private combinedTranslation = Observable.combineLatest(this.utilsService.getTranslationObjectObservable() , (x : any) => {
+	private translationObjectObservable = this.localizationService.getTranslationObjectObservable();
+	private combinedTranslation = Observable.combineLatest(this.localizationService.getTranslationObjectObservable() , (x : any) => {
 
 	return x.labels.TOP_STOCKS + ' Combined with ' + x.labels.NEWS;
 	});
 
-	constructor(private utilsService : UtilsService , private themeService : ThemeService) {
-		this.utilsService.getActiveLanguageObservable().subscribe(res => {
+	constructor(private localizationService : LocalizationService , private themeService : ThemeService) {
+		this.localizationService.getActiveLanguageObservable().subscribe(res => {
 			console.log('Language Changed: ' + res);
 		});
 	}
 
 	public changeLang() : void {
-		if (this.utilsService.getActiveLanguage() === 'EN') {
-			this.utilsService.setActiveLanguage('AR');
+		if (this.localizationService.getActiveLanguage() === 'EN') {
+			this.localizationService.setActiveLanguage('AR');
 		}else {
-			this.utilsService.setActiveLanguage('EN');
+			this.localizationService.setActiveLanguage('EN');
 		}
 	}
 

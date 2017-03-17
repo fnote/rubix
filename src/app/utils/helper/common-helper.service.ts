@@ -15,14 +15,27 @@ export class CommonHelperService {
 
 	////////////////////// Date Formatters //////////////////////
 
+	/**
+	* Return the time difference as a string
+	* @param lastUpdated Last updated time
+	* @param exchange Corresponding exchange data store
+	* param factor Multiplication factor
+	*/
 	public getTimeOffsetString(lastUpdated : number , exchange : any , factor : number ) : string {
 		// TODO: [Malindu] add correct type for exchange
 		// moment.locale('ar-ma'); TODO: [Malindu] change language accordingly
-	lastUpdated = lastUpdated * factor;
+		lastUpdated = lastUpdated * factor;
 		const timeZoneOffSet : number = this.getTimeZoneOffSet(lastUpdated.toString() , exchange);
 		return moment.utc(lastUpdated).utcOffset(timeZoneOffSet).fromNow();
 	}
 
+	/**
+	* Format the data in the provided pattern
+	* @param date Date to be formatted
+	* @param pattern Format pattern
+	* @param exchange Exchange
+	* @param factor Multiplication factor
+	*/
 	public formatDate(date : number , pattern : string , exchange : any , factor : number) : string {
 		// TODO: [Malindu] add correct type for exchange
 		const timeZoneOffSet : number = this.getTimeZoneOffSet(date.toString() , exchange) || 0;
@@ -30,6 +43,11 @@ export class CommonHelperService {
 	}
 
 	// TODO: [Malindu] rewrite this
+	/**
+	* Return the timezone offset for the exchange compared to GMT
+	* @param date Date to be formatted
+	* @param exchange Corresponding Exchange
+	*/
 	public getTimeZoneOffSet(date : string , exchange : any) : number { // TODO: [Malindu] add correct type for exchange
 		const timeZoneMap = {};
 		let timeZone, tzo , adjTzo , sd : number, ed : number , dateInteger : number , offSet : number;
@@ -62,6 +80,11 @@ export class CommonHelperService {
 
 	////////////////////// Number Formatters //////////////////////
 
+	/**
+	* Round number to given decimal places
+	* @param num Number to be rounded
+	* @param dec Number of decimal places
+	*/
 	public roundNumber(num : number , dec : number) : number {
 		let result : string;
 		if (dec < 0) {
@@ -80,6 +103,10 @@ export class CommonHelperService {
 		return parseFloat(result);
 	}
 
+	/**
+	* Convert a number to a fixed number
+	* @param num Input number
+	*/
 	public toFixed(num : number) : number {
 		let e : number;
 		if (Math.abs(num) < 1.0) {
@@ -135,6 +162,11 @@ export class CommonHelperService {
 	//   return formNum;
 	// }
 
+	/**
+	* Format a number in Millions
+	* @param num Number to be formatted
+	* @param dec Number of decimal places
+	*/
 	public formatNumberInMillions(num : number , dec : number) : string {
 		const x : number = Math.abs(num);
 		if (x <= 999999) {
@@ -147,6 +179,10 @@ export class CommonHelperService {
 
 	////////////////////// Number Formatters END //////////////////////
 
+	/**
+	* Returns wether a string is right to left
+	* @param str Input string
+	*/
 	public isRTLText(str : string) : boolean {
 		const ltrChars = '\u0000-\u0040\u005B-\u0060\u007B-\u00BF\u00D7\u00F7\u02B9-\u02FF\u2000-\u2BFF\u2010-\u2029\u202C\u202F-\u2BFF',
 			rtlChars = '\u0591-\u07FF\u200F\u202B\u202E\uFB1D-\uFDFD\uFE70-\uFEFC',
@@ -155,6 +191,13 @@ export class CommonHelperService {
 		return rtlDirCheck.test(str);
 	}
 
+	/**
+	* Returns order value
+	* @param price Price
+	* @param qty Quantity
+	* @param curr Currency
+	* @param lotSize Lot size
+	*/
 	public getOrderValue(price : number , qty : number , curr : number , lotSize : number) : number {
 		lotSize = lotSize > 0 ? lotSize : 1;
 		if (price > 0 && qty > 0) {
@@ -164,6 +207,11 @@ export class CommonHelperService {
 		}
 	}
 
+	/**
+	* Returns number of pages
+	* @param pageSize Number of records per page
+	* @param totalRecords Total recordes
+	*/
 	public getPagesCount(pageSize : number , totalRecords : number) : number {
 		let pages : number = Math.floor(totalRecords / pageSize);
 		const remain : number = totalRecords % pageSize;
@@ -174,6 +222,9 @@ export class CommonHelperService {
 		return pages;
 	}
 
+	/**
+	* Returns current UTC time
+	*/
 	public getCurrentDate() : number {
 
 	return new Date().getTime();
