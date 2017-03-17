@@ -70,7 +70,7 @@ export class AppComponent {
 			userType : '30',
 			subType : '1'
 		};
-		this.priceService.authenticateWithPrimaryAuthToken( authParams, Channels.Price );
+		this.priceService.authenticateWithUsernameAndPassword( authParams , Channels.Price );
 	}
 
 	// public sendTestPriceRequest() : void {

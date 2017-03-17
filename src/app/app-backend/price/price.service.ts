@@ -49,9 +49,13 @@ export class PriceService {
 		 *                      appVersion  : Application version
 		 *                      lan         : Current Language. Mandatory.
 		 */
-	public authenticateWithUsernameAndPassword (authParams : Object = {}) : void  {
-				// let request = <Price Request Generator>.generateRetailAuthRequest(authParams);
-				// talk to the communication service and send the auth request
+	public authenticateWithUsernameAndPassword (authParams : any, connectionIndex : number) : void  {
+		const authReqest =  PriceStreamingRequestHandler.getInstance().generateAuthRequest(authParams);
+		const request = {
+			index : connectionIndex,
+			data : authReqest
+		};
+		this.dataService.sendToWs(request);
 	}
 
 	/**
@@ -75,14 +79,9 @@ export class PriceService {
 		 *                      appVersion  : Application version
 		 *                      lan         : Current Language. Mandatory.
 		 */
-	public authenticateWithPrimaryAuthToken(authParams : any, connectionIndex : number) : void  {
-		const authReqest =  PriceStreamingRequestHandler.getInstance().generateAuthRequest(authParams);
-		const request = {
-			index:connectionIndex,
-			data:authReqest
-		};
-		this.dataService.sendToWs(request);
+	public authenticateWithPrimaryAuthToken(authParams : Object = {}) : void  {
 	}
+
 
 	//
 	// API to handle price related meta and streaming
