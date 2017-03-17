@@ -1,4 +1,7 @@
+import { PriceRequest } from '../price-request';
+
 export class PriceStreamingRequestHandler {
+
 	private static _instance : PriceStreamingRequestHandler = new PriceStreamingRequestHandler();
 
 	public static getInstance() : PriceStreamingRequestHandler {
@@ -21,11 +24,13 @@ export class PriceStreamingRequestHandler {
 		return 'sso auth request';
 	}
 
-	public generateAddRequest(params : {MT : string, PRM : string}) : string {
-		return ['{"RT":"1","MT":"', params.MT, '","PRM":"', params.PRM, '"]}'].join('');
+	public generateAddRequest(req : PriceRequest) : string {
+		req.rt = 1;
+		return req.buildMessage();
 	}
 
-	public generateRemoveRequest(params : {MT : string, PRM : string}) : string {
-		return ['{"RT":"0","MT":"', params.MT, '","PRM":"', params.PRM, '"]}'].join('');
+	public generateRemoveRequest(req : PriceRequest) : string {
+		req.rt = 0;
+		return req.buildMessage();
 	}
 }
