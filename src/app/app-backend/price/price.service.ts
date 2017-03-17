@@ -5,11 +5,12 @@ import { StockDataStore } from './data-stores/stock-data-store';
 import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';
 import { PriceRequest } from './protocols/price-request';
 import { PriceRequestTypes } from '../../constants/enums/price-request-types.enum';
+import { PriceSubscriptionService } from './price-subscription.service';
 
 @Injectable()
 export class PriceService {
 
-	constructor() { }
+	constructor(private priceSubscriptionService : PriceSubscriptionService) { }
 
 	/**
      * Fetch data managers
@@ -69,18 +70,22 @@ export class PriceService {
      * Subscribe and Un-subscribe from exchange updates
      * @param exchange Exchange code string
      */
-	public addExchangeRequest (exchange : string) : void {
-		const req = new PriceRequest;
-		req.mt = PriceRequestTypes.Exchange;
-		req.addParam(exchange);
-		alert(PriceStreamingRequestHandler.getInstance().generateAddRequest(req));
+	public addExchzangeRequest (exchange : string) : void {
+		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.Exchange, exchange)) {
+			const req = new PriceRequest;
+			req.mt = PriceRequestTypes.Exchange;
+			req.addParam(exchange);
+			alert(PriceStreamingRequestHandler.getInstance().generateAddRequest(req));
+		}
 	}
 
 	public removeExchangeRequest (exchange : string) : void {
-		const req = new PriceRequest;
-		req.mt = PriceRequestTypes.Exchange;
-		req.addParam(exchange);
-		alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
+		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.Exchange, exchange)) {
+			const req = new PriceRequest;
+			req.mt = PriceRequestTypes.Exchange;
+			req.addParam(exchange);
+			alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
+		}
 	}
 
 	public addExchangeListRequest (exchange : string[]) : void {
@@ -111,17 +116,21 @@ export class PriceService {
      * @param symbol Symbol Code string
      */
 	public addSymbolRequest (exchange : string, symbol : string) : void {
-		const req = new PriceRequest;
-		req.mt = PriceRequestTypes.SnapshotSymbol;
-		req.addParam(exchange, symbol);
-		alert(PriceStreamingRequestHandler.getInstance().generateAddRequest(req));
+		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.Exchange, exchange, symbol)) {
+			const req = new PriceRequest;
+			req.mt = PriceRequestTypes.SnapshotSymbol;
+			req.addParam(exchange, symbol);
+			alert(PriceStreamingRequestHandler.getInstance().generateAddRequest(req));
+		}
 	}
 
 	public removeSymbolRequest (exchange : string, symbol : string) : void {
-		const req = new PriceRequest;
-		req.mt = PriceRequestTypes.SnapshotSymbol;
-		req.addParam(exchange, symbol);
-		alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
+		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.Exchange, exchange)) {
+			const req = new PriceRequest;
+			req.mt = PriceRequestTypes.SnapshotSymbol;
+			req.addParam(exchange, symbol);
+			alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
+		}
 	}
 
 	/**
