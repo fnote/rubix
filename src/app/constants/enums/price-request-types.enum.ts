@@ -1,0 +1,18 @@
+export enum PriceRequestTypes {
+	SnapshotSymbol = 10,
+	SnapshotFullMarket,
+	DetailQuoteSymbol,
+	DetailQuoteFullMarket,
+	ExchangeAndSubmarket = 15,
+	Exchange = 17,
+	SectorSummary,
+	TimeAndSalesSymbol = 20,
+	TimeAndSalesFullMarket,
+	MarketDepthByPrice = 25,
+	MarketDepthByOrder,
+	News = 30,
+	Announcement = 35,
+	OHLCSymbol = 40,
+	OHLCFullMarket,
+	TopStocks = 50,
+}

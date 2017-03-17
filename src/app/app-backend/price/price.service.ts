@@ -3,6 +3,8 @@ import { DataManagers } from '../../constants/enums/data-managers.enum';
 import { BaseDataStore } from './data-stores/base-data-store';
 import { StockDataStore } from './data-stores/stock-data-store';
 import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';
+import { PriceRequest } from './protocols/price-request';
+import { PriceRequestTypes } from '../../constants/enums/price-request-types.enum';
 
 @Injectable()
 export class PriceService {
@@ -68,24 +70,90 @@ export class PriceService {
      * @param exchange Exchange code string
      */
 	public addExchangeRequest (exchange : string) : void {
-		PriceStreamingRequestHandler.getInstance().generateAddRequest({MT: '17', PRM: exchange});
+		const req = new PriceRequest;
+		req.mt = PriceRequestTypes.Exchange;
+		req.addParam(exchange);
+		alert(PriceStreamingRequestHandler.getInstance().generateAddRequest(req));
 	}
 
 	public removeExchangeRequest (exchange : string) : void {
-		PriceStreamingRequestHandler.getInstance().generateRemoveRequest({MT: '17', PRM: exchange});
+		const req = new PriceRequest;
+		req.mt = PriceRequestTypes.Exchange;
+		req.addParam(exchange);
+		alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
+	}
+
+	public addExchangeListRequest (exchange : string[]) : void {
+		const req = new PriceRequest;
+		req.mt = PriceRequestTypes.Exchange;
+
+		for (const exg of exchange) {
+			req.addParam(exg);
+		}
+
+		alert(PriceStreamingRequestHandler.getInstance().generateAddRequest(req));
+	}
+
+	public removeExchangeListRequest (exchange : string[]) : void {
+		const req = new PriceRequest;
+		req.mt = PriceRequestTypes.Exchange;
+
+		for (const exg of exchange) {
+			req.addParam(exg);
+		}
+
+		alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
 	}
 
     /**
-     * Subscribe and Un-subscribe from symbol updates
+     * Subscribe and Un-subscribe for a symbol updates
      * @param exchange Exchange Code string
      * @param symbol Symbol Code string
      */
-	public addSymbolRequest (symbol : string) : void {
-		PriceStreamingRequestHandler.getInstance().generateAddRequest({MT: '10', PRM: symbol});
+	public addSymbolRequest (exchange : string, symbol : string) : void {
+		const req = new PriceRequest;
+		req.mt = PriceRequestTypes.SnapshotSymbol;
+		req.addParam(exchange, symbol);
+		alert(PriceStreamingRequestHandler.getInstance().generateAddRequest(req));
 	}
 
-	public removeSymbolRequest (symbol : string) : void {
-		PriceStreamingRequestHandler.getInstance().generateRemoveRequest({MT: '10', PRM: symbol});
+	public removeSymbolRequest (exchange : string, symbol : string) : void {
+		const req = new PriceRequest;
+		req.mt = PriceRequestTypes.SnapshotSymbol;
+		req.addParam(exchange, symbol);
+		alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
+	}
+
+	/**
+     * Subscribe and Un-subscribe for a list of symbol updates.
+	 * !!!!! important:	params needs to be sufficient to generate a request.
+	 * 					i.e: Symbol array and Exchange arrays should contain corresponsing
+	 * 					values ordered way.
+     * @param exchange Exchange Code string array
+     * @param symbol Symbol Code string array
+     */
+	public addSymbolListRequest (exchange : string[], symbol : string[]) : void {
+		const req = new PriceRequest;
+		req.mt = PriceRequestTypes.SnapshotSymbol;
+
+		let i = 0;
+		for (const exg of exchange) {
+			req.addParam(exg, symbol[i++]);
+		}
+
+		alert(PriceStreamingRequestHandler.getInstance().generateAddRequest(req));
+	}
+
+	public removeSymbolListRequest (exchange : string[], symbol : string[]) : void {
+		const req = new PriceRequest;
+		req.mt = PriceRequestTypes.SnapshotSymbol;
+
+		let i = 0;
+		for (const exg of exchange) {
+			req.addParam(exg, symbol[i++]);
+		}
+
+		alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
 	}
 
 	//

@@ -43,7 +43,10 @@ export class AppComponent {
 
 	private getPrice() : void {
 		this.loggerService.logInfo(this.inputValues);
-		this.priceService.addSymbolRequest(this.inputValues);
+		this.priceService.addSymbolRequest('TDWL', '1010');
+		this.priceService.addExchangeRequest('TDWL');
+		this.priceService.addSymbolListRequest(['TDWL', 'TDWL', 'DFM'], ['1010', '1020', 'EMAAR']);
+		this.priceService.addExchangeListRequest(['TDWL', 'DFM', 'LKCSE']);
 	}
 }
 
