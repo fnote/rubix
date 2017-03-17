@@ -32,7 +32,7 @@ import { StorageService } from './utils/storage.service';
 		AppRoutingModule,
 		CommunicationModule,
 		AppRoutingModule,
-        PriceModule
+		PriceModule
 	],
 	providers: [
 		ConfigService,
