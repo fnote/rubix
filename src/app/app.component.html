@@ -1,14 +1,23 @@
 <div [ngClass]="themeService.selectedThemeId">
-  <div>
-    <label>Input </label>
-    <input [(ngModel)]="inputValues" placeholder="input" />
-  </div>
-  <div>
-    <label>Result : </label>{{result}}
-  </div>
-  <button (click)="convert()">Convert</button>
-  <button (click)="changeLang()">Change lang</button>
-  <button (click)="getPrice()">Get Price</button>
-  <br><br><br>
-  <app-child></app-child>
+<div>
+  <label>Input </label>
+  <input [(ngModel)]="inputValues" placeholder="input" />
+</div>
+<div>
+  <label>Result : </label>{{result}}
+</div>
+<button (click)="convert()">Convert</button>
+<button (click)="changeLang()">Change lang</button>
+<button (click)="getPrice()">Get Price</button>
+<br><br><br>
+<app-child></app-child>
+
+<br><br>
+<input [(ngModel)]="userName" placeholder="userName" />
+<input type="password" [(ngModel)]="password" placeholder="password" />
+<br><br>
+<button (click)="authenticateWithPrimaryAuthToken()">authenticate With PrimaryAuthToken</button>
+response from Price
+{{response}}
+<button (click)="sendTestPriceRequest()">sample Request send</button>
 </div>

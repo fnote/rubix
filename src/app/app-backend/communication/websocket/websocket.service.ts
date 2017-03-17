@@ -31,9 +31,9 @@ export class WebsocketService {
 		});
 
 		const observer : any = {
-			next: (data : Object) : void => {
+			next: (data : any) : void => {
 				if (socket.readyState === WebSocket.OPEN) {
-					socket.send(JSON.stringify(data));
+					socket.send(data.data.data);
 					console.log('[WebsocketService] sent to ' + socket.url + ' ' + data );
 				}
 			}

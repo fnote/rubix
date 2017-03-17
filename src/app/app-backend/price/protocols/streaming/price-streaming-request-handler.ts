@@ -16,8 +16,16 @@ export class PriceStreamingRequestHandler {
 		PriceStreamingRequestHandler._instance = this;
 	}
 
-	public generateAuthRequest(authParams : Object = {}) : string {
-		return 'auth request';
+	public generateAuthRequest(authParams : {priceVerion : string, userName : string, password : string, userType : string, subType : string  }) : string {
+		const fs = '\u001C';
+		const ds = '\u0002';
+		return [
+			[ 150 , authParams.priceVerion ].join(ds),
+			[ 20 , authParams.userName ].join(ds),
+			[ 21 , authParams.password ].join(ds),
+			[ 24 , authParams.userType ].join(ds),
+			[ 1000 , authParams.subType ].join(ds)
+		].join(fs);
 	}
 
 	public generateSSOAuthRequest(authParams : Object = {}) : string {

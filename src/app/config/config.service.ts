@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Channels } from '../constants/enums/channels.enum';
 
 interface ConnectionConfig {
 	index : number;
@@ -12,17 +13,18 @@ interface ConnectionConfig {
 @Injectable()
 export class ConfigService {
 	private connectionConfig : Array<ConnectionConfig>;
-	public ECHO_URL = 'wss://echo.websocket.org';
-	public CHAT_URL = 'ws://10.1.20.136:1234';
-	public PRICE_URL = 'wss://phoenix-eg-uat.mubashertrade.com/phoenix';
+	public ECHO_URL : string = 'wss://echo.websocket.org';
+	public CHAT_URL : string = 'ws://10.1.20.136:1234';
+    public PRICE_URL : string = 'ws://mfg-uat-phoenix.mubashertrade.com:9090/websocket/price';
+	//	public PRICE_URL : string = 'ws://10.1.20.17:9090/websocket/price';
 
 	public configObj : any;
 
 	constructor(private http : Http) {
 		this.connectionConfig = [
-			{ index: 0, channel: 'echo' , url: this.ECHO_URL, isSecure: true },
+			{ index: 0, channel: 'echo' , url: this.ECHO_URL, isSecure: false },
 			{ index: 1, channel: 'chat' , url: this.CHAT_URL, isSecure: false },
-			{ index: 2, channel: 'price' , url: this.PRICE_URL, isSecure: false }
+			{ index: Channels.Price , channel: 'price' , url: this.PRICE_URL, isSecure: false }
 		];
 
 		this.load();

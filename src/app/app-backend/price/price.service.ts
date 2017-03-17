@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Rx';
+
 import { DataManagers } from '../../constants/enums/data-managers.enum';
 import { BaseDataStore } from './data-stores/base-data-store';
 import { StockDataStore } from './data-stores/stock-data-store';
 import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';
+import { PriceStreamingResponseHandler} from './protocols/streaming/price-streaming-response-handler';
 import { PriceRequest } from './protocols/price-request';
 import { PriceRequestTypes } from '../../constants/enums/price-request-types.enum';
 import { PriceSubscriptionService } from './price-subscription.service';
+import { DataService } from '../communication/data.service';
 
 @Injectable()
 export class PriceService {
 
-	constructor(private priceSubscriptionService : PriceSubscriptionService) { }
+	constructor(private dataService : DataService , private priceStreamingResponseHandler : PriceStreamingResponseHandler , private priceSubscriptionService : PriceSubscriptionService ) {  }
 
 	/**
-     * Fetch data managers
-     * @param dmID Data Manager ID number
-     */
+		 * Fetch data managers
+		 * @param dmID Data Manager ID number
+		 */
 	public getDataManager (dmID : number) : BaseDataStore {
 		let dtStore : BaseDataStore = null;
 
@@ -36,30 +40,48 @@ export class PriceService {
 	//
 
 	/**
-     * Authenticate with username and password
-     * @param authParams An object with following properties set
+		 * Authenticate with username and password
+		 * @param authParams An object with following properties set
 	 * 						channel		: Value Defined at Channels Enum. Mandatory
-     *                      username    : Username. Mandatory.
-     *                      password    : Password. Mandatory.
-     *                      loginIP     : Machine IP
-     *                      appVersion  : Application version
-     *                      lan         : Current Language. Mandatory.
-     */
+		 *                      username    : Username. Mandatory.
+		 *                      password    : Password. Mandatory.
+		 *                      loginIP     : Machine IP
+		 *                      appVersion  : Application version
+		 *                      lan         : Current Language. Mandatory.
+		 */
 	public authenticateWithUsernameAndPassword (authParams : Object = {}) : void  {
-        // let request = <Price Request Generator>.generateRetailAuthRequest(authParams);
-        // talk to the communication service and send the auth request
+				// let request = <Price Request Generator>.generateRetailAuthRequest(authParams);
+				// talk to the communication service and send the auth request
 	}
 
 	/**
-     * Authenticate with SSO token
-     * @param authParams An object with following properties set
-     *                      channel		: Value Defined at Channels Enum. Mandatory
-     *                      sso token	: SSO token. Mandatory
-     *                      loginIP     : Machine IP
-     *                      appVersion  : Application version
-     *                      lan         : Current Language. Mandatory.
-     */
+		 * Authenticate with SSO token
+		 * @param authParams An object with following properties set
+		 *                      channel		: Value Defined at Channels Enum. Mandatory
+		 *                      sso token	: SSO token. Mandatory
+		 *                      loginIP     : Machine IP
+		 *                      appVersion  : Application version
+		 *                      lan         : Current Language. Mandatory.
+		 */
 	public authenticateWithSSOToken (authParams : Object = {}) : void  {
+	}
+
+	/**
+		 * Authenticate with Primary AuthToken
+		 * @param authParams An object with following properties set
+		 *                      channel		: Value Defined at Channels Enum. Mandatory
+		 *                      sso token	: SSO token. Mandatory
+		 *                      loginIP     : Machine IP
+		 *                      appVersion  : Application version
+		 *                      lan         : Current Language. Mandatory.
+		 */
+	public authenticateWithPrimaryAuthToken(authParams : any, connectionIndex : number) : void  {
+		const authReqest =  PriceStreamingRequestHandler.getInstance().generateAuthRequest(authParams);
+		const request = {
+			index:connectionIndex,
+			data:authReqest
+		};
+		this.dataService.sendToWs(request);
 	}
 
 	//
@@ -163,6 +185,10 @@ export class PriceService {
 		}
 
 		alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
+	}
+
+	public getPriceResponseStream() : Subject<Object> {
+		return this.priceStreamingResponseHandler.getPriceResponseStream();
 	}
 
 	//

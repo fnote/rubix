@@ -3,12 +3,12 @@ import { Observable } from 'rxjs/Observable';
 import * as Rx from 'rxjs/Rx';
 import { WebsocketService } from './websocket.service';
 import { PulseService } from './pulse.service';
-import { ConfigService } from '../../config/config.service';
+import { ConfigService } from '../../../config/config.service';
 import { Connection } from '../connection';
 
 @Injectable()
 export class QueueMannagerService {
-	private TIME_INTERVAL : number = 3000; // 1000 * 3
+	private TIME_INTERVAL : number = 300; // 1000 * 3
 	private connectedSocketPool : Array<Connection> = [];
 	private response$ : Rx.Subject<any> ;
 
@@ -61,8 +61,8 @@ export class QueueMannagerService {
 				connection.connectedSocket = socket;
 				connection.isConnected = true;
 				this.subscribeForConnected(connectionConfig.index);
-				this.activateSentReceive(connection.sendMessageQueue, connection.sendQueueProcessInterval, connection.connectedSocket);
-				this.activateSentReceive(connection.recivedMessageQueue, connection.recivedQueueProcessInterval, this.response$);
+				this.activateSentReceive(connection.sendMessageQueue, connection.sendQueueProcessInterval, connection.connectedSocket, connection.index);
+				this.activateSentReceive(connection.recivedMessageQueue, connection.recivedQueueProcessInterval, this.response$ , connection.index);
 			}).catch(error => {
 				console.log('[QueueMannagerService] error occured..' + connectionConfig.channel );
 			});
@@ -71,11 +71,17 @@ export class QueueMannagerService {
 		}
 	}
 
-	private activateSentReceive(messageQueue : Array<any>, timeIntervalProcess : NodeJS.Timer , socket : Rx.Subject<MessageEvent> ) : void {
+	private activateSentReceive(messageQueue : Array<any>, timeIntervalProcess : NodeJS.Timer , socket : Rx.Subject<MessageEvent> , index : number ) : void {
 		timeIntervalProcess = setInterval(() => {
 			if ( messageQueue.length > 0 ) {
 				const msg : any = this.deQueueMessage(messageQueue);
-				socket.next(<MessageEvent>{data: msg});
+				const sendRecivedMsg = {
+					data : {
+						data : msg,
+						connection : index
+					}
+				};
+				socket.next(<MessageEvent>sendRecivedMsg);
 			}
 		}, this.TIME_INTERVAL);
 	}
@@ -84,8 +90,8 @@ export class QueueMannagerService {
 		const connection : Connection = this.getConnectionByIndex(index);
 		if (connection.connectedSocket && !connection.subscription ) {
 			connection.subscription = connection.connectedSocket.subscribe(msg => {
-													if (JSON.parse(msg.data).channel !== 'pulse') {
-														this.enQueueMessage(msg, connection.recivedMessageQueue);
+													if (JSON.parse(msg.data).channel !== 'pulse' && msg.data) {
+														this.enQueueMessage(msg.data, connection.recivedMessageQueue);
 													}
 													connection.pulseService.resetPulse();
 												}, error => {

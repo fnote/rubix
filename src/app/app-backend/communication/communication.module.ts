@@ -4,7 +4,6 @@ import { WebsocketService } from './websocket/websocket.service';
 import { AjaxService } from './ajax/ajax.service';
 import { QueueMannagerService } from './websocket/queue-mannager.service';
 import { DataService } from './data.service';
-import { ConfigService } from '../config/config.service';
 
 @NgModule({
 	imports: [
@@ -15,8 +14,7 @@ import { ConfigService } from '../config/config.service';
 		WebsocketService,
 		AjaxService,
 		QueueMannagerService,
-		DataService,
-		ConfigService
+		DataService
 	],
 })
 export class CommunicationModule { }

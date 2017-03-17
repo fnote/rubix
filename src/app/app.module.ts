@@ -7,7 +7,10 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { PriceModule } from './app-backend/price/price.module';
+import { CommunicationModule } from './app-backend/communication/communication.module';
 
+import { StreamRouteService } from './app-backend/stream-route.service';
+import { PriceService } from './app-backend/price/price.service';
 import { LoggerService } from './utils/logger.service';
 import { ConfigService } from './config/config.service';
 import { ChildComponent } from './child/child.component';
@@ -27,11 +30,15 @@ import { StorageService } from './utils/storage.service';
 		FormsModule,
 		HttpModule,
 		AppRoutingModule,
-		PriceModule
+		CommunicationModule,
+		AppRoutingModule,
+        PriceModule
 	],
 	providers: [
-		LoggerService,
 		ConfigService,
+		LoggerService,
+		PriceService,
+		StreamRouteService,
 		ThemeService,
 		CommonHelperService,
 		TradeHelperService,
