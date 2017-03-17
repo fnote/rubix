@@ -12,10 +12,13 @@ import { PriceService } from './app-backend/price/price.service';
 import { LoggerService } from './utils/logger.service';
 import { ConfigService } from './config/config.service';
 import { ChildComponent } from './child/child.component';
+import { ThemeService } from './utils/theme/theme.service';
 
 @NgModule({
-	declarations: [ AppComponent ,
-					ChildComponent ],
+	declarations: [
+		AppComponent ,
+		ChildComponent
+	],
 	imports: [
 		BrowserModule,
 		FormsModule,
@@ -26,7 +29,8 @@ import { ChildComponent } from './child/child.component';
 	providers: [
 		PriceService,
 		LoggerService,
-		ConfigService
+		ConfigService,
+    ThemeService
 	],
 	bootstrap: [ AppComponent ]
 })

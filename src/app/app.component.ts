@@ -1,5 +1,6 @@
 import { Component , ChangeDetectionStrategy } from '@angular/core';
 import { UtilsService } from './utils/utils.service';
+import { ThemeService } from './utils/theme/theme.service';
 import { CommonHelperService } from './utils/helper/common-helper.service';
 import { PriceService } from './app-backend/price/price.service';
 import { LoggerService } from './utils/logger.service';
@@ -19,6 +20,7 @@ export class AppComponent {
 
 	constructor(
 		private commonHelperService : CommonHelperService ,
+    private themeService : ThemeService,
 		private utilsService : UtilsService ,
 		private priceService : PriceService,
 		private loggerService : LoggerService) {}
@@ -32,7 +34,7 @@ export class AppComponent {
 	public changeLang() : void {
 		if (this.utilsService.getActiveLanguage() === 'EN') {
 			this.utilsService.setActiveLanguage('AR');
-		} else {
+		}else {
 			this.utilsService.setActiveLanguage('EN');
 		}
 	}
