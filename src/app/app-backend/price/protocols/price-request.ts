@@ -50,7 +50,6 @@ export class PriceRequest {
 			} else {
 				arrParam.push(exg);
 			}
-
 			i++;
 		}
 

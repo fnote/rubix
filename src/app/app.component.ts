@@ -1,4 +1,5 @@
 import { Component , ChangeDetectionStrategy } from '@angular/core';
+
 import { ThemeService } from './utils/theme/theme.service';
 import { PriceService } from './app-backend/price/price.service';
 import { LoggerService } from './utils/logger.service';
