@@ -1,9 +1,10 @@
 import { Component , ChangeDetectionStrategy} from '@angular/core';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {UtilsService} from '../utils/utils.service';
-import {CommonHelperService} from '../utils/helper/common-helper.service';
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { UtilsService } from '../utils/utils.service';
+import { CommonHelperService } from '../utils/helper/common-helper.service';
+import { ThemeService } from '../utils/theme/theme.service';
 
 @Component({
 	selector: 'app-child',
@@ -20,7 +21,7 @@ export class ChildComponent {
 	return x.labels.TOP_STOCKS + ' Combined with ' + x.labels.NEWS;
 	});
 
-	constructor(private utilsService : UtilsService) {
+	constructor(private utilsService : UtilsService , private themeService : ThemeService) {
 		this.utilsService.getActiveLanguageObservable().subscribe(res => {
 			console.log('Language Changed: ' + res);
 		});
@@ -32,6 +33,10 @@ export class ChildComponent {
 		}else {
 			this.utilsService.setActiveLanguage('EN');
 		}
+	}
+
+	public changeTheme(themeCode : string) : void {
+		this.themeService.setTheme(themeCode);
 	}
 
 	public testFun() : void {

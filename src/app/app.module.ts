@@ -7,10 +7,13 @@ import { UtilsModule } from './utils/utils.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ChildComponent } from './child/child.component';
+import { ThemeService } from './utils/theme/theme.service';
 
 @NgModule({
-	declarations: [ AppComponent ,
-					ChildComponent ],
+	declarations: [
+		AppComponent ,
+		ChildComponent
+	],
 	imports: [
 		BrowserModule,
 		FormsModule,
@@ -18,7 +21,7 @@ import { ChildComponent } from './child/child.component';
 		AppRoutingModule,
 		UtilsModule
 	],
-	providers: [],
+	providers: [ ThemeService ],
 	bootstrap: [ AppComponent ]
 })
 export class AppModule { }

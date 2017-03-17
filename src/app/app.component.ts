@@ -1,5 +1,6 @@
 import { Component , ChangeDetectionStrategy} from '@angular/core';
 import { UtilsService } from './utils/utils.service';
+import { ThemeService } from './utils/theme/theme.service';
 
 @Component({
 	selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
 	private result : string;
 	private inputValues : string;
 
-	constructor(private utilsService : UtilsService) {}
+	constructor(private utilsService : UtilsService , private themeService : ThemeService) {}
 
 	public convert() : void {
 		console.log(this.utilsService.formatDate(24826369496 , 'YYYY-MM-DD hh:mm:ss' , {} , 60));
