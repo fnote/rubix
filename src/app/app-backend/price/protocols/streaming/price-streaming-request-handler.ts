@@ -16,14 +16,19 @@ export class PriceStreamingRequestHandler {
 		PriceStreamingRequestHandler._instance = this;
 	}
 
-	public generateAuthRequest(authParams : {priceVerion : string, userName : string, password : string, userType : string, subType : string  }) : string {
+	public generateAuthRequest(authParams : {
+								priceVerion : string,
+								userName : string,
+								password : string,
+								userType : string,
+								subType : string}) : string {
 		const fs = '\u001C';
 		const ds = '\u0002';
-		const AUTHENTICATION_REQUEST_VERSION_TAG : number = 150;
-		const USER_NAME_TAG : number = 20;
-		const USER_PASSWORD_TAG : number = 21;
-		const USER_TYPE_TAG : number = 24;
-		const USER_SUB_TYPE_TAG : number = 1000;
+		const AUTHENTICATION_REQUEST_VERSION_TAG = 150;
+		const USER_NAME_TAG = 20;
+		const USER_PASSWORD_TAG = 21;
+		const USER_TYPE_TAG = 24;
+		const USER_SUB_TYPE_TAG = 1000;
 		return [
 			[ AUTHENTICATION_REQUEST_VERSION_TAG , authParams.priceVerion ].join(ds),
 			[ USER_NAME_TAG , authParams.userName ].join(ds),

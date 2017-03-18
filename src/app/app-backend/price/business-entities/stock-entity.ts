@@ -2,16 +2,16 @@ import { BaseEntity } from './base-entity';
 
 export class StockEntity extends BaseEntity {
 
-	private _code : string = null;
-	private _exchangeCode : string = null;
-	private _longDesc : string = null;
-	private _shortDesc : string = null;
-	private _dispCode : string = null;
-	private _lastTradePrice : number = null;
-	private _openPrice : number = null;
-	private _highPrice : number = null;
-	private _lowPrice : number = null;
-	private _closePrice : number = null;
+	private _code = '';
+	private _exchangeCode = '';
+	private _longDesc = '';
+	private _shortDesc = '';
+	private _dispCode = '';
+	private _lastTradePrice = -1;
+	private _openPrice = -1;
+	private _highPrice = -1;
+	private _lowPrice = -1;
+	private _closePrice = -1;
 
 	public get code() : string  {
 		return this._code;

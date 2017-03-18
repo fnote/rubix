@@ -62,8 +62,7 @@
     "no-eval": true,
     "no-inferrable-types": [
       true,
-      "ignore-params",
-      "ignore-properties"
+      "ignore-params"
     ],
     "no-magic-numbers": true,
     "no-shadowed-variable": true,

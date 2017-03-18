@@ -1,27 +1,28 @@
 import { BaseEntity } from './base-entity';
+import { MarketStatus } from '../../../constants/enums/market-status.enum';
 
 export class ExchangeEntity extends BaseEntity {
 
-	private _code : string = null;
-	private _longDesc : string = null;
-	private _shortDesc : string = null;
-	private _dispExgCode : string = null;
-	private _decimalCorrFactor : number = null;
-	private _decimalPlaces : number = null;
-	private _currency : string = null;
-	private _countryCode : string = null;
-	private _timeZoneOffset : number = null;
-	private _marketStatus : number = null;
-	private _dateTimeUTC : number = null;
-	private _dateDisplay : string = null;
-	private _timeDisplay : string = null;
-	private _ups : number = null;
-	private _downs : number = null;
-	private _noChange : number = null;
-	private _volume : number = null;
-	private _turnover : number = null;
-	private _trades : number = null;
-	private _symbolsTraded : number = null;
+	private _code = '';
+	private _longDesc = '';
+	private _shortDesc = '';
+	private _dispExgCode = '';
+	private _decimalCorrFactor = 1;
+	private _decimalPlaces = 2;
+	private _currency = '';
+	private _countryCode = '';
+	private _timeZoneOffset = 0;
+	private _marketStatus = MarketStatus.Close;
+	private _dateTimeUTC = 0;
+	private _dateDisplay = '1970-01-01';
+	private _timeDisplay = '00:00';
+	private _ups = -1;
+	private _downs = -1;
+	private _noChange = -1;
+	private _volume = -1;
+	private _turnover = -1;
+	private _trades = -1;
+	private _symbolsTraded = -1;
 
 	public get code() : string  {
 		return this._code;
