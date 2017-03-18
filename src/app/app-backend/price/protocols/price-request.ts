@@ -5,8 +5,7 @@ export class PriceRequest {
 	private _mt : PriceRequestTypes = null;
 	private _rt : number = null;
 	private _lan : string = null;
-	private _exg : string[];
-	private _sym : string[];
+	private _param : [string, string][];
 
 	public get mt() : PriceRequestTypes  {
 		return this._mt;
@@ -33,24 +32,18 @@ export class PriceRequest {
 	}
 
 	public addParam(exg : string, sym? : string) : void {
-		this._exg.push(exg);
-
-		if (sym) {
-			this._sym.push(sym);
-		}
+		this._param.push([exg, sym]);
 	}
 
 	private getParam() : string[] {
 		const arrParam : string[] = [];
 
-		let i = 0;
-		for (const exg of this._exg) {
-			if (this._sym[i]) {
-				arrParam.push(exg + '~' + this._sym[i]);
+		for (const item of this._param) {
+			if (item[1]) {
+				arrParam.push(item[0] + '~' + item[1]);
 			} else {
-				arrParam.push(exg);
+				arrParam.push(item[0]);
 			}
-			i++;
 		}
 
 		return arrParam;
@@ -91,7 +84,6 @@ export class PriceRequest {
 	}
 
 	constructor() {
-		this._exg = [];
-		this._sym = [];
+		this._param = [];
 	}
 }

@@ -133,54 +133,47 @@ export class PriceService {
 
     /**
      * Subscribe and Un-subscribe for a symbol updates
-     * @param exchange Exchange Code string
-     * @param symbol Symbol Code string
+     * @param exchangeSymbol A tupple with Exchange Code and Symbol Code [string, string]
      */
-	public addSymbolRequest (exchange : string, symbol : string) : void {
-		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.Exchange, exchange, symbol)) {
+	public addSymbolRequest (exchangeSymbol : [string, string]) : void {
+		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.Exchange, exchangeSymbol[0], exchangeSymbol[1])) {
 			const req = new PriceRequest;
 			req.mt = PriceRequestTypes.SnapshotSymbol;
-			req.addParam(exchange, symbol);
+			req.addParam(exchangeSymbol[0], exchangeSymbol[1]);
 			alert(PriceStreamingRequestHandler.getInstance().generateAddRequest(req));
 		}
 	}
 
-	public removeSymbolRequest (exchange : string, symbol : string) : void {
-		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.Exchange, exchange)) {
+	public removeSymbolRequest (exchangeSymbol : [string, string]) : void {
+		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.Exchange, exchangeSymbol[0], exchangeSymbol[1])) {
 			const req = new PriceRequest;
 			req.mt = PriceRequestTypes.SnapshotSymbol;
-			req.addParam(exchange, symbol);
+			req.addParam(exchangeSymbol[0], exchangeSymbol[1]);
 			alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
 		}
 	}
 
 	/**
      * Subscribe and Un-subscribe for a list of symbol updates.
-	 * !!!!! important:	params needs to be sufficient to generate a request.
-	 * 					i.e: Symbol array and Exchange arrays should contain corresponsing
-	 * 					values ordered way.
-     * @param exchange Exchange Code string array
-     * @param symbol Symbol Code string array
+     * @param @param exchangeSymbol An array of tupples with Exchange Code and Symbol Code [string, string][]
      */
-	public addSymbolListRequest (exchange : string[], symbol : string[]) : void {
+	public addSymbolListRequest (exchangeSymbol : [string, string][]) : void {
 		const req = new PriceRequest;
 		req.mt = PriceRequestTypes.SnapshotSymbol;
 
-		let i = 0;
-		for (const exg of exchange) {
-			req.addParam(exg, symbol[i++]);
+		for (const exgSym of exchangeSymbol) {
+			req.addParam(exgSym[0], exgSym[1]);
 		}
 
 		alert(PriceStreamingRequestHandler.getInstance().generateAddRequest(req));
 	}
 
-	public removeSymbolListRequest (exchange : string[], symbol : string[]) : void {
+	public removeSymbolListRequest (exchangeSymbol : [string, string][]) : void {
 		const req = new PriceRequest;
 		req.mt = PriceRequestTypes.SnapshotSymbol;
 
-		let i = 0;
-		for (const exg of exchange) {
-			req.addParam(exg, symbol[i++]);
+		for (const exgSym of exchangeSymbol) {
+			req.addParam(exgSym[0], exgSym[1]);
 		}
 
 		alert(PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req));
