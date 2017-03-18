@@ -57,9 +57,9 @@ export class AppComponent {
 	private getPrice() : void {
 		this.loggerService.logInfo(this.inputValues);
 		this.priceService.addSymbolRequest(['TDWL', '1010']);
-		//this.priceService.addExchangeRequest('TDWL');
-		//this.priceService.addSymbolListRequest([['TDWL', '1010'], ['TDWL', '1020'], ['DFM', 'EMAAR']]);
-		//this.priceService.addExchangeListRequest(['TDWL', 'DFM', 'LKCSE']);
+		// this.priceService.addExchangeRequest('TDWL');
+		// this.priceService.addSymbolListRequest([['TDWL', '1010'], ['TDWL', '1020'], ['DFM', 'EMAAR']]);
+		// this.priceService.addExchangeListRequest(['TDWL', 'DFM', 'LKCSE']);
 	}
 
 	public authenticateWithPrimaryAuthToken() : void {
