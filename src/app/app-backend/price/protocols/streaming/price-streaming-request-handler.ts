@@ -21,7 +21,8 @@ export class PriceStreamingRequestHandler {
 								userName : string,
 								password : string,
 								userType : string,
-								subType : string}) : string {
+								subType : string,
+								omsId : number}) : string {
 		const fs = '\u001C';
 		const ds = '\u0002';
 		const AUTHENTICATION_REQUEST_VERSION_TAG = 150;
@@ -29,12 +30,15 @@ export class PriceStreamingRequestHandler {
 		const USER_PASSWORD_TAG = 21;
 		const USER_TYPE_TAG = 24;
 		const USER_SUB_TYPE_TAG = 1000;
+		const OMS_ID_TAG = 19;
+
 		return [
 			[ AUTHENTICATION_REQUEST_VERSION_TAG , authParams.priceVerion ].join(ds),
 			[ USER_NAME_TAG , authParams.userName ].join(ds),
 			[ USER_PASSWORD_TAG , authParams.password ].join(ds),
 			[ USER_TYPE_TAG , authParams.userType ].join(ds),
-			[ USER_SUB_TYPE_TAG , authParams.subType ].join(ds)
+			[ USER_SUB_TYPE_TAG , authParams.subType ].join(ds),
+			[ OMS_ID_TAG , authParams.omsId ].join(ds)
 		].join(fs);
 	}
 

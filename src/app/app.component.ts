@@ -7,6 +7,7 @@ import { CommonHelperService } from './utils/helper/common-helper.service';
 import { TradeHelperService } from './utils/helper/trade-helper.service';
 import { LocalizationService } from './utils/localization/localization.service';
 import { StorageService } from './utils/storage.service';
+import { DataService } from './app-backend/communication/data.service';
 import { Channels } from './constants/enums/channels.enum';
 
 @Component({
@@ -30,6 +31,7 @@ export class AppComponent {
 		private themeService : ThemeService,
 		private priceService : PriceService,
 		private loggerService : LoggerService,
+		private dataService : DataService,
 		private localizationService : LocalizationService ) {
 			this.updatePriceResponse();
 		}
@@ -68,14 +70,28 @@ export class AppComponent {
 			userName : this.userName,
 			password : this.password,
 			userType : '30',
-			subType : '1'
+			subType : '1',
+						omsId : 10
 		};
 		this.priceService.authenticateWithUsernameAndPassword( authParams , Channels.Price );
 	}
 
-	// public sendTestPriceRequest() : void {
-	// 	const sampleRequest = '{"MT":10,"PRM":["DFM~DFMGI","BSE~BSEX","ADSM~ADI","CASE~OTMT","CHIX~DLGD","DFM~AMAN","DFM~DFM","NYSE~A","NYSE~G","NYSE~WSO","TDWL~1010","TDWL~1150","TDWL~8100","DFM~GFH","DFM~EMAAR","ADSM~ALDAR","NSDQ~GOOG","NSDQ~AAPL"],"RT":1}';
-	// 	this.priceService.sendTestPriceRequest( sampleRequest , Channels.Price );
-	// }
+	public sendSymbolSnapshotRequest() : void {
+		const sampleRequest = '{"MT":10,"PRM":["DFM~DFMGI","BSE~BSEX","ADSM~ADI","CASE~OTMT","CHIX~DLGD","DFM~AMAN","DFM~DFM","NYSE~A","NYSE~G","NYSE~WSO","TDWL~1010","TDWL~1150","TDWL~8100","DFM~GFH","DFM~EMAAR","ADSM~ALDAR","NSDQ~GOOG","NSDQ~AAPL"],"RT":1}';
+				const request = {
+					index : 2,
+					data : sampleRequest
+				};
+				this.dataService.sendToWs( request );
+	}
+
+		public sendNewsRequest() : void {
+				const sampleRequest = '{ "RT": "1", "MT": 30, "LAN": "EN", "PRM": [ "N/WER", "N/FNVW", "MUBASHER.AE" ] }';
+				const request = {
+					index : 2,
+					data : sampleRequest
+				};
+				this.dataService.sendToWs( request );
+		}
 }
 

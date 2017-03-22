@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
 import { StreamRouteService } from '../../../communication/stream-route.service';
+import { PriceResponse } from '../price-response';
 
 @Injectable()
 
@@ -23,7 +24,9 @@ export class PriceStreamingResponseHandler {
 		}
 
 		private processPriceResponseStream (response : any) : any {
-				return JSON.parse(response);
+			const priceResponse = new PriceResponse;
+			const processedResponse = priceResponse.processPriceResponse(JSON.parse(response));
+			return processedResponse;
 		}
 
 		public getPriceResponseStream() : Subject<Object> {
