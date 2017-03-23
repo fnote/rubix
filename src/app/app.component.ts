@@ -75,7 +75,8 @@ export class AppComponent {
 			password : this.password,
 			userType : '30',
 			subType : '1',
-			omsId : 10
+			omsId : 10,
+			brokerCode : 'MFS_UAT'
 		};
 		this.priceService.authenticateWithUsernameAndPassword( authParams , Channels.Price );
 	}
@@ -88,7 +89,8 @@ export class AppComponent {
 			userType : '30',
 			subType : '1',
 			omsId : 10,
-			session : this.session
+			session : this.session,
+			brokerCode : 'MFS_UAT'
 		};
 		this.priceService.authenticateWithSecondaryAuthToken( authParams , 3 );
 	}
@@ -113,6 +115,8 @@ export class AppComponent {
 
 		public sendMarketMetaRequest() : void {
 			const sampleRequest = ' { "MT": 80, "TKN": 1, "LAN": "EN", "SEG": [ "EXG", "EXGFE", "SUBM", "SECT", "TD", "ID", "WLD", "WLTD", "TZD", "GMS", "NPD" ], "EXG": [ "TDWL", "CASE", "ISE", "DFM" ] }';
+			//const sampleRequest = '{ "MT": 46, "TKN": 1, "LAN": "EN", "PRM": [ "TDWL~1150", "NSDQ~QQQ" ] }';
+			//const sampleRequest = '{ "MT": 44, "SYM": [ "TDWL~TASI", "LKCSE~JKH.N0000`N", "ISE~TARAF", "CSE~SAM", "CSE~MASI" ], "PRD": "1d", "TYP": "1" }';
 			const request = {
 				index : Channels.PriceMeta,
 				data : sampleRequest

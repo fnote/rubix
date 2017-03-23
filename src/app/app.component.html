@@ -17,10 +17,14 @@
 <input type="password" [(ngModel)]="password" placeholder="password" />
 <br><br>
 <button (click)="authenticateRealTimePath()">authenticate Real-Time Path</button>
-  <button (click)="authenticateBackLogPath()">authenticate BackLog Path</button>
-response from Price
-{{response}}
   <button (click)="sendSymbolSnapshotRequest()">send RT(Symbol Snapshot)</button>
   <button (click)="sendNewsRequest()">send RT (News)</button>
+
+  <br><br>
+
+  <button (click)="authenticateBackLogPath()">authenticate BackLog Path</button>
   <button (click)="sendMarketMetaRequest()">Send BL (Market Meta)</button>
+
+  response from Price
+  {{response}}
 </div>

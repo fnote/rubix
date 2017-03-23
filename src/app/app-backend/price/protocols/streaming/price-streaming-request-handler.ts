@@ -22,6 +22,7 @@ export class PriceStreamingRequestHandler {
 																					password : string,
 																					userType : string,
 																					subType : string,
+																					brokerCode : string,
 																					omsId : number}) : string {
 			const fs = '\u001C';
 			const ds = '\u0002';
@@ -31,6 +32,7 @@ export class PriceStreamingRequestHandler {
 			const USER_TYPE_TAG = 24;
 			const USER_SUB_TYPE_TAG = 1000;
 			const OMS_ID_TAG = 19;
+			const BROKER_CODE_TAG = 1;
 
 			return [
 				[ AUTHENTICATION_REQUEST_VERSION_TAG , authParams.priceVerion ].join(ds),
@@ -38,7 +40,8 @@ export class PriceStreamingRequestHandler {
 				[ USER_PASSWORD_TAG , authParams.password ].join(ds),
 				[ USER_TYPE_TAG , authParams.userType ].join(ds),
 				[ USER_SUB_TYPE_TAG , authParams.subType ].join(ds),
-				[ OMS_ID_TAG , authParams.omsId ].join(ds)
+				[ OMS_ID_TAG , authParams.omsId ].join(ds),
+				[ BROKER_CODE_TAG , authParams.brokerCode ].join(ds)
 			].join(fs);
 	}
 
@@ -49,6 +52,7 @@ export class PriceStreamingRequestHandler {
 																				userType : string,
 																				subType : string,
 																				session : string,
+																				brokerCode : string,
 																				omsId : number}) : string {
 			const fs = '\u001C';
 			const ds = '\u0002';
@@ -60,6 +64,7 @@ export class PriceStreamingRequestHandler {
 			const USER_SUB_TYPE_TAG = 1000;
 			const OMS_ID_TAG = 19;
 			const CONNECTION_TYPE_TAG = 132;
+			const BROKER_CODE_TAG = 1;
 
 			return [
 				[ AUTHENTICATION_REQUEST_VERSION_TAG , authParams.priceVerion ].join(ds),
@@ -69,7 +74,8 @@ export class PriceStreamingRequestHandler {
 				[ USER_TYPE_TAG , authParams.userType ].join(ds),
 				[ USER_SUB_TYPE_TAG , authParams.subType ].join(ds),
 				[ CONNECTION_TYPE_TAG , '0'].join(ds),
-				[ OMS_ID_TAG , authParams.omsId ].join(ds)
+				[ OMS_ID_TAG , authParams.omsId ].join(ds),
+				[ BROKER_CODE_TAG , authParams.brokerCode ].join(ds)
 			].join(fs);
 	}
 
