@@ -4,7 +4,7 @@ import { ExchangeEntity } from '../business-entities/exchange-entity';
 export class ExchangeDataStore extends BaseDataStore {
 
 	private static _instance : ExchangeDataStore = new ExchangeDataStore();
-	private allExchangeStore : object = {};
+	private allExchangeStore = {};
 
 	public static getInstance() : ExchangeDataStore {
 		return ExchangeDataStore._instance;
