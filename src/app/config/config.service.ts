@@ -13,10 +13,10 @@ interface ConnectionConfig {
 @Injectable()
 export class ConfigService {
 	private connectionConfig : Array<ConnectionConfig>;
-	public ECHO_URL : string = 'wss://echo.websocket.org';
-	public CHAT_URL : string = 'ws://10.1.20.136:1234';
-    public PRICE_URL : string = 'ws://mfg-uat-phoenix.mubashertrade.com:9090/websocket/price';
-	//	public PRICE_URL : string = 'ws://10.1.20.17:9090/websocket/price';
+	public ECHO_URL  = 'wss://echo.websocket.org';
+	public CHAT_URL  = 'ws://10.1.20.136:1234';
+	public PRICE  = 'ws://mfg-uat-phoenix.mubashertrade.com:9090/websocket/price';
+	public PRICE_META  = 'ws://mfg-uat-phoenix.mubashertrade.com:9090/websocket/meta';
 
 	public configObj : any;
 
@@ -24,7 +24,8 @@ export class ConfigService {
 		this.connectionConfig = [
 			{ index: 0, channel: 'echo' , url: this.ECHO_URL, isSecure: false },
 			{ index: 1, channel: 'chat' , url: this.CHAT_URL, isSecure: false },
-			{ index: Channels.Price , channel: 'price' , url: this.PRICE_URL, isSecure: false }
+			{ index: Channels.Price , channel: 'price' , url: this.PRICE, isSecure: false },
+			{ index: Channels.PriceMeta , channel: 'priceMeta' , url: this.PRICE_META, isSecure: false }
 		];
 
 		this.load();

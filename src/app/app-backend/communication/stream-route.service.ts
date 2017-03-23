@@ -17,8 +17,11 @@ export class StreamRouteService {
 	private routeResponseStream() : void {
 		this.dataService.getResponseSteam().subscribe(response => {
 			switch (response.connection) {
-				case Channels.Price:
-					this.priceResponseStream$.next(response.data);
+				case Channels.Price :
+					this.priceResponseStream$.next( {data : response.data , channel : Channels.Price } );
+					break;
+				case Channels.PriceMeta :
+					this.priceResponseStream$.next( {data : response.data , channel : Channels.PriceMeta } );
 					break;
 				default :
 					console.log('[StreamRouteService] could not find the connection');

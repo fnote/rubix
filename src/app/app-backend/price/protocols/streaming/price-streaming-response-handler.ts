@@ -25,7 +25,11 @@ export class PriceStreamingResponseHandler {
 
 		private processPriceResponseStream (response : any) : any {
 			const priceResponse = new PriceResponse;
-			const processedResponse = priceResponse.processPriceResponse(JSON.parse(response));
+			const parsedResponse = {
+				channel : response.channel,
+				data : JSON.parse(response.data)
+			};
+			const processedResponse = priceResponse.processPriceResponse(parsedResponse);
 			return processedResponse;
 		}
 

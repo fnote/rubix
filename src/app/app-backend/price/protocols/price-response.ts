@@ -1,20 +1,30 @@
 import PriceResponseTypes from '../../../constants/enums/price-response-types';
+import { Channels } from '../../../constants/enums/channels.enum';
 
 export class PriceResponse {
 
 	public processPriceResponse( response : any ) : Array<Object> {
 		const processedRes = [];
-		if ( response && response.length > 0) {
-			for ( const res of response ){
-				processedRes.push((this.buildResponse(res)));
+		if ( response.channel === Channels.Price ) {
+			if ( response && response.data && response.data.length > 0) {
+				for ( const res of response.data ){
+					processedRes.push((this.buildRealTimeResponse(res)));
+				}
+			}else {
+				processedRes.push(this.buildRealTimeResponse(response.data));
 			}
+		}else if ( response.channel === Channels.PriceMeta ) {
+			processedRes.push(this.buildBackLogResponse(response.data));
 		}else {
-				processedRes.push(this.buildResponse(response));
 		}
 		return processedRes;
 	}
 
-	private buildResponse(response : {HED : string, DAT : string }) : Object {
+	private buildBackLogResponse(response : {HED : string, DAT : string }) : Object {
+		return response;
+	}
+
+	private buildRealTimeResponse(response : {HED : string, DAT : string }) : Object {
 		const arrBuild : string[] = [];
 		if ( response && response.HED && response.DAT) {
 			arrBuild.push('{');

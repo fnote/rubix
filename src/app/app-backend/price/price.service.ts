@@ -58,6 +58,24 @@ export class PriceService {
 		this.dataService.sendToWs(request);
 	}
 
+  /**
+   * Authenticate with Secondary Auth Token
+   * @param authParams An object with following properties set
+   *                      username    : Username. Mandatory.
+   *                      password    : Password. Mandatory.
+   *                      loginIP     : Machine IP
+   *                      appVersion  : Application version
+   *                      lan         : Current Language. Mandatory.
+   */
+	public authenticateWithSecondaryAuthToken (authParams : any, channel : number) : void  {
+		const authRequest =  PriceStreamingRequestHandler.getInstance().generateSecondaryAuthRequest(authParams);
+		const request = {
+			index : channel,
+			data : authRequest
+		};
+		this.dataService.sendToWs(request);
+	}
+
 	/**
 		 * Authenticate with SSO token
 		 * @param authParams An object with following properties set

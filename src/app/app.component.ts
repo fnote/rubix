@@ -25,6 +25,7 @@ export class AppComponent {
 	private inputValues : string;
 	private userName = '';
 	private password = '';
+	private session = '';
 
 	constructor(
 		private commonHelperService : CommonHelperService,
@@ -39,6 +40,9 @@ export class AppComponent {
 	private updatePriceResponse() : void {
 		this.priceService.getPriceResponseStream().subscribe( response => {
 			this.response.push(response);
+			if ( response && response[0] && response[0].MT === '-1' ) {
+				this.session = response[0].SESSION;
+			}
 		});
 	}
 
@@ -64,22 +68,35 @@ export class AppComponent {
 		// this.priceService.addExchangeListRequest(['TDWL', 'DFM', 'LKCSE']);
 	}
 
-	public authenticateWithPrimaryAuthToken() : void {
+	public authenticateRealTimePath() : void {
 		const authParams : Object = {
 			priceVerion : '1',
 			userName : this.userName,
 			password : this.password,
 			userType : '30',
 			subType : '1',
-						omsId : 10
+			omsId : 10
 		};
 		this.priceService.authenticateWithUsernameAndPassword( authParams , Channels.Price );
+	}
+
+	public authenticateBackLogPath() : void {
+		const authParams : Object = {
+			priceVerion : '1',
+			userName : this.userName,
+			password : this.password,
+			userType : '30',
+			subType : '1',
+			omsId : 10,
+			session : this.session
+		};
+		this.priceService.authenticateWithSecondaryAuthToken( authParams , 3 );
 	}
 
 	public sendSymbolSnapshotRequest() : void {
 		const sampleRequest = '{"MT":10,"PRM":["DFM~DFMGI","BSE~BSEX","ADSM~ADI","CASE~OTMT","CHIX~DLGD","DFM~AMAN","DFM~DFM","NYSE~A","NYSE~G","NYSE~WSO","TDWL~1010","TDWL~1150","TDWL~8100","DFM~GFH","DFM~EMAAR","ADSM~ALDAR","NSDQ~GOOG","NSDQ~AAPL"],"RT":1}';
 				const request = {
-					index : 2,
+					index : Channels.Price,
 					data : sampleRequest
 				};
 				this.dataService.sendToWs( request );
@@ -88,10 +105,19 @@ export class AppComponent {
 		public sendNewsRequest() : void {
 				const sampleRequest = '{ "RT": "1", "MT": 30, "LAN": "EN", "PRM": [ "N/WER", "N/FNVW", "MUBASHER.AE" ] }';
 				const request = {
-					index : 2,
+					index : Channels.Price,
 					data : sampleRequest
 				};
 				this.dataService.sendToWs( request );
+		}
+
+		public sendMarketMetaRequest() : void {
+			const sampleRequest = ' { "MT": 80, "TKN": 1, "LAN": "EN", "SEG": [ "EXG", "EXGFE", "SUBM", "SECT", "TD", "ID", "WLD", "WLTD", "TZD", "GMS", "NPD" ], "EXG": [ "TDWL", "CASE", "ISE", "DFM" ] }';
+			const request = {
+				index : Channels.PriceMeta,
+				data : sampleRequest
+			};
+			this.dataService.sendToWs( request );
 		}
 }
 
