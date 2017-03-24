@@ -6,11 +6,11 @@ import { PriceService } from './price.service';
 describe('PriceService', () => {
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [PriceService]
+			providers: [PriceService],
 		});
 	});
 
-	it('should ...', inject([PriceService], (service : PriceService) => {
+	it('should ...', inject([PriceService], (service: PriceService) => {
 		expect(service).toBeTruthy();
 	}));
 });
