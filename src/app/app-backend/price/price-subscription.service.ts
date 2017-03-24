@@ -4,13 +4,15 @@ import { PriceRequestTypes } from '../../constants/enums/price-request-types.enu
 @Injectable()
 export class PriceSubscriptionService {
 
-	constructor() { }
+	constructor() {
+		// Some Code
+	}
 
-	public subscribeFor(messageType : PriceRequestTypes, exchange : string, symbol? : string) : boolean {
+	public subscribeFor(messageType: PriceRequestTypes, exchange: string, symbol?: string): boolean {
 		return true;
 	}
 
-	public unSubscribeFor(messageType : PriceRequestTypes, exchange : string, symbol? : string) : boolean {
+	public unSubscribeFor(messageType: PriceRequestTypes, exchange: string, symbol?: string): boolean {
 		return true;
 	}
 }

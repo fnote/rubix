@@ -7,39 +7,39 @@ export class MarketEntity extends BaseEntity {
 	private _volume = -1;
 	private _turnover = -1;
 
-	public get exchangeCode() : string  {
+	public get exchangeCode(): string  {
 		return this._exchangeCode;
 	}
 
-	public set exchangeCode(value : string ) {
+	public set exchangeCode(value: string) {
 		this._exchangeCode = value;
 	}
 
-	public get code() : string  {
+	public get code(): string  {
 		return this._code;
 	}
 
-	public set code(value : string ) {
+	public set code(value: string) {
 		this._code = value;
 	}
 
-	public get volume() : number  {
+	public get volume(): number  {
 		return this._volume;
 	}
 
-	public set volume(value : number ) {
+	public set volume(value: number) {
 		this._volume = value;
 	}
 
-	public get turnover() : number  {
+	public get turnover(): number  {
 		return this._turnover;
 	}
 
-	public set turnover(value : number ) {
+	public set turnover(value: number) {
 		this._turnover = value;
 	}
 
-	constructor(values : Object = {}) {
+	constructor(values: Object = {}) {
 		super();
 		Object.assign(this, values);
 	}
