@@ -3,10 +3,10 @@ import { ExchangeEntity } from '../business-entities/exchange-entity';
 
 export class ExchangeDataStore extends BaseDataStore {
 
-	private static _instance : ExchangeDataStore = new ExchangeDataStore();
+	private static _instance: ExchangeDataStore = new ExchangeDataStore();
 	private allExchangeStore = {};
 
-	public static getInstance() : ExchangeDataStore {
+	public static getInstance(): ExchangeDataStore {
 		return ExchangeDataStore._instance;
 	}
 
@@ -19,12 +19,12 @@ export class ExchangeDataStore extends BaseDataStore {
 		ExchangeDataStore._instance = this;
 	}
 
-	private getOrAddExchange(exchangeCode : string) : ExchangeEntity {
-		let exgObj : ExchangeEntity = this.allExchangeStore[exchangeCode];
+	private getOrAddExchange(exchangeCode: string): ExchangeEntity {
+		let exgObj: ExchangeEntity = this.allExchangeStore[exchangeCode];
 
 		if (!exgObj) {
 			exgObj = new ExchangeEntity({
-				code: exchangeCode
+				code: exchangeCode,
 			});
 
 			this.allExchangeStore[exchangeCode] = exgObj;

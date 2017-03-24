@@ -2,24 +2,25 @@
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
+  "extends": [
+    "tslint-eslint-rules"
+  ],
   "rules": {
     "typedef": [
       true,
       "call-signature",
-      "arrow-call-signature",
+      // "arrow-call-signature",
       "parameter",
-      //"variable-declaration",
-      "property-declaration",
+      // "variable-declaration",
+      "property-declaration"
       //"member-variable-declaration",
-      "object-destructuring",
-      "array-destructuring"
+      // "object-destructuring",
+      // "array-destructuring"
     ],
+	"no-constant-condition": true,
     "callable-types": true,
     "class-name": true,
-    "comment-format": [
-      true,
-      "check-space"
-    ],
+    "comment-format": [true, "check-space", "check-uppercase"],
     "curly": true,
     "eofline": true,
     "forin": true,
@@ -57,7 +58,7 @@
     "no-construct": true,
     "no-debugger": true,
     "no-duplicate-variable": true,
-    "no-empty": false,
+    "no-empty": true,
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": [
@@ -82,14 +83,8 @@
       "check-whitespace"
     ],
     "prefer-const": true,
-    "quotemark": [
-      true,
-      "single"
-    ],
     "radix": true,
-    "semicolon": [
-      "always"
-    ],
+    "semicolon": [true, "always"],
     "triple-equals": [
       true,
       "allow-null-check"
@@ -97,12 +92,13 @@
     "typedef-whitespace": [
       true,
       {
-        "call-signature": "onespace",
-        "index-signature": "onespace",
-        "parameter": "onespace",
-        "property-declaration": "onespace",
-        "variable-declaration": "onespace"
-      }, {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }, 
+	  {
         "call-signature": "onespace",
         "index-signature": "onespace",
         "parameter": "onespace",
@@ -112,7 +108,7 @@
     ],
     "typeof-compare": true,
     "unified-signatures": true,
-    "variable-name": false,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "whitespace": [
       true,
       "check-branch",
@@ -135,6 +131,59 @@
     "directive-class-suffix": true,
     "no-access-missing-member": true,
     "templates-use-public": true,
-    "invoke-injectable": true
+    "invoke-injectable": true,
+	"trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
+	"no-conditional-assignment": true,
+	"no-control-regex": true,
+	"no-duplicate-case": true,
+	"no-ex-assign": true,
+	"no-extra-boolean-cast": true,
+	"no-extra-semi": true,
+	"no-inner-declarations": [true, "functions"],
+	"no-invalid-regexp": true,
+	"no-irregular-whitespace": [true, {"skipStrings": true, "skipComments": true, "skipRegExps": true, "skipTemplates": true}],
+	"no-regex-spaces": true,
+	"no-sparse-arrays": true,
+	"no-unexpected-multiline": true,
+	"no-unsafe-finally": true,
+	"use-isnan": true,
+	"valid-typeof": true,
+	"valid-jsdoc": [true, {
+  		"prefer": {
+    		"return": "returns"
+  		},
+  		"requireReturn": false,
+  		"requireParamDescription": true,
+  		"requireReturnDescription": true
+  		//"matchDescription": "^[A-Z][A-Za-z0-9\\s]*[.]$"
+	}],
+	"cyclomatic-complexity": [true, 20], // Check if this (20) needs to be increased, or rule removed
+
+	// ESLint inherited styling
+	"array-bracket-spacing": [true, "never"],
+	"block-spacing": [true, "always"],
+	"brace-style": [true, "1tbs", {"allowSingleLine": true}],
+	"ter-indent": [true, "tab", { 
+		"SwitchCase": 1, 
+		"FunctionDeclaration": {"body": 1, "parameters": 1},
+		"FunctionExpression": {"body": 1, "parameters": 1},
+		"CallExpression": {"arguments": "first"}
+		}],
+	"ter-max-len": [true, {
+		"code": 120,
+    	"ignoreImports": true,
+    	"ignoreUrls": true,
+		"ignoreStrings": true,
+		"ignoreTrailingComments": true,
+    	"ignorePattern": "^\\s*(let|const)\\s.+=\\s*require\\s*\\("
+  	}],
+	"new-parens": true,
+	"no-consecutive-blank-lines": [true, 1],
+	"one-variable-per-declaration": [true, "ignore-for-loop"],
+	"object-curly-spacing": [true, "always"],
+	"object-literal-key-quotes": [true, "as-needed"],
+	"quotemark": [true, "single", "avoid-escape", "jsx-single"],
+	"sort-imports": [true, { "ignore-case": true }],
+	"space-in-parens": [true, "never"]
   }
 }

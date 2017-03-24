@@ -11,11 +11,11 @@ export class BaseEntity {
 		this._isMetaDataLoaded = value;
 	}
 
-	public get isStreamingDataLoaded(): boolean {
+	public get isStreamingDataLoaded() : boolean {
 		return this._isStreamingDataLoaded;
 	}
 
-	public set isStreamingDataLoaded(value: boolean) {
+	public set isStreamingDataLoaded(value : boolean) {
 		this._isStreamingDataLoaded = value;
 	}
 
