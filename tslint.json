@@ -160,7 +160,9 @@
 	"cyclomatic-complexity": [true, 20], // Check if this (20) needs to be increased, or rule removed
 
 	// ESLint inherited styling
-	"array-bracket-spacing": [true, "never"],
+	"array-bracket-spacing": [true, "never", {
+  "arraysInArrays": true
+}],
 	"block-spacing": [true, "always"],
 	"brace-style": [true, "1tbs", {"allowSingleLine": true}],
 	"ter-indent": [true, "tab", { 

@@ -53,6 +53,8 @@ export class PriceStreamingRequestHandler {
 		const CONNECTION_TYPE_TAG = 132;
 		const BROKER_CODE_TAG = 1;
 
+		const myarray = ['abc' , 'xyz', 'mno'];
+
 		return [
 			[AUTHENTICATION_REQUEST_VERSION_TAG, authParams.priceVerion].join(ds),
 			[USER_NAME_TAG, authParams.userName].join(ds),

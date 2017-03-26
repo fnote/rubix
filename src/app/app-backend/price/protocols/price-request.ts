@@ -2,41 +2,41 @@ import { PriceRequestTypes } from '../../../constants/enums/price-request-types.
 
 export class PriceRequest {
 
-	private _mt : PriceRequestTypes = null;
-	private _rt : number = null;
-	private _lan : string = null;
-	private _param : [string, string][];
+	private _mt: PriceRequestTypes = null;
+	private _rt: number = null;
+	private _lan: string = null;
+	private _param: [string, string][];
 
-	public get mt() : PriceRequestTypes  {
+	public get mt(): PriceRequestTypes  {
 		return this._mt;
 	}
 
-	public set mt(value : PriceRequestTypes ) {
+	public set mt(value: PriceRequestTypes) {
 		this._mt = value;
 	}
 
-	public get rt() : number  {
+	public get rt(): number  {
 		return this._rt;
 	}
 
-	public set rt(value : number ) {
+	public set rt(value: number) {
 		this._rt = value;
 	}
 
-	public get lan() : string  {
+	public get lan(): string  {
 		return this._lan;
 	}
 
-	public set lan(value : string ) {
+	public set lan(value: string) {
 		this._lan = value;
 	}
 
-	public addParam(exg : string, sym? : string) : void {
+	public addParam(exg: string, sym?: string): void {
 		this._param.push([exg, sym]);
 	}
 
-	private getParam() : string[] {
-		const arrParam : string[] = [];
+	private getParam(): string[] {
+		const arrParam: string[] = [];
 
 		for (const item of this._param) {
 			if (item[1]) {
@@ -49,8 +49,8 @@ export class PriceRequest {
 		return arrParam;
 	}
 
-	public buildMessage() : string {
-		const arrBuild : string[] = [];
+	public buildMessage(): string {
+		const arrBuild: string[] = [];
 		arrBuild.push('{');
 
 		if (this.rt) {
