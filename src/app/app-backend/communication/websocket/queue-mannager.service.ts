@@ -8,22 +8,22 @@ import { WebsocketService } from './websocket.service';
 
 @Injectable()
 export class QueueMannagerService {
-	private TIME_INTERVAL : number = 300; // 1000 * 3
-	private connectedSocketPool : Array<Connection> = [];
-	private response$ : Rx.Subject<any> ;
+	private TIME_INTERVAL = 300; // 1000 * 3
+	private connectedSocketPool: Array<Connection> = [];
+	private response$: Rx.Subject<any> ;
 
-	constructor(private configService : ConfigService, private websocketService : WebsocketService) {
+	constructor(private configService: ConfigService, private websocketService: WebsocketService) {
 		this.response$ = new Rx.Subject();
 		this.init();
 	}
 
-	public getResponse() : Rx.Subject<any> {
+	public getResponse(): Rx.Subject<any> {
 		return this.response$;
 	}
 
-	private init() : void {
+	private init(): void {
 		this.configService.getConnectionConfig().forEach(connection => {
-			const connConfig : Connection = {
+			const connConfig: Connection = {
 				channel: connection.channel,
 				index: connection.index,
 				url: connection.url,
@@ -34,52 +34,60 @@ export class QueueMannagerService {
 				sendQueueProcessInterval: null,
 				recivedQueueProcessInterval: null,
 				subscription: null,
-				pulseService: null
+				pulseService: null,
 			};
 			this.connectedSocketPool.push(connConfig);
 		});
 	}
 
-	private enQueueMessage(message : Object, messageQueue : Array<any>) : void {
+	private enQueueMessage(message: Object, messageQueue: Array<any>): void {
 		messageQueue.push(message);
 	}
 
-	private deQueueMessage(messageQueue : Array<any>) : any {
+	private deQueueMessage(messageQueue: Array<any>): any {
 		return messageQueue.shift();
 	}
 
-
-	public getConnectionByIndex(index : number) : Connection {
+	public getConnectionByIndex(index: number): Connection {
 		return this.connectedSocketPool[index];
 	}
 
-	private connect(connectionConfig : Connection) : void {
-		const connection : Connection = this.getConnectionByIndex(connectionConfig.index);
+	private connect(connectionConfig: Connection): void {
+		const connection: Connection = this.getConnectionByIndex(connectionConfig.index);
 		if (!connection.isConnected) {
 			this.websocketService.initConnection(connection).then(sockt => {
-				const socket : Rx.Subject<MessageEvent> = this.websocketService.createConnection(sockt);
+				const socket: Rx.Subject<MessageEvent> = this.websocketService.createConnection(sockt);
 				connection.connectedSocket = socket;
 				connection.isConnected = true;
 				this.subscribeForConnected(connectionConfig.index);
-				this.activateSentReceive(connection.sendMessageQueue, connection.sendQueueProcessInterval, connection.connectedSocket, connection.index);
-				this.activateSentReceive(connection.recivedMessageQueue, connection.recivedQueueProcessInterval, this.response$ , connection.index);
+				this.activateSentReceive(
+					connection.sendMessageQueue,
+					connection.sendQueueProcessInterval,
+					connection.connectedSocket,
+					connection.index);
+				this.activateSentReceive(
+					connection.recivedMessageQueue,
+					connection.recivedQueueProcessInterval,
+					this.response$ ,
+					connection.index);
 			}).catch(error => {
-				console.log('[QueueMannagerService] error occured..' + connectionConfig.channel );
+				console.log('[QueueMannagerService] error occured..' + connectionConfig.channel);
 			});
 		}else {
-			console.log('[QueueMannagerService] allready connected..' + connectionConfig.channel );
+			console.log('[QueueMannagerService] allready connected..' + connectionConfig.channel);
 		}
 	}
 
-	private activateSentReceive(messageQueue : Array<any>, timeIntervalProcess : NodeJS.Timer , socket : Rx.Subject<MessageEvent> , index : number ) : void {
+	private activateSentReceive(messageQueue: Array<any>, timeIntervalProcess: NodeJS.Timer,
+		socket: Rx.Subject<MessageEvent> , index: number): void {
 		timeIntervalProcess = setInterval(() => {
-			if ( messageQueue.length > 0 ) {
-				const msg : any = this.deQueueMessage(messageQueue);
+			if (messageQueue.length > 0) {
+				const msg: any = this.deQueueMessage(messageQueue);
 				const sendRecivedMsg = {
 					data : {
 						data : msg,
-						connection : index
-					}
+						connection : index,
+					},
 				};
 				socket.next(<MessageEvent>sendRecivedMsg);
 			}
@@ -95,10 +103,10 @@ export class QueueMannagerService {
 				}
 				connection.pulseService.resetPulse();
 			}, error => {
-				console.log('[QueueMannagerService] error occured..' + error );
+				console.log('[QueueMannagerService] error occured..' + error);
 			}, () => {
 				this.unsubcribeConnection(connection.index);
-				console.log('[QueueMannagerService] disconnected.. ' + connection.channel );
+				console.log('[QueueMannagerService] disconnected.. ' + connection.channel);
 			});
 		}
 	}

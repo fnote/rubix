@@ -2,28 +2,28 @@ import { Injectable } from '@angular/core';
 import { WebsocketService } from './websocket.service';
 
 interface PulseConfig {
-	index : number;
-	channel : string;
+	index: number;
+	channel: string;
 }
 
 @Injectable()
 export class PulseService {
-	private TIME_INTERVAL : number = 5000; // 1000 * 5
-	private MAX_HEARTBEATS : number = 5;
-	private pulseObj : PulseConfig;
-	private pulseInterval : NodeJS.Timer;
-	private heartbeats : number = 0;
+	private TIME_INTERVAL = 5000; // 1000 * 5
+	private MAX_HEARTBEATS = 5;
+	private pulseObj: PulseConfig;
+	private pulseInterval: NodeJS.Timer;
+	private heartbeats = 0;
 
-	constructor(private ws : WebSocket, private wsService : WebsocketService) {
+	constructor(private ws: WebSocket, private wsService: WebsocketService) {
 		this.sendPulse();
 	}
 
-	public sendPulse() : void {
+	public sendPulse(): void {
 		this.pulseInterval = setInterval(() => {
 			this.heartbeats++;
 			this.pulseObj = {
 				index: this.heartbeats,
-				channel: 'pulse'
+				channel: 'pulse',
 			};
 
 			if (this.heartbeats >= this.MAX_HEARTBEATS) {
@@ -40,7 +40,7 @@ export class PulseService {
 		}, this.TIME_INTERVAL);
 	}
 
-	public resetPulse() : void {
+	public resetPulse(): void {
 		// TODO: [Lahiru] Refactor once the log module is completed
 		console.log('[PulseGenerator] Pulse Resetting..');
 		clearInterval(this.pulseInterval);
