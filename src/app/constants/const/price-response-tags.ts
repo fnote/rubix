@@ -1,4 +1,4 @@
-export const priceResponseTypes = {
+export const priceResponseTags = {
 	0 : 'NODATA',
 	3 : 'S',
 	4 : 'E',
