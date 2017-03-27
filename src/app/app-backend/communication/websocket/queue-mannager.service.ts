@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import * as Rx from 'rxjs/Rx';
-import { WebsocketService } from './websocket.service';
-import { PulseService } from './pulse.service';
 import { ConfigService } from '../../../config/config.service';
 import { Connection } from '../connection';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { PulseService } from './pulse.service';
+import { WebsocketService } from './websocket.service';
 
 @Injectable()
 export class QueueMannagerService {
@@ -86,25 +86,25 @@ export class QueueMannagerService {
 		}, this.TIME_INTERVAL);
 	}
 
-	private subscribeForConnected(index : number) : void {
-		const connection : Connection = this.getConnectionByIndex(index);
-		if (connection.connectedSocket && !connection.subscription ) {
+	private subscribeForConnected(index: number): void {
+		const connection: Connection = this.getConnectionByIndex(index);
+		if (connection.connectedSocket && !connection.subscription) {
 			connection.subscription = connection.connectedSocket.subscribe(msg => {
-													if (JSON.parse(msg.data).channel !== 'pulse' && msg.data) {
-														this.enQueueMessage(msg.data, connection.recivedMessageQueue);
-													}
-													connection.pulseService.resetPulse();
-												}, error => {
-													console.log('[QueueMannagerService] error occured..' + error );
-												}, () => {
-													this.unsubcribeConnection(connection.index);
-													console.log('[QueueMannagerService] disconnected.. ' + connection.channel );
-												});
+				if (JSON.parse(msg.data).channel !== 'pulse' && msg.data) {
+					this.enQueueMessage(msg.data, connection.recivedMessageQueue);
+				}
+				connection.pulseService.resetPulse();
+			}, error => {
+				console.log('[QueueMannagerService] error occured..' + error );
+			}, () => {
+				this.unsubcribeConnection(connection.index);
+				console.log('[QueueMannagerService] disconnected.. ' + connection.channel );
+			});
 		}
 	}
 
-	public unsubcribeConnection(index : number) : void {
-		const connection : Connection = this.getConnectionByIndex(index);
+	public unsubcribeConnection(index: number): void {
+		const connection: Connection = this.getConnectionByIndex(index);
 		if (connection.isConnected && connection.subscription) {
 			connection.isConnected = false;
 			connection.subscription.unsubscribe();
@@ -115,8 +115,8 @@ export class QueueMannagerService {
 		}
 	}
 
-	public addMessageToQueue(data : any) : void {
-		const connection : Connection = this.getConnectionByIndex(data.index);
+	public addMessageToQueue(data: any): void {
+		const connection: Connection = this.getConnectionByIndex(data.index);
 		this.enQueueMessage(data.data, connection.sendMessageQueue);
 		if (!connection.isConnected) {
 			this.connect(data);
