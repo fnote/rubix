@@ -10,7 +10,7 @@ import { ThemeService } from './utils/theme.service';
 import { TradeHelperService } from './utils/helper/trade-helper.service';
 
 @Component({
-	selector: 'app-root',
+	selector: 'app-root',//
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
