@@ -172,7 +172,7 @@ export class CommonHelperService {
 	* @param dec Number of decimal places
 	*/
 	public formatNumberInMillions(num: number , dec: number): string {
-		const x : number = Math.abs(num);
+		const x: number = Math.abs(num);
 		if (x <= 999999) {
 			return this.roundNumber(num, dec).toString();
 		}
@@ -230,7 +230,6 @@ export class CommonHelperService {
 	* Returns current UTC time
 	*/
 	public getCurrentDate(): number {
-
 		return new Date().getTime();
 	}
 }

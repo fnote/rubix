@@ -10,7 +10,7 @@ import { ThemeService } from './utils/theme.service';
 import { TradeHelperService } from './utils/helper/trade-helper.service';
 
 @Component({
-	selector: 'app-root',//
+	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,14 +19,14 @@ import { TradeHelperService } from './utils/helper/trade-helper.service';
 export class AppComponent {
 
 	private title = 'Rubix test page';
-	private result: string;
-	private response: Array<any> = [] ;
-	private inputValues: string;
-	private userName = '';
-	private password = '';
+	public result: string;
+	public response: Array<any> = [] ;
+	public inputValues: string;
+	public userName = '';
+	public password = '';
 	private session = '';
 
-	constructor(private commonHelperService: CommonHelperService, private themeService: ThemeService,
+	constructor(private commonHelperService: CommonHelperService, public themeService: ThemeService,
 		private priceService: PriceService, private loggerService: LoggerService, private dataService: DataService,
 		private localizationService: LocalizationService) {
 		this.updatePriceResponse();
@@ -55,7 +55,7 @@ export class AppComponent {
 		}
 	}
 
-	private getPrice(): void {
+	public getPrice(): void {
 		this.loggerService.logInfo(this.inputValues);
 		this.priceService.addSymbolRequest(['TDWL', '1010']);
 		// this.priceService.addExchangeRequest('TDWL');
