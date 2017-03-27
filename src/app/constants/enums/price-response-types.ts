@@ -142,4 +142,3 @@ export const priceResponseTypes = {
 	26328 : 'WEEKLY_PCT_CHANGE',
 	25127 : 'NWS_EDITORIAL_ID',
 };
-
