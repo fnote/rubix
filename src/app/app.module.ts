@@ -28,6 +28,6 @@ import { UtilsModule } from './utils/utils.module';
 	providers: [
 		ConfigService,
 	],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
 })
 export class AppModule { }

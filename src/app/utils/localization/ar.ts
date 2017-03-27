@@ -7,5 +7,5 @@ export const AR = {
 	HIGH_TO_LOW: 'AR - High to Low',
 	LOW_TO_HIGH: 'AR - Low to High',
 	BUY: 'AR - Buy',
-	SELL: 'AR - Sell'
+	SELL: 'AR - Sell',
 };

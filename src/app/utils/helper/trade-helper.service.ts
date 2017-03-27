@@ -9,7 +9,7 @@ export class TradeHelperService {
 	* @param value Input value
 	* @param isExg Is exchange
 	*/
-	public getPriceRatios(value : number , isExg : boolean) : number {
+	public getPriceRatios(value: number , isExg: boolean): number {
 		const rate = 1;
 
 		return rate;

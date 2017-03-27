@@ -1,16 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { StorageService } from './storage.service';
-import { LoggerService } from './logger.service';
-import { ThemeService } from './theme.service';
-import { LocalizationService } from './localization/localization.service';
 import { CommonHelperService } from './helper/common-helper.service';
+import { CommonModule } from '@angular/common';
+import { LocalizationService } from './localization/localization.service';
+import { LoggerService } from './logger.service';
+import { NgModule } from '@angular/core';
+import { StorageService } from './storage.service';
+import { ThemeService } from './theme.service';
 import { TradeHelperService } from './helper/trade-helper.service';
 
 @NgModule({
 	imports: [
-		CommonModule
+		CommonModule,
 	],
 	declarations: [],
 	providers: [
@@ -19,7 +18,7 @@ import { TradeHelperService } from './helper/trade-helper.service';
 		ThemeService,
 		LocalizationService,
 		CommonHelperService,
-		TradeHelperService
-	]
+		TradeHelperService,
+	],
 })
 export class UtilsModule { }
