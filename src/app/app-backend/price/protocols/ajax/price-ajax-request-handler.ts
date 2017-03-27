@@ -1,7 +1,7 @@
 export class PriceAjaxRequestHandler {
-	private static _instance : PriceAjaxRequestHandler = new PriceAjaxRequestHandler();
+	private static _instance: PriceAjaxRequestHandler = new PriceAjaxRequestHandler();
 
-	public static getInstance() : PriceAjaxRequestHandler {
+	public static getInstance(): PriceAjaxRequestHandler {
 		return PriceAjaxRequestHandler._instance;
 	}
 
@@ -13,11 +13,11 @@ export class PriceAjaxRequestHandler {
 		PriceAjaxRequestHandler._instance = this;
 	}
 
-	private generateExchangeMetaRequest(params : Object = {}) : string {
+	private generateExchangeMetaRequest(params: Object = {}): string {
 		return 'exchange meta request';
 	}
 
-	private generateSymbolMetaRequest(params : Object = {}) : string {
+	private generateSymbolMetaRequest(params: Object = {}): string {
 		return 'symbol meta request';
 	}
 }

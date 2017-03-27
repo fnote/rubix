@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Rx';
 @Injectable()
 export class DataService {
 	private responseStream$: Subject<any> ;
+
 	constructor(private queueMannagerService: QueueMannagerService, private ajaxService: AjaxService) {
 		this.init();
 	}
