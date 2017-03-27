@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
-
-import { LogLevels } from '../constants/enums/log-levels.enum';
 import { ConfigService } from '../config/config.service';
+import { Injectable } from '@angular/core';
+import { LogLevels } from '../constants/enums/log-levels.enum';
 
 @Injectable()
 export class LoggerService {
@@ -10,31 +9,31 @@ export class LoggerService {
 	private lastSentIndex = 0;
 	private isRequestInProgress = false;
 	private isPeriodicUpdateStarted = false;
-	private configObj : Object = {};
+	private configObj: Object = {};
 
-	constructor(private configService : ConfigService) { }
+	constructor(private configService: ConfigService) { }
 
-	public logError (logEntry : string) : void {
+	public logError (logEntry: string): void {
 		this.amendLog(logEntry, LogLevels.LogError);
 	}
 
-	public logWarning (logEntry : string) : void {
+	public logWarning (logEntry: string): void {
 		this.amendLog(logEntry, LogLevels.LogWarning);
 	}
 
-	public logInfo (logEntry : string) : void {
+	public logInfo (logEntry: string): void {
 		this.amendLog(logEntry, LogLevels.LogInfo);
 	}
 
-	public logDebug (logEntry : string) : void {
+	public logDebug (logEntry: string): void {
 		this.amendLog(logEntry, LogLevels.LogDebug);
 	}
 
-	public LogData (logEntry : string) : void {
+	public LogData (logEntry: string): void {
 		this.amendLog(logEntry, LogLevels.LogData);
 	}
 
-	private amendLog (logEntry : string, logType : LogLevels) : void {
+	private amendLog (logEntry: string, logType: LogLevels): void {
 		try {
 			if (this.configService.getNumberConfigVal('loggerConfig', 'appLogLevel') >= logType) {
 				this.amendLogConsole(logEntry, logType);
@@ -48,7 +47,7 @@ export class LoggerService {
 		}
 	}
 
-	private amendLogConsole (logEntry : string, logType : LogLevels) : void {
+	private amendLogConsole (logEntry: string, logType: LogLevels): void {
 		switch (logType) {
 			case LogLevels.LogError:
 				console.error(logEntry);
@@ -70,7 +69,7 @@ export class LoggerService {
 		}
 	}
 
-	private amendLogToBuffer (logEntry : string, logType : LogLevels) : void {
+	private amendLogToBuffer (logEntry: string, logType: LogLevels): void {
 		// TODO: [Amila] Check the necessity of sending server side logs and implement this
 	}
 }
