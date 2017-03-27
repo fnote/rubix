@@ -1,5 +1,5 @@
-import PriceResponseTypes from '../../../constants/enums/price-response-types';
 import { Channels } from '../../../constants/enums/channels.enum';
+import { priceResponseTypes } from '../../../constants/enums/price-response-types';
 
 export class PriceResponse {
 
@@ -62,8 +62,8 @@ export class PriceResponse {
 			const arrHed = response.HED.split('|');
 			const arrDat = response.DAT.split('|');
 			for ( let i = 0 ; i < arrHed.length ; i++ ) {
-				if ( PriceResponseTypes[arrHed[i]] ) {
-					arrBuild.push('"' + PriceResponseTypes[arrHed[i]].id + '"');
+				if ( priceResponseTypes[arrHed[i]] ) {
+					arrBuild.push('"' + priceResponseTypes[arrHed[i]] + '"');
 					arrBuild.push(':');
 					arrBuild.push('"' + arrDat[i].toString() + '"');
 					arrBuild.push(',');
