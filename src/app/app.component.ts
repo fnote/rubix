@@ -109,6 +109,8 @@ export class AppComponent {
 	}
 
 	public sendMarketMetaRequest(): void {
+		// Below is temperoray
+		// tslint:disable-next-line:max-line-length
 		const sampleRequest = '{ "MT": 80, "TKN": 1, "LAN": "EN", "SEG": [ "EXG", "EXGFE", "SUBM", "SECT", "TD", "ID", "WLD", "WLTD", "TZD", "GMS", "NPD" ], "EXG": [ "TDWL", "CASE", "ISE", "DFM" ] }';
 		// const sampleRequest = '{ "MT": 46, "TKN": 1, "LAN": "EN", "PRM": [ "TDWL~1150", "NSDQ~QQQ" ] }';
 		// const sampleRequest =
