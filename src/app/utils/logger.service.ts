@@ -43,11 +43,12 @@ export class LoggerService {
 				this.amendLogToBuffer(logEntry, logType);
 			}
 		} catch (e) {
-			console.error((['Logger error: ', e].join('')));
+			this.amendLogConsole(['Logger error: ', e].join(''), LogLevels.LogError);
 		}
 	}
 
 	private amendLogConsole (logEntry: string, logType: LogLevels): void {
+		/* tslint:disable */
 		switch (logType) {
 			case LogLevels.LogError:
 				console.error(logEntry);
@@ -58,15 +59,14 @@ export class LoggerService {
 				break;
 
 			case LogLevels.LogInfo:
-				/* tslint:disable */
 				console.info(logEntry);
-				/* tslint:enable */
 				break;
 
 			default:
 				console.log(logEntry);
 				break;
 		}
+		/* tslint:enable */
 	}
 
 	private amendLogToBuffer (logEntry: string, logType: LogLevels): void {

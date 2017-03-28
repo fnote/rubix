@@ -49,11 +49,14 @@
     "no-bitwise": true,
     "no-console": [
       true,
+	  "log",
       "debug",
       "info",
       "time",
       "timeEnd",
-      "trace"
+      "trace",
+	  "warn",
+	  "error"
     ],
     "no-construct": true,
     "no-debugger": true,
@@ -65,7 +68,7 @@
       true,
       "ignore-params"
     ],
-    "no-magic-numbers": true,
+    "no-magic-numbers": [true, -1, 0, 1, 2, 10, 20, 999999, 1000000],
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
