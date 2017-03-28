@@ -13,34 +13,36 @@ export class LoggerService {
 
 	constructor(private configService: ConfigService) { }
 
-	public logError (logEntry: string): void {
-		this.amendLog(logEntry, LogLevels.LogError);
+	public logError (logEntry: string, module?: string): void {
+		this.amendLog(logEntry, LogLevels.LogError, module);
 	}
 
-	public logWarning (logEntry: string): void {
-		this.amendLog(logEntry, LogLevels.LogWarning);
+	public logWarning (logEntry: string, module?: string): void {
+		this.amendLog(logEntry, LogLevels.LogWarning, module);
 	}
 
-	public logInfo (logEntry: string): void {
-		this.amendLog(logEntry, LogLevels.LogInfo);
+	public logInfo (logEntry: string, module?: string): void {
+		this.amendLog(logEntry, LogLevels.LogInfo, module);
 	}
 
-	public logDebug (logEntry: string): void {
-		this.amendLog(logEntry, LogLevels.LogDebug);
+	public logDebug (logEntry: string, module?: string): void {
+		this.amendLog(logEntry, LogLevels.LogDebug, module);
 	}
 
-	public LogData (logEntry: string): void {
-		this.amendLog(logEntry, LogLevels.LogData);
+	public LogData (logEntry: string, module?: string): void {
+		this.amendLog(logEntry, LogLevels.LogData, module);
 	}
 
-	private amendLog (logEntry: string, logType: LogLevels): void {
+	private amendLog (logEntry: string, logType: LogLevels, module?: string): void {
+		const logStr = module ? ['[', module, '] ', logEntry].join('') : logEntry;
+
 		try {
 			if (this.configService.getNumberConfigVal('loggerConfig', 'appLogLevel') >= logType) {
-				this.amendLogConsole(logEntry, logType);
+				this.amendLogConsole(logStr, logType);
 			}
 
 			if (this.configService.getNumberConfigVal('loggerConfig', 'serverLogLevel') >= logType) {
-				this.amendLogToBuffer(logEntry, logType);
+				this.amendLogToBuffer(logStr, logType);
 			}
 		} catch (e) {
 			this.amendLogConsole(['Logger error: ', e].join(''), LogLevels.LogError);
