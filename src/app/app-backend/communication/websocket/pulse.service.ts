@@ -29,20 +29,14 @@ export class PulseService {
 			if (this.heartbeats >= this.MAX_HEARTBEATS) {
 				this.wsService.closeWebSocket(this.ws);
 				clearInterval(this.pulseInterval);
-				// TODO: [Lahiru] Refactor once the log module is completed
-				console.log('Disconnected. ' + this.ws.url);
 				return;
 			}
 
 			this.wsService.sendToWebSocket(this.ws, JSON.stringify(this.pulseObj));
-			// TODO: [Lahiru] Refactor once the log module is completed
-			console.log('[PulseGenerator] Pulse sent to ' + this.ws.url + ': ' + this.pulseObj.index);
 		}, this.TIME_INTERVAL);
 	}
 
 	public resetPulse(): void {
-		// TODO: [Lahiru] Refactor once the log module is completed
-		console.log('[PulseGenerator] Pulse Resetting..');
 		clearInterval(this.pulseInterval);
 		this.heartbeats = 0;
 		this.sendPulse();
