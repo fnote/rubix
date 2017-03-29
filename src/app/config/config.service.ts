@@ -4,8 +4,7 @@ import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 interface ConnectionConfig {
-	index: number;
-	channel: string;
+	channel: number;
 	url: string;
 	isSecure: boolean;
 }
@@ -22,10 +21,10 @@ export class ConfigService {
 
 	constructor(private http: Http) {
 		this.connectionConfig = [
-			{ index: 0, channel: 'echo' , url: this.ECHO_URL, isSecure: false },
-			{ index: 1, channel: 'chat' , url: this.CHAT_URL, isSecure: false },
-			{ index: Channels.Price , channel: 'price' , url: this.PRICE, isSecure: false },
-			{ index: Channels.PriceMeta , channel: 'priceMeta' , url: this.PRICE_META, isSecure: false },
+			{ channel: 0 , url: this.ECHO_URL, isSecure: false },
+			{ channel: 1 , url: this.CHAT_URL, isSecure: false },
+			{ channel: Channels.Price , url: this.PRICE, isSecure: false },
+			{ channel: Channels.PriceMeta  , url: this.PRICE_META, isSecure: false },
 		];
 
 		this.load();

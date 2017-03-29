@@ -62,12 +62,12 @@ export class PriceService {
 	 * 			loginIP     : Machine IP
 	 * 			appVersion  : Application version
 	 * 			lan         : Current Language. Mandatory.
-	 * @param {number} channel - Respective CHannel from Channel Enum
+	 * @param {number} channel - Respective Channel from Channel Enum
 	*/
 	public authenticateWithUsernameAndPassword (authParams: any, channel: Channels): void  {
 		const authReqest =  PriceStreamingRequestHandler.getInstance().generateAuthRequest(authParams);
 		const request = {
-			index : channel, // TODO: [Chandana] Rename the word 'index' as 'channel'
+			channel : channel,
 			data : authReqest,
 		};
 
@@ -87,7 +87,7 @@ export class PriceService {
 	public authenticateWithSecondaryAuthToken (authParams: any, channel: number): void  {
 		const authRequest =  PriceStreamingRequestHandler.getInstance().generateSecondaryAuthRequest(authParams);
 		const request = {
-			index : channel,
+			channel : channel,
 			data : authRequest,
 		};
 		this.dataService.sendToWs(request);

@@ -25,7 +25,6 @@ export class QueueMannagerService {
 		this.configService.getConnectionConfig().forEach(connection => {
 			const connConfig: Connection = {
 				channel: connection.channel,
-				index: connection.index,
 				url: connection.url,
 				connectedSocket: null,
 				sendMessageQueue: [],
@@ -48,28 +47,28 @@ export class QueueMannagerService {
 		return messageQueue.shift();
 	}
 
-	public getConnectionByIndex(index: number): Connection {
-		return this.connectedSocketPool[index];
+	public getConnectionByChannel(channel: number): Connection {
+		return this.connectedSocketPool[channel];
 	}
 
 	private connect(connectionConfig: Connection): void {
-		const connection: Connection = this.getConnectionByIndex(connectionConfig.index);
+		const connection: Connection = this.getConnectionByChannel(connectionConfig.channel);
 		if (!connection.isConnected) {
 			this.websocketService.initConnection(connection).then(sockt => {
 				const socket: Rx.Subject<MessageEvent> = this.websocketService.createConnection(sockt);
 				connection.connectedSocket = socket;
 				connection.isConnected = true;
-				this.subscribeForConnected(connectionConfig.index);
+				this.subscribeForConnected(connectionConfig.channel);
 				this.activateSentReceive(
 					connection.sendMessageQueue,
 					connection.sendQueueProcessInterval,
 					connection.connectedSocket,
-					connection.index);
+					connection.channel);
 				this.activateSentReceive(
 					connection.recivedMessageQueue,
 					connection.recivedQueueProcessInterval,
 					this.response$ ,
-					connection.index);
+					connection.channel);
 			}).catch(error => {
 				console.log('[QueueMannagerService] error occured..' + connectionConfig.channel);
 			});
@@ -94,8 +93,8 @@ export class QueueMannagerService {
 		}, this.TIME_INTERVAL);
 	}
 
-	private subscribeForConnected(index: number): void {
-		const connection: Connection = this.getConnectionByIndex(index);
+	private subscribeForConnected(channel: number): void {
+		const connection: Connection = this.getConnectionByChannel(channel);
 		if (connection.connectedSocket && !connection.subscription) {
 			connection.subscription = connection.connectedSocket.subscribe(msg => {
 				if (JSON.parse(msg.data).channel !== 'pulse' && msg.data) {
@@ -105,14 +104,14 @@ export class QueueMannagerService {
 			}, error => {
 				console.log('[QueueMannagerService] error occured..' + error);
 			}, () => {
-				this.unsubcribeConnection(connection.index);
+				this.unsubcribeConnection(connection.channel);
 				console.log('[QueueMannagerService] disconnected.. ' + connection.channel);
 			});
 		}
 	}
 
-	public unsubcribeConnection(index: number): void {
-		const connection: Connection = this.getConnectionByIndex(index);
+	public unsubcribeConnection(channel: number): void {
+		const connection: Connection = this.getConnectionByChannel(channel);
 		if (connection.isConnected && connection.subscription) {
 			connection.isConnected = false;
 			connection.subscription.unsubscribe();
@@ -124,7 +123,7 @@ export class QueueMannagerService {
 	}
 
 	public addMessageToQueue(data: any): void {
-		const connection: Connection = this.getConnectionByIndex(data.index);
+		const connection: Connection = this.getConnectionByChannel(data.channel);
 		this.enQueueMessage(data.data, connection.sendMessageQueue);
 		if (!connection.isConnected) {
 			this.connect(data);

@@ -93,7 +93,7 @@ export class AppComponent {
 	public sendSymbolSnapshotRequest(): void {
 		const sampleRequest = '{"MT":10,"PRM":["DFM~DFMGI","BSE~BSEX",TDWL~1150","TDWL~8100","ADSM~ALDAR","NSDQ~GOOG","NSDQ~AAPL"],"RT":1}';
 		const request = {
-			index : Channels.Price,
+			channel : Channels.Price,
 			data : sampleRequest,
 		};
 		this.dataService.sendToWs(request);
@@ -102,7 +102,7 @@ export class AppComponent {
 	public sendNewsRequest(): void {
 		const sampleRequest = '{ "RT": "1", "MT": 30, "LAN": "EN", "PRM": [ "N/WER", "N/FNVW", "MUBASHER.AE" ] }';
 		const request = {
-			index : Channels.Price,
+			channel : Channels.Price,
 			data : sampleRequest,
 		};
 		this.dataService.sendToWs(request);
@@ -117,7 +117,7 @@ export class AppComponent {
 		// 			'{ "MT": 44, "SYM": [ "TDWL~TASI", "LKCSE~JKH.N0000`N", "ISE~TARAF",
 		// 			"CSE~SAM", "CSE~MASI" ], "PRD": "1d", "TYP": "1" }';
 		const request = {
-			index : Channels.PriceMeta,
+			channel : Channels.PriceMeta,
 			data : sampleRequest,
 		};
 		this.dataService.sendToWs(request);
