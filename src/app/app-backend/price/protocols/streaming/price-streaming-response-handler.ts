@@ -17,7 +17,6 @@ export class PriceStreamingResponseHandler {
 		this.streamRouteService.getPriceResponseStream().map(response => {
 			return this.processPriceResponseStream(response);
 		}).subscribe(response => {
-			console.log('[PriceStreamingResponseHandler]' + response);
 			this.priceResponseStream$.next(response);
 		});
 	}

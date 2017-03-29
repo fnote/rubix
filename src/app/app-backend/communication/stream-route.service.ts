@@ -1,6 +1,7 @@
 import { Channels } from '../../constants/enums/channels.enum';
 import { DataService } from './data.service';
 import { Injectable } from '@angular/core';
+import { LoggerService } from '../../utils/logger.service';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
@@ -8,7 +9,7 @@ export class StreamRouteService {
 
 	private priceResponseStream$: Subject<Object>;
 
-	constructor(private dataService: DataService) {
+	constructor(private dataService: DataService, private loggerService: LoggerService) {
 		this.priceResponseStream$ = new Subject();
 		this.routeResponseStream();
 	}
@@ -23,7 +24,7 @@ export class StreamRouteService {
 					this.priceResponseStream$.next({ data : response.data , channel : Channels.PriceMeta });
 					break;
 				default :
-					console.log('[StreamRouteService] could not find the connection');
+					this.loggerService.logInfo('could not find the connection', 'StreamRouteService');
 			}
 		});
 	}
