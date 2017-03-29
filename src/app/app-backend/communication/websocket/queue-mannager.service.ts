@@ -2,6 +2,7 @@ import * as Rx from 'rxjs/Rx';
 import { ConfigService } from '../../../config/config.service';
 import { Connection } from '../connection';
 import { Injectable } from '@angular/core';
+import { LoggerService } from '../../../utils/logger.service';
 import { Observable } from 'rxjs/Observable';
 import { PulseService } from './pulse.service';
 import { WebsocketService } from './websocket.service';
@@ -12,7 +13,8 @@ export class QueueMannagerService {
 	private connectedSocketPool: Array<Connection> = [];
 	private response$: Rx.Subject<any> ;
 
-	constructor(private configService: ConfigService, private websocketService: WebsocketService) {
+	constructor(private configService: ConfigService, private websocketService: WebsocketService,
+		private loggerService: LoggerService) {
 		this.response$ = new Rx.Subject();
 		this.init();
 	}
@@ -70,10 +72,10 @@ export class QueueMannagerService {
 					this.response$ ,
 					connection.channel);
 			}).catch(error => {
-				console.log('[QueueMannagerService] error occured..' + connectionConfig.channel);
+				this.loggerService.logInfo('error occured ' + connectionConfig.channel , 'QueueMannagerService');
 			});
 		}else {
-			console.log('[QueueMannagerService] allready connected..' + connectionConfig.channel);
+			this.loggerService.logInfo('allready connected ' + connectionConfig.channel , 'QueueMannagerService');
 		}
 	}
 
@@ -102,10 +104,10 @@ export class QueueMannagerService {
 				}
 				connection.pulseService.resetPulse();
 			}, error => {
-				console.log('[QueueMannagerService] error occured..' + error);
+				this.loggerService.logError(error, 'QueueMannagerService');
 			}, () => {
 				this.unsubcribeConnection(connection.channel);
-				console.log('[QueueMannagerService] disconnected.. ' + connection.channel);
+				this.loggerService.logInfo('disconnected ' + connection.channel , 'QueueMannagerService');
 			});
 		}
 	}
