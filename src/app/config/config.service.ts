@@ -21,8 +21,8 @@ export class ConfigService {
 
 	constructor(private http: Http) {
 		this.connectionConfig = [
-			{ channel: 0 , url: this.ECHO_URL, isSecure: false },
-			{ channel: 1 , url: this.CHAT_URL, isSecure: false },
+			{ channel: Channels.Trade , url: this.ECHO_URL, isSecure: false },
+			{ channel: Channels.TradeMeta , url: this.CHAT_URL, isSecure: false },
 			{ channel: Channels.Price , url: this.PRICE, isSecure: false },
 			{ channel: Channels.PriceMeta  , url: this.PRICE_META, isSecure: false },
 		];
@@ -35,7 +35,7 @@ export class ConfigService {
 	}
 
 	private load(): void {
-		this.http.get('app/config/app-config.json').map((res) => res.json()).subscribe(data => {
+		this.http.get('./src/app/config/app-config.json').map((res) => res.json()).subscribe(data => {
 			this.configObj = data;
 		}, (rej) => {
 			console.error('Could not load local data' , rej);

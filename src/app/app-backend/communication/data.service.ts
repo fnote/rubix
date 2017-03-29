@@ -1,5 +1,6 @@
 import { AjaxService } from './ajax/ajax.service';
 import { Injectable } from '@angular/core';
+import { LoggerService } from '../../utils/logger.service';
 import { QueueMannagerService } from './websocket/queue-mannager.service';
 import { Subject } from 'rxjs/Rx';
 
@@ -7,7 +8,8 @@ import { Subject } from 'rxjs/Rx';
 export class DataService {
 	private responseStream$: Subject<any> ;
 
-	constructor(private queueMannagerService: QueueMannagerService, private ajaxService: AjaxService) {
+	constructor(private queueMannagerService: QueueMannagerService, private ajaxService: AjaxService,
+		private loggerService: LoggerService) {
 		this.init();
 	}
 
@@ -56,8 +58,7 @@ export class DataService {
 
 	private updateResponseStream(): void {
 		this.queueMannagerService.getResponse().subscribe(msg => {
-			// TODO: [Chandana] Refactor once the log module is completed
-			console.log('[DataService] response recived..' + msg);
+			this.loggerService.logInfo('response recived..', 'DataService');
 			if (msg && msg.data) {
 				this.responseStream$.next(msg.data);
 			}
