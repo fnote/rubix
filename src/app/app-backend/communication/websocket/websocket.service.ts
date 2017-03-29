@@ -1,12 +1,13 @@
 import * as Rx from 'rxjs/Rx';
 import { Connection } from '../connection';
 import { Injectable } from '@angular/core';
+import { LoggerService } from '../../../utils/logger.service';
 import { PulseService } from './pulse.service';
 
 @Injectable()
 export class WebsocketService {
 
-	constructor() {
+	constructor(private loggerService: LoggerService) {
 		// Some Code
 	}
 
@@ -15,7 +16,7 @@ export class WebsocketService {
 		const promise: Promise<WebSocket> = new Promise((resolve, reject) : void => {
 			ws.onopen = () : void => {
 				connection.pulseService = new PulseService(ws, this);
-				console.log('[WebsocketService] connected to ' + connection.url);
+				this.loggerService.logInfo('connected to ' + connection.url , 'WebsocketService');
 				resolve(ws);
 			};
 		});
@@ -36,7 +37,7 @@ export class WebsocketService {
 			next: (data: any) : void => {
 				if (socket.readyState === WebSocket.OPEN) {
 					socket.send(data.data.data);
-					console.log('[WebsocketService] sent to ' + socket.url + ' ' + data);
+					this.loggerService.logInfo('sent to ' + socket.url , 'WebsocketService');
 				}
 			},
 		};
