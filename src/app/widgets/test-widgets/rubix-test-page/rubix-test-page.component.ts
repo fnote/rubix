@@ -1,35 +1,36 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Channels } from './constants/enums/channels.enum';
-import { CommonHelperService } from './utils/helper/common-helper.service';
-import { DataService } from './app-backend/communication/data.service';
-import { LocalizationService } from './utils/localization/localization.service';
-import { LoggerService } from './utils/logger.service';
-import { PriceService } from './app-backend/price/price.service';
-import { StorageService } from './utils/storage.service';
-import { ThemeService } from './utils/theme.service';
-import { TradeHelperService } from './utils/helper/trade-helper.service';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Channels } from '../../../constants/enums/channels.enum';
+import { CommonHelperService } from '../../../utils/helper/common-helper.service';
+import { DataService } from '../../../app-backend/communication/data.service';
+import { LocalizationService } from '../../../utils/localization/localization.service';
+import { LoggerService } from '../../../utils/logger.service';
+import { PriceService } from '../../../app-backend/price/price.service';
+import { ThemeService } from '../../../utils/theme.service';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
+	selector: 'app-rubix-test-page',
+	templateUrl: './rubix-test-page.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class AppComponent {
+export class RubixTestPageComponent {
 
-	private title = 'Rubix test page';
-	public result: string;
 	public response: Array<any> = [] ;
+	private session = '';
 	public inputValues: string;
 	public userName = '';
 	public password = '';
-	private session = '';
+	public result: string;
 
 	constructor(private commonHelperService: CommonHelperService, public themeService: ThemeService,
 		private priceService: PriceService, private loggerService: LoggerService, private dataService: DataService,
 		private localizationService: LocalizationService) {
 		this.updatePriceResponse();
 	}
+
+	/**public ngOnInit() {
+
+	}*/
 
 	private updatePriceResponse(): void {
 		this.priceService.getPriceResponseStream().subscribe(response => {

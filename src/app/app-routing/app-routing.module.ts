@@ -1,8 +1,9 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { RubixTestPageComponent } from '../widgets/test-widgets/rubix-test-page/rubix-test-page.component';
 
 const routes: Routes = [
-
+	{ path: 'test', component: RubixTestPageComponent },
 ];
 
 @NgModule({
