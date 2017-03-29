@@ -28,10 +28,6 @@ export class RubixTestPageComponent {
 		this.updatePriceResponse();
 	}
 
-	/**public ngOnInit() {
-
-	}*/
-
 	private updatePriceResponse(): void {
 		this.priceService.getPriceResponseStream().subscribe(response => {
 			this.response.push(response);
