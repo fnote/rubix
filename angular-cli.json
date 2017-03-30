@@ -18,7 +18,7 @@
       "tsconfig": "tsconfig.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "assets/styles/app.scss"
       ],
       "scripts": [],
 	  "environmentSource": "environments/environment.ts",
