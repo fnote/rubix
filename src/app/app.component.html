@@ -1,30 +1,3 @@
-<div [ngClass]="themeService.selectedThemeId">
 <div>
-  <label>Input </label>
-  <input [(ngModel)]="inputValues" placeholder="input" />
-</div>
-<div>
-  <label>Result : </label>{{result}}
-</div>
-<button (click)="convert()">Convert</button>
-<button (click)="changeLang()">Change lang</button>
-<button (click)="getPrice()">Get Price</button>
-<br><br><br>
-<app-child></app-child>
-
-<br><br>
-<input [(ngModel)]="userName" placeholder="userName" />
-<input type="password" [(ngModel)]="password" placeholder="password" />
-<br><br>
-<button (click)="authenticateRealTimePath()">authenticate Real-Time Path</button>
-  <button (click)="sendSymbolSnapshotRequest()">send RT(Symbol Snapshot)</button>
-  <button (click)="sendNewsRequest()">send RT (News)</button>
-
-  <br><br>
-
-  <button (click)="authenticateBackLogPath()">authenticate BackLog Path</button>
-  <button (click)="sendMarketMetaRequest()">Send BL (Market Meta)</button>
-
-  response from Price
-  {{response}}
+    <router-outlet></router-outlet>
 </div>

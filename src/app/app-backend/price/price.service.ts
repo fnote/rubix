@@ -108,7 +108,7 @@ export class PriceService {
 			req.addParam(exchange);
 
 			const request = {
-				index : Channels.Price,
+				channel : Channels.Price,
 				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
 			};
 			this.dataService.sendToWs(request);
@@ -122,7 +122,7 @@ export class PriceService {
 			req.addParam(exchange);
 
 			const request = {
-				index : Channels.Price,
+				channel : Channels.Price,
 				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
 			};
 			this.dataService.sendToWs(request);
@@ -138,7 +138,7 @@ export class PriceService {
 		}
 
 		const request = {
-			index : Channels.Price,
+			channel : Channels.Price,
 			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
 		};
 		this.dataService.sendToWs(request);
@@ -153,7 +153,7 @@ export class PriceService {
 		}
 
 		const request = {
-			index : Channels.Price,
+			channel : Channels.Price,
 			data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
 		};
 		this.dataService.sendToWs(request);
@@ -170,7 +170,7 @@ export class PriceService {
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
-				index : Channels.Price,
+				channel : Channels.Price,
 				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
 			};
 			this.dataService.sendToWs(request);
@@ -184,7 +184,7 @@ export class PriceService {
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
-				index : Channels.Price,
+				channel : Channels.Price,
 				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
 			};
 			this.dataService.sendToWs(request);
@@ -204,7 +204,7 @@ export class PriceService {
 		}
 
 		const request = {
-			index : Channels.Price,
+			channel : Channels.Price,
 			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
 		};
 		this.dataService.sendToWs(request);
@@ -219,7 +219,7 @@ export class PriceService {
 		}
 
 		const request = {
-			index : Channels.Price,
+			channel : Channels.Price,
 			data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
 		};
 		this.dataService.sendToWs(request);

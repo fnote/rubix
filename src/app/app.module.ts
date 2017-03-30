@@ -9,12 +9,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { PriceModule } from './app-backend/price/price.module';
+import { RubixTestPageComponent } from './widgets/test-widgets/rubix-test-page/rubix-test-page.component';
 import { UtilsModule } from './utils/utils.module';
 
 @NgModule({
 	declarations: [
 		AppComponent ,
 		ChildComponent,
+		RubixTestPageComponent,
 	],
 	imports: [
 		BrowserModule,
