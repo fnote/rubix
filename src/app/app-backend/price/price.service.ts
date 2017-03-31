@@ -2,6 +2,7 @@ import { BaseDataStore } from './data-stores/base-data-store';
 import { Channels } from '../../constants/enums/channels.enum';
 import { DataManagers } from '../../constants/enums/data-managers.enum';
 import { DataService } from '../communication/data.service';
+import { ExchangeDataStore } from './data-stores/exchange-data-store';
 import { Injectable } from '@angular/core';
 import { PriceRequest } from './protocols/price-request';
 import { PriceRequestTypes } from '../../constants/enums/price-request-types.enum';
@@ -14,38 +15,22 @@ import { Subject } from 'rxjs/Rx';
 @Injectable()
 export class PriceService {
 
-	constructor(
-		private dataService: DataService,
-		private priceStreamingResponseHandler: PriceStreamingResponseHandler,
-		private priceSubscriptionService: PriceSubscriptionService) {  }
+	public stockDM: StockDataStore;
+	public exchangeDM: ExchangeDataStore;
 
-	// TODO: [Amila] Check if this is required
+	constructor(private dataService: DataService, private priceStreamingResponseHandler: PriceStreamingResponseHandler,
+		private priceSubscriptionService: PriceSubscriptionService) {
+		this.stockDM = StockDataStore.getInstance();
+		this.exchangeDM = ExchangeDataStore.getInstance();
+	}
+
+	// TODO: [Amila] Check if this is required with Chandana
 	/**
 	 * Get the price response handler
 	 * @returns {Subject<Object>} Response stream
 	 */
 	public getPriceResponseStream(): Subject<Object> {
 		return this.priceStreamingResponseHandler.getPriceResponseStream();
-	}
-
-	/**
-     * Fetch data managers
-     * @param {number} dmID - Data Manager ID
-     * @returns {BaseDataStore} Data Store Object
-     */
-	public getDataManager (dmID: number): BaseDataStore {
-		let dtStore: BaseDataStore = null;
-
-		switch (dmID) {
-			case DataManagers.Stock:
-				dtStore = StockDataStore.getInstance();
-				break;
-			case DataManagers.Exchange:
-				dtStore = StockDataStore.getInstance();
-				break;
-		}
-
-		return dtStore;
 	}
 
 	//

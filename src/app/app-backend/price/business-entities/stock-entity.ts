@@ -7,6 +7,7 @@ export class StockEntity extends BaseEntity {
 	private _longDesc = '';
 	private _shortDesc = '';
 	private _dispCode = '';
+	private _currency = '';
 	private _lastTradePrice = -1;
 	private _openPrice = -1;
 	private _highPrice = -1;
@@ -43,6 +44,14 @@ export class StockEntity extends BaseEntity {
 
 	public set shortDesc(value: string) {
 		this._shortDesc = value;
+	}
+
+	public get currency(): string  {
+		return this._currency;
+	}
+
+	public set currency(value: string) {
+		this._currency = value;
 	}
 
 	public get dispCode(): string  {
