@@ -11,4 +11,3 @@ import { RubixTestPageComponent } from './rubix-test-page/rubix-test-page.compon
 	],
 })
 export class CommonWidgetModule { }
-
