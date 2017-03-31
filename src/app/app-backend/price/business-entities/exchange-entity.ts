@@ -181,6 +181,6 @@ export class ExchangeEntity extends BaseEntity {
 
 	constructor(values: Object = {}) {
 		super();
-		Object.assign(this, values);
+		this.setValues(values);
 	}
 }
