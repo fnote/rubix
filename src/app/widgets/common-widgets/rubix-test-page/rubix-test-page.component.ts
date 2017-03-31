@@ -5,7 +5,6 @@ import { DataService } from '../../../app-backend/communication/data.service';
 import { LocalizationService } from '../../../utils/localization/localization.service';
 import { LoggerService } from '../../../utils/logger.service';
 import { PriceService } from '../../../app-backend/price/price.service';
-import { ThemeService } from '../../../utils/theme.service';
 
 @Component({
 	selector: 'app-rubix-test-page',
@@ -22,7 +21,7 @@ export class RubixTestPageComponent {
 	public result: string;
 	private session = '';
 
-	constructor(private commonHelperService: CommonHelperService, public themeService: ThemeService,
+	constructor(private commonHelperService: CommonHelperService,
 		private priceService: PriceService, private loggerService: LoggerService, private dataService: DataService,
 		private localizationService: LocalizationService) {
 		this.updatePriceResponse();
