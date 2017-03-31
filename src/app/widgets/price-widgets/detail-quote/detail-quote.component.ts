@@ -4,7 +4,7 @@ import { PriceService } from '../../../app-backend/price/price.service';
 @Component({
 	selector: 'app-detail-quote',
 	templateUrl: './detail-quote.component.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	//changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailQuoteComponent implements OnInit, OnDestroy {
 
