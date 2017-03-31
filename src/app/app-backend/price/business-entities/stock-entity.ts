@@ -104,10 +104,6 @@ export class StockEntity extends BaseEntity {
 
 	constructor(values: Object = {}) {
 		super();
-		this.setStock(values);
-	}
-
-	public setStock(values: Object = {}): void {
-		Object.assign(this, values);
+		this.setValues(values);
 	}
 }

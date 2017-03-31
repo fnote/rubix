@@ -18,4 +18,8 @@ export class BaseEntity {
 	public set isStreamingDataLoaded(value: boolean) {
 		this._isStreamingDataLoaded = value;
 	}
+
+	public setValues(values: Object = {}): void {
+		Object.assign(this, values);
+	}
 }
