@@ -3,13 +3,19 @@ import { PriceResponse } from '../price-response';
 import { StreamRouteService } from '../../../communication/stream-route.service';
 import { Subject } from 'rxjs/Rx';
 
+import { StockDataStore } from '../../data-stores/stock-data-store';
+
+
 @Injectable()
 export class PriceStreamingResponseHandler {
 
 	private priceResponseStream$: Subject<Object>;
+	private symbolSnapShotStream$: Subject<Object>;
+	private stockDataStore: StockDataStore;
 
 	constructor(private streamRouteService: StreamRouteService) {
 		this.priceResponseStream$ = new Subject();
+		this.stockDataStore = StockDataStore.getInstance();
 		this.updatePriceResponseStream();
 	}
 
@@ -28,6 +34,9 @@ export class PriceStreamingResponseHandler {
 			data : JSON.parse(response.data),
 		};
 		const processedResponse = priceResponse.processPriceResponse(parsedResponse);
+
+		this.stockDataStore.setStock(processedResponse[0]);
+
 		return processedResponse;
 	}
 

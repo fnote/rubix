@@ -1,7 +1,8 @@
 export const priceResponseTags = {
+	3: 'code',
+	4: 'exchangeCode',
+	// refatcor below
 	0: 'NODATA',
-	3: 'S',
-	4: 'E',
 	5: 'EXC',
 	6: 'INS',
 	10: 'BAP',
@@ -31,7 +32,6 @@ export const priceResponseTags = {
 	52: 'TSPLT',
 	53: 'TT',
 	54: 'TSEQ',
-	55: 'LTP',
 	56: 'TQ',
 	57: 'OL',
 	62: 'VWAP',
