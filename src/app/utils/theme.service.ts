@@ -11,10 +11,10 @@ export class ThemeService {
 	};
 
 	constructor() {
-		this.setSelectedTheme(Themes.Light);
+		this.selectedTheme = Themes.Light;
 	}
 
-	public setSelectedTheme(value: Themes): void {
+	public set selectedTheme(value: Themes) {
 		if (this._selectedTheme === value) {
 			return;
 		}
@@ -24,6 +24,7 @@ export class ThemeService {
 			const head = document.getElementsByTagName('head')[0];
 			const body = document.getElementsByTagName('body')[0];
 
+			// remove the old class if available
 			if (this._selectedTheme !== -1) {
 				head.classList.remove(this.getThemeCode(this._selectedTheme));
 				body.classList.remove(this.getThemeCode(this._selectedTheme));
@@ -36,7 +37,7 @@ export class ThemeService {
 		}
 	}
 
-	public getSelectedTheme(): Themes {
+	public get selectedTheme(): Themes {
 		return this._selectedTheme;
 	}
 

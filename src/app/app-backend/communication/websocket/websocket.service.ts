@@ -7,9 +7,7 @@ import { PulseService } from './pulse.service';
 @Injectable()
 export class WebsocketService {
 
-	constructor(private loggerService: LoggerService) {
-		// Some Code
-	}
+	constructor(private loggerService: LoggerService) { }
 
 	public initConnection(connection: Connection): Promise<WebSocket> {
 		const ws: WebSocket = new WebSocket(connection.url);

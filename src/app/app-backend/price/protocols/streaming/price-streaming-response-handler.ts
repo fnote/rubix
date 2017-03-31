@@ -30,8 +30,9 @@ export class PriceStreamingResponseHandler {
 
 	private updatePriceModel(response: any): void {
 		switch (response.MT) {
-			case PriceRequestTypes.SnapshotSymbol :
-				this.stockDataStore.setStock(response);
+			case PriceRequestTypes.SnapshotSymbol:
+				this.stockDataStore.getOrAddStock([response.exchangeCode, response.symbolCode]).setValues(response);
+				this.stockDataStore.getOrAddStock([response.exchangeCode, response.symbolCode]).printObj();
 				break;
 			default:
 				// code here

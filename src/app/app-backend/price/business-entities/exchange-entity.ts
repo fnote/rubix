@@ -3,7 +3,7 @@ import { MarketStatus } from '../../../constants/enums/market-status.enum';
 
 export class ExchangeEntity extends BaseEntity {
 
-	private _code = '';
+	private _exchangeCode = '';
 	private _longDesc = '';
 	private _shortDesc = '';
 	private _dispExgCode = '';
@@ -24,12 +24,12 @@ export class ExchangeEntity extends BaseEntity {
 	private _trades = -1;
 	private _symbolsTraded = -1;
 
-	public get code(): string  {
-		return this._code;
+	public get exchangeCode(): string  {
+		return this._exchangeCode;
 	}
 
-	public set code(value: string) {
-		this._code = value;
+	public set exchangeCode(value: string) {
+		this._exchangeCode = value;
 	}
 
 	public get longDesc(): string {

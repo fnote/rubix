@@ -31,7 +31,7 @@ export class PulseService {
 				return;
 			}
 
-			this.wsService.sendToWebSocket(this.ws, JSON.stringify(this.pulseObj));
+			this.wsService.sendToWebSocket(this.ws, '[' + JSON.stringify(this.pulseObj) + ']');
 		}, this.TIME_INTERVAL);
 	}
 

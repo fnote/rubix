@@ -25,17 +25,13 @@ export class StockDataStore extends BaseDataStore {
 
 		if (!stockObj) {
 			stockObj = new StockEntity({
-				code: exgSym[0],
-				exchangeCode: exgSym[1],
+				exchangeCode: exgSym[0],
+				symbolCode: exgSym[1],
 			});
 
 			this.allStockStore[key] = stockObj;
 		}
 
 		return stockObj;
-	}
-
-	public setStock(values: any): void {
-		this.getOrAddStock([values.exchangeCode, values.code]).setValues(values);
 	}
 }

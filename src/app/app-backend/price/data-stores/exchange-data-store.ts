@@ -24,7 +24,7 @@ export class ExchangeDataStore extends BaseDataStore {
 
 		if (!exgObj) {
 			exgObj = new ExchangeEntity({
-				code: exchangeCode,
+				exchangeCode: exchangeCode,
 			});
 
 			this.allExchangeStore[exchangeCode] = exgObj;
