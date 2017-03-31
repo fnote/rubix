@@ -6,8 +6,8 @@ export class ThemeService {
 	private _selectedTheme: string;
 	private _selectedThemeId: string;
 	private supportedThemes = {
-		DARK : { id : 'dark' },
-		LIGHT : { id : 'light' },
+		DARK : { id : 'theme1' },
+		LIGHT : { id : 'theme2' },
 	};
 
 	public get selectedThemeId(): string {
