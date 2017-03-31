@@ -5,19 +5,17 @@ html{
 }
 
 body {
-    font-family: "OpenSans", sans-serif; 
     direction: ltr;
     font-size: 13px;
 }
 .bold {
     font-weight: $font-bold;
 }
-.md-bold {
-  font-weight: 700;
-}
-
 .no-bold {
     font-weight: 400;
+}
+.md-bold {
+  font-weight: 700;
 }
 
 .unicode-override {
@@ -28,12 +26,7 @@ body {
     cursor: pointer;
 }
 
-@font-face {
-    font-family: "OpenSans";
-    src: url("../assets/fonts/OpenSans-Regular.ttf");
-    font-weight: normal;
-    font-style: normal; }
-
+//links
 a { 
 	text-decoration: none;
 	outline: 0;
@@ -44,15 +37,7 @@ a:hover, a:active, a:focus {
 	text-decoration: none;
 }
 
-label.checkbox-label input[type=checkbox] {
-	position: relative;
-	vertical-align: middle;
-	bottom: 2px;
-	padding: 0px !important;
-}
-
-// new CSS for fonts
-
+//fonts
 .text-white{
     color:#fff;
 }
@@ -130,6 +115,24 @@ label.checkbox-label input[type=checkbox] {
 	clear: both;
 }
 
+
+.top-0{
+    top:0;
+}
+.bot-0 {
+    bottom: 0;
+}
+.right-0{
+    right:0;
+}
+
+.left-0{
+    left:0;
+}
+
+.p-fixed {
+    position: fixed;
+}
 .p-absolute {
     position: absolute;
 }
@@ -138,12 +141,13 @@ label.checkbox-label input[type=checkbox] {
     position: relative;
 }
 
-.bot-0 {
-    bottom: 0;
-}
+
 
 .full-width {
     width: 100%;
+}
+.full-height{
+    height:100%;
 }
 
 .v-align-top {
@@ -159,8 +163,8 @@ label.checkbox-label input[type=checkbox] {
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  vertical-align:middle
 }
-
 .v-align-text-top {
     vertical-align:text-top;
 }
@@ -168,6 +172,7 @@ label.checkbox-label input[type=checkbox] {
 .v-align-text-bottom {
     vertical-align:text-top;
 }
+
 
 .display-table {
     display: table;
@@ -184,7 +189,15 @@ label.checkbox-label input[type=checkbox] {
 .display-inline {
     display: inline-block !important;
 }
+.flex{
+    display: flex;
+}
 
+.inline-block{
+    display: inline-block;
+}
+
+//padding
 .padding-small {
     padding: $padding-small; 
 }
@@ -192,7 +205,84 @@ label.checkbox-label input[type=checkbox] {
 .padding-medium {
     padding: $padding-medium;
 }
+.padding-small-top {
+    padding-top: $padding-small;
+}
 
+.padding-small-right {
+    padding-right: $padding-small;
+}
+
+.ar .padding-small-right {
+    padding-left: $padding-small;
+}
+
+.padding-small-bottom {
+    padding-bottom: $padding-small;
+}
+
+.padding-small-left {
+    padding-left: $padding-small;
+}
+
+.padding-medium-top {
+    padding-top: $padding-medium;
+}
+.padding-medium-right {
+    padding-right: $padding-medium;
+}
+
+.ar .padding-medium-right {
+    padding-left: $padding-medium;
+}
+
+.padding-medium-bottom {
+    padding-bottom: $padding-medium;
+}
+
+.padding-medium-left {
+    padding-left: $padding-medium;
+}
+
+.padding-large {
+    padding: $padding-large;
+}
+
+.padding-large-top {
+    padding-top: $padding-large;
+}
+
+.padding-large-right {
+    padding-right: $padding-large;
+}
+
+.ar .padding-large-right {
+    padding-left: $padding-large;
+}
+
+.padding-large-bottom {
+    padding-bottom: $padding-large;
+}
+
+.padding-large-left {
+    padding-left: $padding-large;
+}
+.padding-v-sep-x{
+    padding-bottom:$padding-small;
+}
+.no-padding{
+    padding: 0px !important;
+}
+
+.no-padding-right {
+    padding-right: 0;
+}
+
+.no-padding-left {
+    padding-left: 0;
+}
+
+//margin
 .margin-small {
     margin-top: $margin-small;
 }
@@ -258,99 +348,21 @@ label.checkbox-label input[type=checkbox] {
 .margin-large-left {
     margin-left: $margin-large;
 }
-
-.margin-large-bottom-minus {
-    margin-bottom: -20px;
+.margin-v-sep-x{
+    margin-bottom:$margin-small;
+}
+.no-margin {
+    margin: 0 !important;
+}
+.no-margin-top {
+    margin-top: 0 !important;
 }
 
-.padding-small-top {
-    padding-top: $padding-small;
-}
-
-.padding-small-right {
-    padding-right: $padding-small;
-}
-
-.ar .padding-small-right {
-    padding-left: $padding-small;
-}
-
-.padding-small-bottom {
-    padding-bottom: $padding-small;
-}
-
-.padding-small-left {
-    padding-left: $padding-small;
-}
-
-.padding-medium-top {
-    padding-top: $padding-medium;
-}
-.padding-medium-right {
-    padding-right: $padding-medium;
-}
-
-.ar .padding-medium-right {
-    padding-left: $padding-medium;
-}
-
-.padding-medium-bottom {
-    padding-bottom: $padding-medium;
-}
-
-.padding-medium-left {
-    padding-left: $padding-medium;
-}
-
-.padding-large {
-    padding: $padding-large;
-}
-
-.padding-large-top {
-    padding-top: $padding-large;
-}
-
-.padding-large-right {
-    padding-right: $padding-large;
-}
-
-.ar .padding-large-right {
-    padding-left: $padding-large;
-}
-
-.padding-large-bottom {
-    padding-bottom: $padding-large;
-}
-
-.padding-large-left {
-    padding-left: $padding-large;
-}
-
-.padding-x-large-right{
-    padding-right: 27px;
-}
-
-.ar .padding-x-large-right{
-    padding-left: 24px;
-    padding-right: 0px;
-}
-
-.single-line-text {
+//truncate string with ellipsis
+.ellipsis{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.single-col {
-    max-width: 250px;
-}
-
-.padding-v-sep-x{
-    padding-bottom:$padding-small;
-}
-
-.margin-v-sep-x{
-    margin-bottom:$margin-small;
 }
 
 .sub_str_tbl {
@@ -358,171 +370,8 @@ label.checkbox-label input[type=checkbox] {
     width: 100%;
 }
 
-.sub-str-tbl {
-    table-layout: fixed;
-    width: 100%;
-}
 
-.horizontal-list-left{
-	list-style-type: none;
-    padding: 0px;
-	float:$float-1;
-    width: 100%;
-}
-
-.ar .horizontal-list-left{
-	list-style-type: none;
-    padding: 0px;
-	float:$float-2;
-}
-
-.horizontal-list-left li:first-child:not([role="presentation"]) {
-    width: 100%;
-    height: 35px;
-    margin-bottom: $margin-medium;
-}
-
-.chart-btns li {
-    width: 29% !important;
-    margin:0 2%;
-}
-
-li.chart-fig-btn:last-child {
-    //margin-right: 0 !important;
-    float: right;
-    text-align: right;
-}
-
-.chart-fig-btn ul.dropdown-menu li {
-    width: 100% !important;
-    height: auto !important;
-    margin: 0 !important;
-    border-bottom: 1px solid #ececec;
-    padding: 0;
-    text-align: center;
-}
-
-.chart-fig-btn ul.dropdown-menu li a {
-    padding: 8px 0px;
-}
-
-.horizontal-list-left li{
-	float:$float-1;
-	line-height:20px;
-	vertical-align:middle;
-    width: 14.2857143%;
-    height: 35px;
-}
-
-.horizontal-list-left li.right-btn {
-    float: right;
-    width: auto;
-    margin-right: 0;
-}
-
-.horizontal-list-left li a{
-	vertical-align:middle;
-}	
-
-.horizontal-list-left-v-sep{
-    content: "";
-    display: inline-block;
-    width: 10px;
-    height: 18px;
-    border-right: 1px solid #1a2128;
-    padding: 0;
-    position: relative;
-    top: 3px;
-	margin-left:-$padding-small;
-}	
-
-.horizontal-list-left input[type="checkbox"]{
-	margin:0px 5px 0 0;
-} 
-
-.horizontal-list-left input[type="radio"]{
-	margin:0px 5px 0 0;
-}
-
-.horizontal-list-right{
-	list-style-type: none;
-    margin: 0px;
-	float:right;
-}
-
-.ar .horizontal-list-right{
-	list-style-type: none;
-	float:$float-1;
-}
-
-.horizontal-list-right li{
-	margin-left:11px;
-	float:left;
-	line-height:23px;
-	vertical-align:middle;
-}
-
-.ar .horizontal-list-right li{
-	margin-left:11px;
-	float:right;
-	line-height:23px;
-	vertical-align:middle;
-}
-
-.horizontal-list-right li a{
-	vertical-align:middle;
-}	
-
-.horizontal-list-right-v-sep{
-    content: "";
-    display: inline-block;
-    width: 10px;
-    height: 18px;
-    border-left: 1px solid #1a2128;
-    padding: 0;
-    position: relative;
-    top: 3px;
-	margin-right:-$padding-small;
-}	
-
-.horizontal-list-right input[type="checkbox"]{
-	margin:0px $padding-small 0 0;
-} 
-
-.horizontal-list-right input[type="radio"]{
-	margin:0px $padding-small 0 0;
-}
-
-.ellipsis{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.p-fixed {
-    position: fixed;
-}
-
-.full-height{
-    height:100%;
-}
-
-.top-0{
-    top:0;
-}
-
-.right-0{
-    right:0;
-}
-
-.left-0{
-    left:0;
-}
-
-.v-align-middle {
-    vertical-align:middle
-}
-
+//scroll
 .y-scroll{
     overflow-y:scroll;
 }
@@ -548,151 +397,18 @@ li.chart-fig-btn:last-child {
   overflow-x: hidden;
 }
 
-.text-box {
-    height: 24px;
-    padding-left: $padding-small;
-}
-
-ul.dropdown-menu li {
-    width: 100%;
-    margin: 0 0 1px 0;
-}
-
-ul.dropdown-menu li {
-    width: 100%;
-}
-
-.dropdown-menu > li > a {
-    padding: 3px 5px;
-}
-
-.border-none {
-    border: none!important;
-}
 
 .background-color-none {
     background-color:transparent!important;
 }
-
-.table-type-2 td {
-    height: 25px;
-    vertical-align: middle;
-}
-
-.flex{
-    display: flex;
-}
-
-.inline-block{
-    display: inline-block;
-}
-
-// Helps position submenu
-.dropdown-submenu {
-    position: relative;
-}
-
-// Menus under the submenu should show up on the right of the parent 
-.dropdown-submenu > .dropdown-menu {
-    top:0;
-    left:100%;
-}
-
-.ar .dropdown-submenu > .dropdown-menu {
-    top:0;
-    right:100%;
-    width: 263px;
-}
-
-// Make submenu visible when hovering on link 
-.dropdown-submenu:hover>.dropdown-menu {
-    display:block;
-}
-
-.dropdown-submenu:hover>a:after {
-    content: "►";
-    border-width:5px 0 5px 5px;
-    margin-top:5px;
-    margin-right:-10px;
-    float: $float-2;
-}
-
-.ar .dropdown-submenu:hover>a:after {
-    content: "►";
-    border-width:5px 0 5px 5px;
-    margin-top:5px;
-    margin-left:-10px;
-    float: $float-1;
-}
-
-.ar .rtl {
-    direction: rtl;
-}
-
-.ltr {
-    direction: ltr;
-}
-
-.ltr-rtl{
-    direction: ltr;
-}
-
-.ar .ltr-rtl{
-    direction: rtl;
-}
-
-.ar .ltr-text{
-    direction: ltr!important;
-    text-align: left!important;
-}
-
-.fullscreencontainer{
-    position: absolute; 
-    z-index:0; 
-    height: 100%; 
-    max-height: 100%;
-    margin-top: -5px;
-    margin-left: -5px;
-}
-
-.display-none, .collapse{
-    display: none;
-}
-
-.display-block, .expand {
-    display: block;
-}
-
-.no-padding{
-    padding: 0px !important;
-}
-
-.no-padding-right {
-    padding-right: 0;
-}
-
-.no-padding-left {
-    padding-left: 0;
-}
-
-.no-margin {
-    margin: 0 !important;
-}
-
-.no-height {
-  height: 0;
-}
-
-.no-margin-top {
-    margin-top: 0 !important;
-}
-
 .no-background {
     background: none !important;
 }
-.no-radius{
-        border-radius: 0 !important;
-    }  
+.circle{
+    border-radius:50%;
+}
+
+//line heights
 .line-height-xs {
     line-height: 1;
 }
@@ -705,237 +421,7 @@ ul.dropdown-menu li {
     line-height: 2;
 }
 
-.transparent_btn{
-    background-color:transparent;
-    border:0;
-}
-.circle{
-    border-radius:50%;
-}
+//buttons
 button{
     outline:none;
-}
-
-input[type="radio"], input[type="checkbox"] {
-    margin: 0px 0 0;
-    margin-top: 1px \9;
-}
-
-.historyDetail div {
-    line-height: 28px;
-}
-
-.historyChart svg {
-    height: 250px;
-}
-
-.slide-panel-header table tr td:first-child {
-    width: 88%;
-}
-
-.table-wrapper table tr th:first-child, table.Table3 tr:first-child th {
-    text-align: center;
-    width: 100%;
-    padding: 8px 8px;
-    background: #CDD9E6;
-    border: 1px solid #E8E8E8
-}
-
-.table-wrapper table tr td {
-    text-align: right;
-    padding: 8px 8px;
-    border: 1px solid #E8E8E8;
-}
-
-.table-wrapper table tr:nth-child(odd) {
-    background: #D2DAE2;
-}
-
-.table-wrapper table tr:nth-child(even) {
-    background: #C2CDD8;
-}
-
-.vertical-middle{
-    vertical-align: middle;
-}
-
-.vertical-bottom{
-    vertical-align: bottom;
-}
-
-.half-container{
-    width:50%;
-}
-
-/*Chart Styles*/
-
-.highcharts-axis-labels tspan:first-child {
-    font-size: $font-small;
-}
-
-.highcharts-axis-labels tspan:last-child {
-    font-size: $font-large;
-}
-
-.highcharts-title {
-    top: -3px !important;
-    left: 0 !important;
-    border-bottom: 1px solid #e5e5e5 !important;
-    width: 100% !important;
-    padding: 2px 0;
-}
-
-.highcharts-tooltip text,
-#chart1 svg,
-#chart2 svg {
-    direction: ltr;
-}
-
-.ar .highcharts-title {
-    text-align: $text-align-3;
-}
-
-.ar .highcharts-axis-labels.highcharts-yaxis-labels {
-  direction: ltr !important;
-}
-
-.chart-fig-btn .dropdown button.activeVol,
-.chart-fig-btn .dropdown button {
-    outline: none;
-}
-
-.chartTabs {
-    width: 100%;
-}
-
-.table-responsive table {
-    @extend .table;
-    @extend .table-striped;
-}
-
-
-//Common animation for icons
-
-.theme3 .animation-wrap:hover {
-    .spinner {
-        -moz-animation: spin .4s 1 linear;
-        -o-animation: spin .4s 1 linear;
-        -webkit-animation: spin .4s 1 linear;
-        animation: spin .4s 1 linear;
-    }
-
-    .scale {
-        transition: all .2s ease-in-out;
-        transform: scale(1.15);
-    }
-}
-
-@-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(359deg); }
-}
-
-@-moz-keyframes spin {
-    0% { -moz-transform: rotate(0deg); }
-    100% { -moz-transform: rotate(359deg); }
-}
-
-@-o-keyframes spin {
-    0% { -o-transform: rotate(0deg); }
-    100% { -o-transform: rotate(359deg); }
-}
-
-@-ms-keyframes spin {
-    0% { -ms-transform: rotate(0deg); }
-    100% { -ms-transform: rotate(359deg); }
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(359deg); }
-}
-
-.opacity-none {
-    opacity: 0;
-    height: 0;
-    display: none !important;
-}
-
-.opacity-block {
-    opacity: 1;
-}
-
-.border-top-none {
-    border-top: 0 !important;
-}
-.bordered {
-    border: 1px solid #ddd;
-}
-.z-index-upper {
-    z-index: 9999;
-}
-
-.overflow-x-scroll {
-    overflow-x: scroll !important;
-}
-
-.touch, .multi-select {
-  -webkit-overflow-scrolling: touch;
-}
-.no-white-space tr th,
-.no-white-space tr td {
-  white-space: normal !important;
-}
-.highcharts-button image {
-  cursor: pointer;
-}
-.highcharts-button rect {
-  stroke: #ffffff !important;
-  stroke-width: 0 !important;
-  fill: #fff !important;
-}
-.highcharts-button image:hover {
-  opacity: 0.7;
-}
-
-/* table-scroll-mobile customzed using breakpoints */
-
-/* Medium Devices, Desktops */
-/*@media only screen and (max-width : 992px) {
-    .ar .table-mobile-scroll {
-        min-width: 1200px;
-        width: 100%;
-        overflow: hidden !important;
-        position: relative;
-    }
-}*/
-
-/* Small Devices, Tablets */
-/*@media only screen and (max-width : 768px) {
-    .ar .table-mobile-scroll {
-        min-width: 992px;
-        width: 100%;
-        overflow: hidden !important;
-        position: relative;
-    }
-}*/
-
-/* Extra Small Devices, Phones */
-@media only screen and (max-width : 480px) {
-    .ar .table-mobile-scroll {
-        min-width: 768px;
-        width: 100%;
-        overflow: hidden !important;
-        position: relative;
-    }
-}
-
-/* Custom, iPhone Retina */
-@media only screen and (max-width : 320px) {
-    .ar .table-mobile-scroll {
-        min-width: 480px;
-        width: 100%;
-        overflow: hidden !important;
-        position: relative;
-    }
 }
