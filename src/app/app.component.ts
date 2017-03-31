@@ -6,5 +6,7 @@ import { ThemeService } from './utils/theme.service';
 	templateUrl: './app.component.html',
 })
 export class AppComponent {
-	constructor(public themeService: ThemeService) { }
+
+	constructor(private themeService: ThemeService) {
+	}
 }

@@ -26,7 +26,16 @@ export class ThemeService {
 		}
 	}
 
-	private loadStyles(selectedThemeObj: {id: string}): void {
-		this._selectedThemeId = selectedThemeObj.id;
+	private loadStyles(newThemeObj: {id: string}): void {
+		const head = document.getElementsByTagName('head')[0];
+		const body = document.getElementsByTagName('body')[0];
+
+		head.classList.remove(this._selectedThemeId);
+		body.classList.remove(this._selectedThemeId);
+
+		this._selectedThemeId = newThemeObj.id;
+
+		head.classList.add(this._selectedThemeId);
+		body.classList.add(this._selectedThemeId);
 	}
 }
