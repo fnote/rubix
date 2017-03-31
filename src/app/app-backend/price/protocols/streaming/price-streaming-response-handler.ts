@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { PriceRequestTypes } from '../../../../constants/enums/price-request-types.enum';
 import { PriceResponse } from '../price-response';
 import { StockDataStore } from '../../data-stores/stock-data-store';
 import { StreamRouteService } from '../../../communication/stream-route.service';
@@ -8,7 +9,6 @@ import { Subject } from 'rxjs/Rx';
 export class PriceStreamingResponseHandler {
 
 	private priceResponseStream$: Subject<Object>;
-	private symbolSnapShotStream$: Subject<Object>;
 	private stockDataStore: StockDataStore;
 
 	constructor(private streamRouteService: StreamRouteService) {
@@ -22,7 +22,20 @@ export class PriceStreamingResponseHandler {
 			return this.processPriceResponseStream(response);
 		}).subscribe(response => {
 			this.priceResponseStream$.next(response);
+			for (const res of response) {
+				this.updatePriceModel(res);
+			}
 		});
+	}
+
+	private updatePriceModel(response: any): void {
+		switch (response.MT) {
+			case PriceRequestTypes.Exchange :
+				// code here
+				break;
+			default:
+				// code here
+		}
 	}
 
 	private processPriceResponseStream (response: any): any {
