@@ -20,8 +20,9 @@ export class PriceResponse {
 		return processedRes;
 	}
 
-	private buildPriceMetaResponse(response: any): Object {
-		const processedResponse = {};
+	private buildPriceMetaResponse(response: any): Array<Object> {
+		const processedResponseOb = {};
+		const processedRes = [];
 		if (response && response.HED && response.DAT) {
 			const keys = Object.keys(response.HED);
 			const headerFieldsArr = [];
@@ -41,7 +42,7 @@ export class PriceResponse {
 
 			for (let k = 0 ; k < headerFieldsArr.length ; k++) {
 				const key = Object.keys(headerFieldsArr[k])[0];
-				processedResponse[key] = [];
+				processedResponseOb[key] = [];
 				for (let m = 0; m < dataFieldArr[k][key].length ; m++) {
 					const responseOb = {};
 					for (let p = 0 ;  p < dataFieldArr[k][key][m].length ; p++) {
@@ -51,19 +52,21 @@ export class PriceResponse {
 							responseOb[headerFieldsArr[k][key][p]] = dataFieldArr[k][key][m][p];
 						}
 					}
-					processedResponse[key].push(responseOb);
+					processedResponseOb[key].push(responseOb);
 				}
 			}
-			processedResponse['MT'] = response.MT;
-			processedResponse['NOR'] = response.NOR;
-			processedResponse['PGI'] = response.PGI;
-			processedResponse['PGS'] = response.PGS;
-			processedResponse['STC'] = response.STC;
-			processedResponse['TKN'] = response.TKN;
-			processedResponse['VER'] = response.VER;
-			return processedResponse;
+			processedResponseOb['MT'] = response.MT;
+			processedResponseOb['NOR'] = response.NOR;
+			processedResponseOb['PGI'] = response.PGI;
+			processedResponseOb['PGS'] = response.PGS;
+			processedResponseOb['STC'] = response.STC;
+			processedResponseOb['TKN'] = response.TKN;
+			processedResponseOb['VER'] = response.VER;
+			processedRes.push(processedResponseOb);
+			return processedRes;
 		} else {
-			return response;
+			processedRes.push(response);
+			return processedRes;
 		}
 	}
 
