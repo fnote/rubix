@@ -1,6 +1,9 @@
 export const priceResponseTags = {
 	3: 'code',
 	4: 'exchangeCode',
+	55: 'lastTradePrice',
+
+	EXCHANGE: 'test_chandana',
 	// refatcor below
 	0: 'NODATA',
 	5: 'EXC',
