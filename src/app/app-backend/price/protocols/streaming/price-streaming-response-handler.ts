@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { PriceResponse } from '../price-response';
+import { StockDataStore } from '../../data-stores/stock-data-store';
 import { StreamRouteService } from '../../../communication/stream-route.service';
 import { Subject } from 'rxjs/Rx';
-
-import { StockDataStore } from '../../data-stores/stock-data-store';
-
 
 @Injectable()
 export class PriceStreamingResponseHandler {

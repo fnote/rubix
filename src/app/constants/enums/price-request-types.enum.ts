@@ -1,4 +1,5 @@
 export enum PriceRequestTypes {
+	Pulse = 0,
 	SnapshotSymbol = 10,
 	SnapshotFullMarket,
 	DetailQuoteSymbol,

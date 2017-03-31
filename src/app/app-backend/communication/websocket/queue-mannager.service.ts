@@ -80,14 +80,14 @@ export class QueueMannagerService {
 	}
 
 	private activateSentReceive(messageQueue: Array<any>, timeIntervalProcess: NodeJS.Timer,
-		socket: Rx.Subject<MessageEvent> , index: number): void {
+		socket: Rx.Subject<MessageEvent> , channel: number): void {
 		timeIntervalProcess = setInterval(() => {
 			if (messageQueue.length > 0) {
 				const msg: any = this.deQueueMessage(messageQueue);
 				const sendRecivedMsg = {
 					data : {
 						data : msg,
-						connection : index,
+						connection : channel,
 					},
 				};
 				socket.next(<MessageEvent>sendRecivedMsg);
@@ -99,9 +99,7 @@ export class QueueMannagerService {
 		const connection: Connection = this.getConnectionByChannel(channel);
 		if (connection.connectedSocket && !connection.subscription) {
 			connection.subscription = connection.connectedSocket.subscribe(msg => {
-				if (JSON.parse(msg.data).channel !== 'pulse' && msg.data) {
-					this.enQueueMessage(msg.data, connection.recivedMessageQueue);
-				}
+				this.enQueueMessage(msg.data, connection.recivedMessageQueue);
 				connection.pulseService.resetPulse();
 			}, error => {
 				this.loggerService.logError(error, 'QueueMannagerService');
