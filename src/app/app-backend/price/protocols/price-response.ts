@@ -20,18 +20,18 @@ export class PriceResponse {
 		return processedRes;
 	}
 
-	private buildPriceMetaResponse(response: {HED: any, DAT: any}): Object {
-		const processedResponse = new Object();
+	private buildPriceMetaResponse(response: any): Object {
+		const processedResponse = {};
 		if (response && response.HED && response.DAT) {
 			const keys = Object.keys(response.HED);
 			const headerFieldsArr = [];
 			const dataFieldArr = [];
 
 			for (let i = 0 ; i < keys.length ; i++) {
-				const splitHeader = new Object();
+				const splitHeader = {};
 				splitHeader[keys[i]] = response.HED[keys[i]].split('|');
 				headerFieldsArr.push(splitHeader);
-				const splitData = new Object();
+				const splitData = {};
 				splitData[keys[i]] = [];
 				for (let j = 0 ; j < response.DAT[keys[i]].length ; j++) {
 					splitData[keys[i]].push(response.DAT[keys[i]][j].split('|'));
@@ -43,20 +43,28 @@ export class PriceResponse {
 				const key = Object.keys(headerFieldsArr[k])[0];
 				processedResponse[key] = [];
 				for (let m = 0; m < dataFieldArr[k][key].length ; m++) {
-					const responseOb = new Object();
+					const responseOb = {};
 					for (let p = 0 ;  p < dataFieldArr[k][key][m].length ; p++) {
 						responseOb[headerFieldsArr[k][key][p]] = dataFieldArr[k][key][m][p];
 					}
 					processedResponse[key].push(responseOb);
 				}
 			}
+			processedResponse['MT'] = response.MT;
+			processedResponse['NOR'] = response.NOR;
+			processedResponse['PGI'] = response.PGI;
+			processedResponse['PGS'] = response.PGS;
+			processedResponse['STC'] = response.STC;
+			processedResponse['TKN'] = response.TKN;
+			processedResponse['VER'] = response.VER;
 			return processedResponse;
 		} else {
 			return response;
 		}
 	}
 
-	private buildPriceResponse(response: {HED: string, DAT: string }): Object {
+	private buildPriceResponse(response: {HED: string, DAT: string, MT: string}): Object {
+		let processedResponse = {};
 		const arrBuild: string[] = [];
 		if (response && response.HED && response.DAT) {
 			arrBuild.push('{');
@@ -74,7 +82,9 @@ export class PriceResponse {
 
 			arrBuild.splice(-1 , 1);
 			arrBuild.push('}');
-			return JSON.parse(arrBuild.join(''));
+			processedResponse =  JSON.parse(arrBuild.join(''));
+			processedResponse['MT'] = response.MT;
+			return processedResponse;
 		}
 		return response;
 	}
