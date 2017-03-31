@@ -10,17 +10,17 @@ import { ThemeService } from '../../../utils/theme.service';
 @Component({
 	selector: 'app-rubix-test-page',
 	templateUrl: './rubix-test-page.component.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
+	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class RubixTestPageComponent {
 
 	public response: Array<any> = [] ;
-	private session = '';
 	public inputValues: string;
 	public userName = '';
 	public password = '';
 	public result: string;
+	private session = '';
 
 	constructor(private commonHelperService: CommonHelperService, public themeService: ThemeService,
 		private priceService: PriceService, private loggerService: LoggerService, private dataService: DataService,

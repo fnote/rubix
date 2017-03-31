@@ -10,6 +10,7 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { PriceModule } from './app-backend/price/price.module';
 import { PriceWidgetModule } from './widgets/price-widgets/price-widget.module';
+//import { RubixTestPageComponent } from './widgets/common-widgets/rubix-test-page/rubix-test-page.component';
 import { UtilsModule } from './utils/utils.module';
 
 @NgModule({
@@ -25,9 +26,7 @@ import { UtilsModule } from './utils/utils.module';
 		CommonWidgetModule,
 		UtilsModule,
 	],
-	providers: [
-		ConfigService,
-	],
+	providers: [ConfigService],
 	bootstrap: [AppComponent],
 })
 export class AppModule { }
