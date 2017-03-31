@@ -30,8 +30,8 @@ export class PriceStreamingResponseHandler {
 
 	private updatePriceModel(response: any): void {
 		switch (response.MT) {
-			case PriceRequestTypes.Exchange :
-				// code here
+			case PriceRequestTypes.SnapshotSymbol :
+				this.stockDataStore.setStock(response);
 				break;
 			default:
 				// code here
@@ -45,9 +45,6 @@ export class PriceStreamingResponseHandler {
 			data : JSON.parse(response.data),
 		};
 		const processedResponse = priceResponse.processPriceResponse(parsedResponse);
-
-		this.stockDataStore.setStock(processedResponse[0]);
-
 		return processedResponse;
 	}
 

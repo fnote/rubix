@@ -55,7 +55,7 @@ export class PriceResponse {
 					processedResponseOb[key].push(responseOb);
 				}
 			}
-			processedResponseOb['MT'] = response.MT;
+			processedResponseOb['MT'] =  parseInt(response.MT, 10);
 			processedResponseOb['NOR'] = response.NOR;
 			processedResponseOb['PGI'] = response.PGI;
 			processedResponseOb['PGS'] = response.PGS;
@@ -90,7 +90,7 @@ export class PriceResponse {
 			arrBuild.splice(-1 , 1);
 			arrBuild.push('}');
 			processedResponse =  JSON.parse(arrBuild.join(''));
-			processedResponse['MT'] = response.MT;
+			processedResponse['MT'] = parseInt(response.MT, 10);
 			return processedResponse;
 		}
 		return response;
