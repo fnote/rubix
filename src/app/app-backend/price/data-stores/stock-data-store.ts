@@ -36,6 +36,6 @@ export class StockDataStore extends BaseDataStore {
 	}
 
 	public setStock(values: any): void {
-		this.getOrAddStock(['TDWL', '1010']).setStock(values);
+		this.getOrAddStock([values.exchangeCode, values.code]).setValues(values);
 	}
 }

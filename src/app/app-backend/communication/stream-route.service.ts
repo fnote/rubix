@@ -24,7 +24,7 @@ export class StreamRouteService {
 					this.priceResponseStream$.next({ data : response.data , channel : Channels.PriceMeta });
 					break;
 				default :
-					this.loggerService.logInfo('could not find the connection', 'StreamRouteService');
+					this.loggerService.logError('Invalid Channel Found...!', 'StreamRouteService');
 			}
 		});
 	}

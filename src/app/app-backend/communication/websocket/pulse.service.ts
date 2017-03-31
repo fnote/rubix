@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { PriceRequestTypes } from '../../../constants/enums/price-request-types.enum'
 import { WebsocketService } from './websocket.service';
 
 interface PulseConfig {
-	index: number;
-	channel: string;
+	MT: PriceRequestTypes;
 }
 
 @Injectable()
@@ -22,8 +22,7 @@ export class PulseService {
 		this.pulseInterval = setInterval(() => {
 			this.heartbeats++;
 			this.pulseObj = {
-				index: this.heartbeats,
-				channel: 'pulse',
+				MT: PriceRequestTypes.Pulse,
 			};
 
 			if (this.heartbeats >= this.MAX_HEARTBEATS) {
