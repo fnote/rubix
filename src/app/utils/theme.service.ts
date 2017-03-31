@@ -6,8 +6,8 @@ export class ThemeService {
 	private _selectedTheme: string;
 	private _selectedThemeId: string;
 	private supportedThemes = {
-		DARK : { id : 'theme1' },
-		LIGHT : { id : 'theme2' },
+		LIGHT : { id : 'theme1' },
+		DARK : { id : 'theme2' },
 	};
 
 	public get selectedThemeId(): string {
@@ -15,7 +15,7 @@ export class ThemeService {
 	}
 
 	constructor() {
-		this.setTheme('DARK');
+		this.setTheme('LIGHT');
 	}
 
 	public setTheme(themeCode: string): void {
