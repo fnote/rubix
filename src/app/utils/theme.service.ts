@@ -1,41 +1,47 @@
 import { Injectable } from '@angular/core';
+import { Themes } from '../constants/enums/themes.enum';
 
 @Injectable()
 export class ThemeService {
 
-	private _selectedTheme: string;
-	private _selectedThemeId: string;
+	private _selectedTheme: Themes = -1;
 	private supportedThemes = {
-		LIGHT : { id : 'theme1' },
-		DARK : { id : 'theme2' },
+		0 : { code : 'theme1', displayName: 'Light' },
+		1 : { code : 'theme2', displayName: 'Dark' },
 	};
 
-	public get selectedThemeId(): string {
-		return this._selectedThemeId;
-	}
-
 	constructor() {
-		this.setTheme('LIGHT');
+		this.setSelectedTheme(Themes.Light);
 	}
 
-	public setTheme(themeCode: string): void {
-		const selectedThemeObj = this.supportedThemes[themeCode];
+	public setSelectedTheme(value: Themes): void {
+		if (this._selectedTheme === value) {
+			return;
+		}
+
+		const selectedThemeObj = this.supportedThemes[value];
 		if (selectedThemeObj) {
-			this._selectedTheme = themeCode;
-			this.loadStyles(selectedThemeObj);
+			const head = document.getElementsByTagName('head')[0];
+			const body = document.getElementsByTagName('body')[0];
+
+			if (this._selectedTheme !== -1) {
+				head.classList.remove(this.getThemeCode(this._selectedTheme));
+				body.classList.remove(this.getThemeCode(this._selectedTheme));
+			}
+
+			this._selectedTheme = value;
+
+			head.classList.add(this.getThemeCode(value));
+			body.classList.add(this.getThemeCode(value));
 		}
 	}
 
-	private loadStyles(newThemeObj: {id: string}): void {
-		const head = document.getElementsByTagName('head')[0];
-		const body = document.getElementsByTagName('body')[0];
+	public getSelectedTheme(): Themes {
+		return this._selectedTheme;
+	}
 
-		head.classList.remove(this._selectedThemeId);
-		body.classList.remove(this._selectedThemeId);
-
-		this._selectedThemeId = newThemeObj.id;
-
-		head.classList.add(this._selectedThemeId);
-		body.classList.add(this._selectedThemeId);
+	private getThemeCode(value: Themes): string {
+		const selectedThemeObj = this.supportedThemes[value];
+		return selectedThemeObj.code;
 	}
 }

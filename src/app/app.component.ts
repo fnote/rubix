@@ -7,6 +7,5 @@ import { ThemeService } from './utils/theme.service';
 })
 export class AppComponent {
 
-	constructor(private themeService: ThemeService) {
-	}
+	constructor(private themeService: ThemeService) { }
 }
