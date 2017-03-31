@@ -115,33 +115,45 @@ export class PriceService {
 	}
 
 	public addExchangeListRequest (exchange: string[]): void {
+		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
 		req.mt = PriceRequestTypes.Exchange;
 
 		for (const exg of exchange) {
-			req.addParam(exg);
+			if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.Exchange, exg)) {
+				req.addParam(exg);
+				isValidItemsAvailable = true;
+			}
 		}
 
-		const request = {
-			channel : Channels.Price,
-			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
-		};
-		this.dataService.sendToWs(request);
+		if (isValidItemsAvailable) {
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
 	}
 
 	public removeExchangeListRequest (exchange: string[]): void {
+		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
 		req.mt = PriceRequestTypes.Exchange;
 
 		for (const exg of exchange) {
-			req.addParam(exg);
+			if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.Exchange, exg)) {
+				req.addParam(exg);
+				isValidItemsAvailable = true;
+			}
 		}
 
-		const request = {
-			channel : Channels.Price,
-			data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
-		};
-		this.dataService.sendToWs(request);
+		if (isValidItemsAvailable) {
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
 	}
 
     /**
@@ -149,7 +161,7 @@ export class PriceService {
      * @param {[string, string]} exgSym - A tupple with Exchange Code and Symbol Code
      */
 	public addSymbolRequest (exgSym: [string, string]): void {
-		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.Exchange, exgSym[0], exgSym[1])) {
+		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.SnapshotSymbol, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
 			req.mt = PriceRequestTypes.SnapshotSymbol;
 			req.addParam(exgSym[0], exgSym[1]);
@@ -163,7 +175,7 @@ export class PriceService {
 	}
 
 	public removeSymbolRequest (exgSym: [string, string]): void {
-		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.Exchange, exgSym[0], exgSym[1])) {
+		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.SnapshotSymbol, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
 			req.mt = PriceRequestTypes.SnapshotSymbol;
 			req.addParam(exgSym[0], exgSym[1]);
@@ -176,38 +188,58 @@ export class PriceService {
 		}
 	}
 
+	public requestSymbolMeta (exgSym: [string, string]): void {
+		// Implement this
+	}
+
 	/**
      * Subscribe and Un-subscribe for a list of symbol updates.
      * @param {[string, string][]} exgSym - An array of tupples with Exchange Code and Symbol Code
      */
 	public addSymbolListRequest (exgSym: [string, string][]): void {
+		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
 		req.mt = PriceRequestTypes.SnapshotSymbol;
 
 		for (const sym of exgSym) {
-			req.addParam(sym[0], sym[1]);
+			if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.SnapshotSymbol, sym[0], sym[1])) {
+				req.addParam(sym[0], sym[1]);
+				isValidItemsAvailable = true;
+			}
 		}
 
-		const request = {
-			channel : Channels.Price,
-			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
-		};
-		this.dataService.sendToWs(request);
+		if (isValidItemsAvailable) {
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
 	}
 
 	public removeSymbolListRequest (exgSym: [string, string][]): void {
+		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
 		req.mt = PriceRequestTypes.SnapshotSymbol;
 
 		for (const sym of exgSym) {
-			req.addParam(sym[0], sym[1]);
+			if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.SnapshotSymbol, sym[0], sym[1])) {
+				req.addParam(sym[0], sym[1]);
+				isValidItemsAvailable = true;
+			}
 		}
 
-		const request = {
-			channel : Channels.Price,
-			data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
-		};
-		this.dataService.sendToWs(request);
+		if (isValidItemsAvailable) {
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
+	public requestSymbolListMeta (exgSym: [string, string][]): void {
+		// Implement this
 	}
 
 	//

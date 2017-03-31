@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PriceService } from '../../../app-backend/price/price.service';
 
 @Component({
 	selector: 'app-detail-quote',
 	templateUrl: './detail-quote.component.html',
-	//changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailQuoteComponent implements OnInit, OnDestroy {
 
@@ -35,7 +34,7 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 		}
 
 		if (!this.stockObj.isMetaDataLoaded) {
-			// this.priceService.requestSymbolMeta(this.exgStock);
+			this.priceService.requestSymbolMeta(this.exgStock);
 		}
 
 		// Add the symbol subscription
