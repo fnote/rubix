@@ -1,9 +1,9 @@
 <div>
 <div [ngClass]="themeService.selectedThemeId">
-<!--<div>
+<div>
   <label>Input </label>
   <input [(ngModel)]="inputValues" placeholder="input" />
-</div>-->
+</div>
 <div>
   <label>Result : </label>{{result}}
 </div>
@@ -13,8 +13,8 @@
 <br><br><br>
 
 <br><br>
-<!--<input [(ngModel)]="userName" placeholder="userName" />
-<input type="password" [(ngModel)]="password" placeholder="password" />-->
+<input [(ngModel)]="userName" placeholder="userName" />
+<input type="password" [(ngModel)]="password" placeholder="password" />
 <br><br>
 <button (click)="authenticateRealTimePath()">authenticate Real-Time Path</button>
   <button (click)="sendSymbolSnapshotRequest()">send RT(Symbol Snapshot)</button>

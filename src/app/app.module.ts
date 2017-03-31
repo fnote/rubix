@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonWidgetModule } from './widgets/common-widgets/common-widget.module';
 import { CommunicationModule } from './app-backend/communication/communication.module';
 import { ConfigService } from './config/config.service';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { PriceModule } from './app-backend/price/price.module';
@@ -16,7 +15,6 @@ import { UtilsModule } from './utils/utils.module';
 	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
-		FormsModule,
 		HttpModule,
 		AppRoutingModule,
 		CommunicationModule,
