@@ -3,7 +3,7 @@ export const priceResponseTags = {
 	4: 'exchangeCode',
 	55: 'lastTradePrice',
 
-	EXCHANGE: 'test_chandana',
+	EXCHANGE: 'exchange',
 	// refatcor below
 	0: 'NODATA',
 	5: 'EXC',
