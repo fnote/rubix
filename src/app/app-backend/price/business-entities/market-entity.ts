@@ -2,18 +2,9 @@ import { BaseEntity } from './base-entity';
 
 export class MarketEntity extends BaseEntity {
 
-	private _exchangeCode: string;
 	private _marketCode: string;
 	private _volume: number;
 	private _turnover: number;
-
-	public get exchangeCode(): string  {
-		return this._exchangeCode;
-	}
-
-	public set exchangeCode(value: string) {
-		this._exchangeCode = value;
-	}
 
 	public get marketCode(): string  {
 		return this._marketCode;

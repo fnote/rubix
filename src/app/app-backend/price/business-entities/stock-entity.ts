@@ -2,8 +2,6 @@ import { BaseEntity } from './base-entity';
 
 export class StockEntity extends BaseEntity {
 
-	private _symbolCode: string;
-	private _exchangeCode: string;
 	private _longDesc: string;
 	private _shortDesc: string;
 	private _dispCode: string;
@@ -36,22 +34,6 @@ export class StockEntity extends BaseEntity {
  	// NOT : 147 ???
 	// LTDP : 10.55 ???
 	// OPERATOR : 5288
-
-	public get symbolCode(): string  {
-		return this._symbolCode;
-	}
-
-	public set symbolCode(value: string) {
-		this._symbolCode = value;
-	}
-
-	public get exchangeCode(): string  {
-		return this._exchangeCode;
-	}
-
-	public set exchangeCode(value: string) {
-		this._exchangeCode = value;
-	}
 
 	public get longDesc(): string  {
 		return this._longDesc;
