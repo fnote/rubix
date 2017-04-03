@@ -41,33 +41,23 @@ a:hover, a:active, a:focus {
 .text-white{
     color:#fff;
 }
-
-.font-x-large {
-    font-size: $font-x-large;
-}
-
-.font-large {
-    font-size: $font-large;
-}
-
-.font-medium {
-    font-size: $font-medium;
-}
-
 .font-small {
     font-size: $font-small;
 }
-
-.font-xxx-large {
+.font-medium {
+    font-size: $font-medium;
+}
+.font-large {
+    font-size: $font-large;
+}
+.font-x-large {
+    font-size: $font-x-large;
+}
+.font-xx-large {
     font-size: $font-xxx-large;
 }
-
-.font-x-large {
-	font-size: $font-x-large;
-}
-
-.font-heading-x-large {
-    font-size: $font-heading-x-large;
+.font-xxx-large {
+    font-size: $font-xxx-large;
 }
 
 .text-align-right {
