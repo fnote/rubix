@@ -8,7 +8,7 @@ interface PulseConfig {
 
 @Injectable()
 export class PulseService {
-	private TIME_INTERVAL = 5000; // 1000 * 5
+	private TIME_INTERVAL = 10000; // 1000 * 10
 	private MAX_HEARTBEATS = 5;
 	private pulseObj: PulseConfig;
 	private pulseInterval: NodeJS.Timer;
@@ -31,7 +31,7 @@ export class PulseService {
 				return;
 			}
 
-			this.wsService.sendToWebSocket(this.ws, '[' + JSON.stringify(this.pulseObj) + ']');
+			this.wsService.sendToWebSocket(this.ws, JSON.stringify(this.pulseObj));
 		}, this.TIME_INTERVAL);
 	}
 

@@ -6,6 +6,8 @@ import { Languages } from '../../../constants/enums/languages.enum';
 import { LocalizationService } from '../../../utils/localization/localization.service';
 import { LoggerService } from '../../../utils/logger.service';
 import { PriceService } from '../../../app-backend/price/price.service';
+import { ThemeService } from '../../../utils/theme.service';
+import { Themes } from '../../../constants/enums/themes.enum';
 
 @Component({
 	selector: 'app-rubix-test-page',
@@ -23,7 +25,7 @@ export class RubixTestPageComponent {
 
 	constructor(private commonHelperService: CommonHelperService,
 		private priceService: PriceService, private loggerService: LoggerService, private dataService: DataService,
-		private localizationService: LocalizationService) {
+		public localizationService: LocalizationService, public themeService: ThemeService) {
 		this.updatePriceResponse();
 	}
 
@@ -45,8 +47,16 @@ export class RubixTestPageComponent {
 	public changeLang(): void {
 		if (this.localizationService.activeLanguageCode === Languages.EN) {
 			this.localizationService.activeLanguageCode = Languages.AR;
-		}else {
+		} else {
 			this.localizationService.activeLanguageCode = Languages.EN;
+		}
+	}
+
+	public changeTheme(): void {
+		if (this.themeService.selectedTheme === Themes.Light) {
+			this.themeService.selectedTheme = Themes.Dark;
+		} else {
+			this.themeService.selectedTheme = Themes.Light;
 		}
 	}
 
