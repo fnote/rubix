@@ -8,7 +8,7 @@ import { PriceService } from '../../../app-backend/price/price.service';
 export class DetailQuoteComponent implements OnInit, OnDestroy {
 
 	public stockObj;
-	private exgStock: [string, string] = ['TDWL', '1010'];
+	private exgStock: [string, string] = ['DFM', 'DIC'];
 
 	constructor(private priceService: PriceService) {
 		// Constructor
@@ -29,16 +29,18 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 
 	public ngOnInit(): void {
 		// on init
-		if (!this.stockObj) {
-			this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
-		}
+		setTimeout(() => {
+			if (!this.stockObj) {
+				this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
+			}
 
-		if (!this.stockObj.isMetaDataLoaded) {
-			this.priceService.requestSymbolMeta(this.exgStock);
-		}
+			if (!this.stockObj.isMetaDataLoaded) {
+				this.priceService.requestSymbolMeta(this.exgStock);
+			}
 
-		// Add the symbol subscription
-		this.priceService.addSymbolRequest(this.exgStock);
+			// Add the symbol subscription
+			this.priceService.addSymbolRequest(this.exgStock);
+		}, 5000);
 	}
 
 	public ngOnDestroy(): void {
