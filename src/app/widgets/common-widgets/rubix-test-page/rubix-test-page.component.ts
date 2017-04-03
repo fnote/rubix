@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseWidgetComponent } from '../base-widget/base-widget.component';
 import { Channels } from '../../../constants/enums/channels.enum';
 import { CommonHelperService } from '../../../utils/helper/common-helper.service';
 import { DataService } from '../../../app-backend/communication/data.service';
@@ -11,7 +10,6 @@ import { PriceService } from '../../../app-backend/price/price.service';
 @Component({
 	selector: 'app-rubix-test-page',
 	templateUrl: './rubix-test-page.component.html',
-	// changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class RubixTestPageComponent {
