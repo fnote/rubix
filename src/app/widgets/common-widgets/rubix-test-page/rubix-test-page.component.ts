@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BaseWidgetComponent } from '../base-widget/base-widget.component';
 import { Channels } from '../../../constants/enums/channels.enum';
 import { CommonHelperService } from '../../../utils/helper/common-helper.service';
 import { DataService } from '../../../app-backend/communication/data.service';
+import { Languages } from '../../../constants/enums/languages.enum';
 import { LocalizationService } from '../../../utils/localization/localization.service';
 import { LoggerService } from '../../../utils/logger.service';
 import { PriceService } from '../../../app-backend/price/price.service';
@@ -43,10 +45,10 @@ export class RubixTestPageComponent {
 	}
 
 	public changeLang(): void {
-		if (this.localizationService.getActiveLanguage() === 'EN') {
-			this.localizationService.setActiveLanguage('AR');
+		if (this.localizationService.activeLanguageCode === Languages.EN) {
+			this.localizationService.activeLanguageCode = Languages.AR;
 		}else {
-			this.localizationService.setActiveLanguage('EN');
+			this.localizationService.activeLanguageCode = Languages.EN;
 		}
 	}
 

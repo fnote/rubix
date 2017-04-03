@@ -1,78 +1,62 @@
 import { AR } from './ar';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EN } from './en';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Languages } from '../../constants/enums/languages.enum';
 
 @Injectable()
 export class LocalizationService {
 
-	private language: string;
-	private languageObservable = new BehaviorSubject('AR');
-	public translationObject;
-	public translationObjectObservable =  new BehaviorSubject('');
+	private language: any;
 	private layout: string;
-	private AR = AR;
-	private EN = EN;
+	private _activeLanguageCode: Languages = -1;
+	private supportedLanguages = {
+		0 : { code : 'EN', langObj: EN, layout: 'ltr' , des : 'English' },
+		1 : { code : 'AR', langObj: AR, layout: 'rtl' , des : '\u0639\u0631\u0628\u0649' },
+	};
 
 	constructor() {
-		this.setActiveLanguage('AR');
+		this.activeLanguageCode = Languages.EN;
 	}
 
-	public setActiveLanguage(lanCode: string): void {
-		const activeLanguage = this[lanCode];
-		if (activeLanguage) {
-			this.language = lanCode;
-			this.languageObservable.next(lanCode);
-			this.layout = activeLanguage.layout;
-			this.updateTranslationObject(activeLanguage);
+	public set activeLanguageCode(value: Languages) {
+		if (this._activeLanguageCode === value) {
+			return;
 		}
+
+		this._activeLanguageCode = value;
+		this.language = this.supportedLanguages[value].langObj;
+		this.layout = this.supportedLanguages[value].layout;
+		this.setOrientationClass();
 	}
 
-	public getActiveLanguage(): string {
-		return this.language;
+	public get activeLanguageCode(): Languages {
+		return this._activeLanguageCode;
 	}
 
-	public getActiveLanguageObservable(): Observable<string> {
-		return this.languageObservable;
+	public getLongDesc(value?: Languages): string  {
+		let param = value;
+		if (!param) {
+			param = this._activeLanguageCode;
+		}
+
+		return this.supportedLanguages[value].des;
 	}
 
-	public getTranslationObject(): any {
-		return this.translationObject;
-	}
+	private setOrientationClass (): void {
+		const head = document.getElementsByTagName('head')[0];
+		const body = document.getElementsByTagName('body')[0];
 
-	public getTranslationObjectObservable(): any {
-		return this.translationObjectObservable;
+		// remove the old class if available
+		if (this._activeLanguageCode === Languages.AR) {
+			head.classList.add('ar');
+			body.classList.add('ar');
+		} else {
+			head.classList.remove('ar');
+			body.classList.remove('ar');
+		}
 	}
 
 	public isRTL(): boolean {
 		return this.layout === 'rtl';
-	}
-
-	public changeActiveLanguage(lanCode: string): void {
-		this.setActiveLanguage(lanCode);
-	}
-
-	private updateTranslationObject(selectedLanguageObject: any): void {
-		this.translationObject = {
-			labels : {
-				TOP_STOCKS : selectedLanguageObject.TOP_STOCKS,
-				NEWS : selectedLanguageObject.NEWS,
-			},
-
-			tradeLabels : {
-				HIGH_TO_LOW : selectedLanguageObject.HIGH_TO_LOW,
-				LOW_TO_HIGH : selectedLanguageObject.LOW_TO_HIGH,
-			},
-
-			tradeText : {
-				ORD_SIDE : {
-					1 : selectedLanguageObject.BUY,
-					2 : selectedLanguageObject.SELL,
-				},
-			},
-		};
-
-		this.translationObjectObservable.next(this.translationObject);
 	}
 }
