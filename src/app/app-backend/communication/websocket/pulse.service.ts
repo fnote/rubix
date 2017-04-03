@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PriceRequestTypes } from '../../../constants/enums/price-request-types.enum'
+import { PriceRequestTypes } from '../../../constants/enums/price-request-types.enum';
 import { WebsocketService } from './websocket.service';
 
 interface PulseConfig {
