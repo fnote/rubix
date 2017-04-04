@@ -35,21 +35,21 @@ body.theme1{
 }
 
 .theme1 .h-sep-line {
-    background-color:$h-sep-line-color;
+    background-color:$theme1-h-sep-line-color;
 }
 
 .theme1 .snap-period-wrapper-green{
-    background-color:$snap-period-wrapper-green-bg-color;
-    color:$snap-period-wrapper-green-text-color;
+    background-color:$theme1-snap-period-wrapper-green-bg-color;
+    color:$theme1-snap-period-wrapper-green-text-color;
 }
 
 .theme1 .snap-period-wrapper-red{
-    background-color:$snap-period-wrapper-red-bg-color;
-    color:$snap-period-wrapper-red-text-color;
+    background-color:$theme1-snap-period-wrapper-red-bg-color;
+    color:$theme1-snap-period-wrapper-red-text-color;
 }
 .theme1 .snap-period-wrapper-no-change{
-    background-color:$snap-period-wrapper-no-change-bg-color;
-    color:$snap-period-wrapper-no-change-text-color;
+    background-color:$theme1-snap-period-wrapper-no-change-bg-color;
+    color:$theme1-snap-period-wrapper-no-change-text-color;
 }
 
 .theme1 .up-down-slider-row-1{
@@ -60,14 +60,14 @@ body.theme1{
 }
 
 .theme1 .snap-note {
-  color: $snap-note-text-color}
+  color: $theme1-snap-note-text-color}
 
 .theme1 .snap-lbl-1 {
-  color:$snap-lbl-1-text-color}
+  color:$theme1-snap-lbl-1-text-color}
 
 .theme1 .snap-lbl-2 {
-  color: $snap-lbl-1-text-color}
+  color: $theme1-snap-lbl-1-text-color}
 
 .theme1 .up-down-slider-row-2 {
-    border-color: $up-down-slider-row-2-border-color;
+    border-color: $theme1-up-down-slider-row-2-border-color;
 }

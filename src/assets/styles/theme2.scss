@@ -1,0 +1,73 @@
+@import 'colour-theme-theme2';
+
+body.theme2{
+    font-family: arial;
+    background-color: $theme2-color-background;
+    color: $theme2-text-color-main;
+}
+
+.theme2 .green-text {
+    color:  $theme2-color-green;
+}
+
+.theme2 .green-bg {
+    background-color:  $theme2-color-green;
+}
+
+.theme2 .green-dark-text {
+    color: $theme2-color-green-dark;
+}
+
+.theme2 .red-text {
+    color: $theme2-color-red;
+}
+
+.theme2 .red-bg {
+    background-color:  $theme2-color-red;
+}
+
+.theme2 .no-change-bg {
+    background-color: $theme2-color-no-change;
+}
+
+.theme2 .no-change-bg-text {
+    color: $theme2-color-no-change;
+}
+
+.theme2 .h-sep-line {
+    background-color:$theme2-h-sep-line-color;
+}
+
+.theme2 .snap-period-wrapper-green{
+    background-color:$theme2-snap-period-wrapper-green-bg-color;
+    color:$theme2-snap-period-wrapper-green-text-color;
+}
+
+.theme2 .snap-period-wrapper-red{
+    background-color:$theme2-snap-period-wrapper-red-bg-color;
+    color:$theme2-snap-period-wrapper-red-text-color;
+}
+.theme2 .snap-period-wrapper-no-change{
+    background-color:$theme2-snap-period-wrapper-no-change-bg-color;
+    color:$theme2-snap-period-wrapper-no-change-text-color;
+}
+
+.theme2 .up-down-slider-row-1{
+    background-color:$theme2-color-red;
+}
+.theme2 .up-down-slider-row-2{
+    background-color:$theme2-color-green;
+}
+
+.theme2 .snap-note {
+  color: $theme2-snap-note-text-color}
+
+.theme2 .snap-lbl-1 {
+  color:$theme2-snap-lbl-1-text-color}
+
+.theme2 .snap-lbl-2 {
+  color: $theme2-snap-lbl-1-text-color}
+
+.theme2 .up-down-slider-row-2 {
+    border-color: $theme2-up-down-slider-row-2-border-color;
+}
