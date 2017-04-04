@@ -34,6 +34,10 @@ body.theme1{
     color: $theme1-color-no-change;
 }
 
+.theme1 .h-sep-line {
+    background-color:$h-sep-line-color;
+}
+
 .theme1 .snap-period-wrapper-green{
     background-color:$snap-period-wrapper-green-bg-color;
     color:$snap-period-wrapper-green-text-color;
@@ -53,4 +57,17 @@ body.theme1{
 }
 .theme1 .up-down-slider-row-2{
     background-color:$theme1-color-green;
+}
+
+.theme1 .snap-note {
+  color: $snap-note-text-color}
+
+.theme1 .snap-lbl-1 {
+  color:$snap-lbl-1-text-color}
+
+.theme1 .snap-lbl-2 {
+  color: $snap-lbl-1-text-color}
+
+.theme1 .up-down-slider-row-2 {
+    border-color: $up-down-slider-row-2-border-color;
 }

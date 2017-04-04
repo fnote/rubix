@@ -6,10 +6,9 @@ body{
     line-height: $line-height-normal;
 }
 
-.theme1 .h-sep-line {
+.h-sep-line {
     width: 100%;
     height: 1px;
-    background-color: #e5e5e5;
 }
 
 .v-sep {
@@ -54,7 +53,6 @@ body{
   margin-bottom: 5px; }
 
 .snap-note {
-  color: #757575;
   font-size: 11px; }
 
 .snap-val-1 {
@@ -65,11 +63,9 @@ body{
 
 
 .snap-lbl-1 {
-  color: #757575;
   font-size: $snap-font-size-1; }
 
 .snap-lbl-2 {
-  color: #757575;
   font-size: $snap-font-size-2; }
 
 
@@ -82,5 +78,10 @@ body{
 .up-down-slider-row-2 {
     width: 40%;
     height: 5px;
-    border-right: 2px solid #fff;
+    border-right: 2px solid;
+}
+.ar .up-down-slider-row-2 {
+    float:right;
+    border-left: 2px solid;
+    border-right: 0;
 }
