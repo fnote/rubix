@@ -5,7 +5,9 @@
 body{
     line-height: $line-height-normal;
 }
-
+body.ar{
+  direction: rtl;
+}
 .h-sep-line {
     width: 100%;
     height: 1px;
