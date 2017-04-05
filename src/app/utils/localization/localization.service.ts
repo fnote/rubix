@@ -2,6 +2,7 @@ import { AR } from './ar';
 import { EN } from './en';
 import { Injectable } from '@angular/core';
 import { Languages } from '../../constants/enums/languages.enum';
+import { userSettings } from '../../config/user-settings';
 
 @Injectable()
 export class LocalizationService {
@@ -15,7 +16,8 @@ export class LocalizationService {
 	};
 
 	constructor() {
-		this.activeLanguageCode = Languages.EN;
+		// TODO: [Amila] dump this to local storage and load it from there
+		this.activeLanguageCode = userSettings.presentation.defaultLanguage;
 	}
 
 	public set activeLanguageCode(value: Languages) {

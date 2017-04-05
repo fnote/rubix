@@ -1,35 +1,39 @@
 import { BaseEntity } from './base-entity';
+import { userSettings } from '../../../config/user-settings';
 
 export class StockEntity extends BaseEntity {
 
-	private _longDesc: string;
-	private _shortDesc: string;
-	private _dispCode: string;
-	private _currency: string;
-	private _lastTradePrice: number;
-	private _openPrice: number;
-	private _highPrice: number;
-	private _lowPrice: number;
-	private _closePrice: number;
-	private _bestAskPrice: number;
-	private _bestAskQty: number;
-	private _bestBidPrice: number;
-	private _bestBidQty: number;
-	private _totalBidQty: number;
-	private _totalAskQty: number;
-	private _change: number;
-	private _perChange: number;
-	private _previousClosePrice: number;
-	private _turnover: number;
-	private _volume: number;
-	private _totalTrades: number;
-	private _totalQty: number;
-	private _lastTradeDate: number;
-	private _vwap: number;
-	private _min: number;
-	private _max: number;
-	private _high52: number;
-	private _low52: number;
+	private _longDesc: string = userSettings.marketData.defaultStringInitializer;
+	private _shortDesc: string = userSettings.marketData.defaultStringInitializer;
+	private _dispCode: string = userSettings.marketData.defaultStringInitializer;
+	private _currency: string = userSettings.marketData.defaultStringInitializer;
+	private _decimalPlaces: number = userSettings.marketData.defaultDecimalPlaces;
+	private _lastTradePrice: number = userSettings.marketData.defaultNumberInitializer;
+	private _openPrice: number = userSettings.marketData.defaultNumberInitializer;
+	private _highPrice: number = userSettings.marketData.defaultNumberInitializer;
+	private _lowPrice: number = userSettings.marketData.defaultNumberInitializer;
+	private _closePrice: number = userSettings.marketData.defaultNumberInitializer;
+	private _bestAskPrice: number = userSettings.marketData.defaultNumberInitializer;
+	private _bestAskQty: number = userSettings.marketData.defaultNumberInitializer;
+	private _bestBidPrice: number = userSettings.marketData.defaultNumberInitializer;
+	private _bestBidQty: number = userSettings.marketData.defaultNumberInitializer;
+	private _totalBidQty: number = userSettings.marketData.defaultNumberInitializer;
+	private _totalAskQty: number = userSettings.marketData.defaultNumberInitializer;
+	private _change: number = userSettings.marketData.defaultNumberInitializer;
+	private _perChange: number = userSettings.marketData.defaultNumberInitializer;
+	private _previousClosePrice: number = userSettings.marketData.defaultNumberInitializer;
+	private _turnover: number = userSettings.marketData.defaultNumberInitializer;
+	private _volume: number = userSettings.marketData.defaultNumberInitializer;
+	private _totalTrades: number = userSettings.marketData.defaultNumberInitializer;
+	private _totalQty: number = userSettings.marketData.defaultNumberInitializer;
+	private _lastTradeDate: number = userSettings.marketData.defaultNumberInitializer;
+	private _vwap: number = userSettings.marketData.defaultNumberInitializer;
+	private _min: number = userSettings.marketData.defaultNumberInitializer;
+	private _max: number = userSettings.marketData.defaultNumberInitializer;
+	private _high52: number = userSettings.marketData.defaultNumberInitializer;
+	private _low52: number = userSettings.marketData.defaultNumberInitializer;
+	private _bidOffer: number = userSettings.marketData.defaultNumberInitializer;
+
  	// TRT : U ???
  	// NOT : 147 ???
 	// LTDP : 10.55 ???
@@ -65,6 +69,14 @@ export class StockEntity extends BaseEntity {
 
 	public set dispCode(value: string) {
 		this._dispCode = value;
+	}
+
+	public get decimalPlaces(): number {
+		return this._decimalPlaces;
+	}
+
+	public set decimalPlaces(value: number) {
+		this._decimalPlaces = value;
 	}
 
 	public get lastTradePrice(): number  {
@@ -257,6 +269,14 @@ export class StockEntity extends BaseEntity {
 
 	public set low52(value: number) {
 		this._low52 = value;
+	}
+
+	public get bidOffer(): number {
+		return this._bidOffer;
+	}
+
+	public set bidOffer(value: number) {
+		this._bidOffer = value;
 	}
 
 	constructor(values: Object = {}) {

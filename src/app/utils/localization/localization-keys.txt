@@ -1,4 +1,23 @@
-export const () = {
-    TOP_STOCKS: [1],
-    NEWS: [2]
+export const EN = {
+	VWAP: '[880]',
+	PREV_CLOSE: '[6881]',
+	OPEN: '[3155]',
+	CLOSE: '[845]',
+	HIGH: '[1943]',
+	LOW: '[1552]',
+	VOLUME: '[5230]',
+	TURNOVER: '[1353]',
+	MAX: '[5230]',
+	MIN: '[1353]',
+	BID_OFFER: '[4598]',
+	TRADES: '[388]',
+	BEST_BID: '[259]',
+	BEST_OFFER: '[256]',
+	BID_QTY: '[331]',
+	OFFER_QTY: '[329]',
+	TOTAL_BID_QTY: '[5027]',
+	TOTAL_OFFER_QTY: '[14324]',
+	FIFTY_TWO_WK_LOW: '[4859]',
+	FIFTY_TWO_WK_HIGH: '[21]',
 };
+

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { LocalizationService } from '../../../utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 	public stockObj;
 	private exgStock: [string, string] = ['DFM', 'DIC'];
 
-	constructor(private priceService: PriceService) {
+	constructor(private priceService: PriceService, public localizationService: LocalizationService) {
 		// Constructor
 		this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
 

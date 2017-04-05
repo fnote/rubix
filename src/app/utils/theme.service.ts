@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Themes } from '../constants/enums/themes.enum';
+import { userSettings } from '../config/user-settings';
 
 @Injectable()
 export class ThemeService {
@@ -11,7 +12,8 @@ export class ThemeService {
 	};
 
 	constructor() {
-		this.selectedTheme = Themes.Light;
+		// TODO: [Amila] dump this to local storage and load it from there
+		this.selectedTheme = userSettings.presentation.defaultTheme;
 	}
 
 	public set selectedTheme(value: Themes) {
