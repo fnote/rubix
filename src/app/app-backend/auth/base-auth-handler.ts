@@ -1,5 +1,5 @@
 
-export class BaseAuthHandler {
+export abstract class BaseAuthHandler {
 
 	private _isAuthenticated= false;
 
@@ -15,11 +15,8 @@ export class BaseAuthHandler {
 		this._isAuthenticated = value;
 	}
 
-	protected buildAuthRequest(userName: string, password: string): void {
-		// code here
-	}
+	protected abstract buildAuthRequest(userName: string, password: string): void;
 
-	protected processAuthRseponse(params: any): void {
-		// code here
-	}
+	protected abstract processAuthRseponse(params: any): void;
+
 }

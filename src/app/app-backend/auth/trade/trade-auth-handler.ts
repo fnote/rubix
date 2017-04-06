@@ -49,4 +49,8 @@ export class TradeAuthHandler extends BaseAuthHandler {
 		};
 		return tradeAuthBody;
 	}
+
+	public processAuthRseponse(response: any): void {
+		// code here
+	}
 }
