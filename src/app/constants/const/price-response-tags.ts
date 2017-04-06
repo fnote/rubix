@@ -37,7 +37,7 @@ export const priceResponseTags = {
 	DS: 'dispCode',
 
 	// refatcor below
-	0: 'NODATA',
+	/*0: 'NODATA',
 	5: 'EXC',
 	6: 'INS',
 	39: 'UP',
@@ -152,5 +152,5 @@ export const priceResponseTags = {
 	25828: 'ANN_INDICATOR',
 	25827: 'NWS_INDICATOR',
 	26328: 'WEEKLY_PCT_CHANGE',
-	25127: 'NWS_EDITORIAL_ID',
+	25127: 'NWS_EDITORIAL_ID',*/
 };

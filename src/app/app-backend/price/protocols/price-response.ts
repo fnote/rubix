@@ -48,9 +48,9 @@ export class PriceResponse {
 					for (let p = 0 ;  p < dataFieldArr[k][key][m].length ; p++) {
 						if (priceResponseTags[headerFieldsArr[k][key][p]]) {
 							responseOb[priceResponseTags[headerFieldsArr[k][key][p]]] = dataFieldArr[k][key][m][p];
-						} else {
+						} /** else {
 							responseOb[headerFieldsArr[k][key][p]] = dataFieldArr[k][key][m][p];
-						}
+						}*/
 					}
 					processedResponseOb[key].push(responseOb);
 				}

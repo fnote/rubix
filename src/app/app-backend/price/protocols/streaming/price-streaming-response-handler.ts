@@ -41,7 +41,7 @@ export class PriceStreamingResponseHandler {
 					this.stockDataStore.getOrAddStock([symObj.exchangeCode, symObj.symbolCode]).printObj();
 				}
 				break;
-				
+
 			default:
 				// code here
 		}

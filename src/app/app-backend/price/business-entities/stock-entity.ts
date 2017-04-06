@@ -3,7 +3,7 @@ import { userSettings } from '../../../config/user-settings';
 
 export class StockEntity extends BaseEntity {
 
-	private _instrmentType: number = userSettings.marketData.defaultDecimalPlaces;
+	private _instrumentType: number = userSettings.marketData.defaultDecimalPlaces;
 	private _longDesc: string = userSettings.marketData.defaultStringInitializer;
 	private _shortDesc: string = userSettings.marketData.defaultStringInitializer;
 	private _dispCode: string = userSettings.marketData.defaultStringInitializer;
@@ -41,12 +41,12 @@ export class StockEntity extends BaseEntity {
 	// LTDP : 10.55 ???
 	// OPERATOR : 5288
 
-	public get instrmentType(): number  {
-		return this._instrmentType;
+	public get instrumentType(): number  {
+		return this._instrumentType;
 	}
 
-	public set instrmentType(value: number) {
-		this._instrmentType = value;
+	public set instrumentType(value: number) {
+		this._instrumentType = value;
 	}
 
 	public get longDesc(): string  {
