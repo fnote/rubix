@@ -1,14 +1,16 @@
 import { DataService } from '../communication/data.service';
 import { Injectable } from '@angular/core';
 import { PriceAuthHandler } from './price/price-auth-handler';
-import { StreamRouteService } from '../communication/stream-route.service';
 import { TradeAuthHandler } from './trade/trade-auth-handler';
+import { TradeStreamingResponseHandler } from '../trade/protocols/streaming/trade-streaming-response-handler';
 
 @Injectable()
 export class AuthService {
 
-	constructor(private dataService: DataService, private streamRouteService: StreamRouteService) {
-		this.processAuthResponse();
+	constructor(private dataService: DataService,
+		private tradeStreamingResponseHandler: TradeStreamingResponseHandler) {
+
+		this.updateAuthStatus();
 	}
 
 	public authenticateUser(userName: string, password: string): void {
@@ -17,9 +19,13 @@ export class AuthService {
 		this.dataService.sendToWs(authRequest);
 	}
 
-	private processAuthResponse(): void {
-		this.streamRouteService.getTradeResponseStream().subscribe(response => {
-			alert(response.data);
+	private updateAuthStatus(): void {
+		this.tradeStreamingResponseHandler.getAuthenticationResponseStream().subscribe(response => {
+			if (response && response.DAT) {
+				if (response.DAT.AUTH_STS === 1) {
+					// user authenticated
+				}
+			}
 		});
 	}
 
