@@ -8,15 +8,17 @@ import { TradeStreamingResponseHandler } from '../trade/protocols/streaming/trad
 @Injectable()
 export class AuthService {
 
+	private tradeAuthHandler: TradeAuthHandler;
+
 	constructor(private dataService: DataService,
 		private tradeStreamingResponseHandler: TradeStreamingResponseHandler) {
 
 		this.updateAuthStatus();
+		this.tradeAuthHandler = TradeAuthHandler.getInstance();
 	}
 
 	public authenticateUser(userName: string, password: string): void {
-		const tradeAuthHandler = new TradeAuthHandler();
-		const authRequest = tradeAuthHandler.buildAuthRequest(userName, password);
+		const authRequest = this.tradeAuthHandler.buildAuthRequest(userName, password);
 		this.dataService.sendToWs(authRequest);
 	}
 
@@ -24,7 +26,7 @@ export class AuthService {
 		this.tradeStreamingResponseHandler.getAuthenticationResponseStream().subscribe(response => {
 			if (response && response.DAT) {
 				if (response.DAT.AUTH_STS === ResponseStatus.Success) {
-					// user authenticated
+					this.tradeAuthHandler.isAuthenticated = true;
 				}
 			}
 		});

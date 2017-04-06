@@ -5,8 +5,19 @@ import { TradeRequestGroups } from '../../../constants/enums/trade-request-group
 import { TradeRequestTypes } from '../../../constants/enums/trade-request-types.enum';
 
 export class TradeAuthHandler extends BaseAuthHandler {
+
+	private static instance: TradeAuthHandler;
+
+	public static getInstance(): TradeAuthHandler {
+		TradeAuthHandler.instance = TradeAuthHandler.instance || new TradeAuthHandler();
+		return TradeAuthHandler.instance;
+	}
+
 	constructor() {
 		super();
+		if (TradeAuthHandler.instance) {
+			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
+		}
 	}
 
 	public buildAuthRequest(userName: string, password: string): any {
