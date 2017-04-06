@@ -1,6 +1,7 @@
 import { DataService } from '../communication/data.service';
 import { Injectable } from '@angular/core';
 import { PriceAuthHandler } from './price/price-auth-handler';
+import { ResponseStatus } from '../../constants/enums/response-status.enum';
 import { TradeAuthHandler } from './trade/trade-auth-handler';
 import { TradeStreamingResponseHandler } from '../trade/protocols/streaming/trade-streaming-response-handler';
 
@@ -22,7 +23,7 @@ export class AuthService {
 	private updateAuthStatus(): void {
 		this.tradeStreamingResponseHandler.getAuthenticationResponseStream().subscribe(response => {
 			if (response && response.DAT) {
-				if (response.DAT.AUTH_STS === 1) {
+				if (response.DAT.AUTH_STS === ResponseStatus.Success) {
 					// user authenticated
 				}
 			}
