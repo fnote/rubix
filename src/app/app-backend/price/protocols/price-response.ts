@@ -4,7 +4,7 @@ import { priceResponseTags } from '../../../constants/const/price-response-tags'
 export class PriceResponse {
 
 	public processPriceResponse(response: any): Array<Object> {
-		const processedRes = [];
+		let processedRes = [];
 		if (response.channel === Channels.Price) {
 			if (response && response.data && response.data.length > 0) {
 				for (const res of response.data) {
@@ -14,7 +14,7 @@ export class PriceResponse {
 				processedRes.push(this.buildPriceResponse(response.data));
 			}
 		} else if (response.channel === Channels.PriceMeta) {
-			processedRes.push(this.buildPriceMetaResponse(response.data));
+			processedRes = this.buildPriceMetaResponse(response.data);
 		}
 
 		return processedRes;
