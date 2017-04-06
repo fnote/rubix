@@ -8,8 +8,8 @@ import { Channels } from '../../../constants/enums/channels.enum';
 })
 export class LoginComponent implements OnInit {
 
-	private userName= '';
-	private password= '';
+	public userName= '';
+	public password= '';
 
 	constructor(private authService: AuthService) {
 		// code here
