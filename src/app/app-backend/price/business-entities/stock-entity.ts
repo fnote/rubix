@@ -3,11 +3,13 @@ import { userSettings } from '../../../config/user-settings';
 
 export class StockEntity extends BaseEntity {
 
+	private _instrmentType: number = userSettings.marketData.defaultDecimalPlaces;
 	private _longDesc: string = userSettings.marketData.defaultStringInitializer;
 	private _shortDesc: string = userSettings.marketData.defaultStringInitializer;
 	private _dispCode: string = userSettings.marketData.defaultStringInitializer;
 	private _currency: string = userSettings.marketData.defaultStringInitializer;
 	private _decimalPlaces: number = userSettings.marketData.defaultDecimalPlaces;
+	private _decimalCorrectionFactor: number = userSettings.marketData.defaultDecimalPlaces;
 	private _lastTradePrice: number = userSettings.marketData.defaultNumberInitializer;
 	private _openPrice: number = userSettings.marketData.defaultNumberInitializer;
 	private _highPrice: number = userSettings.marketData.defaultNumberInitializer;
@@ -38,6 +40,14 @@ export class StockEntity extends BaseEntity {
  	// NOT : 147 ???
 	// LTDP : 10.55 ???
 	// OPERATOR : 5288
+
+	public get instrmentType(): number  {
+		return this._instrmentType;
+	}
+
+	public set instrmentType(value: number) {
+		this._instrmentType = value;
+	}
 
 	public get longDesc(): string  {
 		return this._longDesc;
@@ -77,6 +87,14 @@ export class StockEntity extends BaseEntity {
 
 	public set decimalPlaces(value: number) {
 		this._decimalPlaces = value;
+	}
+
+	public get decimalCorrectionFactor(): number  {
+		return this._decimalCorrectionFactor;
+	}
+
+	public set decimalCorrectionFactor(value: number) {
+		this._decimalCorrectionFactor = value;
 	}
 
 	public get lastTradePrice(): number  {

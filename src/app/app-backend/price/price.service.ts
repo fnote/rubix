@@ -4,6 +4,7 @@ import { DataManagers } from '../../constants/enums/data-managers.enum';
 import { DataService } from '../communication/data.service';
 import { ExchangeDataStore } from './data-stores/exchange-data-store';
 import { Injectable } from '@angular/core';
+import { LocalizationService } from '../../utils/localization/localization.service';
 import { PriceRequest } from './protocols/price-request';
 import { PriceRequestTypes } from '../../constants/enums/price-request-types.enum';
 import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';
@@ -19,7 +20,7 @@ export class PriceService {
 	public exchangeDM: ExchangeDataStore;
 
 	constructor(private dataService: DataService, private priceStreamingResponseHandler: PriceStreamingResponseHandler,
-		private priceSubscriptionService: PriceSubscriptionService) {
+		private priceSubscriptionService: PriceSubscriptionService, private localizationService: LocalizationService) {
 		this.stockDM = StockDataStore.getInstance();
 		this.exchangeDM = ExchangeDataStore.getInstance();
 	}
@@ -189,7 +190,17 @@ export class PriceService {
 	}
 
 	public requestSymbolMeta (exgSym: [string, string]): void {
-		// Implement this
+		const req = new PriceRequest();
+		req.mt = PriceRequestTypes.SymbolMeta;
+		req.tkn = 1;
+		req.lan = this.localizationService.getshortCode();
+		req.addParam(exgSym[0], exgSym[1]);
+
+		const request = {
+			channel : Channels.PriceMeta,
+			data : PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
+		};
+		this.dataService.sendToWs(request);
 	}
 
 	/**

@@ -11,8 +11,8 @@ export class LocalizationService {
 	private layout: string;
 	private _activeLanguageCode: Languages = -1;
 	private supportedLanguages = {
-		0 : { code : 'EN', langObj: EN, layout: 'ltr' , des : 'English' },
-		1 : { code : 'AR', langObj: AR, layout: 'rtl' , des : '\u0639\u0631\u0628\u0649' },
+		0 : { shortCode : 'EN', langObj: EN, layout: 'ltr' , des : 'English' },
+		1 : { shortCode : 'AR', langObj: AR, layout: 'rtl' , des : '\u0639\u0631\u0628\u0649' },
 	};
 
 	constructor() {
@@ -41,7 +41,16 @@ export class LocalizationService {
 			param = this._activeLanguageCode;
 		}
 
-		return this.supportedLanguages[value].des;
+		return this.supportedLanguages[param].des;
+	}
+
+	public getshortCode(value?: Languages): string  {
+		let param = value;
+		if (!param) {
+			param = this._activeLanguageCode;
+		}
+
+		return this.supportedLanguages[param].shortCode;
 	}
 
 	private setOrientationClass (): void {

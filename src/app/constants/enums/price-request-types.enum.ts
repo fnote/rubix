@@ -15,5 +15,6 @@ export enum PriceRequestTypes {
 	Announcement = 35,
 	OHLCSymbol = 40,
 	OHLCFullMarket,
+	SymbolMeta = 46,
 	TopStocks = 50,
 }

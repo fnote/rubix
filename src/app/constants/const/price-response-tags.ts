@@ -25,6 +25,16 @@ export const priceResponseTags = {
 	81: 'min',
 	82: 'high52',
 	84: 'low52',
+
+	EXCHANGE: 'exchangeCode',
+	SYMBOL: 'symbolCode',
+	INSTRUMENT_TYPE: 'instrumentType',
+	SYMBOL_DESCRIPTION: 'longDesc',
+	CURRENCY: 'currency',
+	SHRT_DSC: 'shortDesc',
+	DECIMAL_PLACES: 'decimalPlaces',
+	CORRECTION_FACTOR: 'decimalCorrectionFactor',
+	DS: 'dispCode',
 	// refatcor below
 	0: 'NODATA',
 	5: 'EXC',

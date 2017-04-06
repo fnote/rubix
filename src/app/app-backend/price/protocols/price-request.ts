@@ -5,6 +5,7 @@ export class PriceRequest {
 	private _mt: PriceRequestTypes = null;
 	private _rt: number = null;
 	private _lan: string = null;
+	private _tkn: number = null;
 	private _param: [string, string][];
 
 	public get mt(): PriceRequestTypes  {
@@ -29,6 +30,14 @@ export class PriceRequest {
 
 	public set lan(value: string) {
 		this._lan = value;
+	}
+
+	public get tkn(): number  {
+		return this._tkn;
+	}
+
+	public set tkn(value: number) {
+		this._tkn = value;
 	}
 
 	public addParam(exg: string, sym?: string): void {
@@ -56,23 +65,29 @@ export class PriceRequest {
 		if (this.rt) {
 			arrBuild.push('"RT":');
 			arrBuild.push(String(this.rt));
+			arrBuild.push(',');
 		}
 
 		if (this.mt) {
-			arrBuild.push(',');
 			arrBuild.push('"MT":');
 			arrBuild.push(String(this.mt));
+			arrBuild.push(',');
+		}
+
+		if (this.tkn) {
+			arrBuild.push('"TKN":');
+			arrBuild.push(String(this.tkn));
+			arrBuild.push(',');
 		}
 
 		if (this.lan) {
-			arrBuild.push(',');
 			arrBuild.push('"LAN":');
 			arrBuild.push(this.lan);
+			arrBuild.push(',');
 		}
 
 		const tmp = this.getParam();
 		if (tmp.length > 0) {
-			arrBuild.push(',');
 			arrBuild.push('"PRM":["');
 			arrBuild.push(tmp.join('","'));
 			arrBuild.push('"]');
@@ -80,7 +95,7 @@ export class PriceRequest {
 
 		arrBuild.push('}');
 
-		return arrBuild.join('');
+		return arrBuild.join('').trim();
 	}
 
 	constructor() {

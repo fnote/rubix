@@ -14,18 +14,6 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 	constructor(private priceService: PriceService, public localizationService: LocalizationService) {
 		// Constructor
 		this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
-
-		// TODO: [Amila] Below is hardcoded until the login is impmented
-		const authParams: Object = {
-			priceVerion: '1',
-			userName: 'amila',
-			password: 'password',
-			userType: '30',
-			subType: '1',
-			omsId: 10,
-			brokerCode: 'MFS_UAT',
-		};
-		this.priceService.authenticateWithUsernameAndPassword(authParams, 2);
 	}
 
 	public ngOnInit(): void {

@@ -114,17 +114,6 @@ export class RubixTestPageComponent {
 	}
 
 	public sendMarketMetaRequest(): void {
-		// Below is temperoray
-		// tslint:disable-next-line:max-line-length
-		const sampleRequest = '{ "MT": 80, "TKN": 1, "LAN": "EN", "SEG": [ "EXG", "EXGFE", "SUBM", "SECT", "TD", "ID", "WLD", "WLTD", "TZD", "GMS", "NPD" ], "EXG": [ "TDWL", "CASE", "ISE", "DFM" ] }';
-		// const sampleRequest = '{ "MT": 46, "TKN": 1, "LAN": "EN", "PRM": [ "TDWL~1150", "NSDQ~QQQ" ] }';
-		// const sampleRequest =
-		// 			'{ "MT": 44, "SYM": [ "TDWL~TASI", "LKCSE~JKH.N0000`N", "ISE~TARAF",
-		// 			"CSE~SAM", "CSE~MASI" ], "PRD": "1d", "TYP": "1" }';
-		const request = {
-			channel : Channels.PriceMeta,
-			data : sampleRequest,
-		};
-		this.dataService.sendToWs(request);
+		this.priceService.requestSymbolMeta(['TDWL', '1010']);
 	}
 }

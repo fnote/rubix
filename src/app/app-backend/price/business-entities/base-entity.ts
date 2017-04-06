@@ -3,7 +3,6 @@ export class BaseEntity {
 	private _symbolCode: string;
 	private _exchangeCode: string;
 	private _isMetaDataLoaded = false;
-	private _isStreamingDataLoaded = false;
 
 	public get symbolCode(): string  {
 		return this._symbolCode;
@@ -27,14 +26,6 @@ export class BaseEntity {
 
 	public set isMetaDataLoaded(value: boolean) {
 		this._isMetaDataLoaded = value;
-	}
-
-	public get isStreamingDataLoaded(): boolean {
-		return this._isStreamingDataLoaded;
-	}
-
-	public set isStreamingDataLoaded(value: boolean) {
-		this._isStreamingDataLoaded = value;
 	}
 
 	public setValues(values: Object = {}): void {

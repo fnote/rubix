@@ -81,4 +81,8 @@ export class PriceStreamingRequestHandler {
 		req.rt = 0;
 		return req.buildMessage();
 	}
+
+	public generateMetaRequest (req: PriceRequest): string {
+		return req.buildMessage();
+	}
 }
