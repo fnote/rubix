@@ -250,7 +250,22 @@ export class PriceService {
 	}
 
 	public requestSymbolListMeta (exgSym: [string, string][]): void {
-		// Implement this
+		let isValidItemsAvailable = false;
+		const req = new PriceRequest();
+		req.mt = PriceRequestTypes.SymbolMeta;
+		req.tkn = 1;
+		req.lan = this.localizationService.getshortCode();
+
+		for (const sym of exgSym) {
+			req.addParam(sym[0], sym[1]);
+			isValidItemsAvailable = true;
+		}
+
+		const request = {
+			channel : Channels.PriceMeta,
+			data : PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
+		};
+		this.dataService.sendToWs(request);
 	}
 
 	//
