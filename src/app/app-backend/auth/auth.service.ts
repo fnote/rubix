@@ -8,13 +8,19 @@ import { TradeAuthHandler } from './trade/trade-auth-handler';
 export class AuthService {
 
 	constructor(private dataService: DataService, private streamRouteService: StreamRouteService) {
-		// code here
+		this.processAuthResponse();
 	}
 
 	public authenticateUser(userName: string, password: string): void {
 		const tradeAuthHandler = new TradeAuthHandler();
 		const authRequest = tradeAuthHandler.buildAuthRequest(userName, password);
 		this.dataService.sendToWs(authRequest);
+	}
+
+	private processAuthResponse(): void {
+		this.streamRouteService.getTradeResponseStream().subscribe(response => {
+			alert(response.data);
+		});
 	}
 
 }
