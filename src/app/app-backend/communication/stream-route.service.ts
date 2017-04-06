@@ -8,9 +8,11 @@ import { Subject } from 'rxjs/Subject';
 export class StreamRouteService {
 
 	private priceResponseStream$: Subject<Object>;
+	private tradeResponseStream$: Subject<Object>;
 
 	constructor(private dataService: DataService, private loggerService: LoggerService) {
 		this.priceResponseStream$ = new Subject();
+		this.tradeResponseStream$ = new Subject();
 		this.routeResponseStream();
 	}
 
@@ -23,6 +25,9 @@ export class StreamRouteService {
 				case Channels.PriceMeta :
 					this.priceResponseStream$.next({ data : response.data , channel : Channels.PriceMeta });
 					break;
+				case Channels.Trade :
+					this.tradeResponseStream$.next({ data : response.data , channel : Channels.Trade });
+					break;
 				default :
 					this.loggerService.logError('Invalid Channel Found...!', 'StreamRouteService');
 			}
@@ -31,6 +36,10 @@ export class StreamRouteService {
 
 	public getPriceResponseStream(): Subject<any> {
 		return this.priceResponseStream$;
+	}
+
+	public getTradeResponseStream(): Subject<any> {
+		return this.tradeResponseStream$;
 	}
 
 }
