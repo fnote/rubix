@@ -1,12 +1,23 @@
 import { BaseAuthHandler } from '../base-auth-handler';
 import { Channels } from '../../../constants/enums/channels.enum';
 import { Md5 } from 'ts-md5/dist/md5';
-import { TradeRequestGroups } from '../../../constants/enums/trade-request.groups.enum';
-import { TradeRequestTypes } from '../../../constants/enums/trade-request.types.enum';
+import { TradeRequestGroups } from '../../../constants/enums/trade-request-groups.enum';
+import { TradeRequestTypes } from '../../../constants/enums/trade-request-types.enum';
 
 export class TradeAuthHandler extends BaseAuthHandler {
+
+	private static instance: TradeAuthHandler;
+
+	public static getInstance(): TradeAuthHandler {
+		TradeAuthHandler.instance = TradeAuthHandler.instance || new TradeAuthHandler();
+		return TradeAuthHandler.instance;
+	}
+
 	constructor() {
 		super();
+		if (TradeAuthHandler.instance) {
+			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
+		}
 	}
 
 	public buildAuthRequest(userName: string, password: string): any {

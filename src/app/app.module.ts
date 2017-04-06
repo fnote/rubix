@@ -10,6 +10,7 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { PriceModule } from './app-backend/price/price.module';
 import { PriceWidgetModule } from './widgets/price-widgets/price-widget.module';
+import { TradeModule } from './app-backend/trade/trade.module';
 import { UtilsModule } from './utils/utils.module';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { UtilsModule } from './utils/utils.module';
 		CommonWidgetModule,
 		UtilsModule,
 		AuthModule,
+		TradeModule,
 	],
 	providers: [ConfigService],
 	bootstrap: [AppComponent],
