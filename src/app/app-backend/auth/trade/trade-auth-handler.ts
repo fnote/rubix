@@ -1,8 +1,8 @@
 import { BaseAuthHandler } from '../base-auth-handler';
 import { Channels } from '../../../constants/enums/channels.enum';
 import { Md5 } from 'ts-md5/dist/md5';
-import { TradeRequestGroups } from '../../../constants/enums/trade-request.groups.enum';
-import { TradeRequestTypes } from '../../../constants/enums/trade-request.types.enum';
+import { TradeRequestGroups } from '../../../constants/enums/trade-request-groups.enum';
+import { TradeRequestTypes } from '../../../constants/enums/trade-request-types.enum';
 
 export class TradeAuthHandler extends BaseAuthHandler {
 	constructor() {
