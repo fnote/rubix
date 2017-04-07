@@ -10,11 +10,14 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { PriceModule } from './app-backend/price/price.module';
 import { PriceWidgetModule } from './widgets/price-widgets/price-widget.module';
+import { PrimaryLayoutOneComponent } from './layouts/primary-layout-one/primary-layout-one.component';
+import { SecondaryLayoutOneComponent } from './layouts/secondary-layout-one/secondary-layout-one.component';
 import { TradeModule } from './app-backend/trade/trade.module';
 import { UtilsModule } from './utils/utils.module';
+import { WidgetLoaderService } from './widgets/widget-loader/widget-loader.service';
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, SecondaryLayoutOneComponent, PrimaryLayoutOneComponent],
 	imports: [
 		BrowserModule,
 		HttpModule,
@@ -27,7 +30,7 @@ import { UtilsModule } from './utils/utils.module';
 		AuthModule,
 		TradeModule,
 	],
-	providers: [ConfigService],
+	providers: [ConfigService, WidgetLoaderService],
 	bootstrap: [AppComponent],
 })
 export class AppModule { }

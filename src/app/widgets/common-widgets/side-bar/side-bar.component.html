@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let tab of tabs"
+      [class.btn-info]="tab.id === selectedTab"
+      (click)="loadTab(tab)">
+    {{ tab.title}}
+  </li>
+</ul>

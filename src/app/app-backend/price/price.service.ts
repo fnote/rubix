@@ -192,33 +192,33 @@ export class PriceService {
    * Subscribe and unsubscribe for market depth by price
    * @param {[string, string]} exgSym - A tuple with Exchange Code and Symbol Code
    */
-  public removeMarketDepthByPriceRequest (exgSym: [string, string]) : void {
-    if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketDepthByPrice, exgSym[0], exgSym[1])) {
-      const req = new PriceRequest();
-      req.mt = PriceRequestTypes.MarketDepthByPrice;
-      req.addParam(exgSym[0], exgSym[1]);
+	public removeMarketDepthByPriceRequest (exgSym: [string, string]): void {
+		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketDepthByPrice, exgSym[0], exgSym[1])) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.MarketDepthByPrice;
+			req.addParam(exgSym[0], exgSym[1]);
 
-      const request = {
-        channel : Channels.Price,
-        data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
-      };
-      this.dataService.sendToWs(request);
-    }
-  }
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
 
-  public addMarketDepthByPriceRequest (exgSym: [string, string]) : void {
-    if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketDepthByPrice, exgSym[0], exgSym[1])) {
-      const req = new PriceRequest();
-      req.mt = PriceRequestTypes.MarketDepthByPrice;
-      req.addParam(exgSym[0], exgSym[1]);
+	public addMarketDepthByPriceRequest (exgSym: [string, string]): void {
+		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketDepthByPrice, exgSym[0], exgSym[1])) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.MarketDepthByPrice;
+			req.addParam(exgSym[0], exgSym[1]);
 
-      const request = {
-        channel : Channels.Price,
-        data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
-      };
-      this.dataService.sendToWs(request);
-    }
-  }
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
 
   /**
      * Subscribe and Un-subscribe for a list of symbol updates.
