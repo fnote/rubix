@@ -13,4 +13,8 @@ export class SSOAuthHandler extends BaseAuthHandler {
 		// code here
 	}
 
+	public buildPriceAuthRequest(userName: string, password: string): void {
+		// code here
+	}
+
 }

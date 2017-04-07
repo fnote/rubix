@@ -1,4 +1,6 @@
 export enum PriceRequestTypes {
+	AuthMeta = -2,
+	AuthPrice = -1,
 	Pulse = 0,
 	SnapshotSymbol = 10,
 	SnapshotFullMarket,

@@ -65,12 +65,13 @@ export class PriceResponse {
 			processedRes.push(processedResponseOb);
 			return processedRes;
 		} else {
+			response['MT'] = parseInt(response.MT, 10);
 			processedRes.push(response);
 			return processedRes;
 		}
 	}
 
-	private buildPriceResponse(response: {HED: string, DAT: string, MT: string}): Object {
+	private buildPriceResponse(response: {HED: string, DAT: string, MT: any}): Object {
 		let processedResponse = {};
 		const arrBuild: string[] = [];
 		if (response && response.HED && response.DAT) {
@@ -93,6 +94,7 @@ export class PriceResponse {
 			processedResponse['MT'] = parseInt(response.MT, 10);
 			return processedResponse;
 		}
+		response['MT'] = parseInt(response.MT, 10);
 		return response;
 	}
 
