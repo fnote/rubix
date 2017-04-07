@@ -25,7 +25,6 @@ export class PriceService {
 		this.exchangeDM = ExchangeDataStore.getInstance();
 	}
 
-	// TODO: [Amila] Check if this is required with Chandana
 	/**
 	 * Get the price response handler
 	 * @returns {Subject<Object>} Response stream
@@ -80,7 +79,7 @@ export class PriceService {
 	}
 
 	//
-	// API to handle price related meta and streaming
+	// API to handle price streaming
 	//
 
 	/**
@@ -189,20 +188,6 @@ export class PriceService {
 		}
 	}
 
-	public requestSymbolMeta (exgSym: [string, string]): void {
-		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.SymbolMeta;
-		req.tkn = 1;
-		req.lan = this.localizationService.getshortCode();
-		req.addParam(exgSym[0], exgSym[1]);
-
-		const request = {
-			channel : Channels.PriceMeta,
-			data : PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
-		};
-		this.dataService.sendToWs(request);
-	}
-
 	/**
      * Subscribe and Un-subscribe for a list of symbol updates.
      * @param {[string, string][]} exgSym - An array of tupples with Exchange Code and Symbol Code
@@ -249,6 +234,25 @@ export class PriceService {
 		}
 	}
 
+	//
+	// API to handle price related meta
+	//
+	public requestSymbolMeta (exgSym: [string, string]): void {
+		if (!this.stockDM.getOrAddStock(exgSym).isMetaDataLoaded) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.SymbolMeta;
+			req.tkn = 1;
+			req.lan = this.localizationService.getshortCode();
+			req.addParam(exgSym[0], exgSym[1]);
+
+			const request = {
+				channel : Channels.PriceMeta,
+				data : PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
 	public requestSymbolListMeta (exgSym: [string, string][]): void {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
@@ -257,18 +261,18 @@ export class PriceService {
 		req.lan = this.localizationService.getshortCode();
 
 		for (const sym of exgSym) {
-			req.addParam(sym[0], sym[1]);
-			isValidItemsAvailable = true;
+			if (!this.stockDM.getOrAddStock(sym).isMetaDataLoaded) {
+				req.addParam(sym[0], sym[1]);
+				isValidItemsAvailable = true;
+			}
 		}
 
-		const request = {
-			channel : Channels.PriceMeta,
-			data : PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
-		};
-		this.dataService.sendToWs(request);
+		if (isValidItemsAvailable) {
+			const request = {
+				channel : Channels.PriceMeta,
+				data : PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
 	}
-
-	//
-	// API to handle trade related meta and streaming
-	//
 }
