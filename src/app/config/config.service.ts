@@ -16,14 +16,14 @@ export class ConfigService {
 	public CHAT_URL  = 'ws://10.1.20.136:1234';
 	public PRICE  = 'ws://mfg-uat-phoenix.mubashertrade.com:9090/websocket/price';
 	public PRICE_META  = 'ws://mfg-uat-phoenix.mubashertrade.com:9090/websocket/meta';
-	private TRADE_UAT = 'ws://mtplusglobal-uat.mubashertrade.com:8802/comet';
+	private TRADE_UAT = 'ws://mtplusglobal-uat.mubashertrade.com:8800/appsocket';
 	private TRADE_LOCAL = 'ws://10.1.200.61:8800/appsocket';
 
 	public configObj: any;
 
 	constructor(private http: Http) {
 		this.connectionConfig = [
-			{ channel: Channels.Trade , url: this.TRADE_LOCAL, isSecure: false },
+			{ channel: Channels.Trade , url: this.TRADE_UAT, isSecure: false },
 			{ channel: Channels.TradeMeta , url: this.CHAT_URL, isSecure: false },
 			{ channel: Channels.Price , url: this.PRICE, isSecure: false },
 			{ channel: Channels.PriceMeta  , url: this.PRICE_META, isSecure: false },
