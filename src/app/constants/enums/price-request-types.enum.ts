@@ -10,7 +10,7 @@ export enum PriceRequestTypes {
 	TimeAndSalesSymbol = 20,
 	TimeAndSalesFullMarket,
 	MarketDepthByPrice = 25,
-	MarketDepthByOrder,
+	MarketDepthByOrder = 26,
 	News = 30,
 	Announcement = 35,
 	OHLCSymbol = 40,
