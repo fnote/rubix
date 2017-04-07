@@ -59,7 +59,6 @@ export class DataService {
 
 	private updateResponseStream(): void {
 		this.queueMannagerService.getResponse().subscribe(msg => {
-			this.loggerService.logInfo('response recived..', 'DataService');
 			if (msg && msg.data) {
 				this.responseStream$.next(msg.data);
 			}
