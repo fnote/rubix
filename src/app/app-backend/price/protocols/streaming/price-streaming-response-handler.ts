@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { PriceRequestTypes } from '../../../../constants/enums/price-request-types.enum';
 import { PriceResponse } from '../price-response';
 import { StockDataStore } from '../../data-stores/stock-data-store';
+import { StockEntity } from '../../business-entities/stock-entity';
 import { StreamRouteService } from '../../../communication/stream-route.service';
 import { Subject } from 'rxjs/Rx';
 
@@ -32,13 +33,13 @@ export class PriceStreamingResponseHandler {
 		switch (response.MT) {
 			case PriceRequestTypes.SnapshotSymbol:
 				this.stockDataStore.getOrAddStock([response.exchangeCode, response.symbolCode]).setValues(response);
-				this.stockDataStore.getOrAddStock([response.exchangeCode, response.symbolCode]).printObj();
 				break;
 
 			case PriceRequestTypes.SymbolMeta:
 				for (const symObj of response.SYMS) {
-					this.stockDataStore.getOrAddStock([symObj.exchangeCode, symObj.symbolCode]).setValues(symObj);
-					this.stockDataStore.getOrAddStock([symObj.exchangeCode, symObj.symbolCode]).printObj();
+					const stockObj = this.stockDataStore.getOrAddStock([symObj.exchangeCode, symObj.symbolCode]);
+					stockObj.setValues(symObj);
+					stockObj.isMetaDataLoaded = true;
 				}
 				break;
 

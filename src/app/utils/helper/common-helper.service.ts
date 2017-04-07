@@ -2,6 +2,7 @@ import 'moment/locale/ar-ma';
 import * as moment from 'moment';
 import { Injectable } from '@angular/core';
 import { TradeHelperService } from './trade-helper.service';
+import { userSettings } from '../../config/user-settings';
 
 const MIN = 60000; // 1000 * 60
 const HOUR = 3600000; // 1000 * 60 * 60
@@ -90,11 +91,11 @@ export class CommonHelperService {
 	* @param dec Number of decimal places
 	*/
 	public roundNumber(num: number , dec: number): number {
-		let result: string;
 		if (dec < 0) {
-			dec = 1;
+			dec = userSettings.marketData.defaultDecimalPlaces;
 		}
-		result = (this.toFixed((Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)))).toString();
+
+		let result = (this.toFixed((Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)))).toString();
 		if ((result.split('.')).length !== 1) {
 			const floatNum: string = result.split('.')[1];
 			if (floatNum.length < dec) {

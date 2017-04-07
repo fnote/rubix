@@ -1,7 +1,11 @@
 import { BaseEntity } from './base-entity';
+import { CommonHelperService } from '../../../utils/helper/common-helper.service';
+import { ReflectiveInjector } from '@angular/core';
 import { userSettings } from '../../../config/user-settings';
 
 export class StockEntity extends BaseEntity {
+
+	private commonHelperService: CommonHelperService;
 
 	private _instrumentType: number = userSettings.marketData.defaultDecimalPlaces;
 	private _longDesc: string = userSettings.marketData.defaultStringInitializer;
@@ -102,7 +106,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set lastTradePrice(value: number) {
-		this._lastTradePrice = value;
+		this._lastTradePrice = this.commonHelperService.roundNumber(value, this.decimalPlaces);
 	}
 
 	public get openPrice(): number  {
@@ -299,6 +303,10 @@ export class StockEntity extends BaseEntity {
 
 	constructor(values: Object = {}) {
 		super();
+
+		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
+		this.commonHelperService = injector.get(CommonHelperService);
+
 		this.setValues(values);
 	}
 }

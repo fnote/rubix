@@ -8,26 +8,59 @@ import { PriceService } from '../../../app-backend/price/price.service';
 })
 export class DetailQuoteComponent implements OnInit, OnDestroy {
 
+	public response: Array<any> = [] ;
+	private session = '';
 	public stockObj;
 	private exgStock: [string, string] = ['DFM', 'DIC'];
 
 	constructor(private priceService: PriceService, public localizationService: LocalizationService) {
-		// Constructor
 		this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
+
+		// Temp
+		this.updatePriceResponse();
+	}
+
+	private updatePriceResponse(): void {
+		this.priceService.getPriceResponseStream().subscribe(response => {
+			this.response.push(response);
+			if (response && response[0] && response[0].MT === '-1') {
+				this.session = response[0].SESSION;
+			}
+		});
 	}
 
 	public ngOnInit(): void {
-		// on init
+		const authParams: Object = {
+			priceVerion: '1',
+			userName: 'amilaa',
+			password: 'password',
+			userType: '30',
+			subType: '1',
+			omsId: 10,
+			brokerCode: 'MFS_UAT',
+		};
+		this.priceService.authenticateWithUsernameAndPassword(authParams, 2);
+
+		setTimeout(() => {
+			const authParams1: Object = {
+				priceVerion: '1',
+				userName: 'amilaa',
+				password: 'password',
+				userType: '30',
+				subType: '1',
+				omsId: 10,
+				session: this.session,
+				brokerCode: 'MFS_UAT',
+			};
+			this.priceService.authenticateWithSecondaryAuthToken(authParams1, 3);
+		}, 5000);
+
 		setTimeout(() => {
 			if (!this.stockObj) {
 				this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
 			}
 
-			if (!this.stockObj.isMetaDataLoaded) {
-				this.priceService.requestSymbolMeta(this.exgStock);
-			}
-
-			// Add the symbol subscription
+			this.priceService.requestSymbolMeta(this.exgStock);
 			this.priceService.addSymbolRequest(this.exgStock);
 		}, 5000);
 	}
