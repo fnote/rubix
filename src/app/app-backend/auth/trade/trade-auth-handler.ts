@@ -44,7 +44,7 @@ export class TradeAuthHandler extends BaseAuthHandler {
 			USR_ID: '',
 			LANG_ID: 'EN',
 			CL_IP: '',
-			VER : 'DFN_JSON_3.0',
+			VER : 'DFN_JSON_2.0',
 		};
 		return tradeAuthHeder;
 	}

@@ -10,10 +10,14 @@ import { Subject } from 'rxjs/Rx';
 export class PriceStreamingResponseHandler {
 
 	private priceResponseStream$: Subject<Object>;
+	private metaAuthResponseStream$: Subject<any>;
+	private priceAuthResponseStream$: Subject<any>;
 	private stockDataStore: StockDataStore;
 
 	constructor(private streamRouteService: StreamRouteService) {
 		this.priceResponseStream$ = new Subject();
+		this.metaAuthResponseStream$ = new Subject();
+		this.priceAuthResponseStream$ = new Subject();
 		this.stockDataStore = StockDataStore.getInstance();
 		this.updatePriceResponseStream();
 	}
@@ -31,6 +35,12 @@ export class PriceStreamingResponseHandler {
 
 	private updatePriceModel(response: any): void {
 		switch (response.MT) {
+			case PriceRequestTypes.AuthMeta:
+				this.metaAuthResponseStream$.next(response);
+				break;
+			case PriceRequestTypes.AuthPrice:
+				this.priceAuthResponseStream$.next(response);
+				break;
 			case PriceRequestTypes.SnapshotSymbol:
 				this.stockDataStore.getOrAddStock([response.exchangeCode, response.symbolCode]).setValues(response);
 				break;
@@ -60,5 +70,13 @@ export class PriceStreamingResponseHandler {
 
 	public getPriceResponseStream(): Subject<Object> {
 		return this.priceResponseStream$;
+	}
+
+	public getmetaAuthResponseStream(): Subject<any> {
+		return this.metaAuthResponseStream$;
+	}
+
+	public getPriceAuthResponseStream(): Subject<any> {
+		return this.priceAuthResponseStream$;
 	}
 }

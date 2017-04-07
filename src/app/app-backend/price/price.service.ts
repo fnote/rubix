@@ -83,9 +83,9 @@ export class PriceService {
 	//
 
 	/**
-     * Subscribe and Un-subscribe from exchange updates
-     * @param {string} exchange - Exchange code
-     */
+		 * Subscribe and Un-subscribe from exchange updates
+		 * @param {string} exchange - Exchange code
+		 */
 	public addExchangeRequest (exchange: string): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.Exchange, exchange)) {
 			const req = new PriceRequest();
@@ -156,10 +156,10 @@ export class PriceService {
 		}
 	}
 
-    /**
-     * Subscribe and Un-subscribe for a symbol updates
-     * @param {[string, string]} exgSym - A tupple with Exchange Code and Symbol Code
-     */
+		/**
+		 * Subscribe and Un-subscribe for a symbol updates
+		 * @param {[string, string]} exgSym - A tupple with Exchange Code and Symbol Code
+		 */
 	public addSymbolRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.SnapshotSymbol, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
@@ -188,10 +188,10 @@ export class PriceService {
 		}
 	}
 
-  /**
-   * Subscribe and unsubscribe for market depth by price
-   * @param {[string, string]} exgSym - A tuple with Exchange Code and Symbol Code
-   */
+	/**
+	 * Subscribe and unsubscribe for market depth by price
+	 * @param {[string, string]} exgSym - A tuple with Exchange Code and Symbol Code
+	 */
 	public removeMarketDepthByPriceRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketDepthByPrice, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
@@ -220,10 +220,10 @@ export class PriceService {
 		}
 	}
 
-  /**
-     * Subscribe and Un-subscribe for a list of symbol updates.
-     * @param {[string, string][]} exgSym - An array of tupples with Exchange Code and Symbol Code
-     */
+	/**
+		 * Subscribe and Un-subscribe for a list of symbol updates.
+		 * @param {[string, string][]} exgSym - An array of tupples with Exchange Code and Symbol Code
+		 */
 	public addSymbolListRequest (exgSym: [string, string][]): void {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
