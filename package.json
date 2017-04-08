@@ -5,6 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
+    "prestart": "node preBuild.js",
     "start": "ng serve",
     "test": "ng test",
     "lint": "ng lint",
