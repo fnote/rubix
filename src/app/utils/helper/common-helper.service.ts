@@ -90,7 +90,7 @@ export class CommonHelperService {
 	* @param num Number to be rounded
 	* @param dec Number of decimal places
 	*/
-	public roundNumber(num: number , dec: number): number {
+	public roundNumber(num: number , dec: number): string {
 		if (dec < 0) {
 			dec = userSettings.marketData.defaultDecimalPlaces;
 		}
@@ -105,7 +105,7 @@ export class CommonHelperService {
 			}
 		}
 
-		return parseFloat(result);
+		return result;
 	}
 
 	/*

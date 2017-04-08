@@ -11,7 +11,7 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 	public response: Array<any> = [] ;
 	private session = '';
 	public stockObj;
-	private exgStock: [string, string] = ['DFM', 'DIC'];
+	private exgStock: [string, string] = ['TDWL', '1020'];
 
 	constructor(private priceService: PriceService, public localizationService: LocalizationService) {
 		this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
@@ -32,7 +32,7 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 	public ngOnInit(): void {
 		const authParams: Object = {
 			priceVerion: '1',
-			userName: 'amilaa',
+			userName: 'amilaaaaa',
 			password: 'password',
 			userType: '30',
 			subType: '1',
@@ -41,10 +41,10 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 		};
 		this.priceService.authenticateWithUsernameAndPassword(authParams, 2);
 
-		setTimeout(() => {
+		/**setTimeout(() => {
 			const authParams1: Object = {
 				priceVerion: '1',
-				userName: 'amilaa',
+				userName: 'amilaaaaa',
 				password: 'password',
 				userType: '30',
 				subType: '1',
@@ -53,14 +53,14 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 				brokerCode: 'MFS_UAT',
 			};
 			this.priceService.authenticateWithSecondaryAuthToken(authParams1, 3);
-		}, 5000);
+		}, 5000);*/
 
 		setTimeout(() => {
 			if (!this.stockObj) {
 				this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
 			}
 
-			this.priceService.requestSymbolMeta(this.exgStock);
+			// this.priceService.requestSymbolMeta(this.exgStock);
 			this.priceService.addSymbolRequest(this.exgStock);
 		}, 5000);
 	}

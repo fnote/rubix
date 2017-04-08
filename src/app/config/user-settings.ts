@@ -11,6 +11,7 @@ export const userSettings = {
 
 	marketData: {
 		defaultDecimalPlaces: 2,
+		defaultPercentageDecimalPlaces: 2,
 		defaultNumberInitializer: -1,
 		defaultStringInitializer: '-',
 		thousandSeperator: {
