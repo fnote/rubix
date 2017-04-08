@@ -87,8 +87,9 @@ export class CommonHelperService {
 
 	/**
 	* Round number to given decimal places
-	* @param num Number to be rounded
-	* @param dec Number of decimal places
+	* @param {number} num Number to be rounded
+	* @param {number} dec Number of decimal places
+	* @returns {string} Formatted number
 	*/
 	public roundNumber(num: number , dec: number): string {
 		if (dec < 0) {
@@ -106,6 +107,16 @@ export class CommonHelperService {
 		}
 
 		return result;
+	}
+
+	/**
+	* Format a number in Millions
+	* @param {number} num Number to be formatted
+	* @param {number} dec Number of decimal places
+	* @returns {string} Formatted number
+	*/
+	public formatNumberInMillions(num: number , dec: number): string {
+		return (Math.abs(num) < 1000000) ? this.roundNumber(num, dec) : this.roundNumber(num / 1000000, 2) + ' M';
 	}
 
 	/*
@@ -166,21 +177,6 @@ export class CommonHelperService {
 	//   }
 	//   return formNum;
 	// }
-
-	/**
-	* Format a number in Millions
-	* @param num Number to be formatted
-	* @param dec Number of decimal places
-	*/
-	public formatNumberInMillions(num: number , dec: number): string {
-		const x: number = Math.abs(num);
-		if (x <= 999999) {
-			return this.roundNumber(num, dec).toString();
-		}
-		if (x > 999999) {
-			return this.roundNumber(num / 1000000, 2) + ' M';
-		}
-	}
 
 	////////////////////// Number Formatters END //////////////////////
 
