@@ -146,7 +146,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set bestAskPrice(value: string) {
-		this._bestAskPrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);;
+		this._bestAskPrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get bestAskQty(): number  {
@@ -162,7 +162,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set bestBidPrice(value: string) {
-		this._bestBidPrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);;
+		this._bestBidPrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get bestBidQty(): number  {
@@ -291,7 +291,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set low52(value: string) {
-		this._low52 = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);;
+		this._low52 = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get bidOffer(): string {
@@ -300,7 +300,7 @@ export class StockEntity extends BaseEntity {
 
 	public set bidOffer(value: string) {
 		this._bidOffer = this.commonHelperService.roundNumber(
-			parseFloat(value), userSettings.marketData.defaultPercentageDecimalPlaces);;
+			parseFloat(value), userSettings.marketData.defaultPercentageDecimalPlaces);
 	}
 
 	constructor(values: Object = {}) {
