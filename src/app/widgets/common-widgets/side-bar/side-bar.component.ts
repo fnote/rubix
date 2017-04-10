@@ -17,7 +17,7 @@ export class SideBarComponent {
 		private http: Http,
 		private widgetLoader: WidgetLoaderService,
 	) {
-		this.http.get('src/app/profile/profileLayout.json').map((res) => res.json()).subscribe(data => {
+		this.http.get('src/app/config/profileLayout.json').map((res) => res.json()).subscribe(data => {
 			this.tabs = data.model[1].model;
 		});
 	}

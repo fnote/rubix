@@ -2,7 +2,7 @@ var fs = require('fs');
 
 console.log('Pre Build started @ ' + new Date().getTime());
 
-var text = fs.readFileSync('src/app/profile/profileLayout.json', "utf8");
+var text = fs.readFileSync('src/app/config/profileLayout.json', "utf8");
 var profile = JSON.parse(text);
 var routes = [];
 var routesString = 'export const routes: Routes = [\n';
