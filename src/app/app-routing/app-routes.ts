@@ -9,7 +9,7 @@ import { SecondaryLayoutOneComponent } from '../layouts/secondary-layout-one/sec
 import { SideBarComponent } from '../widgets/common-widgets/side-bar/side-bar.component';
 import { TimeAndSalesComponent } from '../widgets/price-widgets/time-and-sales/time-and-sales.component';
 
-//endOfImports//
+// endOfImports //
 export const routes: Routes = [
 	{ path: 'primary-layout-one', component: PrimaryLayoutOneComponent,
 		children: [

@@ -78,9 +78,9 @@ var createRoute = function (profile, tabs) {
 createRoute(profile, 1);
 routesString = routesString + '];\n';
 
-var imports = fs.readFileSync('src/app/app-routing/app-routes.ts', "utf8").split('//endOfImports//')[0];
+var imports = fs.readFileSync('src/app/app-routing/app-routes.ts', "utf8").split('// endOfImports //')[0];
 var out = fs.createWriteStream('src/app/app-routing/app-routes.ts', { encoding: "utf8" });
-out.write(imports + '//endOfImports//\n' + routesString);
+out.write(imports + '// endOfImports //\n' + routesString);
 out.end();
 console.log('routes:\n ' + routesString);
 console.log('\nPre Build finished @ ' + new Date().getTime());
