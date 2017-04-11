@@ -37,13 +37,16 @@ export class LoggerService {
 		const logStr = module ? ['[', module, '] ', logEntry].join('') : logEntry;
 
 		try {
-			if (this.configService.getNumberConfigVal('loggerConfig', 'appLogLevel') >= logType) {
-				this.amendLogConsole(logStr, logType);
-			}
-
-			if (this.configService.getNumberConfigVal('loggerConfig', 'serverLogLevel') >= logType) {
-				this.amendLogToBuffer(logStr, logType);
-			}
+			this.configService.getNumberConfigVal('loggerConfig', 'appLogLevel').then(logLevel => {
+				if (logLevel >= logType) {
+					this.amendLogConsole(logStr, logType);
+				}
+			});
+			this.configService.getNumberConfigVal('loggerConfig', 'serverLogLevel').then(logLevel => {
+				if (logLevel >= logType) {
+					this.amendLogToBuffer(logStr, logType);
+				}
+			});
 		} catch (e) {
 			this.amendLogConsole(['Logger error: ', e].join(''), LogLevels.LogError);
 		}

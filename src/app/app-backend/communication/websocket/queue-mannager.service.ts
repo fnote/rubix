@@ -24,20 +24,22 @@ export class QueueMannagerService {
 	}
 
 	private init(): void {
-		this.configService.getConnectionConfig().forEach(connection => {
-			const connConfig: Connection = {
-				channel: connection.channel,
-				url: connection.url,
-				connectedSocket: null,
-				sendMessageQueue: [],
-				recivedMessageQueue: [],
-				isConnected: false,
-				sendQueueProcessInterval: null,
-				recivedQueueProcessInterval: null,
-				subscription: null,
-				pulseService: null,
-			};
-			this.connectedSocketPool.push(connConfig);
+		this.configService.getStringConfigVal('connectionConfig').then(connections => {
+			connections.forEach(connection => {
+				const connConfig: Connection = {
+					channel: connection.channel,
+					url: connection.url,
+					connectedSocket: null,
+					sendMessageQueue: [],
+					recivedMessageQueue: [],
+					isConnected: false,
+					sendQueueProcessInterval: null,
+					recivedQueueProcessInterval: null,
+					subscription: null,
+					pulseService: null,
+				};
+				this.connectedSocketPool.push(connConfig);
+			});
 		});
 	}
 
