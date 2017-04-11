@@ -32,11 +32,13 @@ export class AuthService {
 	}
 
 	private authenticatePrimarySSO(): void {
+		this.loggerService.logInfo('Price Connecting...', 'AuthService');
 		const request = this.priceAuthHandler.getPrimarySSORequest();
 		this.dataService.sendToWs(request);
 	}
 
 	private authenticateSecondarySSO(): void {
+		this.loggerService.logInfo('Meta Connecting...', 'AuthService');
 		const request = this.priceAuthHandler.getSecondarySSORequest();
 		this.dataService.sendToWs(request);
 	}
@@ -49,7 +51,6 @@ export class AuthService {
 					this.tradeAuthHandler.isAuthenticated = true;
 					UserState.getInstance().setTadeValues(response.DAT);
 					UserState.getInstance().setTadeValues({ SESN_ID: response.HED.SESN_ID });
-					this.loggerService.logInfo('Price Connecting...', 'AuthService');
 					this.authenticatePrimarySSO();
 				}
 			}
@@ -59,7 +60,6 @@ export class AuthService {
 			this.loggerService.logInfo('Price Connected', 'AuthService');
 			UserState.getInstance().setPriceValues(response);
 			this.priceAuthHandler.isPriceAuthenticated = true;
-			this.loggerService.logInfo('Meta Connecting...', 'AuthService');
 			this.authenticateSecondarySSO();
 		});
 
