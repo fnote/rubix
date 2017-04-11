@@ -1,8 +1,8 @@
+import { AuthenticationRequestTypes } from '../../../constants/enums/trade-meta/authentication/authentication-request-types.enum';
 import { BaseAuthHandler } from '../base-auth-handler';
 import { Channels } from '../../../constants/enums/channels.enum';
 import { Md5 } from 'ts-md5/dist/md5';
-import { TradeRequestGroups } from '../../../constants/enums/trade-request-groups.enum';
-import { TradeRequestTypes } from '../../../constants/enums/trade-request-types.enum';
+import { TradeMetaGroups } from '../../../constants/enums/trade-meta/trade-meta-groups.enum';
 
 export class TradeAuthHandler extends BaseAuthHandler {
 
@@ -35,8 +35,8 @@ export class TradeAuthHandler extends BaseAuthHandler {
 
 	private getTradeAuthHeader(): any {
 		const tradeAuthHeder =  {
-			MSG_GRP: TradeRequestGroups.Authentication,
-			MSG_TYP: TradeRequestTypes.AuthNormal,
+			MSG_GRP: TradeMetaGroups.Authentication,
+			MSG_TYP: AuthenticationRequestTypes.AuthNormal,
 			CHNL_ID: 25,
 			CL_VER: '1.0.4.49',
 			CL_REQ_ID: '',

@@ -1,9 +1,9 @@
+import { AuthenticationResponseTypes } from '../../../../constants/enums/trade-meta/authentication/authentication-response-types.enum';
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../../../utils/logger.service';
 import { StreamRouteService } from '../../../communication/stream-route.service';
 import { Subject } from 'rxjs/Rx';
-import { TradeResponseGroups } from '../../../../constants/enums/trade-response-groups.enum';
-import { TradeResponseTypes } from '../../../../constants/enums/trade-response-types.enum';
+import { TradeMetaGroups } from '../../../../constants/enums/trade-meta/trade-meta-groups.enum';
 
 @Injectable()
 export class TradeStreamingResponseHandler {
@@ -38,11 +38,11 @@ export class TradeStreamingResponseHandler {
 
 	private updateTradeModel(response: any): void {
 		if (response && response.DAT && response.HED) {
-			if (response.HED.MSG_GRP === TradeResponseGroups.Authentication) {
-				if (response.HED.MSG_TYP === TradeResponseTypes.AuthNormal) {
+			if (response.HED.MSG_GRP === TradeMetaGroups.Authentication) {
+				if (response.HED.MSG_TYP === AuthenticationResponseTypes.AuthNormal) {
 					this.authenticationResponseStream$.next(response);
 				}else {
-					this.loggerService.logError('No response type under group - ' + TradeResponseGroups.Authentication , 'TradeStreamingResponseHandler');
+					this.loggerService.logError('No response type under group - ' + TradeMetaGroups.Authentication , 'TradeStreamingResponseHandler');
 				}
 			} else {
 				this.loggerService.logError('No response group - ' + response.HED.MSG_GRP , 'TradeStreamingResponseHandler');
