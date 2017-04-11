@@ -11,6 +11,7 @@ export class SideBarComponent {
 	private tabs= [];
 	private selectedTab= '';
 
+	// If this is failing, add the initialisation to the main app component's constructor
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,

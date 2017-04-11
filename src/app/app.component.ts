@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ConfigService } from './config/config.service';
 import { ThemeService } from './utils/theme.service';
 
 @Component({
@@ -7,5 +8,7 @@ import { ThemeService } from './utils/theme.service';
 })
 export class AppComponent {
 
-	constructor(private themeService: ThemeService) { }
+	constructor(private themeService: ThemeService, private configService: ConfigService) {
+		this.configService.init();
+	}
 }

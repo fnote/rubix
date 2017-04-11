@@ -28,15 +28,14 @@ export class ConfigService {
 			{ channel: Channels.Price , url: this.PRICE, isSecure: false },
 			{ channel: Channels.PriceMeta  , url: this.PRICE_META, isSecure: false },
 		];
-
-		this.load();
 	}
 
 	public getConnectionConfig(): Array<ConnectionConfig> {
 		return this.connectionConfig;
 	}
 
-	private load(): void {
+	// Below will be invoked from the main component's constructor. This will pre initialise the service.
+	public init(): void {
 		this.http.get('./src/app/config/app-config.json').map((res) => res.json()).subscribe(data => {
 			this.configObj = data;
 		}, (rej) => {
