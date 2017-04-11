@@ -6,8 +6,7 @@
 				{
 					"title": "Side Bar",
 					"path": "side-bar",
-					"outlet": "outlet1",
-					"args": []
+					"outlet": "outlet1"
 				}
 			]
 		},
@@ -20,19 +19,23 @@
 					"model": [
 						{
 							"path": "detail-quote",
-							"outlet": "outlet1"
+							"outlet": "outlet1",
+							"args": ["TDWL", "1010"]
 						},
 						{
 							"path": "detail-quote",
-							"outlet": "outlet2"
+							"outlet": "outlet2",
+							"args": ["DFM", "EMAAR"]
 						},
 						{
-							"path": "chart",
-							"outlet": "outlet3"
+							"path": "detail-quote",
+							"outlet": "outlet3",
+							"args": ["DFM", "DIC"]
 						},
 						{
-							"path": "chart",
-							"outlet": "outlet4"
+							"path": "detail-quote",
+							"outlet": "outlet4",
+							"args": ["TDWL", "1090"]
 						}
 					]
 				},
@@ -66,15 +69,18 @@
 					"model": [
 						{
 							"path": "detail-quote",
-							"outlet": "outlet1"
+							"outlet": "outlet1",
+							"args": ["TDWL", "1090"]
 						},
 						{
 							"path": "detail-quote",
-							"outlet": "outlet2"
+							"outlet": "outlet2",
+							"args": ["TDWL", "1090"]
 						},
 						{
 							"path": "detail-quote",
-							"outlet": "outlet3"
+							"outlet": "outlet3",
+							"args": ["TDWL", "1090"]
 						}
 					]
 				}

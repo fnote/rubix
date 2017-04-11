@@ -19,8 +19,8 @@ export const routes: Routes = [
 				children: [
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1' },
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2' },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet3' },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet4' },
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet3' },
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet4' },
 				],
 			},
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
