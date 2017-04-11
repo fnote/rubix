@@ -63,7 +63,7 @@ export class AuthService {
 			this.authenticateSecondarySSO();
 		});
 
-		this.priceStreamingResponseHandler.getmetaAuthResponseStream().subscribe(response => {
+		this.priceStreamingResponseHandler.getMetaAuthResponseStream().subscribe(response => {
 			this.loggerService.logInfo('Meta Connected', 'AuthService');
 			this.priceAuthHandler.isMetaAuthenticated = true;
 			if (this.priceAuthHandler.isPriceAuthenticated) {

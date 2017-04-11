@@ -8,15 +8,13 @@ import { Channels } from '../../../constants/enums/channels.enum';
 })
 export class LoginComponent implements OnInit {
 
-	public userName= '';
-	public password= '';
+	public userName = '';
+	public password = '';
 
-	constructor(private authService: AuthService) {
-		// code here
-	}
+	constructor(private authService: AuthService) { }
 
 	public ngOnInit(): void {
-		// Test
+		// implement this
 	}
 
 	public login(): void {

@@ -72,7 +72,7 @@ export class PriceStreamingResponseHandler {
 		return this.priceResponseStream$;
 	}
 
-	public getmetaAuthResponseStream(): Subject<any> {
+	public getMetaAuthResponseStream(): Subject<any> {
 		return this.metaAuthResponseStream$;
 	}
 
