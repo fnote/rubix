@@ -28,6 +28,9 @@ var getComponent = function (id) {
 		case 'secondary-layout-one':
 			component = 'SecondaryLayoutOneComponent';
 			break;
+		case 'secondary-layout-two':
+			component = 'SecondaryLayoutTwoComponent';
+			break;
 		case 'primary-layout-one':
 			component = 'PrimaryLayoutOneComponent';
 			break;

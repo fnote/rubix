@@ -4,7 +4,6 @@
 		{
 			"model": [
 				{
-					"id": "sb",
 					"title": "Side Bar",
 					"path": "side-bar",
 					"outlet": "outlet1",
@@ -15,8 +14,7 @@
 		{
 			"model": [
 				{
-					"id": "t",
-					"title": "Trade",
+					"title": "First Tab",
 					"path": "secondary-layout-one",
 					"outlet": "outlet2",
 					"model": [
@@ -39,8 +37,7 @@
 					]
 				},
 				{
-					"id": "c",
-					"title": "Chart",
+					"title": "Second Tab",
 					"path": "secondary-layout-one",
 					"outlet": "outlet2",
 					"model": [
@@ -59,6 +56,25 @@
 						{
 							"path": "chart",
 							"outlet": "outlet4"
+						}
+					]
+				},
+				{
+					"title": "Third Tab",
+					"path": "secondary-layout-two",
+					"outlet": "outlet2",
+					"model": [
+						{
+							"path": "detail-quote",
+							"outlet": "outlet1"
+						},
+						{
+							"path": "detail-quote",
+							"outlet": "outlet2"
+						},
+						{
+							"path": "detail-quote",
+							"outlet": "outlet3"
 						}
 					]
 				}
