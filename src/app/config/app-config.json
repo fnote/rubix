@@ -8,5 +8,8 @@
 			{ "channel": 1 , "url": "ws://10.1.20.136:1234", "isSecure": false },
 			{ "channel": 2 , "url": "ws://mfg-uat-phoenix.mubashertrade.com:9090/websocket/price", "isSecure": false },
 			{ "channel": 3 , "url": "ws://mfg-uat-phoenix.mubashertrade.com:9090/websocket/meta", "isSecure": false }
-		]
+		],
+  "cacheConfig" : {
+    "appCacheVersion" : 1
+  }
 }
