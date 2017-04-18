@@ -17,7 +17,6 @@ import { TradeModule } from './app-backend/trade/trade.module';
 import { UtilsModule } from './utils/utils.module';
 import { WidgetLoaderService } from './widgets/widget-loader/widget-loader.service';
 
-
 @NgModule({
 	declarations: [AppComponent, PrimaryLayoutOneComponent, SecondaryLayoutOneComponent, SecondaryLayoutTwoComponent],
 	imports: [
