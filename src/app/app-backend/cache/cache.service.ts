@@ -13,7 +13,7 @@ export class CacheService {
 	private _dbController: DbController;
 
 	constructor(private network: NetworkController, private logger: LoggerService) {
-		this._dbController = new DbController(this._version);
+		this._dbController = new DbController(this._version, logger);
 	}
 
 	private _isExpired(persistTime: number, ttl: number): boolean {

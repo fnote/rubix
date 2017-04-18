@@ -1,12 +1,13 @@
 import { CacheConfig } from '../../config/cache-config';
 import { LocalforageController } from './localforage-controller';
+import { LoggerService } from '../../utils/logger.service';
 import { StorageController } from './interfaces/storage-controller';
 
 export class DbController implements StorageController {
 	private _db: StorageController;
 	private _config: CacheConfig;
 
-	constructor(version: number) {
+	constructor(version: number, logger: LoggerService) {
 
 		this._config = new CacheConfig();
 		/* const indexedDB =
@@ -17,7 +18,7 @@ export class DbController implements StorageController {
 		 } else {
 		 this._db = new LocalstorageController(version);
 		 } */
-		this._db = new LocalforageController(version);
+		this._db = new LocalforageController(version, logger);
 	}
 
 	public getStore(storeName: string): any {
