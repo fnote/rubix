@@ -2,22 +2,23 @@ import 'rxjs/add/operator/map';
 import { Channels } from '../constants/enums/channels.enum';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
-
+import { LoggerService } from '../utils/logger.service';
 
 @Injectable()
 export class ConfigService {
 
 	public configObj: any;
 
-	constructor(private http: Http) {
+	constructor(private http: Http, private logger: LoggerService) {
 	}
 
 	// Below will be invoked from the main component's constructor. This will pre initialise the service.
 	public init(): void {
-		this.http.get('./src/app/config/app-config.json').map((res) => res.json()).subscribe(data => {
+		const self = this;
+		self.http.get('./src/app/config/app-config.json').map((res) => res.json()).subscribe(data => {
 			this.configObj = data;
 		}, (rej) => {
-			console.error('Could not load local data' , rej);
+			self.logger.logError('Could not load local data : ' + rej.message , 'ConfigService');
 		});
 	}
 

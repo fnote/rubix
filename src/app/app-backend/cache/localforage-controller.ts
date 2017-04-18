@@ -1,4 +1,5 @@
 import { CacheController } from './interfaces/cache-controller';
+import { LoggerService } from '../../utils/logger.service';
 import { StorageController } from './interfaces/storage-controller';
 import localForage from 'localforage';
 
@@ -6,7 +7,7 @@ export class LocalforageController implements StorageController, CacheController
 
 	private _version: number;
 
-	constructor(version: number) {
+	constructor(public version: number, private logger: LoggerService) {
 		this._version = version;
 		this.init();
 	}
@@ -31,7 +32,16 @@ export class LocalforageController implements StorageController, CacheController
 	}
 
 	public garbageCollect(): void {
-		// do nothing
+		const self = this;
+		localForage.iterate(function(value: any, key: any): any {
+			if (Date.now() > value.persistTime + value.ttl) {
+				self.remove(key);
+			}
+		}).then(() => {
+			self.logger.logInfo('Garbage collection completed', 'LocalforageController');
+		}).catch((err: Error) => {
+			self.logger.logError('Garbage collection failed : ' + err.message , 'LocalforageController');
+		});
 	}
 
 	public add(key: any, value: any): any {

@@ -138,7 +138,7 @@ export class CacheService {
 
 		const store = self._dbController.getStore(keyData.storeName);
 
-		const val = { persistTime: self._getTimeStamp(), value: value };
+		const val = { persistTime: self._getTimeStamp(), ttl: keyData.ttl, value: value };
 
 		store.add(keyData.name, val).then(() => {
 			/* tslint:disable */
@@ -146,6 +146,9 @@ export class CacheService {
 			/* tslint:enable */
 		}).catch((evt) => {
 			self.logger.logError('value for ' + key + 'cache update failed', 'CacheService');
+
+			self.logger.logInfo('Running garbage collection', 'CacheService');
+			self._dbController.garbageCollect();
 		});
 	}
 
