@@ -347,17 +347,15 @@ export class PriceSubscriptionService {
 	private logSubscriptionTree(): void {
 		this.subscriptionMap.forEach((value: Map<string, NodeObject>, key: PriceRequestTypes) => {
 			// tslint:disable-next-line:no-console
-			console.log('Level 1 Map key Request Type : ' + key);
+			console.log('Level 1 Map key :  Request Type : ' + key);
 			value.forEach((exchangeNode: NodeObject, exchangeCode: string) => {
 				// tslint:disable-next-line:no-console
-				console.log('Level 2 Map key exchange code : ' + exchangeCode);
-				// tslint:disable-next-line:no-console
-				console.log('Exchange Node Object Properties : ' + exchangeNode.printObj);
-				exchangeNode.subscribedSymbolInfo.forEach((symbolNode: SymbolNodeObject, symbokCode: string) => {
+				console.log('Level 2 Map key : exchange code : ' + exchangeCode);
+				exchangeNode.printObj();
+				exchangeNode.subscribedSymbolInfo.forEach((symbolNode: SymbolNodeObject, symbolCode: string) => {
 						// tslint:disable-next-line:no-console
-					console.log('Level 3 Map symbol code : ' + symbokCode);
-						// tslint:disable-next-line:no-console
-					console.log('Symbol Node Object Properties : ' +  symbolNode.printObj);
+					console.log('Level 3 Map key : symbol code : ' + symbolCode);
+					symbolNode.printObj();
 				});
 			});
 		});
