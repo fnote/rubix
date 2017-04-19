@@ -6,7 +6,6 @@
     "experimentalDecorators": true,
     "lib": [
       "es2016",
-      "es6",
       "dom"
     ],
     "mapRoot": "./",
