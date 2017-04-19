@@ -30,39 +30,12 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnInit(): void {
-		const authParams: Object = {
-			priceVerion: '1',
-			userName: 'amilaaaaa',
-			password: 'password',
-			userType: '30',
-			subType: '1',
-			omsId: 10,
-			brokerCode: 'MFS_UAT',
-		};
-		this.priceService.authenticateWithUsernameAndPassword(authParams, 2);
-
-		/**setTimeout(() => {
-			const authParams1: Object = {
-				priceVerion: '1',
-				userName: 'amilaaaaa',
-				password: 'password',
-				userType: '30',
-				subType: '1',
-				omsId: 10,
-				session: this.session,
-				brokerCode: 'MFS_UAT',
-			};
-			this.priceService.authenticateWithSecondaryAuthToken(authParams1, 3);
-		}, 5000);*/
-
-		setTimeout(() => {
 			if (!this.stockObj) {
 				this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
 			}
 
-			// this.priceService.requestSymbolMeta(this.exgStock);
+			this.priceService.requestSymbolMeta(this.exgStock);
 			this.priceService.addSymbolRequest(this.exgStock);
-		}, 5000);
 	}
 
 	public ngOnDestroy(): void {

@@ -1,7 +1,7 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { WidgetLoaderService } from '../../../widgets/widget-loader/widget-loader.service';
+import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 
 @Component({
 	selector: 'app-side-bar',

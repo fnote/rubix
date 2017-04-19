@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AuthGuardService } from './widgets/widget-util/auth-guard-service';
 import { AuthModule } from './app-backend/auth/auth.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonWidgetModule } from './widgets/common-widgets/common-widget.module';
@@ -15,7 +16,7 @@ import { SecondaryLayoutOneComponent } from './layouts/secondary-layout-one/seco
 import { SecondaryLayoutTwoComponent } from './layouts/secondary-layout-two/secondary-layout-two.component';
 import { TradeModule } from './app-backend/trade/trade.module';
 import { UtilsModule } from './utils/utils.module';
-import { WidgetLoaderService } from './widgets/widget-loader/widget-loader.service';
+import { WidgetLoaderService } from './widgets/widget-util/widget-loader.service';
 
 @NgModule({
 	declarations: [AppComponent, PrimaryLayoutOneComponent, SecondaryLayoutOneComponent, SecondaryLayoutTwoComponent],
@@ -31,7 +32,7 @@ import { WidgetLoaderService } from './widgets/widget-loader/widget-loader.servi
 		AuthModule,
 		TradeModule,
 	],
-	providers: [ConfigService, WidgetLoaderService],
+	providers: [ConfigService, WidgetLoaderService, AuthGuardService],
 	bootstrap: [AppComponent],
 })
 export class AppModule { }
