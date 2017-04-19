@@ -27,4 +27,9 @@ export class SideBarComponent {
 		this.selectedTab = tab.id;
 		this.widgetLoader.loadTab(tab);
 	}
+
+	public sideBarCloseClicked(): void {
+		const body = document.getElementsByTagName('body')[0];
+		body.classList.remove('nav-expanded');
+	}
 }
