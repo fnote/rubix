@@ -30,12 +30,12 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnInit(): void {
-			if (!this.stockObj) {
-				this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
-			}
+		if (!this.stockObj) {
+			this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
+		}
 
-			this.priceService.requestSymbolMeta(this.exgStock);
-			this.priceService.addSymbolRequest(this.exgStock);
+		this.priceService.requestSymbolMeta(this.exgStock);
+		this.priceService.addSymbolRequest(this.exgStock);
 	}
 
 	public ngOnDestroy(): void {

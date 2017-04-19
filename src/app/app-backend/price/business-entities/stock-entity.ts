@@ -20,18 +20,18 @@ export class StockEntity extends BaseEntity {
 	private _lowPrice: string = userSettings.marketData.defaultStringInitializer;
 	private _closePrice: string = userSettings.marketData.defaultStringInitializer;
 	private _bestAskPrice: string = userSettings.marketData.defaultStringInitializer;
-	private _bestAskQty: number = userSettings.marketData.defaultNumberInitializer;
+	private _bestAskQty: string = userSettings.marketData.defaultStringInitializer;
 	private _bestBidPrice: string = userSettings.marketData.defaultStringInitializer;
-	private _bestBidQty: number = userSettings.marketData.defaultNumberInitializer;
-	private _totalBidQty: number = userSettings.marketData.defaultNumberInitializer;
-	private _totalAskQty: number = userSettings.marketData.defaultNumberInitializer;
+	private _bestBidQty: string = userSettings.marketData.defaultStringInitializer;
+	private _totalBidQty: string = userSettings.marketData.defaultStringInitializer;
+	private _totalAskQty: string = userSettings.marketData.defaultStringInitializer;
 	private _change: string = userSettings.marketData.defaultStringInitializer;
 	private _perChange: string = userSettings.marketData.defaultStringInitializer;
 	private _previousClosePrice: string = userSettings.marketData.defaultStringInitializer;
-	private _turnover: number = userSettings.marketData.defaultNumberInitializer;
-	private _volume: number = userSettings.marketData.defaultNumberInitializer;
-	private _totalTrades: number = userSettings.marketData.defaultNumberInitializer;
-	private _totalQty: number = userSettings.marketData.defaultNumberInitializer;
+	private _turnover: string = userSettings.marketData.defaultStringInitializer;
+	private _volume: string = userSettings.marketData.defaultStringInitializer;
+	private _trades: string = userSettings.marketData.defaultStringInitializer;
+	private _totalQty: string = userSettings.marketData.defaultStringInitializer;
 	private _lastTradeDate: number = userSettings.marketData.defaultNumberInitializer;
 	private _vwap: string = userSettings.marketData.defaultStringInitializer;
 	private _min: string = userSettings.marketData.defaultStringInitializer;
@@ -106,7 +106,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set lastTradePrice(value: string) {
-		this._lastTradePrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._lastTradePrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get openPrice(): string  {
@@ -114,7 +114,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set openPrice(value: string) {
-		this._openPrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._openPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get highPrice(): string  {
@@ -122,7 +122,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set highPrice(value: string) {
-		this._highPrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._highPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get lowPrice(): string  {
@@ -130,7 +130,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set lowPrice(value: string) {
-		this._lowPrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._lowPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get closePrice(): string  {
@@ -138,7 +138,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set closePrice(value: string) {
-		this._closePrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._closePrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get bestAskPrice(): string  {
@@ -146,15 +146,15 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set bestAskPrice(value: string) {
-		this._bestAskPrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._bestAskPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
-	public get bestAskQty(): number  {
+	public get bestAskQty(): string  {
 		return this._bestAskQty;
 	}
 
-	public set bestAskQty(value: number) {
-		this._bestAskQty = value;
+	public set bestAskQty(value: string) {
+		this._bestAskQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public get bestBidPrice(): string  {
@@ -162,31 +162,43 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set bestBidPrice(value: string) {
-		this._bestBidPrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._bestBidPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
-	public get bestBidQty(): number  {
+	public get bestBidQty(): string  {
 		return this._bestBidQty;
 	}
 
-	public set bestBidQty(value: number) {
-		this._bestBidQty = value;
+	public set bestBidQty(value: string) {
+		this._bestBidQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
-	public get totalBidQty(): number  {
+	public get totalBidQty(): string  {
 		return this._totalBidQty;
 	}
 
-	public set totalBidQty(value: number) {
-		this._totalBidQty = value;
+	public set totalBidQty(value: string) {
+		this._totalBidQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
+
+		if (this.totalAskQty !== userSettings.marketData.defaultStringInitializer) {
+			const val = parseFloat(value) / parseFloat(this.totalAskQty.replace(',', ''));
+			this._bidOffer =
+				this.commonHelperService.formatNumber(val, this.decimalPlaces);
+		}
 	}
 
-	public get totalAskQty(): number  {
+	public get totalAskQty(): string  {
 		return this._totalAskQty;
 	}
 
-	public set totalAskQty(value: number) {
-		this._totalAskQty = value;
+	public set totalAskQty(value: string) {
+		this._totalAskQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
+
+		if (this.totalBidQty !== userSettings.marketData.defaultStringInitializer) {
+			const val = parseFloat(this.totalBidQty.replace(',', '')) / parseFloat(value);
+			this._bidOffer =
+				this.commonHelperService.formatNumber(val, this.decimalPlaces);
+		}
 	}
 
 	public get change(): string {
@@ -194,7 +206,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set change(value: string) {
-		this._change = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._change = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get perChange(): string {
@@ -202,7 +214,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set perChange(value: string) {
-		this._perChange = this.commonHelperService.roundNumber(
+		this._perChange = this.commonHelperService.formatNumber(
 			parseFloat(value), userSettings.marketData.defaultPercentageDecimalPlaces);
 	}
 
@@ -211,39 +223,39 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set previousClosePrice(value: string) {
-		this._previousClosePrice = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._previousClosePrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
-	public get turnover(): number {
+	public get turnover(): string {
 		return this._turnover;
 	}
 
-	public set turnover(value: number) {
-		this._turnover = value;
+	public set turnover(value: string) {
+		this._turnover = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
-	public get volume(): number {
+	public get volume(): string {
 		return this._volume;
 	}
 
-	public set volume(value: number) {
-		this._volume = value;
+	public set volume(value: string) {
+		this._volume = this.commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
-	public get totalTrades(): number {
-		return this._totalTrades;
+	public get trades(): string {
+		return this._trades;
 	}
 
-	public set totalTrades(value: number) {
-		this._totalTrades = value;
+	public set trades(value: string) {
+		this._trades = this.commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
-	public get totalQty(): number {
+	public get totalQty(): string {
 		return this._totalQty;
 	}
 
-	public set totalQty(value: number) {
-		this._totalQty = value;
+	public set totalQty(value: string) {
+		this._totalQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public get lastTradeDate(): number {
@@ -259,7 +271,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set vwap(value: string) {
-		this._vwap = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._vwap = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get min(): string {
@@ -267,7 +279,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set min(value: string) {
-		this._min = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._min = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get max(): string {
@@ -275,7 +287,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set max(value: string) {
-		this._max = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._max = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get high52(): string {
@@ -283,7 +295,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set high52(value: string) {
-		this._high52 = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._high52 = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get low52(): string {
@@ -291,16 +303,11 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set low52(value: string) {
-		this._low52 = this.commonHelperService.roundNumber(parseFloat(value), this.decimalPlaces);
+		this._low52 = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get bidOffer(): string {
 		return this._bidOffer;
-	}
-
-	public set bidOffer(value: string) {
-		this._bidOffer = this.commonHelperService.roundNumber(
-			parseFloat(value), userSettings.marketData.defaultPercentageDecimalPlaces);
 	}
 
 	constructor(values: Object = {}) {

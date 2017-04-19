@@ -143,40 +143,46 @@ export class CommonHelperService {
 		return num;
 	}
 
-	// TODO: [Malindu] Uncomment if this is required
-	// formatNumber(num: number , dec: number): string {
-	//   const roundedNum = this.roundNumber(num, dec);
-	//   const wholeNum = (roundedNum.toString().split('.')[0]).toString();
-	//   let wholeNumWthtMinus;
-	//   if (wholeNum.charAt(0) === '-') {
-	//     wholeNumWthtMinus = wholeNum.substring(1, wholeNum.length);
-	//   } else {
-	//     wholeNumWthtMinus = wholeNum;
-	//   }
-	//   let formWholeNum = '', formNum;
-	//   for (let i = wholeNumWthtMinus.length; i > 0; i -= 3) {
-	//     formWholeNum = ',' + wholeNumWthtMinus.substring(i - 3, i) + formWholeNum;
-	//   }
-	//   if ((roundedNum.toString().split('.')).length !== 1) {
-	//     formNum = formWholeNum.substring(1, formWholeNum.length) + '.' + roundedNum.toString().split('.')[1];
-	//   } else {
-	//     formNum = formWholeNum.substring(1, formWholeNum.length);
-	//     if (dec > 0) {
-	//       formNum += '.';
-	//       while (dec > 0) {
-	//         formNum += '0';
-	//         dec--;
-	//       }
-	//     }
-	//   }
-	//   if (wholeNum.charAt(0) === '-') {
-	//     formNum = '-' + formNum;
-	//   }
-	//   if (formNum === 'NaN' || formNum.indexOf('NaN') >= 0) {
-	//     formNum = '--';
-	//   }
-	//   return formNum;
-	// }
+	/*
+	* format a number with comma seperators added
+	* @param num Input number
+	*/
+	public formatNumber(num: number, dec: number): string {
+		const roundedNum = this.roundNumber(num, dec);
+		const wholeNum = (roundedNum.toString().split('.')[0]).toString();
+		let wholeNumWthtMinus;
+		if (wholeNum.charAt(0) === '-') {
+			wholeNumWthtMinus = wholeNum.substring(1, wholeNum.length);
+		} else {
+			wholeNumWthtMinus = wholeNum;
+		}
+		let formWholeNum = '';
+		let formNum = '';
+		for (let i = wholeNumWthtMinus.length; i > 0; i -= 3) {
+			formWholeNum = ',' + wholeNumWthtMinus.substring(i - 3, i) + formWholeNum;
+		}
+
+		if ((roundedNum.toString().split('.')).length !== 1) {
+			formNum = formWholeNum.substring(1, formWholeNum.length) + '.' + roundedNum.toString().split('.')[1];
+		} else {
+			formNum = formWholeNum.substring(1, formWholeNum.length);
+			if (dec > 0) {
+				formNum += '.';
+				while (dec > 0) {
+					formNum += '0';
+					dec--;
+				}
+			}
+		}
+
+		if (wholeNum.charAt(0) === '-') {
+			formNum = '-' + formNum;
+		}
+		if (formNum === 'NaN' || formNum.indexOf('NaN') >= 0) {
+			formNum = '--';
+		}
+		return formNum;
+	}
 
 	////////////////////// Number Formatters END //////////////////////
 

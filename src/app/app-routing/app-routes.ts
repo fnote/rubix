@@ -42,7 +42,7 @@ export const routes: Routes = [
 		],
 	},
 
-	{ path: '', redirectTo: 'test', pathMatch: 'full' },
+	{ path: '', redirectTo: 'detail-quote', pathMatch: 'full' },
 	{ path: 'test', canActivate: [AuthGuardService], component: RubixTestPageComponent },
 	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent },
 	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent },
