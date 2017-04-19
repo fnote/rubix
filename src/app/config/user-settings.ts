@@ -5,7 +5,11 @@ export const userSettings = {
 
 	presentation: {
 		defaultTheme: Themes.Light,
+<<<<<<< HEAD
 		defaultLanguage: Languages.EN,
+=======
+		defaultLanguage: Languages.AR,
+>>>>>>> 613d97037b9081049d7a3f9432bf79b01d4ea82f
 		defaultFontSize: 12, // TODO: [Amila] Discuss this with Dinushka
 	},
 
