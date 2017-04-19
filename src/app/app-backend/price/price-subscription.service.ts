@@ -126,10 +126,9 @@ export class PriceSubscriptionService {
  	* @returns {boolean} true - send subscription / false - no subscription
  	*/
 	public subscribeFor(messageType: PriceRequestTypes, exchange: string, symbol?: string): boolean {
-		return true;
-		//const isSubscribe = this.isSubscribeRequest(messageType, exchange, symbol);
-		//this.logSubscriptionTree();
-		//return isSubscribe;
+		const isSubscribe = this.isSubscribeRequest(messageType, exchange, symbol);
+		this.logSubscriptionTree();
+		return isSubscribe;
 	}
 
 	/**
@@ -140,10 +139,9 @@ export class PriceSubscriptionService {
  	* @returns {boolean} true - send unsubscription / false - no unsubscription
  	*/
 	public unSubscribeFor(messageType: PriceRequestTypes, exchange: string, symbol?: string): boolean {
-		return true;
-		//const isUnsubscribe = this.isUnsubscribeRequest(messageType, exchange, symbol);
-		//this.logSubscriptionTree();
-		//return isUnsubscribe;
+		const isUnsubscribe = this.isUnsubscribeRequest(messageType, exchange, symbol);
+		this.logSubscriptionTree();
+		return isUnsubscribe;
 	}
 
 	/**
@@ -219,7 +217,7 @@ export class PriceSubscriptionService {
 	* @returns {boolean} true - key exists/ false - not exists
 	 */
 	private isKeyExistsInMap(key: any, dataMap: Map<any, any>): boolean {
-		if (!dataMap.get(key)) {
+		if (dataMap.has(key)) {
 			return true;
 		}
 		return false;
@@ -349,17 +347,15 @@ export class PriceSubscriptionService {
 	private logSubscriptionTree(): void {
 		this.subscriptionMap.forEach((value: Map<string, NodeObject>, key: PriceRequestTypes) => {
 			// tslint:disable-next-line:no-console
-			console.log('Level 1 Map key Request Type : ' + key);
+			console.log('Level 1 Map key :  Request Type : ' + key);
 			value.forEach((exchangeNode: NodeObject, exchangeCode: string) => {
 				// tslint:disable-next-line:no-console
-				console.log('Level 2 Map key exchange code : ' + exchangeCode);
-				// tslint:disable-next-line:no-console
-				console.log('Exchange Node Object Properties : ' + exchangeNode.printObj);
-				exchangeNode.subscribedSymbolInfo.forEach((symbolNode: SymbolNodeObject, symbokCode: string) => {
+				console.log('Level 2 Map key : exchange code : ' + exchangeCode);
+				exchangeNode.printObj();
+				exchangeNode.subscribedSymbolInfo.forEach((symbolNode: SymbolNodeObject, symbolCode: string) => {
 						// tslint:disable-next-line:no-console
-					console.log('Level 3 Map symbol code : ' + symbokCode);
-						// tslint:disable-next-line:no-console
-					console.log('Symbol Node Object Properties : ' +  symbolNode.printObj);
+					console.log('Level 3 Map key : symbol code : ' + symbolCode);
+					symbolNode.printObj();
 				});
 			});
 		});
