@@ -397,7 +397,7 @@ body.ar {
 }
 
 
-// Sidebar Menu
+// Sidebar Menu start
 a.nav-expander {
   background: none repeat scroll 0 0 #367fa9;
   color: #FFFFFF;
@@ -665,3 +665,30 @@ footer{
   border-top: 1px solid #d2d6de;
 	font-size:10px;
 	}
+// Sidebar Menu end 
+
+//Scrollbar start
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-moz-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+::-moz-scrollbar-track {
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+}
+
+::-moz-scrollbar-thumb {
+    border-radius: 10px;
+}
+//Scrollbar end

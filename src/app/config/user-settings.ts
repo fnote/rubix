@@ -4,7 +4,7 @@ import { Themes } from '../constants/enums/themes.enum';
 export const userSettings = {
 
 	presentation: {
-		defaultTheme: Themes.Dark,
+		defaultTheme: Themes.Light,
 		defaultLanguage: Languages.EN,
 		defaultFontSize: 12, // TODO: [Amila] Discuss this with Dinushka
 	},
