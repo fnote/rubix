@@ -126,9 +126,10 @@ export class PriceSubscriptionService {
  	* @returns {boolean} true - send subscription / false - no subscription
  	*/
 	public subscribeFor(messageType: PriceRequestTypes, exchange: string, symbol?: string): boolean {
-		const isSubscribe = this.isSubscribeRequest(messageType, exchange, symbol);
-		this.logSubscriptionTree();
-		return isSubscribe;
+		return true;
+		//const isSubscribe = this.isSubscribeRequest(messageType, exchange, symbol);
+		//this.logSubscriptionTree();
+		//return isSubscribe;
 	}
 
 	/**
@@ -139,9 +140,10 @@ export class PriceSubscriptionService {
  	* @returns {boolean} true - send unsubscription / false - no unsubscription
  	*/
 	public unSubscribeFor(messageType: PriceRequestTypes, exchange: string, symbol?: string): boolean {
-		const isUnsubscribe = this.isUnsubscribeRequest(messageType, exchange, symbol);
-		this.logSubscriptionTree();
-		return isUnsubscribe;
+		return true;
+		//const isUnsubscribe = this.isUnsubscribeRequest(messageType, exchange, symbol);
+		//this.logSubscriptionTree();
+		//return isUnsubscribe;
 	}
 
 	/**
