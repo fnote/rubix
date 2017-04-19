@@ -126,10 +126,9 @@ export class PriceSubscriptionService {
  	* @returns {boolean} true - send subscription / false - no subscription
  	*/
 	public subscribeFor(messageType: PriceRequestTypes, exchange: string, symbol?: string): boolean {
-		return true;
-		//const isSubscribe = this.isSubscribeRequest(messageType, exchange, symbol);
-		//this.logSubscriptionTree();
-		//return isSubscribe;
+		const isSubscribe = this.isSubscribeRequest(messageType, exchange, symbol);
+		this.logSubscriptionTree();
+		return isSubscribe;
 	}
 
 	/**
@@ -140,10 +139,9 @@ export class PriceSubscriptionService {
  	* @returns {boolean} true - send unsubscription / false - no unsubscription
  	*/
 	public unSubscribeFor(messageType: PriceRequestTypes, exchange: string, symbol?: string): boolean {
-		return true;
-		//const isUnsubscribe = this.isUnsubscribeRequest(messageType, exchange, symbol);
-		//this.logSubscriptionTree();
-		//return isUnsubscribe;
+		const isUnsubscribe = this.isUnsubscribeRequest(messageType, exchange, symbol);
+		this.logSubscriptionTree();
+		return isUnsubscribe;
 	}
 
 	/**
@@ -219,7 +217,7 @@ export class PriceSubscriptionService {
 	* @returns {boolean} true - key exists/ false - not exists
 	 */
 	private isKeyExistsInMap(key: any, dataMap: Map<any, any>): boolean {
-		if (!dataMap.get(key)) {
+		if (dataMap.has(key)) {
 			return true;
 		}
 		return false;
