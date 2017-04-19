@@ -1,16 +1,6 @@
-<!--
-	<ul>
-  <li *ngFor="let tab of tabs"
-      [class.btn-info]="tab.id === selectedTab"
-      (click)="loadTab(tab)">
-    {{ tab.title}}
-  </li>
-</ul>-->
-
-
 <nav>
 	<ul class="list-unstyled main-menu">
-		<li class="text-right"><a id="nav-close" class="nav-menu-close" (click)="sideBarCloseClicked()"></a></li>
+		<li class="text-right"><a id="nav-close" class="nav-menu-close" (click)="sideBarCloseClicked($event)"></a></li>
 		<li *ngFor="let tab of tabs" [class.btn-info]="tab.id === selectedTab" (click)="loadTab(tab)">{{tab.title}}</li>
 	</ul>
 </nav>
