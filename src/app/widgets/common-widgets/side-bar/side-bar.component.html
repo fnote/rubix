@@ -1,7 +1,15 @@
-<ul>
+<!--
+	<ul>
   <li *ngFor="let tab of tabs"
       [class.btn-info]="tab.id === selectedTab"
       (click)="loadTab(tab)">
     {{ tab.title}}
   </li>
-</ul>
+</ul>-->
+
+
+<nav>
+	<ul class="list-unstyled main-menu">
+		<li *ngFor="let tab of tabs" [class.btn-info]="tab.id === selectedTab" (click)="loadTab(tab)">{{tab.title}}</li>
+	</ul>
+</nav>

@@ -1,14 +1,9 @@
 <div class="rubix-wrapper">
-	<div class="row">
-		<div class="col-md-3 side_one">
-			<div class="header">
-				<router-outlet name="outlet1"></router-outlet>
-			</div>
-		</div>
-		<div class="main col-md-9 side_two">
-			<div class="row">
-				<router-outlet name="outlet2"></router-outlet>
-			</div>
+	<div class="navbar navbar-inverse navbar-fixed-top"> <a class="navbar-brand">RubiX</a>
+		<div class="navbar-header pull-right">
+			<a id="nav-expander" class="menu-icon nav-expander fixed" (click)="navExpandClicked()"> </a>
 		</div>
 	</div>
+	<router-outlet name="outlet1"></router-outlet>
+	<router-outlet name="outlet2"></router-outlet>
 </div>

@@ -40,4 +40,10 @@ export const routes: Routes = [
 			},
 		],
 	},
+
+	{ path: '', redirectTo: 'test', pathMatch: 'full' },
+	{ path: 'test', component: RubixTestPageComponent },
+	{ path: 'detail-quote', component: DetailQuoteComponent },
+	{ path: 'time-and-sales', component: TimeAndSalesComponent },
+	{ path: 'login', component: LoginComponent },
 ];
