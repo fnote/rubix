@@ -27,7 +27,7 @@ export class QueueMannagerService {
 	}
 
 	private init(): void {
-		this.configService.getStringConfigVal('connectionConfig').then(connections => {
+		this.configService.getConnectionConfig().then(connections => {
 			connections.forEach(connection => {
 				const connConfig: Connection = {
 					channel: connection.channel,

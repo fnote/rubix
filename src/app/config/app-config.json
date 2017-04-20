@@ -3,13 +3,15 @@
 		"appLogLevel" : 6,
 		"serverLogLevel" : 0
 	},
-	"connectionConfig" : [
-			{ "channel": 0 , "url": "ws://mtplusglobal-uat.mubashertrade.com:8800/appsocket" , "isSecure": false },
-			{ "channel": 1 , "url": "ws://10.1.20.136:1234", "isSecure": false },
-			{ "channel": 2 , "url": "ws://mfg-uat-phoenix.mubashertrade.com:9090/websocket/price", "isSecure": false },
-			{ "channel": 3 , "url": "ws://mfg-uat-phoenix.mubashertrade.com:9090/websocket/meta", "isSecure": false }
-		],
-  "cacheConfig" : {
-    "appCacheVersion" : 1
-  }
+	"cacheConfig" : {
+		"appCacheVersion" : 1
+	},
+	"connectionConfig": {
+			"trade" : {
+						"url" : "ws://mtplusglobal-uat.mubashertrade.com:8800"
+			},
+			"price" : {
+						"url" : "ws://mfg-uat-phoenix.mubashertrade.com:9090"
+			}
+	}
 }
