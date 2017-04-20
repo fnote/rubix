@@ -3,6 +3,8 @@ export class UserState {
 
 	private static instance: UserState;
 	private _isAuthenticated = false;
+	private _isTradeAuthenticated = false;
+	private _isPriceAuthenticated = false;
 	private tradeDetails = {};
 	private priceDetails = {};
 
@@ -40,4 +42,21 @@ export class UserState {
 	public set isAuthenticated(value: boolean) {
 		this._isAuthenticated = value;
 	}
+
+	public get isTradeAuthenticated(): boolean {
+		return this._isTradeAuthenticated;
+	}
+
+	public set isTradeAuthenticated(value: boolean) {
+		this._isTradeAuthenticated = value;
+	}
+
+	public get isPriceAuthenticated(): boolean {
+		return this._isPriceAuthenticated;
+	}
+
+	public set isPriceAuthenticated(value: boolean) {
+		this._isPriceAuthenticated = value;
+	}
+
 }

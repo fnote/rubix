@@ -19,6 +19,7 @@ interface AuthStatus {
 
 @Injectable()
 export class AuthService {
+	private AUTH_TIME_INTERVAL = 5000; // 1000 * 5
 	private tradeAuthHandler: TradeAuthHandler;
 	private priceAuthHandler: PriceAuthHandler;
 	private authStatus$: Subject<AuthStatus>;
@@ -40,10 +41,35 @@ export class AuthService {
 		UserState.getInstance().setTadeValues({ userName: userName });
 		const authRequest = this.tradeAuthHandler.buildAuthRequest(userName, password);
 		this.dataService.sendToWs(authRequest);
+		setTimeout(() => {
+			this.terminateAuthentication();
+		}, this.AUTH_TIME_INTERVAL);
 	}
 
 	public checkAuthenticated(): Subject<AuthStatus> {
 		return this.authStatus$;
+	}
+
+	private terminateAuthentication(): void {
+		let rejectReson = 'Error Occured..';
+		if (!UserState.getInstance().isAuthenticated) {
+			if (!UserState.getInstance().isTradeAuthenticated) {
+				rejectReson = 'Trade Connection Fails';
+			}else if (!UserState.getInstance().isPriceAuthenticated) {
+				rejectReson = 'Price Connection Fails';
+			}else {
+				rejectReson = 'Error Occured..';
+			}
+			const authStatus = {
+				isAuthenticate: UserState.getInstance().isAuthenticated,
+				isTradeAuthenticate: UserState.getInstance().isTradeAuthenticated,
+				isPriceAuthenticated: this.priceAuthHandler.isPriceAuthenticated,
+				isMetaAuthenticated: this.priceAuthHandler.isMetaAuthenticated,
+				rejectReson: rejectReson,
+			};
+			this.authStatus$.next(authStatus);
+			this.authStatus$.complete();
+		}
 	}
 
 	private authenticatePrimarySSO(): void {
@@ -67,6 +93,7 @@ export class AuthService {
 					UserState.getInstance().setTadeValues(response.DAT);
 					UserState.getInstance().setTadeValues({ SESN_ID: response.HED.SESN_ID });
 					this.authenticatePrimarySSO();
+					UserState.getInstance().isTradeAuthenticated = true;
 				}else if (response.DAT.AUTH_STS === ResponseStatus.Fail) {
 					const authStatus = {
 						isAuthenticate: false,
@@ -89,6 +116,7 @@ export class AuthService {
 
 		this.priceStreamingResponseHandler.getMetaAuthResponseStream().subscribe(response => {
 			this.loggerService.logInfo('Meta Connected', 'AuthService');
+			UserState.getInstance().isPriceAuthenticated = true;
 			this.priceAuthHandler.isMetaAuthenticated = true;
 			if (this.priceAuthHandler.isPriceAuthenticated) {
 				this.priceAuthHandler.isAuthenticated = true;
