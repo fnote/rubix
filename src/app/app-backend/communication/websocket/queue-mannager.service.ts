@@ -57,11 +57,11 @@ export class QueueMannagerService {
 	}
 
 	public getConnectionByChannel(channel: number): Promise<Connection> {
-		return new Promise((resolve,reject) => {
-			if(this.isConfigLoaded){
+		return new Promise((resolve, reject) => {
+			if (this.isConfigLoaded) {
 				resolve(this.connectedSocketPool[channel]);
-			}else{
-				this.updateConfigurations$.subscribe( configLoaded => {
+			}else {
+				this.updateConfigurations$.subscribe(configLoaded => {
 					resolve(this.connectedSocketPool[channel]);
 				});
 			}

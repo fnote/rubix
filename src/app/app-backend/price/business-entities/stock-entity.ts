@@ -40,11 +40,6 @@ export class StockEntity extends BaseEntity {
 	private _low52: string = userSettings.marketData.defaultStringInitializer;
 	private _bidOffer: string = userSettings.marketData.defaultStringInitializer;
 
- 	// TRT : U ???
- 	// NOT : 147 ???
-	// LTDP : 10.55 ???
-	// OPERATOR : 5288
-
 	public get instrumentType(): number  {
 		return this._instrumentType;
 	}
