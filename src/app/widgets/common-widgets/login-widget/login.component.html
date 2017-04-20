@@ -1,11 +1,4 @@
-<!--<p>-->
-<!--price-login works!-->
-<!--</p>-->
 
-<!--<input [(ngModel)]="userName" placeholder="userName" />-->
-<!--<input type="password" [(ngModel)]="password" placeholder="password" />-->
-
-<!--<button (click)="login()">Login</button>-->
 <div class="login row">
 	<div class="top-content">
 		<div class="inner-bg">
@@ -19,18 +12,6 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-6 col-sm-offset-3 form-box">
-						<!--<div class="form-top">-->
-						<!--<a href="#">-->
-						<!--<div class="live-tab active">-->
-						<!--<p>LIVE</p>-->
-						<!--</div>-->
-						<!--</a>-->
-						<!--<a href="#">-->
-						<!--<div class="demo-tab">-->
-						<!--<p>DEMO</p>-->
-						<!--</div>-->
-						<!--</a>-->
-						<!--</div>-->
 						<div class="form-bottom loginTab" id="live">
 							<form role="form" action="" method="post" class="login-form">
 								<div class="form-group">
@@ -59,8 +40,8 @@
 										<a class="form-control" href="#">Forget Password?</a>
 									</div>
 								</div>
-
-								<button type="submit" (click)="login()" class="btn">Login</button>
+								<span [ngClass]="authClass" >{{rejectReson}}</span>
+								<button [disabled]="authProgress" type="submit" (click)="login()" class="btn">Login</button>
 							</form>
 						</div>
 					</div>
