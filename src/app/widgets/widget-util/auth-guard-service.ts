@@ -1,6 +1,7 @@
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../../app-backend/auth/auth.service';
 import { Injectable } from '@angular/core';
+import { UserState } from '../../model/user-state';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -13,7 +14,7 @@ export class AuthGuardService implements CanActivate {
 	}
 
 	private checkAuthenticated(url: string): boolean {
-		if (this.authService.isAuthenticated) {
+		if (UserState.getInstance().isAuthenticated) {
 			return true;
 		}
 		this.authService.redirectURL = url;

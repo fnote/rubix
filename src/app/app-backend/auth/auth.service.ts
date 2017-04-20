@@ -9,13 +9,19 @@ import { TradeAuthHandler } from './trade/trade-auth-handler';
 import { TradeStreamingResponseHandler } from '../trade/protocols/streaming/trade-streaming-response-handler';
 import { UserState } from '../../model/user-state';
 
+interface AuthStatus {
+	isAuthenticate: boolean;
+	isTradeAuthenticate: boolean;
+	isPriceAuthenticated: boolean;
+	isMetaAuthenticated: boolean;
+	rejectReson: string;
+}
+
 @Injectable()
 export class AuthService {
 	private tradeAuthHandler: TradeAuthHandler;
 	private priceAuthHandler: PriceAuthHandler;
-	// TODO: [Chaamini] This should move to customer entity. For now keeping the reference here
-	private _isAuthenticated = false;
-	private authStatus$: Subject<boolean>;
+	private authStatus$: Subject<AuthStatus>;
 	private _redirectURL: string;
 
 	constructor(private dataService: DataService,
@@ -36,7 +42,7 @@ export class AuthService {
 		this.dataService.sendToWs(authRequest);
 	}
 
-	public checkAuthenticated(): Subject<boolean> {
+	public checkAuthenticated(): Subject<AuthStatus> {
 		return this.authStatus$;
 	}
 
@@ -55,12 +61,21 @@ export class AuthService {
 	private updateAuthStatus(): void {
 		this.tradeStreamingResponseHandler.getAuthenticationResponseStream().subscribe(response => {
 			if (response && response.DAT) {
+				this.loggerService.logInfo('Trade Connected', 'AuthService');
 				if (response.DAT.AUTH_STS === ResponseStatus.Success) {
-					this.loggerService.logInfo('Trade Connected', 'AuthService');
 					this.tradeAuthHandler.isAuthenticated = true;
 					UserState.getInstance().setTadeValues(response.DAT);
 					UserState.getInstance().setTadeValues({ SESN_ID: response.HED.SESN_ID });
 					this.authenticatePrimarySSO();
+				}else if (response.DAT.AUTH_STS === ResponseStatus.Fail) {
+					const authStatus = {
+						isAuthenticate: false,
+						isTradeAuthenticate: false,
+						isPriceAuthenticated: false,
+						isMetaAuthenticated: false,
+						rejectReson: response.DAT.REJ_RESN,
+					};
+					this.authStatus$.next(authStatus);
 				}
 			}
 		});
@@ -77,8 +92,15 @@ export class AuthService {
 			this.priceAuthHandler.isMetaAuthenticated = true;
 			if (this.priceAuthHandler.isPriceAuthenticated) {
 				this.priceAuthHandler.isAuthenticated = true;
-				this.isAuthenticated = true;
-				this.authStatus$.next(true);
+				UserState.getInstance().isAuthenticated = true;
+				const authStatus = {
+					isAuthenticate: true,
+					isTradeAuthenticate: true,
+					isPriceAuthenticated: true,
+					isMetaAuthenticated: true,
+					rejectReson: '',
+				};
+				this.authStatus$.next(authStatus);
 			}
 		});
 	}
@@ -89,13 +111,5 @@ export class AuthService {
 
 	public set redirectURL(value: string) {
 		this._redirectURL = value;
-	}
-
-	public get isAuthenticated(): boolean {
-		return this._isAuthenticated;
-	}
-
-	public set isAuthenticated(value: boolean) {
-		this._isAuthenticated = value;
 	}
 }

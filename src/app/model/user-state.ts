@@ -2,6 +2,7 @@
 export class UserState {
 
 	private static instance: UserState;
+	private _isAuthenticated = false;
 	private tradeDetails = {};
 	private priceDetails = {};
 
@@ -30,5 +31,13 @@ export class UserState {
 
 	public setTadeValues(values: Object = {}): void {
 		Object.assign(this.tradeDetails, values);
+	}
+
+	public get isAuthenticated(): boolean {
+		return this._isAuthenticated;
+	}
+
+	public set isAuthenticated(value: boolean) {
+		this._isAuthenticated = value;
 	}
 }
