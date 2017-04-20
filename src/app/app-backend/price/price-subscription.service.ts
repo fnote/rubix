@@ -65,7 +65,12 @@ export class PriceSubscriptionService {
 			newExchangeMap.set(exchange, exchangeNodeObject);
 			this.subscriptionMap.set(messageType, newExchangeMap);
 		} else {
-			exchangeNodeObject = this.subscriptionMap.get(messageType).get(exchange);
+			if (!this.isKeyExistsInMap(exchange, this.subscriptionMap.get(messageType))) {
+				exchangeNodeObject = new NodeObject({ exchange: exchange, isExchangeSubscribed: false });
+				this.subscriptionMap.get(messageType).set(exchange, exchangeNodeObject);
+			}else {
+				exchangeNodeObject = this.subscriptionMap.get(messageType).get(exchange);
+			}
 		}
 
 		if (symbol) {
@@ -100,6 +105,10 @@ export class PriceSubscriptionService {
 			// unsubscription for not subscribed message type
 			return false;
 		} else {
+			if (!this.isKeyExistsInMap(exchange, this.subscriptionMap.get(messageType))) {
+				// unsubscription for not subscribed exchange
+				return false;
+			}
 			exchangeNodeObject = this.subscriptionMap.get(messageType).get(exchange);
 		}
 
