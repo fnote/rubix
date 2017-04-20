@@ -1,109 +1,10 @@
+import { Channels } from '../../constants/enums/channels.enum';
+import { DataService } from '../communication/data.service';
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../utils/logger.service';
+import { PriceRequest } from './protocols/price-request';
 import { PriceRequestTypes } from '../../constants/enums/price-request-types.enum';
-
-/**
- * Inner class to represent second level node of the subscription tree
- */
-class NodeObject {
-
-	private _exchange = '';
-	private _isExchangeSubscribed = false;
-	private _exchangeSubscriptionCount = 0;
-	private _subscribedSymbolInfo: Map<string, SymbolNodeObject> = new Map();
-
-	constructor(values: Object = {}) {
-		this.setValues(values);
-	}
-
-	public setValues(values: Object = {}): void {
-		Object.assign(this, values);
-	}
-
-	public get exchange(): string  {
-		return this._exchange;
-	}
-
-	public set exchange(value: string) {
-		this._exchange = value;
-	}
-
-	public get isExchangeSubscribed(): boolean {
-		return this._isExchangeSubscribed;
-	}
-
-	public set isExchangeSubscribed(value: boolean) {
-		this._isExchangeSubscribed = value;
-	}
-
-	public get subscribedSymbolInfo(): Map<string, SymbolNodeObject> {
-		return this._subscribedSymbolInfo;
-	}
-
-	public set subscribedSymbolInfo(value: Map<string, SymbolNodeObject>) {
-		this._subscribedSymbolInfo = value;
-	}
-
-	public get exchangeSubscriptionCount(): number {
-		return this._exchangeSubscriptionCount;
-	}
-
-	public set exchangeSubscriptionCount(value: number) {
-		this._exchangeSubscriptionCount = value;
-	}
-
-	public printObj(): void {
-		for (const key in this) {
-			if (this.hasOwnProperty(key)) {
-        // tslint:disable-next-line:no-console
-				console.log(key + ' : ' + this[key]);
-			}
-		}
-	}
-}
-
-/**
- * Inner class used to represent the third level of the subscription tree
- */
-class SymbolNodeObject {
-
-	private _isSymbolSubscribed = false;
-	private _symbolSubscriptionCount = 0;
-
-	constructor(values: Object = {}) {
-		this.setValues(values);
-	}
-
-	public setValues(values: Object = {}): void {
-		Object.assign(this, values);
-	}
-
-	public get isSymbolSubscribed(): boolean {
-		return this._isSymbolSubscribed;
-	}
-
-	public set isSymbolSubscribed(value: boolean) {
-		this._isSymbolSubscribed = value;
-	}
-
-	public get symbolSubscriptionCount(): number {
-		return this._symbolSubscriptionCount;
-	}
-
-	public set symbolSubscriptionCount(value: number) {
-		this._symbolSubscriptionCount = value;
-	}
-
-	public printObj(): void {
-		for (const key in this) {
-			if (this.hasOwnProperty(key)) {
-        // tslint:disable-next-line:no-console
-				console.log(key + ' : ' + this[key]);
-			}
-		}
-	}
-
-}
+import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';
 
 /**
  * This class is used to manage the realtime price subscriptions.
@@ -114,7 +15,7 @@ export class PriceSubscriptionService {
 
 	private subscriptionMap: Map<PriceRequestTypes, Map<string, NodeObject>> = new Map();
 
-	constructor(private loggerService: LoggerService) {
+	constructor(private dataService: DataService, private loggerService: LoggerService) {
 		// Some Code
 	}
 
@@ -160,7 +61,6 @@ export class PriceSubscriptionService {
 		// check message type already exists. if not create new map entry with default values
 		if (!this.isKeyExistsInMap(messageType, this.subscriptionMap)) {
 			const newExchangeMap: Map<string, NodeObject> = new Map();
-			// tslint:disable-next-line:ter-max-len
 			exchangeNodeObject = new NodeObject({ exchange: exchange, isExchangeSubscribed: false });
 			newExchangeMap.set(exchange, exchangeNodeObject);
 			this.subscriptionMap.set(messageType, newExchangeMap);
@@ -268,7 +168,7 @@ export class PriceSubscriptionService {
 	}
 
 	/**
-	 * Manage symbol level unsubscriptions
+	 * Manage symbol level subscriptions/un subscriptions
 	 * @param {string} exchange - exchange code
 	 * @param {NodeObject} exchangeNodeObject - exchange Node object
 	 * @param {boolean} isSubscription - true if subscription, false for unsubscription
@@ -279,12 +179,12 @@ export class PriceSubscriptionService {
 			if (isSubscription) {
 				exchangeNodeObject.subscribedSymbolInfo.forEach((value: SymbolNodeObject, key: string) => {
 					value.isSymbolSubscribed = true;
-					// initiate symbol subscription request
+					this.addSymbolRequest([exchange, key]);
 				});
 			} else {
 				exchangeNodeObject.subscribedSymbolInfo.forEach((value: SymbolNodeObject, key: string) => {
 					value.isSymbolSubscribed = false;
-					// initiate symbol unsubscription request
+					this.removeSymbolRequest([exchange, key]);
 				});
 			}
 		}
@@ -350,14 +250,145 @@ export class PriceSubscriptionService {
 			console.log('Level 1 Map key :  Request Type : ' + key);
 			value.forEach((exchangeNode: NodeObject, exchangeCode: string) => {
 				// tslint:disable-next-line:no-console
-				console.log('Level 2 Map key : exchange code : ' + exchangeCode);
+				console.log('- Level 2 Map key : exchange code : ' + exchangeCode);
 				exchangeNode.printObj();
 				exchangeNode.subscribedSymbolInfo.forEach((symbolNode: SymbolNodeObject, symbolCode: string) => {
 						// tslint:disable-next-line:no-console
-					console.log('Level 3 Map key : symbol code : ' + symbolCode);
+					console.log('-- Level 3 Map key : symbol code : ' + symbolCode);
 					symbolNode.printObj();
 				});
 			});
 		});
 	}
+
+	/**
+	 * Subscribe and Un-subscribe for a symbol updates
+	 * @param {[string, string]} exgSym - A tupple with Exchange Code and Symbol Code
+	 */
+	private addSymbolRequest (exgSym: [string, string]): void {
+		const req = new PriceRequest();
+		req.mt = PriceRequestTypes.SnapshotSymbol;
+		req.addParam(exgSym[0], exgSym[1]);
+
+		const request = {
+			channel : Channels.Price,
+			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+		};
+		this.dataService.sendToWs(request);
+	}
+
+	private removeSymbolRequest (exgSym: [string, string]): void {
+		const req = new PriceRequest();
+		req.mt = PriceRequestTypes.SnapshotSymbol;
+		req.addParam(exgSym[0], exgSym[1]);
+
+		const request = {
+			channel : Channels.Price,
+			data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+		};
+		this.dataService.sendToWs(request);
+	}
+}
+
+/**
+ * Inner class to represent second level node of the subscription tree
+ */
+class NodeObject {
+
+	private _exchange = '';
+	private _isExchangeSubscribed = false;
+	private _exchangeSubscriptionCount = 0;
+	private _subscribedSymbolInfo: Map<string, SymbolNodeObject> = new Map();
+
+	constructor(values: Object = {}) {
+		this.setValues(values);
+	}
+
+	public setValues(values: Object = {}): void {
+		Object.assign(this, values);
+	}
+
+	public get exchange(): string  {
+		return this._exchange;
+	}
+
+	public set exchange(value: string) {
+		this._exchange = value;
+	}
+
+	public get isExchangeSubscribed(): boolean {
+		return this._isExchangeSubscribed;
+	}
+
+	public set isExchangeSubscribed(value: boolean) {
+		this._isExchangeSubscribed = value;
+	}
+
+	public get subscribedSymbolInfo(): Map<string, SymbolNodeObject> {
+		return this._subscribedSymbolInfo;
+	}
+
+	public set subscribedSymbolInfo(value: Map<string, SymbolNodeObject>) {
+		this._subscribedSymbolInfo = value;
+	}
+
+	public get exchangeSubscriptionCount(): number {
+		return this._exchangeSubscriptionCount;
+	}
+
+	public set exchangeSubscriptionCount(value: number) {
+		this._exchangeSubscriptionCount = value;
+	}
+
+	public printObj(): void {
+		for (const key in this) {
+			if (this.hasOwnProperty(key)) {
+				// tslint:disable-next-line:no-console
+				console.log(key + ' : ' + this[key]);
+			}
+		}
+	}
+}
+
+/**
+ * Inner class used to represent the third level of the subscription tree
+ */
+class SymbolNodeObject {
+
+	private _isSymbolSubscribed = false;
+	private _symbolSubscriptionCount = 0;
+
+	constructor(values: Object = {}) {
+		this.setValues(values);
+	}
+
+	public setValues(values: Object = {}): void {
+		Object.assign(this, values);
+	}
+
+	public get isSymbolSubscribed(): boolean {
+		return this._isSymbolSubscribed;
+	}
+
+	public set isSymbolSubscribed(value: boolean) {
+		this._isSymbolSubscribed = value;
+	}
+
+	public get symbolSubscriptionCount(): number {
+		return this._symbolSubscriptionCount;
+	}
+
+	public set symbolSubscriptionCount(value: number) {
+		this._symbolSubscriptionCount = value;
+	}
+
+	public printObj(): void {
+		for (const key in this) {
+			if (this.hasOwnProperty(key)) {
+				// tslint:disable-next-line:no-console
+				console.log(key + ' : ' + this[key]);
+			}
+		}
+	}
+
 }
