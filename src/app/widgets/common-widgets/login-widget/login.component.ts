@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 	public userName = '';
 	public password = '';
 	public rejectReson = '';
-	private authProgress = false;
+	public isAuthenticating = false;
 	public authClass: {};
 
 	constructor(private authService: AuthService, public router: Router) { }
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
 
 	private setAuthClass(): void {
 		this.authClass =  {
-			authenticateProgress: this.authProgress,
-			authError: !this.authProgress,
+			authenticateProgress: this.isAuthenticating,
+			authError: !this.isAuthenticating,
 		};
 	}
 
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 				const redirect = this.authService.redirectURL ? this.authService.redirectURL : '/test';
 				this.router.navigateByUrl(redirect);
 			}else {
-				this.authProgress = false;
+				this.isAuthenticating = false;
 				this.rejectReson = authStatus.rejectReson;
 				this.setAuthClass();
 			}
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
 	private checkUserInputs(): boolean {
 		if (this.userName === '' || this.password === '') {
-			this.authProgress = false;
+			this.isAuthenticating = false;
 			this.rejectReson = 'Enter User Name & password';
 			return false;
 		}else {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
 
 	public login(): void {
 		if (this.checkUserInputs()) {
-			this.authProgress = true;
+			this.isAuthenticating = true;
 			this.rejectReson = 'Authenticating....';
 			this.authenticateUser();
 		}

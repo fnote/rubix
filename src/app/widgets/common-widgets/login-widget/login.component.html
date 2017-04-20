@@ -41,7 +41,7 @@
 									</div>
 								</div>
 								<span [ngClass]="authClass" >{{rejectReson}}</span>
-								<button [disabled]="authProgress" type="submit" (click)="login()" class="btn">Login</button>
+								<button [disabled]="isAuthenticating" type="submit" (click)="login()" class="btn">Login</button>
 							</form>
 						</div>
 					</div>
