@@ -1,78 +1,71 @@
+<!--<p>-->
+<!--price-login works!-->
+<!--</p>-->
 
-<div class="login">
-  <div class="top-content">
-    <div class="inner-bg">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8 col-sm-offset-2 text">
-            <img class="img-responsive mubasher-logo"
-                 src="../../../../../src/assets/assets/images/MT-black-bg-logo.png">
-            <h1 class="slogan">MT<span>RADE</span> PLUS</h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6 col-sm-offset-3 form-box">
-            <div class="form-top">
-              <a href="#">
-                <div class="live-tab active">
-                  <p>LIVE</p>
-                </div>
-              </a>
-              <a href="#">
-                <div class="demo-tab">
-                  <p>DEMO</p>
-                </div>
-              </a>
-              <!--img class="img-responsive" src="../../../../assets/assets/images/login-tab.png"-->
-            </div>
-            <div class="form-bottom loginTab" id="live">
-              <form role="form" action="" method="post" class="login-form">
-                <div class="form-group">
-                  <label class="sr-only" for="form-username-live">Username</label>
-                  <input type="text" [(ngModel)]="userName" placeholder="Username..." class="form-username form-control"
-                         id="form-username-live" name="userName" >
-                </div>
-                <div class="form-group">
-                  <label class="sr-only" for="form-password-live">Password</label>
-                  <input type="password" [(ngModel)]="password" placeholder="Password..."
-                         class="form-password form-control" id="form-password-live" name="password">
-                </div>
-                <div class="form-group">
-                  <div class="remember-me">
-                    <label _ngcontent-knt-4="" class="form-control">
-                      <input _ngcontent-knt-4="" id="rememberMe" name="rememberMe" type="checkbox" value="remember-me">
-                      Remember me
-                    </label>
-                  </div>
-                  <div class="forget-pw">
-                    <a class="form-control" href="#">Forget Password</a>
-                  </div>
-                </div>
+<!--<input [(ngModel)]="userName" placeholder="userName" />-->
+<!--<input type="password" [(ngModel)]="password" placeholder="password" />-->
 
-                <button [disabled]="authProgress"  type="submit" (click)="login()" class="btn">Login</button>
-              </form>
-            </div>
-            <span [ngClass]="authClass" >{{rejectReson}}</span>
+<!--<button (click)="login()">Login</button>-->
+<div class="login row">
+	<div class="top-content">
+		<div class="inner-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2 text">
+						<img class="img-responsive mubasher-logo"
+								 src="../../../../../src/assets/assets/images/MT-black-bg-logo.png">
+						<h1 class="slogan">MT<span>RADE</span> PLUS</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 col-sm-offset-3 form-box">
+						<!--<div class="form-top">-->
+						<!--<a href="#">-->
+						<!--<div class="live-tab active">-->
+						<!--<p>LIVE</p>-->
+						<!--</div>-->
+						<!--</a>-->
+						<!--<a href="#">-->
+						<!--<div class="demo-tab">-->
+						<!--<p>DEMO</p>-->
+						<!--</div>-->
+						<!--</a>-->
+						<!--</div>-->
+						<div class="form-bottom loginTab" id="live">
+							<form role="form" action="" method="post" class="login-form">
+								<div class="form-group">
+									<label class="sr-only" for="form-username-live">Username</label>
+									<input type="text" [(ngModel)]="userName" placeholder="Username..." class="form-username form-control"
+												 id="form-username-live" name="userName">
+								</div>
 
-            <div class="form-bottom loginTab" id="demo" style="display: none;">
-              <form role="form" action="" method="post" class="login-form">
-                <div class="form-group">
-                  <label class="sr-only" for="form-username-demo">Username</label>
-                  <input type="text" [(ngModel)]="userName" placeholder="Username..." class="form-username form-control"
-                         id="form-username-demo" name="userName">
-                </div>
-                <div class="form-group">
-                  <label class="sr-only" for="form-password-demo">Password</label>
-                  <input type="password" [(ngModel)]="password" placeholder="Password..."
-                         class="form-password form-control" id="form-password-demo" name="password">
-                </div>
-                <button [disabled]="!isLoginEnable"  type="submit" (click)="login()" class="btn">Login</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+								<div class="form-group">
+									<label class="sr-only" for="form-password-live">Password</label>
+									<input type="password" [(ngModel)]="password" placeholder="Password..."
+												 class="form-password form-control" id="form-password-live" name="password">
+								</div>
+
+								<div class="form-group">
+									<div class="rememberme">
+										<ul class="tg-list">
+											<li class="tg-list-item">
+												<input class="tgl tgl-flat" id="cb4" type="checkbox">
+												<label class="tgl-btn" for="cb4"></label>
+											</li>
+										</ul>
+										<p>Remember me</p>
+									</div>
+									<div class="forget-pw">
+										<a class="form-control" href="#">Forget Password?</a>
+									</div>
+								</div>
+
+								<button type="submit" (click)="login()" class="btn">Login</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
