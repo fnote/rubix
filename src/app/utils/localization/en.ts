@@ -1,5 +1,4 @@
-﻿
-export const EN = {
+﻿export const EN = {
 	VWAP: 'VWAP',
 	PREV_CLOSE: 'Prev. Close',
 	OPEN: 'Open',
@@ -20,4 +19,14 @@ export const EN = {
 	TOTAL_OFFER_QTY: 'Total Offer Qty.',
 	FIFTY_TWO_WK_LOW: '52 Wk. Low',
 	FIFTY_TWO_WK_HIGH: '52 Wk. High',
+	TIME: 'Time',
+	PRICE: 'Price',
+	QTY: 'Quantity',
+	CHANGE: 'Change',
+	PER_CHANGE: '% Change',
+	SPLITS: 'Splits',
+	TICK: 'Tick',
+	SIDE: 'Side',
+	BUY: 'Buy',
+	SELL: 'Sell',
 };

@@ -1,3 +1,4 @@
+import { ExchangeDataStore } from '../../data-stores/exchange-data-store';
 import { Injectable } from '@angular/core';
 import { PriceRequestTypes } from '../../../../constants/enums/price-request-types.enum';
 import { PriceResponse } from '../price-response';
@@ -5,6 +6,7 @@ import { StockDataStore } from '../../data-stores/stock-data-store';
 import { StockEntity } from '../../business-entities/stock-entity';
 import { StreamRouteService } from '../../../communication/stream-route.service';
 import { Subject } from 'rxjs/Rx';
+import { TimeAndSalesDataStore } from '../../data-stores/time-and-sales-data-store';
 
 @Injectable()
 export class PriceStreamingResponseHandler {
@@ -12,13 +14,17 @@ export class PriceStreamingResponseHandler {
 	private priceResponseStream$: Subject<Object>;
 	private metaAuthResponseStream$: Subject<any>;
 	private priceAuthResponseStream$: Subject<any>;
-	private stockDataStore: StockDataStore;
+	public stockDataStore: StockDataStore;
+	private timeAndSalesDataStore: TimeAndSalesDataStore;
+	private exchangeDataStore: ExchangeDataStore;
 
 	constructor(private streamRouteService: StreamRouteService) {
 		this.priceResponseStream$ = new Subject();
 		this.metaAuthResponseStream$ = new Subject();
 		this.priceAuthResponseStream$ = new Subject();
 		this.stockDataStore = StockDataStore.getInstance();
+		this.timeAndSalesDataStore = TimeAndSalesDataStore.getInstance();
+		this.exchangeDataStore = ExchangeDataStore.getInstance();
 		this.updatePriceResponseStream();
 	}
 
@@ -44,13 +50,18 @@ export class PriceStreamingResponseHandler {
 			case PriceRequestTypes.SnapshotSymbol:
 				this.stockDataStore.getOrAddStock([response.exchangeCode, response.symbolCode]).setValues(response);
 				break;
-
+			case PriceRequestTypes.TimeAndSalesSymbol:
+				this.timeAndSalesDataStore.updateTick(response);
+				break;
 			case PriceRequestTypes.SymbolMeta:
 				for (const symObj of response.SYMS) {
 					const stockObj = this.stockDataStore.getOrAddStock([symObj.exchangeCode, symObj.symbolCode]);
 					stockObj.setValues(symObj);
 					stockObj.isMetaDataLoaded = true;
 				}
+				break;
+			case PriceRequestTypes.ExchangeAndSubmarket:
+				this.exchangeDataStore.getOrAddExchange(response.exchangeCode).setValues(response);
 				break;
 
 			default:

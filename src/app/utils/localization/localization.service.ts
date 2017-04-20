@@ -7,7 +7,7 @@ import { userSettings } from '../../config/user-settings';
 @Injectable()
 export class LocalizationService {
 
-	private language: any;
+	private _language: any;
 	private layout: string;
 	private _activeLanguageCode: Languages = -1;
 	private supportedLanguages = {
@@ -33,6 +33,14 @@ export class LocalizationService {
 
 	public get activeLanguageCode(): Languages {
 		return this._activeLanguageCode;
+	}
+
+	public set language(value: any) {
+		this._language = value;
+	}
+
+	public get language(): any {
+		return this._language;
 	}
 
 	public getLongDesc(value?: Languages): string  {

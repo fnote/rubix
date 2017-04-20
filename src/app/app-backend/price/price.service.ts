@@ -12,17 +12,20 @@ import { PriceStreamingResponseHandler } from './protocols/streaming/price-strea
 import { PriceSubscriptionService } from './price-subscription.service';
 import { StockDataStore } from './data-stores/stock-data-store';
 import { Subject } from 'rxjs/Rx';
+import { TimeAndSalesDataStore } from './data-stores/time-and-sales-data-store';
 
 @Injectable()
 export class PriceService {
 
 	public stockDM: StockDataStore;
+	public timeAndSalesDM: TimeAndSalesDataStore;
 	public exchangeDM: ExchangeDataStore;
 
 	constructor(private dataService: DataService, private priceStreamingResponseHandler: PriceStreamingResponseHandler,
 		private priceSubscriptionService: PriceSubscriptionService, private localizationService: LocalizationService) {
 		this.stockDM = StockDataStore.getInstance();
 		this.exchangeDM = ExchangeDataStore.getInstance();
+		this.timeAndSalesDM = TimeAndSalesDataStore.getInstance();
 	}
 
 	/**
@@ -179,6 +182,62 @@ export class PriceService {
 			const req = new PriceRequest();
 			req.mt = PriceRequestTypes.SnapshotSymbol;
 			req.addParam(exgSym[0], exgSym[1]);
+
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
+	public addTimeAndSalesRequest (exgSym: [string, string]): void {
+		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.TimeAndSalesSymbol, exgSym[0], exgSym[1])) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.TimeAndSalesSymbol;
+			req.addParam(exgSym[0], exgSym[1]);
+
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
+	public removeTimeAndSalesRequest (exgSym: [string, string]): void {
+		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.TimeAndSalesSymbol, exgSym[0], exgSym[1])) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.TimeAndSalesSymbol;
+			req.addParam(exgSym[0], exgSym[1]);
+
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
+	public addRealTimeExchangeRequest (exchangeCode: string): void {
+		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.ExchangeAndSubmarket, exchangeCode)) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.ExchangeAndSubmarket;
+			req.addParam(exchangeCode);
+
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
+	public removeRealTimeExchangeRequest (exchangeCode: string): void {
+		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.ExchangeAndSubmarket, exchangeCode)) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.ExchangeAndSubmarket;
+			req.addParam(exchangeCode);
 
 			const request = {
 				channel : Channels.Price,

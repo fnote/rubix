@@ -1,5 +1,6 @@
 import 'moment/locale/ar-ma';
 import * as moment from 'moment';
+import { ExchangeEntity } from '../../app-backend/price/business-entities/exchange-entity';
 import { Injectable } from '@angular/core';
 import { TradeHelperService } from './trade-helper.service';
 import { userSettings } from '../../config/user-settings';
@@ -7,6 +8,10 @@ import { userSettings } from '../../config/user-settings';
 const MIN = 60000; // 1000 * 60
 const HOUR = 3600000; // 1000 * 60 * 60
 const HOURS_PER_MONTH = 720; // 30 * 24
+const DATE_LENGTH = 8;
+const TIME_LENGTH_SHORT = 5;
+const TIME_LENGTH_LONG = 6;
+const DATE_TIME_LENGTH = 14;
 
 @Injectable()
 export class CommonHelperService {
@@ -21,7 +26,7 @@ export class CommonHelperService {
 	* @param exchange Corresponding exchange data store
 	* param factor Multiplication factor
 	*/
-	public getTimeOffsetString(lastUpdated: number , exchange: any , factor: number): string {
+	public getTimeOffsetString(lastUpdated: number , exchange: ExchangeEntity , factor: number): string {
 		// TODO: [Malindu] add correct type for exchange
 		// moment.locale('ar-ma'); TODO: [Malindu] change language accordingly
 		lastUpdated = lastUpdated * factor;
@@ -36,10 +41,34 @@ export class CommonHelperService {
 	* @param exchange Exchange
 	* @param factor Multiplication factor
 	*/
-	public formatDate(date: number , pattern: string , exchange: any , factor: number): string {
+	public formatDate(
+		date: string,
+		pattern: string,
+		exchange: any,
+		factor: number,
+		dateForTimeZoneOffset: string,
+		): string {
 		// TODO: [Malindu] add correct type for exchange
-		const timeZoneOffSet: number = this.getTimeZoneOffSet(date.toString() , exchange) || 0;
-		return moment.utc(date * factor).utcOffset(timeZoneOffSet).format(pattern);
+		const timeZoneOffSet: number = this.getTimeZoneOffSet(dateForTimeZoneOffset , exchange) || 0;
+		let inputFormat;
+		switch (date.length) {
+			case TIME_LENGTH_SHORT:
+				inputFormat = 'HHmmss';
+				date = '0' + date;
+				break;
+			case TIME_LENGTH_LONG:
+				inputFormat = 'HHmmss';
+				break;
+			case DATE_LENGTH:
+				inputFormat = 'YYYYMMDD';
+				break;
+			case DATE_TIME_LENGTH:
+				inputFormat = 'YYYYMMDDHHmmss';
+				break;
+
+		}
+		// if -16<offset<16 offset : hours else : min
+		return moment.utc(date, inputFormat).utcOffset(timeZoneOffSet).format(pattern);
 	}
 
 	// TODO: [Malindu] rewrite this
@@ -48,12 +77,12 @@ export class CommonHelperService {
 	* @param date Date to be formatted
 	* @param exchange Corresponding Exchange
 	*/
-	public getTimeZoneOffSet(date: string , exchange: any): number { // TODO: [Malindu] Add correct type for exchange
+	public getTimeZoneOffSet(date: string , exchange: ExchangeEntity): number {
 		// TODO: [Malindu] Do the correct implementation
 		// const timeZoneMap = {};
 		// let timeZone, tzo , adjTzo , sd : number, ed : number , dateInteger : number , offSet : number;
 		// if (!date) {
-		// 	date = exchange.MDATE;
+		// 	date = exchange.marketDate;
 		// }
 		// if (exchange && exchange.TZ_ID && exchange.TZ_ID !== '') {
 		// 	timeZone = timeZoneMap[exchange.TZ_ID];
@@ -91,18 +120,23 @@ export class CommonHelperService {
 	* @param {number} dec Number of decimal places
 	* @returns {string} Formatted number
 	*/
-	public roundNumber(num: number , dec: number): string {
+	public roundNumber(num: number , dec?: number): string {
+		if (!dec) {
+			dec = 0;
+		}
 		if (dec < 0) {
 			dec = userSettings.marketData.defaultDecimalPlaces;
 		}
 
 		let result = (this.toFixed((Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)))).toString();
-		if ((result.split('.')).length !== 1) {
-			const floatNum: string = result.split('.')[1];
-			if (floatNum.length < dec) {
-				for (let i = 0; i < (dec - floatNum.length); i++) {
-					result += '0';
-				}
+		let floatNum: string = result.split('.')[1];
+		if (!floatNum && dec > 0) {
+			result += '.';
+			floatNum = '';
+		}
+		if (floatNum !== undefined && floatNum.length < dec) {
+			for (let i = 0; i < (dec - floatNum.length); i++) {
+				result += '0';
 			}
 		}
 
@@ -238,5 +272,17 @@ export class CommonHelperService {
 	*/
 	public getCurrentDate(): number {
 		return new Date().getTime();
+	}
+
+	public getDirectionTickClasses(direction: number): string {
+		switch (direction) {
+			case -1:
+				return 'down_1 down_2';
+			case 0:
+				return 'equal_1 equal_2';
+			case 1:
+				return 'up_1 up_2';
+			default:
+		}
 	}
 }

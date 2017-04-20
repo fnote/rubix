@@ -29,7 +29,7 @@ export const routes: Routes = [
 					{ path: 'chart', component: ChartComponent, outlet: 'outlet1' },
 					{ path: 'chart', component: ChartComponent, outlet: 'outlet2' },
 					{ path: 'chart', component: ChartComponent, outlet: 'outlet3' },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet4' },
+					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4' },
 				],
 			},
 			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',

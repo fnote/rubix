@@ -1,3 +1,52 @@
-<p>
-  time-and-sales works!
-</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <thead>
+  <tr>
+    <th>{{localizationService.language.OPEN}}</th>
+    <th>{{localizationService.language.HIGH}}</th>
+    <th>{{localizationService.language.LOW}}</th>
+    <th>{{localizationService.language.CLOSE}}</th>
+    <th>{{localizationService.language.VOLUME}}</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr>
+    <td>{{stockObj.openPrice}}</td>
+    <td>{{stockObj.highPrice}}</td>
+    <td>{{stockObj.lowPrice}}</td>
+    <td>{{stockObj.closePrice}}</td>
+    <td>{{stockObj.volume}}</td>
+  <tr>
+  </tbody>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <thead>
+  <tr>
+    <th>{{localizationService.language.TIME}}</th>
+    <th>{{localizationService.language.PRICE}}</th>
+    <th>{{localizationService.language.QTY}}</th>
+    <th>{{localizationService.language.CHANGE}}</th>
+    <th>{{localizationService.language.PER_CHANGE}}</th>
+    <th>{{localizationService.language.SPLITS}}</th>
+    <th>{{localizationService.language.TURNOVER}}</th>
+    <th>{{localizationService.language.TICK}}</th>
+    <th>{{localizationService.language.SIDE}}</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let row of timeAndSalesDataArray">
+      <td>{{row.displayTime}}</td>
+      <td>{{row.lastTradePrice}}</td>
+      <td>{{row.totalQty}}</td>
+      <td>{{row.change}}</td>
+      <td>{{row.perChange}}</td>
+      <td>{{row.splits}}</td>
+      <td>{{row.turnOver}}</td>
+      <td><span  [ngClass] = "row.direction"></span></td>
+      <td><span  [ngClass] = "row.typeClass">{{row.typeString}}</span></td>
+    <tr>
+  </tbody>
+</table>
+

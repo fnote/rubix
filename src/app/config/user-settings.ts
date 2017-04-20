@@ -12,8 +12,11 @@ export const userSettings = {
 	marketData: {
 		defaultDecimalPlaces: 2,
 		defaultPercentageDecimalPlaces: 2,
-		defaultNumberInitializer: -1,
 		defaultStringInitializer: '-',
+		defaultNumberInitializer: {
+			minusOneInitializer: -1,
+			zeroInitializer: 0,
+		},
 		thousandSeperator: {
 			applyThousandSeperator: true,
 			thousandSeperator: ',',
@@ -23,8 +26,11 @@ export const userSettings = {
 
 	tradeData: {
 		defaultDecimalPlaces: 2,
-		defaultNumberInitializer: -1,
 		defaultStringInitializer: '-',
+		defaultNumberInitializer: {
+			minusOneInitializer: -1,
+			zeroInitializer: 0,
+		},
 		thousandSeperator: {
 			applyThousandSeperator: true,
 			thousandSeperator: ',',

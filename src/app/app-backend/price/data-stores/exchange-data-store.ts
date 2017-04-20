@@ -19,7 +19,7 @@ export class ExchangeDataStore extends BaseDataStore {
 		ExchangeDataStore._instance = this;
 	}
 
-	private getOrAddExchange(exchangeCode: string): ExchangeEntity {
+	public getOrAddExchange(exchangeCode: string): ExchangeEntity {
 		let exgObj: ExchangeEntity = this.allExchangeStore[exchangeCode];
 
 		if (!exgObj) {

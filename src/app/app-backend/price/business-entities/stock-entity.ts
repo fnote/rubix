@@ -32,7 +32,7 @@ export class StockEntity extends BaseEntity {
 	private _volume: string = userSettings.marketData.defaultStringInitializer;
 	private _trades: string = userSettings.marketData.defaultStringInitializer;
 	private _totalQty: string = userSettings.marketData.defaultStringInitializer;
-	private _lastTradeDate: number = userSettings.marketData.defaultNumberInitializer;
+	private _lastTradeDate: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
 	private _vwap: string = userSettings.marketData.defaultStringInitializer;
 	private _min: string = userSettings.marketData.defaultStringInitializer;
 	private _max: string = userSettings.marketData.defaultStringInitializer;

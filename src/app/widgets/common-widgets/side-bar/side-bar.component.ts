@@ -9,7 +9,7 @@ import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 })
 export class SideBarComponent {
 	private tabs= [];
-	private selectedTab= '';
+	public selectedTab= '';
 
 	// If this is failing, add the initialisation to the main app component's constructor
 	constructor(

@@ -1,5 +1,6 @@
 import { BaseEntity } from './base-entity';
 import { MarketStatus } from '../../../constants/enums/market-status.enum';
+import { userSettings } from '../../../config/user-settings';
 
 export class ExchangeEntity extends BaseEntity {
 
@@ -12,7 +13,7 @@ export class ExchangeEntity extends BaseEntity {
 	private _countryCode = '';
 	private _timeZoneOffset = 0;
 	private _marketStatus = MarketStatus.Close;
-	private _dateTimeUTC = 0;
+	private _marketDate =  userSettings.marketData.defaultStringInitializer;
 	private _dateDisplay = '1970-01-01';
 	private _timeDisplay = '00:00';
 	private _ups = -1;
@@ -95,15 +96,12 @@ export class ExchangeEntity extends BaseEntity {
 		this._marketStatus = value;
 	}
 
-	public get dateTimeUTC(): number {
-		return this._dateTimeUTC;
+	public get marketDate(): string {
+		return this._marketDate;
 	}
 
-	public set dateTimeUTC(value: number) {
-		this._dateTimeUTC = value;
-
-		// _dateDisplay
-		// _dateTime
+	public set marketDate(value: string) {
+		this._marketDate = value;
 	}
 
 	public get dateDisplay(): string {
