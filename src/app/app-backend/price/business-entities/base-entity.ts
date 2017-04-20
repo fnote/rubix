@@ -31,14 +31,4 @@ export class BaseEntity {
 	public setValues(values: Object = {}): void {
 		Object.assign(this, values);
 	}
-
-	public printObj(): void {
-		for (const key in this) {
-			if (this.hasOwnProperty(key)) {
-				/* tslint:disable */
-				console.log(key + ' : ' + this[key]);
-				/* tslint:enable */
-			}
-		}
-	}
 }
