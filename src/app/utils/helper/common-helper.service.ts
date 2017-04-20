@@ -143,19 +143,23 @@ export class CommonHelperService {
 		return num;
 	}
 
-	/*
-	* format a number with comma seperators added
-	* @param num Input number
+	/**
+	* Format a number with comma seperators added
+	* @param {number} num Number to be formatted
+	* @param {number} dec Number of decimal places
+	* @returns {string} Formatted number
 	*/
 	public formatNumber(num: number, dec: number): string {
 		const roundedNum = this.roundNumber(num, dec);
 		const wholeNum = (roundedNum.toString().split('.')[0]).toString();
+
 		let wholeNumWthtMinus;
 		if (wholeNum.charAt(0) === '-') {
 			wholeNumWthtMinus = wholeNum.substring(1, wholeNum.length);
 		} else {
 			wholeNumWthtMinus = wholeNum;
 		}
+
 		let formWholeNum = '';
 		let formNum = '';
 		for (let i = wholeNumWthtMinus.length; i > 0; i -= 3) {
