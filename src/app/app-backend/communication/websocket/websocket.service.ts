@@ -47,7 +47,9 @@ export class WebsocketService {
 	}
 
 	public sendToWebSocket(ws: WebSocket, message: any): void {
-		ws.send(message);
+		if (ws.readyState === WebSocket.OPEN) {
+			ws.send(message);
+		}
 	}
 
 }
