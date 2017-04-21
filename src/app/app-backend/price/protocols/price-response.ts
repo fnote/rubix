@@ -47,15 +47,17 @@ export class PriceResponse {
 					const responseOb = {};
 					for (let p = 0 ;  p < dataFieldArr[k][key][m].length ; p++) {
 						if (priceResponseTags[headerFieldsArr[k][key][p]]) {
-							responseOb[priceResponseTags[headerFieldsArr[k][key][p]]] = dataFieldArr[k][key][m][p];
-						} /** else {
+							const objKey = priceResponseTags[headerFieldsArr[k][key][p]];
+							const objProp = dataFieldArr[k][key][m][p];
+							responseOb[objKey] = this.convertStringToValues(objProp);
+						}/** else {
 							responseOb[headerFieldsArr[k][key][p]] = dataFieldArr[k][key][m][p];
 						}*/
 					}
 					processedResponseOb[key].push(responseOb);
 				}
 			}
-			processedResponseOb['MT'] =  parseInt(response.MT, 10);
+			processedResponseOb['MT'] =  this.convertStringToValues(response.MT);
 			processedResponseOb['NOR'] = response.NOR;
 			processedResponseOb['PGI'] = response.PGI;
 			processedResponseOb['PGS'] = response.PGS;
@@ -65,7 +67,7 @@ export class PriceResponse {
 			processedRes.push(processedResponseOb);
 			return processedRes;
 		} else {
-			response['MT'] = parseInt(response.MT, 10);
+			response['MT'] =  this.convertStringToValues(response.MT);
 			processedRes.push(response);
 			return processedRes;
 		}
@@ -91,11 +93,24 @@ export class PriceResponse {
 			arrBuild.splice(-1 , 1);
 			arrBuild.push('}');
 			processedResponse =  JSON.parse(arrBuild.join(''));
-			processedResponse['MT'] = parseInt(response.MT, 10);
+			Object.keys(processedResponse).forEach(key => {
+				processedResponse[key] = this.convertStringToValues(processedResponse[key]);
+			});
+			processedResponse['MT'] =  this.convertStringToValues(response.MT);
 			return processedResponse;
 		}
-		response['MT'] = parseInt(response.MT, 10);
+		response['MT'] = this.convertStringToValues(response.MT);
 		return response;
+	}
+
+	private convertStringToValues(strVal: string): any {
+		let parsedVal;
+		try {
+			parsedVal = JSON.parse(strVal);
+		} catch (e) {
+			parsedVal = strVal;
+		}
+		return parsedVal;
 	}
 
 }
