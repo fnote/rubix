@@ -1,29 +1,24 @@
+import { Channels } from '../../../constants/enums/channels.enum';
 import { Injectable } from '@angular/core';
-import { PriceRequestTypes } from '../../../constants/enums/price-request-types.enum';
+import { PriceStreamingRequestHandler } from '../../price/protocols/streaming/price-streaming-request-handler';
+import { TradeStreamingRequestHandler } from '../../trade/protocols/streaming/trade-straming-request-handler';
 import { WebsocketService } from './websocket.service';
-
-interface PulseConfig {
-	MT: PriceRequestTypes;
-}
 
 @Injectable()
 export class PulseService {
 	private TIME_INTERVAL = 10000; // 1000 * 10
 	private MAX_HEARTBEATS = 5;
-	private pulseObj: PulseConfig;
 	private pulseInterval: NodeJS.Timer;
 	private heartbeats = 0;
 
-	constructor(private ws: WebSocket, private wsService: WebsocketService) {
+	constructor(private ws: WebSocket, private wsService: WebsocketService, private channel: number) {
 		this.sendPulse();
 	}
 
 	public sendPulse(): void {
 		this.pulseInterval = setInterval(() => {
 			this.heartbeats++;
-			this.pulseObj = {
-				MT: PriceRequestTypes.Pulse,
-			};
+			const pulseObj = this.genaratePulseMessage(this.channel);
 
 			if (this.heartbeats >= this.MAX_HEARTBEATS) {
 				this.wsService.closeWebSocket(this.ws);
@@ -31,7 +26,7 @@ export class PulseService {
 				return;
 			}
 
-			this.wsService.sendToWebSocket(this.ws, JSON.stringify(this.pulseObj));
+			this.wsService.sendToWebSocket(this.ws, JSON.stringify(pulseObj));
 		}, this.TIME_INTERVAL);
 	}
 
@@ -39,5 +34,21 @@ export class PulseService {
 		clearInterval(this.pulseInterval);
 		this.heartbeats = 0;
 		this.sendPulse();
+	}
+
+	private genaratePulseMessage(channel: number): Object {
+		let pulseRequest: Object;
+		switch (channel) {
+			case Channels.Trade:
+				pulseRequest = TradeStreamingRequestHandler.getInstance().genaratePulseRequest();
+				break;
+			case Channels.Price:
+			case Channels.PriceMeta:
+				pulseRequest = PriceStreamingRequestHandler.getInstance().genaratePulseRequest();
+				break;
+			default :
+				pulseRequest = {};
+		}
+		return pulseRequest;
 	}
 }

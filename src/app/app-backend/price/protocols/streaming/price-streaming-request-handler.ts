@@ -1,4 +1,5 @@
 import { PriceRequest } from '../price-request';
+import { PriceRequestTypes } from '../../../../constants/enums/price-request-types.enum';
 
 export class PriceStreamingRequestHandler {
 
@@ -66,6 +67,13 @@ export class PriceStreamingRequestHandler {
 			[OMS_ID_TAG, authParams.omsId].join(ds),
 			[BROKER_CODE_TAG, authParams.brokerCode].join(ds),
 		].join(fs);
+	}
+
+	public genaratePulseRequest(): Object {
+		const pulseRequest = {
+			MT: PriceRequestTypes.Pulse,
+		};
+		return pulseRequest;
 	}
 
 	public generateSSOAuthRequest(authParams: Object = {}): string {
