@@ -226,7 +226,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set turnover(value: string) {
-		this._turnover = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this._turnover = this.commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public get volume(): string {
