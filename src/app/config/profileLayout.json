@@ -33,7 +33,7 @@
 							"args": ["DFM", "DIC"]
 						},
 						{
-							"path": "detail-quote",
+							"path": "time-and-sales",
 							"outlet": "outlet4",
 							"args": ["TDWL", "1090"]
 						}

@@ -21,7 +21,7 @@ export const routes: Routes = [
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1' },
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2' },
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet3' },
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet4' },
+					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4' },
 				],
 			},
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
