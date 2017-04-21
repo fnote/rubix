@@ -133,6 +133,8 @@ export class QueueMannagerService {
 				connection.isConnected = false;
 				connection.subscription.unsubscribe();
 				connection.subscription = null;
+				connection.sendMessageQueue = [];
+				connection.recivedMessageQueue =  [];
 				clearInterval(connection.sendQueueProcessInterval);
 				clearInterval(connection.recivedQueueProcessInterval);
 				connection.sendQueueProcessInterval = null;

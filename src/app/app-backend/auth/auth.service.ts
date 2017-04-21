@@ -1,3 +1,4 @@
+import { Channels } from '../../constants/enums/channels.enum';
 import { DataService } from '../communication/data.service';
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../utils/logger.service';
@@ -16,10 +17,10 @@ interface AuthStatus {
 	isMetaAuthenticated: boolean;
 	rejectReson: string;
 }
+const AUTH_TIME_INTERVAL = 20000; // 1000 * 20
 
 @Injectable()
 export class AuthService {
-	private AUTH_TIME_INTERVAL = 20000; // 1000 * 20
 	private tradeAuthHandler: TradeAuthHandler;
 	private priceAuthHandler: PriceAuthHandler;
 	private authStatus$: Subject<AuthStatus>;
@@ -34,17 +35,17 @@ export class AuthService {
 		this.updateAuthStatus();
 		this.tradeAuthHandler = TradeAuthHandler.getInstance();
 		this.priceAuthHandler = PriceAuthHandler.getInstance();
-		this.authStatus$ = new Subject();
 	}
 
 	public authenticateUser(userName: string, password: string): void {
+		this.authStatus$ = new Subject();
 		this.loggerService.logInfo('Trade Connecting...', 'AuthService');
 		UserState.getInstance().setTadeValues({ userName: userName });
 		const authRequest = this.tradeAuthHandler.buildAuthRequest(userName, password);
 		this.dataService.sendToWs(authRequest);
 		this.authTerminateTimer = setTimeout(() => {
 			this.terminateAuthentication();
-		}, this.AUTH_TIME_INTERVAL);
+		}, AUTH_TIME_INTERVAL);
 	}
 
 	public checkAuthenticated(): Subject<AuthStatus> {
@@ -71,6 +72,7 @@ export class AuthService {
 			};
 			this.authStatus$.next(authStatus);
 			this.authStatus$.complete();
+			this.dataService.unsubscribeWsConnections([Channels.Trade, Channels.Price, Channels.PriceMeta]);
 		}
 	}
 
