@@ -9,7 +9,6 @@ export class LoggerService {
 	private lastSentIndex = 0;
 	private isRequestInProgress = false;
 	private isPeriodicUpdateStarted = false;
-	private configObj: Object = {};
 
 	constructor(private configService: ConfigService) { }
 

@@ -19,7 +19,6 @@ export class TimeAndSalesComponent implements OnInit, OnDestroy {
 	}
 
 	public ngOnInit(): void {
-
 		this.priceService.addSymbolRequest(this.exgStock);
 		this.priceService.addRealTimeExchangeRequest(this.exgStock[0]);
 		this.priceService.addTimeAndSalesRequest(this.exgStock);

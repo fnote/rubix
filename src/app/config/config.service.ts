@@ -6,19 +6,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ConfigService {
 
-	public configObj: any;
+	private configObj: any;
 
-	constructor(private http: Http) {
-	}
-
-	public init(): void {
-		this.http.get('./src/app/config/app-config.json').map((res) => res.json()).subscribe(data => {
-			this.configObj = data;
-		}, (rej) => {
-			// tslint:disable-next-line
-			console.error('Could not load local data : ' + rej.message , 'ConfigService');
-		});
-	}
+	constructor(private http: Http) { }
 
 	private getConfigurationVal(key1: string, key2?: string, key3?: string): any {
 		if (key3 && key2) {
