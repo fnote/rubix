@@ -40,9 +40,11 @@
 										<a class="form-control" href="#">Forget Password?</a>
 									</div>
 								</div>
-								<span [ngClass]="authClass" >{{rejectReson}}</span>
 								<button [disabled]="isAuthenticating" type="submit" (click)="login()" class="btn">Login</button>
 							</form>
+							<div class="login-authenticating">
+							<span [ngClass]="authClass" >{{rejectReson}}</span>
+							</div>
 						</div>
 					</div>
 				</div>
