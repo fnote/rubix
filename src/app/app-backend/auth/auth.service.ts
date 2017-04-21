@@ -19,7 +19,7 @@ interface AuthStatus {
 
 @Injectable()
 export class AuthService {
-	private AUTH_TIME_INTERVAL = 5000; // 1000 * 5
+	private AUTH_TIME_INTERVAL = 20000; // 1000 * 20
 	private tradeAuthHandler: TradeAuthHandler;
 	private priceAuthHandler: PriceAuthHandler;
 	private authStatus$: Subject<AuthStatus>;
