@@ -61,16 +61,14 @@ export class ConfigService {
 
 	public getConnectionConfig(): Promise<Array<{channel: number, url: string, isSecure: boolean}>> {
 		return new Promise((resolve => {
-			this.getStringConfigVal('connectionConfig', 'trade', 'url').then(tradeUrl => {
-				this.getStringConfigVal('connectionConfig', 'price', 'url').then(priceUrl => {
-					const connections = [
-						{ channel: Channels.Trade, url:  tradeUrl + '/appsocket', isSecure: false },
-						{ channel: Channels.TradeMeta, url:  tradeUrl, isSecure: false },
-						{ channel: Channels.Price, url:  priceUrl + '/websocket/price', isSecure: false },
-						{ channel: Channels.PriceMeta, url:  priceUrl + '/websocket/meta', isSecure: false },
-					];
-					resolve(connections);
-				});
+			this.getStringConfigVal('connectionConfig').then(conConfig => {
+				const connections = [
+					{ channel: Channels.Trade, url: conConfig.trade.url + '/appsocket', isSecure: false },
+					{ channel: Channels.TradeMeta, url: conConfig.trade.url , isSecure: false },
+					{ channel: Channels.Price, url: conConfig.price.url  + '/websocket/price', isSecure: false },
+					{ channel: Channels.PriceMeta, url: conConfig.price.url  + '/websocket/meta', isSecure: false },
+				];
+				resolve(connections);
 			});
 		}));
 	}
