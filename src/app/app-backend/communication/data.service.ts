@@ -31,10 +31,10 @@ export class DataService {
 
 	/**
      * Un-subscribe websocket connection
-     * @param {number} index - Value Defined at Connection configuration index
+     * @param {number} channel - Value Defined at Connection configuration index
      */
-	public unsubscribeWsConnection(index: number): void {
-		this.queueMannagerService.unsubcribeConnection(index);
+	public unsubscribeWsConnection(channel: number): void {
+		this.queueMannagerService.unsubcribeConnection(channel);
 	}
 
 	/**
