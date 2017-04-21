@@ -57,7 +57,7 @@
 							"outlet": "outlet3"
 						},
 						{
-							"path": "chart",
+							"path": "time-and-sales",
 							"outlet": "outlet4"
 						}
 					]
