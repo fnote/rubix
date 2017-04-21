@@ -59,7 +59,7 @@ export class ConfigService {
 		});
 	}
 
-	public getConnectionConfig(): Promise<any> {
+	public getConnectionConfig(): Promise<Array<{channel: number, url: string, isSecure: boolean}>> {
 		return new Promise((resolve => {
 			this.getStringConfigVal('connectionConfig', 'trade', 'url').then(tradeUrl => {
 				this.getStringConfigVal('connectionConfig', 'price', 'url').then(priceUrl => {
