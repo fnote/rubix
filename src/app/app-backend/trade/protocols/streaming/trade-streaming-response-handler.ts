@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { LoggerService } from '../../../../utils/logger.service';
 import { StreamRouteService } from '../../../communication/stream-route.service';
 import { Subject } from 'rxjs/Rx';
+import { SystemResponseTypes } from '../../../../constants/enums/trade-meta/system/system-response-types.enum';
 import { TradeMetaGroups } from '../../../../constants/enums/trade-meta/trade-meta-groups.enum';
 
 @Injectable()
@@ -38,14 +39,28 @@ export class TradeStreamingResponseHandler {
 
 	private updateTradeModel(response: any): void {
 		if (response && response.DAT && response.HED) {
-			if (response.HED.MSG_GRP === TradeMetaGroups.Authentication) {
-				if (response.HED.MSG_TYP === AuthenticationResponseTypes.AuthNormal) {
-					this.authenticationResponseStream$.next(response);
-				}else {
-					this.loggerService.logError('No response type under group - ' + TradeMetaGroups.Authentication , 'TradeStreamingResponseHandler');
-				}
-			} else {
-				this.loggerService.logError('No response group - ' + response.HED.MSG_GRP , 'TradeStreamingResponseHandler');
+			switch (response.HED.MSG_GRP) {
+				case TradeMetaGroups.Authentication:
+					switch (response.HED.MSG_TYP) {
+						case AuthenticationResponseTypes.AuthNormal:
+							this.authenticationResponseStream$.next(response);
+							break;
+						default:
+							this.loggerService.logError('No response type under group - ' + TradeMetaGroups.Authentication , 'TradeStreamingResponseHandler');
+					}
+					break;
+				case TradeMetaGroups.System:
+					switch (response.HED.MSG_TYP) {
+						case SystemResponseTypes.Pulse:
+							// this.loggerService.logInfo('Pulse Recived', 'TradeStreamingResponseHandler');
+							break;
+						default:
+							this.loggerService.logError('No response type under group - ' + TradeMetaGroups.System , 'TradeStreamingResponseHandler');
+					}
+					break;
+				default:
+					this.loggerService.logError('No response group - ' + response.HED.MSG_GRP , 'TradeStreamingResponseHandler');
+
 			}
 		}
 	}

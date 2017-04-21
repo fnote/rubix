@@ -102,11 +102,25 @@ body.ar {
   border-right: 0;
 }
 
+
 /*
 ---
 ------
 --------- Login Page Styles
 */
+.authenticateProgress{
+	text-align: center;
+	color: $success-msg-font-color;
+	font-size: $font-x-large;
+	font-weight: 100;
+}
+
+.authError{
+	text-align: center;
+	color: $error-msg-font-color;
+	font-size: $font-x-large;
+	font-weight: 100;
+}
 
 .login .active {
   border-bottom: 3px solid #d6d6d6;
@@ -160,7 +174,7 @@ body.ar {
   text-align: $text-align-2;
   float: $float-1;
   color: #fff;
-  font-size: 16px;
+  font-size: $font-xx-large;
 }
 
 .login .top-content .text h1 {
@@ -207,7 +221,9 @@ body.ar {
   text-align: $text-align-2;
   box-shadow: none;
 	padding-top: $padding-medium;
-	color: #fff;
+	color: #CFD8DC;
+	font-size: $font-xx-large;
+	text-decoration: underline;
 }
 
 .login .rememberme{
@@ -221,9 +237,9 @@ body.ar {
 height: 30px;
 line-height: 30px;
 margin: 0;
-font-size: 15px;
-color: #fff;
-float: left;
+font-size: $font-xx-large;
+color: #CFD8DC;
+float: $float-1;
 }
 
 .login .forget-pw {
@@ -283,7 +299,7 @@ float: left;
   background: $login-btn-bg-color;
   border: 0;
   font-family: 'Roboto', sans-serif;
-  font-size: $login-btn-font-size;
+  font-size: $font-xx-large;
   font-weight: 300;
   line-height: 50px;
   color: #fff;
@@ -343,7 +359,6 @@ li {
 .tgl {
 	display: none;
 
-	// add default box-sizing for this scope
 	&,
 	&:after,
 	&:before,
@@ -388,14 +403,11 @@ li {
 	}
 }
 
-// themes
-
 .tgl-flat {
 	+ .tgl-btn {
 		padding: 2px;
 		transition: all .4s ease;
-		background: #fff;
-		border: 4px solid #f2f2f2;
+		border: 2px solid #CFD8DC;
 		border-radius: 2em;
 		&:after {
 			transition: all .4s ease;
@@ -406,12 +418,23 @@ li {
 	}
 
 	&:checked + .tgl-btn {
-		border: 4px solid #7FC6A6;
+		border: 2px solid #53d6c1;
 		&:after {
 			left: 50%;
-			background: #7FC6A6;
+			background: #4dcfbd;
 		}
 	}
+}
+
+.login-authenticating {
+	margin-top: 15px;
+	text-align: center;
+	width: 100%;
+}
+
+.login-authenticating span{
+	width: 100%;
+	display: inline-block;
 }
 
 /***** Media queries *****/

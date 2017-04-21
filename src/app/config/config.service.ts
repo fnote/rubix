@@ -54,7 +54,6 @@ export class ConfigService {
 			this.getStringConfigVal('connectionConfig').then(conConfig => {
 				const connections = [
 					{ channel: Channels.Trade, url: conConfig.trade.url + '/appsocket', isSecure: false },
-					{ channel: Channels.TradeMeta, url: conConfig.trade.url , isSecure: false },
 					{ channel: Channels.Price, url: conConfig.price.url  + '/websocket/price', isSecure: false },
 					{ channel: Channels.PriceMeta, url: conConfig.price.url  + '/websocket/meta', isSecure: false },
 				];

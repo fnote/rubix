@@ -13,7 +13,7 @@ export class WebsocketService {
 		const ws: WebSocket = new WebSocket(connection.url);
 		const promise: Promise<WebSocket> = new Promise((resolve, reject) : void => {
 			ws.onopen = () : void => {
-				connection.pulseService = new PulseService(ws, this);
+				connection.pulseService = new PulseService(ws, this, connection.channel);
 				this.loggerService.logInfo('connected to ' + connection.url , 'WebsocketService');
 				resolve(ws);
 			};
