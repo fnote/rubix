@@ -14,6 +14,18 @@
 			"model": [
 				{
 					"title": "First Tab",
+					"path": "secondary-layout-two",
+					"outlet": "outlet2",
+					"model": [
+						{
+							"path": "detail-quote",
+							"outlet": "outlet1",
+							"args": ["TDWL", "1090"]
+						}
+					]
+				},
+				{
+					"title": "Second Tab",
 					"path": "secondary-layout-one",
 					"outlet": "outlet2",
 					"model": [
@@ -40,7 +52,7 @@
 					]
 				},
 				{
-					"title": "Second Tab",
+					"title": "Third Tab",
 					"path": "secondary-layout-one",
 					"outlet": "outlet2",
 					"model": [
@@ -57,30 +69,8 @@
 							"outlet": "outlet3"
 						},
 						{
-							"path": "time-and-sales",
+							"path": "chart",
 							"outlet": "outlet4"
-						}
-					]
-				},
-				{
-					"title": "Third Tab",
-					"path": "secondary-layout-two",
-					"outlet": "outlet2",
-					"model": [
-						{
-							"path": "detail-quote",
-							"outlet": "outlet1",
-							"args": ["TDWL", "1090"]
-						},
-						{
-							"path": "detail-quote",
-							"outlet": "outlet2",
-							"args": ["TDWL", "1090"]
-						},
-						{
-							"path": "detail-quote",
-							"outlet": "outlet3",
-							"args": ["TDWL", "1090"]
 						}
 					]
 				}

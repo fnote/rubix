@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import { ExchangeEntity } from '../../app-backend/price/business-entities/exchange-entity';
 import { Injectable } from '@angular/core';
 import { TradeHelperService } from './trade-helper.service';
-import { userSettings } from '../../config/user-settings';
+import { userSettings } from '../../app-config/user-settings';
 
 const MIN = 60000; // 1000 * 60
 const HOUR = 3600000; // 1000 * 60 * 60

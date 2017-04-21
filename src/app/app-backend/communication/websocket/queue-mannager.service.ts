@@ -1,5 +1,5 @@
 import * as Rx from 'rxjs/Rx';
-import { ConfigService } from '../../../config/config.service';
+import { ConfigService } from '../../../app-config/config.service';
 import { Connection } from '../connection';
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../../utils/logger.service';

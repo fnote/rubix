@@ -16,6 +16,11 @@ export const routes: Routes = [
 	{ path: 'primary-layout-one',  canActivate: [AuthGuardService],  component: PrimaryLayoutOneComponent,
 		children: [
 			{ path: 'side-bar', component: SideBarComponent, outlet: 'outlet1' },
+			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
+				children: [
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1' },
+				],
+			},
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
 				children: [
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1' },
@@ -32,19 +37,12 @@ export const routes: Routes = [
 					{ path: 'chart', component: ChartComponent, outlet: 'outlet4' },
 				],
 			},
-			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
-				children: [
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1' },
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2' },
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet3' },
-				],
-			},
 		],
 	},
 
 	{ path: '', redirectTo: 'detail-quote', pathMatch: 'full' },
-	{ path: 'test', canActivate: [AuthGuardService], component: RubixTestPageComponent },
 	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent },
 	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent },
+	{ path: 'test', component: RubixTestPageComponent },
 	{ path: 'login', component: LoginComponent },
 ];

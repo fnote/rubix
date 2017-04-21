@@ -1,7 +1,7 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
+import { appLayout } from '../../../app-config/app-layout';
 
 @Component({
 	selector: 'app-side-bar',
@@ -15,17 +15,16 @@ export class SideBarComponent {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private http: Http,
 		private widgetLoader: WidgetLoaderService,
 	) {
-		this.http.get('src/app/config/profileLayout.json').map((res) => res.json()).subscribe(data => {
-			this.tabs = data.model[1].model;
-		});
+		this.tabs = appLayout.model[1].model;
 	}
 
 	public loadTab(tab: any): void {
 		this.selectedTab = tab.id;
 		this.widgetLoader.loadTab(tab);
+
+		this.sideBarCloseClicked();
 	}
 
 	public sideBarCloseClicked(): void {

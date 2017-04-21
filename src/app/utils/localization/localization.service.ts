@@ -2,7 +2,7 @@ import { AR } from './ar';
 import { EN } from './en';
 import { Injectable } from '@angular/core';
 import { Languages } from '../../constants/enums/languages.enum';
-import { userSettings } from '../../config/user-settings';
+import { userSettings } from '../../app-config/user-settings';
 
 @Injectable()
 export class LocalizationService {

@@ -1,4 +1,4 @@
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '../app-config/config.service';
 import { Injectable } from '@angular/core';
 import { LogLevels } from '../constants/enums/log-levels.enum';
 
