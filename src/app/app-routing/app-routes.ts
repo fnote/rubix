@@ -21,6 +21,11 @@ export const routes: Routes = [
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1' },
 				],
 			},
+			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
+				children: [
+					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet1' },
+				],
+			},
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
 				children: [
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1' },

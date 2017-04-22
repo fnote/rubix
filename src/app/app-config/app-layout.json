@@ -13,7 +13,7 @@
 		{
 			"model": [
 				{
-					"title": "First Tab",
+					"title": "Detail Quote",
 					"path": "secondary-layout-two",
 					"outlet": "outlet2",
 					"model": [
@@ -25,7 +25,19 @@
 					]
 				},
 				{
-					"title": "Second Tab",
+					"title": "Time and Sales",
+					"path": "secondary-layout-two",
+					"outlet": "outlet2",
+					"model": [
+						{
+							"path": "time-and-sales",
+							"outlet": "outlet1",
+							"args": ["TDWL", "1090"]
+						}
+					]
+				},
+				{
+					"title": "Summary",
 					"path": "secondary-layout-one",
 					"outlet": "outlet2",
 					"model": [
@@ -52,7 +64,7 @@
 					]
 				},
 				{
-					"title": "Third Tab",
+					"title": "Chart",
 					"path": "secondary-layout-one",
 					"outlet": "outlet2",
 					"model": [
