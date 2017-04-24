@@ -7,7 +7,7 @@ import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 	templateUrl: './side-bar.component.html',
 })
 export class SideBarComponent {
-	private tabs = [];
+	private tabs: any = [];
 	public selectedTab= '';
 
 	// If this is failing, add the initialisation to the main app component's constructor
@@ -16,7 +16,9 @@ export class SideBarComponent {
 		private route: ActivatedRoute,
 		private widgetLoaderService: WidgetLoaderService,
 	) {
-		this.tabs = widgetLoaderService.getTabs();
+		widgetLoaderService.getTabs().then(tabList => {
+			this.tabs = tabList;
+		});
 	}
 
 	public loadTab(tab: any): void {
