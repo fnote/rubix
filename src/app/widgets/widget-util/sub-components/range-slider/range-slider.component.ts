@@ -7,9 +7,9 @@ import { CommonHelperService } from '../../../../utils/helper/common-helper.serv
 })
 export class RangeSliderComponent implements OnInit {
 	@Input() public title: string;
-	@Input() private lowVal: number;
-	@Input() private highVal: number;
-	@Input() private refVal: number;
+	@Input() public lowVal: number;
+	@Input() public highVal: number;
+	@Input() public refVal: number;
 
 	public dispPercentage = '';
 	public percentage = 0;
