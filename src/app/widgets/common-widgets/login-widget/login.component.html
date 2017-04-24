@@ -1,15 +1,14 @@
-
 <div class="login row">
 	<div class="top-content">
 		<div class="inner-bg">
 
 			<div class="lang-bar">
 				<div class="col-sm-12 col-md-12 col-xs-12">
-					<div class="lang-bar-ar">
-						<button>عربى</button>
+					<div class="lang-bar-en" *ngIf="localizationService.isRTL()">
+						<button (click)="changeLanguage()">English</button>
 					</div>
-					<div class="lang-bar-en" style="display: none;">
-						<button>English</button>
+					<div class="lang-bar-ar" *ngIf="!localizationService.isRTL()">
+						<button (click)="changeLanguage()">عربى</button>
 					</div>
 				</div>
 			</div>
@@ -17,8 +16,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 text">
-						<img class="img-responsive mubasher-logo"
-								 src="../../../../../src/assets/assets/images/MT-black-bg-logo.png">
+						<img class="img-responsive mubasher-logo" src="../../../../../src/assets/assets/images/MT-black-bg-logo.png">
 						<!--h1 class="slogan">MT<span>RADE</span> PLUS</h1-->
 					</div>
 				</div>
@@ -27,15 +25,15 @@
 						<div class="form-bottom loginTab" id="live">
 							<form role="form" action="" method="post" class="login-form">
 								<div class="form-group">
-									<label class="sr-only" for="form-username-live">Username</label>
-									<input type="text" [(ngModel)]="userName" placeholder="Username..." class="form-username form-control"
-												 id="form-username-live" name="userName">
+									<label class="sr-only" for="form-username-live">{{localizationService.language.USERNAME}}</label>
+									<input type="text" [(ngModel)]="userName" placeholder="{{localizationService.language.USERNAME}}" class="form-username form-control" id="form-username-live"
+									 name="userName">
 								</div>
 
 								<div class="form-group">
-									<label class="sr-only" for="form-password-live">Password</label>
-									<input type="password" [(ngModel)]="password" placeholder="Password..."
-												 class="form-password form-control" id="form-password-live" name="password">
+									<label class="sr-only" for="form-password-live">{{localizationService.language.PASSWORD}}</label>
+									<input type="password" [(ngModel)]="password" placeholder="{{localizationService.language.PASSWORD}}" class="form-password form-control" id="form-password-live"
+									 name="password">
 								</div>
 
 								<div class="form-group">
@@ -46,16 +44,16 @@
 												<label class="tgl-btn" for="cb4"></label>
 											</li>
 										</ul>
-										<p>Remember me</p>
+										<p>{{localizationService.language.REMEMBER_ME}}</p>
 									</div>
 									<div class="forget-pw">
-										<a class="form-control" href="#">Forget Password?</a>
+										<a class="form-control" href="#">{{localizationService.language.FORGOT_PASSWORD}}</a>
 									</div>
 								</div>
-								<button [disabled]="isAuthenticating" type="submit" (click)="login()" class="btn">Login</button>
+								<button [disabled]="isAuthenticating" type="submit" (click)="login()" class="btn">{{localizationService.language.LOGIN}}</button>
 							</form>
 							<div class="login-authenticating">
-							<span [ngClass]="authClass" >{{rejectReson}}</span>
+								<span [ngClass]="authClass">{{rejectReson}}</span>
 							</div>
 						</div>
 					</div>

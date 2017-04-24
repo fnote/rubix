@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../app-backend/auth/auth.service';
 import { Channels } from '../../../constants/enums/channels.enum';
+import { Languages } from '../../../constants/enums/languages.enum';
+import { LocalizationService } from '../../../utils/localization/localization.service';
 import { Router } from '@angular/router';
 import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
 	public isAuthenticating = false;
 	public authClass: {};
 
-	constructor(private authService: AuthService, public router: Router, private widgetLoaderService: WidgetLoaderService) { }
+	constructor(private authService: AuthService, public router: Router,
+		private widgetLoaderService: WidgetLoaderService, public localizationService: LocalizationService) { }
 
 	public ngOnInit(): void {
 		// implement this
@@ -65,5 +68,13 @@ export class LoginComponent implements OnInit {
 			this.authenticateUser();
 		}
 		this.setAuthClass();
+	}
+
+	public changeLanguage(): void {
+		if (this.localizationService.activeLanguageCode === Languages.EN) {
+			this.localizationService.activeLanguageCode = Languages.AR;
+		} else {
+			this.localizationService.activeLanguageCode = Languages.EN;
+		}
 	}
 }

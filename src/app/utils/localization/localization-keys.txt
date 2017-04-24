@@ -31,5 +31,10 @@ export const EN = {
 	SELL: '[526]',
 	DAY_RANGE: '[13913]',,
 	FIFTY_TWO_WK_RANGE: '[14729]',
+	USERNAME: '[5401]',
+	PASSWORD: '[3376]',
+	REMEMBER_ME: '[5707]',
+	FORGOT_PASSWORD: '[5524]',
+	LOGIN: '[5809]',
 };
 

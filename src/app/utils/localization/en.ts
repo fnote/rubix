@@ -31,4 +31,9 @@
 	SELL: 'Sell',
 	DAY_RANGE: 'Day Range',
 	FIFTY_TWO_WK_RANGE: '52 Wk. Range',
+	USERNAME: 'Username',
+	PASSWORD: 'Password',
+	REMEMBER_ME: 'Remember me',
+	FORGOT_PASSWORD: 'Forgot Password?',
+	LOGIN: 'Login',
 };
