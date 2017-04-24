@@ -108,14 +108,46 @@ body.ar {
 ------
 --------- Login Page Styles
 */
-.authenticateProgress{
+
+.login .lang-bar {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	padding: 10px;
+	color: #fff;
+}
+
+.lang-bar-ar button {
+	padding: 8px 20px;
+	background: none;
+	border: none;
+	font-size: 25px;
+	letter-spacing: 1px;
+	text-decoration: underline;
+}
+
+.lang-bar-en button {
+	padding: 8px 20px;
+	background: none;
+	width: 100px;
+	border: none;
+	font-size: 18px;
+	letter-spacing: 1px;
+	text-decoration: underline;
+}
+
+.lang-bar-ar{
+	text-align: right;
+}
+
+.login .authenticateProgress{
 	text-align: center;
 	color: $success-msg-font-color;
 	font-size: $font-x-large;
 	font-weight: 100;
 }
 
-.authError{
+.login .authError{
 	text-align: center;
 	color: $error-msg-font-color;
 	font-size: $font-x-large;
@@ -128,7 +160,7 @@ body.ar {
 
 .login .inner-bg {
   padding: 100px 0 170px 0;
-  background-image: url("../assets/images/2.jpg");
+  background-image: url("../assets/images/bg.png");
   height: 100vh;
 }
 
@@ -216,14 +248,13 @@ body.ar {
 .login .forget-pw a {
   background: transparent;
   border: none;
-  width: 50%;
+  width: 100%;
   float: $float-1;
-  text-align: $text-align-2;
+  text-align: $text-align-3;
   box-shadow: none;
-	padding-top: $padding-medium;
-	color: #CFD8DC;
+	padding-top: $padding-small + 1;
+	color: #55ceff;
 	font-size: $font-xx-large;
-	text-decoration: underline;
 }
 
 .login .rememberme{
@@ -234,18 +265,21 @@ body.ar {
 }
 
 .login .rememberme p{
-height: 30px;
-line-height: 30px;
+height: 22px;
+line-height: 22px;
 margin: 0;
 font-size: $font-xx-large;
 color: #CFD8DC;
 float: $float-1;
+width: auto;
 }
 
 .login .forget-pw {
   height: 34px;
   line-height: 34px;
   text-decoration: underline;
+	width: 50%;
+	float: $float-1;
 }
 
 .login .form-bottom {
@@ -260,6 +294,7 @@ float: $float-1;
 
 .login .form-bottom form button.btn {
   width: 100%;
+	margin-top: $margin-medium;
 }
 
 .login input[type="text"],
@@ -353,7 +388,7 @@ li {
 }
 
 .tg-list-item {
-	margin: 0 2em;
+	margin: 0 1em 0 0;
 }
 
 .tgl {
@@ -375,8 +410,8 @@ li {
 	+ .tgl-btn {
 		outline: 0;
 		display: block;
-		width: 4em;
-		height: 2em;
+		width: 3.5em;
+		height: 1.5em;
 		position: relative;
 		cursor: pointer;
 		user-select: none;
@@ -407,21 +442,21 @@ li {
 	+ .tgl-btn {
 		padding: 2px;
 		transition: all .4s ease;
-		border: 2px solid #CFD8DC;
+		border: 2px solid #c5c5c5;
 		border-radius: 2em;
 		&:after {
 			transition: all .4s ease;
-			background: #f2f2f2;
+			background: #ccc;
 			content: "";
 			border-radius: 1em;
 		}
 	}
 
 	&:checked + .tgl-btn {
-		border: 2px solid #53d6c1;
+		border: 2px solid #fff;
 		&:after {
 			left: 50%;
-			background: #4dcfbd;
+			background: #fff;
 		}
 	}
 }
@@ -436,7 +471,6 @@ li {
 	width: 100%;
 	display: inline-block;
 }
-
 /***** Media queries *****/
 
 //large-monitors
@@ -459,22 +493,61 @@ li {
 	.login .inner-bg{
 		padding: 30px 0 0;
 	}
+
+	.login .tg-list {
+		width: 35%;
+		float: left;
+	}
+
+	.login .tg-list  li{
+		float: left;
+		margin-left: 0;
+		margin-right: 1em;
+	}
 }
 
 //tabs
 @media (min-width: 768px) and (max-width: 991px) {
-
+	.login .forget-pw a {
+		font-size: 14px;
+	}
+	.login .tg-list li{
+		margin: 0 1em 0 0;
+	}
+	.login .rememberme p {
+		font-size: 14px;
+	}
 }
 
 //mobiles
 @media (max-width: 767px) {
 
 	.login .inner-bg {
-		padding: 60px 0 110px 0;
+		padding: 70px 0 50px 0;
 	}
 
 	.login h1, .login h2 {
 		font-size: 32px;
+	}
+
+	.lang-bar-ar button {
+		width: 90px;
+		padding-bottom: 5px;
+		padding-top: 0px;
+		border: 1px solid #fff;
+		font-size: 15px;
+		border-radius: 17px;
+		text-decoration: none;
+	}
+
+	.lang-bar-en button {
+		width: 90px;
+		padding-bottom: 5px;
+		padding-top: 5px;
+		border: 1px solid #fff;
+		font-size: 13px;
+		border-radius: 17px;
+		text-decoration: none;
 	}
 
 	.login .mubasher-logo {
@@ -489,10 +562,6 @@ li {
 
 	.login .slogan span {
 		font-size: 15px;
-	}
-
-	.login .inner-bg {
-		padding-top: 30px;
 	}
 
 	.login input[type="text"], .login input[type="password"], .login textarea, .login textarea.form-control {
@@ -516,12 +585,80 @@ li {
 	}
 
 	.login .forget-pw a {
-		width: 100%;
+		font-size: 11px;
+		padding:0;
+		padding: 4px 0 0;
 	}
 
 	.login .rememberme {
-		width: 100%;
+		width: 50%;
 		padding: 0;
+		height: 25px;
+	}
+
+	.login .tg-list li{
+		margin: 0 5px 0 0;
+	}
+
+	.login .rememberme p {
+		height: 22px;
+		line-height: 22px;
+		font-size: 11px;
+	}
+
+	.login .form-bottom form button.btn{
+		margin-top: 0;
+	}
+
+	.login .form-bottom{
+		background: none;
+	}
+
+	.tgl {
+		display: none;
+
+		&,
+		&:after,
+		&:before,
+		& *,
+		& *:after,
+		& *:before,
+		& + .tgl-btn {
+			box-sizing: border-box;
+			&::selection {
+				background: none;
+			}
+		}
+
+		+ .tgl-btn {
+			outline: 0;
+			display: block;
+			width: 2.8em;
+			height: 1.4em;
+			position: relative;
+			cursor: pointer;
+			user-select: none;
+			&:after,
+			&:before {
+				position: relative;
+				display: block;
+				content: "";
+				width: 50%;
+				height: 100%;
+			}
+
+			&:after {
+				left: 0;
+			}
+
+			&:before {
+				display: none;
+			}
+		}
+
+		&:checked + .tgl-btn:after {
+			left: 50%;
+		}
 	}
 }
 
