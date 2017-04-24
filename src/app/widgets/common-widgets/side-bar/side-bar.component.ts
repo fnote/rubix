@@ -7,7 +7,7 @@ import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 	templateUrl: './side-bar.component.html',
 })
 export class SideBarComponent {
-	private tabs: any = [];
+	public tabs: any = [];
 	public selectedTab= '';
 
 	// If this is failing, add the initialisation to the main app component's constructor
@@ -25,10 +25,15 @@ export class SideBarComponent {
 		this.selectedTab = tab.id;
 		this.widgetLoaderService.loadTab(tab);
 
-		this.sideBarCloseClicked();
+		this.hideSideBar();
 	}
 
-	public sideBarCloseClicked(): void {
+	public sideBarCloseClicked(event: any): void {
+		event.preventDefault();
+		this.hideSideBar();
+	}
+
+	private hideSideBar(): void {
 		const body = document.getElementsByTagName('body')[0];
 		body.classList.remove('nav-expanded');
 	}

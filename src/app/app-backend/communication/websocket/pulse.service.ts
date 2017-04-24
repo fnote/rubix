@@ -11,7 +11,7 @@ export class PulseService {
 	private pulseInterval: NodeJS.Timer;
 	private heartbeats = 0;
 
-	constructor(private ws: WebSocket, private wsService: WebsocketService, private channel: number) {
+	constructor(private ws: any, private wsService: WebsocketService, private channel: number) {
 		this.sendPulse();
 	}
 
