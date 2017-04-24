@@ -19,5 +19,15 @@ export const EN = {
 	TOTAL_OFFER_QTY: '[14324]',
 	FIFTY_TWO_WK_LOW: '[4859]',
 	FIFTY_TWO_WK_HIGH: '[21]',
+	TIME: '[9483]',
+	PRICE: '[9458]',
+	QTY: '[9554]',
+	CHANGE: '[9520]',
+	PER_CHANGE: '[15873]',
+	SPLITS: '[9658]',
+	TICK: '[9543]',
+	SIDE: '[9683]',
+	BUY: '[9477]',
+	SELL: '[526]',
 };
 
