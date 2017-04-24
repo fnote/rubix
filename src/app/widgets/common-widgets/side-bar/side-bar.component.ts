@@ -16,8 +16,8 @@ export class SideBarComponent {
 		private route: ActivatedRoute,
 		private widgetLoaderService: WidgetLoaderService,
 	) {
-		widgetLoaderService.getTabs().then(tabList => {
-			this.tabs = tabList;
+		widgetLoaderService.getTabs().then(layoutObj => {
+			this.tabs = layoutObj.model[1].model;
 		});
 	}
 

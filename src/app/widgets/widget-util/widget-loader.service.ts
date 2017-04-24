@@ -22,8 +22,8 @@ export class WidgetLoaderService {
 		return url.join('');
 	}
 
-	private getTabObj(): any {
-		return this.layoutObj.model[1].model;
+	private getLayoutObj(): any {
+		return this.layoutObj;
 	}
 
 	public getTabs(): Promise<any> {
@@ -31,11 +31,20 @@ export class WidgetLoaderService {
 			if (!this.layoutObj) {
 				this.http.get('src/app/app-config/app-layout.json').map((res) => res.json()).subscribe(data => {
 					this.layoutObj = data;
-					resolve(this.getTabObj());
+					resolve(this.getLayoutObj());
 				});
 			} else {
-				resolve(this.getTabObj());
+				resolve(this.getLayoutObj());
 			}
 		});
+	}
+
+	public loadDefaultTab(): void {
+		this.getTabs().then(layoutObj => {
+			const sideBar = layoutObj.model[0].model[0];
+			const staticUrl = '/' + layoutObj.path + '/(' + sideBar.outlet + ':' + sideBar.path;
+			this.router.navigateByUrl(staticUrl + this.getUrlforTab(layoutObj.model[1].model[0]) + ')');
+		});
+
 	}
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../app-backend/auth/auth.service';
 import { Channels } from '../../../constants/enums/channels.enum';
 import { Router } from '@angular/router';
+import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 
 @Component({
 	selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 	public isAuthenticating = false;
 	public authClass: {};
 
-	constructor(private authService: AuthService, public router: Router) { }
+	constructor(private authService: AuthService, public router: Router, private widgetLoaderService: WidgetLoaderService) { }
 
 	public ngOnInit(): void {
 		// implement this
@@ -33,9 +34,13 @@ export class LoginComponent implements OnInit {
 
 		this.authService.checkAuthenticated().subscribe(authStatus => {
 			if (authStatus.isAuthenticate) {
-				const redirect = this.authService.redirectURL ? this.authService.redirectURL : '/test';
-				this.router.navigateByUrl(redirect);
-			}else {
+				const redirectURL = this.authService.redirectURL;
+				if (redirectURL) {
+					this.router.navigateByUrl(redirectURL);
+				} else {
+					this.widgetLoaderService.loadDefaultTab();
+				}
+			} else {
 				this.isAuthenticating = false;
 				this.rejectReson = authStatus.rejectReson;
 				this.setAuthClass();
