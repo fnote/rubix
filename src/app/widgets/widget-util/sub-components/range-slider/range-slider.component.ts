@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonHelperService } from '../../../../utils/helper/common-helper.service';
 import { ReflectiveInjector } from '@angular/core';
 
@@ -7,21 +7,18 @@ import { ReflectiveInjector } from '@angular/core';
 	templateUrl: './range-slider.component.html',
 })
 export class RangeSliderComponent implements OnInit {
-	private percentage = 0;
+	@Input() public title: string;
+	@Input() private lowVal: number;
+	@Input() private highVal: number;
+	@Input() private refVal: number;
+
 	public dispPercentage = '';
 	public percentageStyle = 'style="width:0%;"';
 	private commonHelperService: CommonHelperService;
 
-	constructor(public title: string, private value1: number, private value2: number) {
+	constructor() {
 		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
 		this.commonHelperService = injector.get(CommonHelperService);
-	}
-
-	public setValues(value1: number, value2: number): void {
-		this.value1 = value1;
-		this.value2 = value2;
-
-		this.calculatePercentage();
 	}
 
 	public ngOnInit(): void {
@@ -29,14 +26,12 @@ export class RangeSliderComponent implements OnInit {
 	}
 
 	private calculatePercentage(): void {
-		const total = this.value1 + this.value2;
-		if (total > 0) {
-			this.percentage = this.value1 * 100 / total;
-		} else {
-			this.percentage = 0;
+		let value = 0;
+		if (this.refVal > 0 && this.highVal > 0 && this.lowVal > 0 && this.highVal !== this.lowVal) {
+			value = (this.refVal - this.lowVal) * 100 / (this.highVal - this.lowVal);
 		}
 
-		this.dispPercentage = this.commonHelperService.formatNumber(this.percentage, 2) + '%';
-		this.percentageStyle = 'style="width:' + Math.round(this.percentage) + '%;"';
+		this.dispPercentage = this.commonHelperService.formatNumber(value, 2) + '%';
+		this.percentageStyle = 'style="width:' + Math.round(value) + '%;"';
 	}
 }

@@ -114,14 +114,12 @@
 	</div>
 	<div class="h-sep-line margin-medium-top margin-medium-bottom"></div>
 	<div class="row">
-		<div class="col-xs-12 col-sm-4">
-			<app-range-slider></app-range-slider>
+		<div class="col-xs-12 col-sm-6">
+			<app-range-slider [title]="localizationService.language.DAY_RANGE" [lowVal]="stockObj.rawLowPrice" [highVal]="stockObj.rawHighPrice" [refVal]="stockObj.rawLastTradePrice"></app-range-slider>
 		</div>
-		<div class="col-xs-12 col-sm-4">
-			<app-range-slider></app-range-slider>
-		</div>
-		<div class="col-xs-12 col-sm-4">
-			<app-range-slider></app-range-slider>
+
+		<div class="col-xs-12 col-sm-6">
+			<app-range-slider [title]="localizationService.language.FIFTY_TWO_WK_RANGE" [lowVal]="stockObj.rawLow52" [highVal]="stockObj.rawHigh52" [refVal]="stockObj.rawLastTradePrice"></app-range-slider>
 		</div>
 	</div>
 	<div class="horizontal-sep-line margin-medium-bottom"></div>

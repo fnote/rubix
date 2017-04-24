@@ -29,4 +29,6 @@
 	SIDE: 'Side',
 	BUY: 'Buy',
 	SELL: 'Sell',
+	DAY_RANGE: 'Day Range',
+	FIFTY_TWO_WK_RANGE: '52 Wk. Range',
 };

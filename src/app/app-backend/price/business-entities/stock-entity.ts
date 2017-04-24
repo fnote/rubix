@@ -14,9 +14,12 @@ export class StockEntity extends BaseEntity {
 	private _currency: string = userSettings.marketData.defaultStringInitializer;
 	private _decimalPlaces: number = userSettings.marketData.defaultDecimalPlaces;
 	private _decimalCorrectionFactor: number = userSettings.marketData.defaultDecimalPlaces;
+	private _rawlastTradePrice: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _lastTradePrice: string = userSettings.marketData.defaultStringInitializer;
 	private _openPrice: string = userSettings.marketData.defaultStringInitializer;
+	private _rawHighPrice: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _highPrice: string = userSettings.marketData.defaultStringInitializer;
+	private _rawLowPrice: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _lowPrice: string = userSettings.marketData.defaultStringInitializer;
 	private _closePrice: string = userSettings.marketData.defaultStringInitializer;
 	private _bestAskPrice: string = userSettings.marketData.defaultStringInitializer;
@@ -36,7 +39,9 @@ export class StockEntity extends BaseEntity {
 	private _vwap: string = userSettings.marketData.defaultStringInitializer;
 	private _min: string = userSettings.marketData.defaultStringInitializer;
 	private _max: string = userSettings.marketData.defaultStringInitializer;
+	private _rawHigh52: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _high52: string = userSettings.marketData.defaultStringInitializer;
+	private _rawLow52: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _low52: string = userSettings.marketData.defaultStringInitializer;
 	private _bidOffer: string = userSettings.marketData.defaultStringInitializer;
 
@@ -96,12 +101,21 @@ export class StockEntity extends BaseEntity {
 		this._decimalCorrectionFactor = value;
 	}
 
+	public get rawLastTradePrice(): number  {
+		return this._rawlastTradePrice;
+	}
+
+	public set rawLastTradePrice(value: number) {
+		this._rawlastTradePrice = value;
+	}
+
 	public get lastTradePrice(): string  {
 		return this._lastTradePrice;
 	}
 
 	public set lastTradePrice(value: string) {
-		this._lastTradePrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this.rawLastTradePrice = parseFloat(value);
+		this._lastTradePrice = this.commonHelperService.formatNumber(this.rawLastTradePrice, this.decimalPlaces);
 	}
 
 	public get openPrice(): string  {
@@ -112,12 +126,29 @@ export class StockEntity extends BaseEntity {
 		this._openPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
+	public get rawHighPrice(): number  {
+		return this._rawHighPrice;
+	}
+
+	public set rawHighPrice(value: number) {
+		this._rawHighPrice = value;
+	}
+
 	public get highPrice(): string  {
 		return this._highPrice;
 	}
 
 	public set highPrice(value: string) {
-		this._highPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this.rawHighPrice = parseFloat(value);
+		this._highPrice = this.commonHelperService.formatNumber(this.rawHighPrice, this.decimalPlaces);
+	}
+
+	public get rawLowPrice(): number  {
+		return this._rawLowPrice;
+	}
+
+	public set rawLowPrice(value: number) {
+		this._rawLowPrice = value;
 	}
 
 	public get lowPrice(): string  {
@@ -125,7 +156,8 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set lowPrice(value: string) {
-		this._lowPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this.rawLowPrice = parseFloat(value);
+		this._lowPrice = this.commonHelperService.formatNumber(this.rawLowPrice, this.decimalPlaces);
 	}
 
 	public get closePrice(): string  {
@@ -285,12 +317,29 @@ export class StockEntity extends BaseEntity {
 		this._max = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
+	public get rawHigh52(): number {
+		return this._rawHigh52;
+	}
+
+	public set rawHigh52(value: number) {
+		this._rawHigh52 = value;
+	}
+
 	public get high52(): string {
 		return this._high52;
 	}
 
 	public set high52(value: string) {
-		this._high52 = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this.rawHigh52 = parseFloat(value);
+		this._high52 = this.commonHelperService.formatNumber(this.rawHigh52, this.decimalPlaces);
+	}
+
+	public get rawLow52(): number {
+		return this._rawLow52;
+	}
+
+	public set rawLow52(value: number) {
+		this._rawLow52 = value;
 	}
 
 	public get low52(): string {
@@ -298,7 +347,8 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set low52(value: string) {
-		this._low52 = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this.rawLow52 = parseFloat(value);
+		this._low52 = this.commonHelperService.formatNumber(this.rawLow52, this.decimalPlaces);
 	}
 
 	public get bidOffer(): string {

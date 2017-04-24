@@ -29,5 +29,7 @@ export const EN = {
 	SIDE: '[9683]',
 	BUY: '[9477]',
 	SELL: '[526]',
+	DAY_RANGE: '[13913]',,
+	FIFTY_TWO_WK_RANGE: '[14729]',
 };
 
