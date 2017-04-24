@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ReflectiveInjector } from '@angular/core';
 import { CommonHelperService } from '../../../../utils/helper/common-helper.service';
-import { ReflectiveInjector } from '@angular/core';
 
 @Component({
 	selector: 'app-range-slider',
@@ -13,7 +12,7 @@ export class RangeSliderComponent implements OnInit {
 	@Input() private refVal: number;
 
 	public dispPercentage = '';
-	public percentageStyle = 'style="width:0%;"';
+	public percentage = 0;
 	private commonHelperService: CommonHelperService;
 
 	constructor() {
@@ -32,6 +31,6 @@ export class RangeSliderComponent implements OnInit {
 		}
 
 		this.dispPercentage = this.commonHelperService.formatNumber(value, 2) + '%';
-		this.percentageStyle = 'style="width:' + Math.round(value) + '%;"';
+		this.percentage = Math.round(value);
 	}
 }
