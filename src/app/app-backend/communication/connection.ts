@@ -6,10 +6,10 @@ export interface Connection {
 	url: string;
 	connectedSocket: Rx.Subject<MessageEvent>;
 	sendMessageQueue: Array<any>;
-	recivedMessageQueue: Array<any>;
+	// recivedMessageQueue: Array<any>;
 	isConnected: boolean;
 	sendQueueProcessInterval: NodeJS.Timer;
-	recivedQueueProcessInterval: NodeJS.Timer;
+	// recivedQueueProcessInterval: NodeJS.Timer;
 	subscription: any;
 	pulseService: PulseService;
 }

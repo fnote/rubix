@@ -34,10 +34,10 @@ export class QueueMannagerService {
 					url: connection.url,
 					connectedSocket: null,
 					sendMessageQueue: [],
-					recivedMessageQueue: [],
+					// recivedMessageQueue: [],
 					isConnected: false,
 					sendQueueProcessInterval: null,
-					recivedQueueProcessInterval: null,
+					// recivedQueueProcessInterval: null,
 					subscription: null,
 					pulseService: null,
 				};
@@ -76,15 +76,10 @@ export class QueueMannagerService {
 					connection.connectedSocket = socket;
 					connection.isConnected = true;
 					this.subscribeForConnected(connectionConfig.channel);
-					this.activateSentReceive(
+					this.activateSentFromQueue(
 						connection.sendMessageQueue,
 						connection.sendQueueProcessInterval,
 						connection.connectedSocket,
-						connection.channel);
-					this.activateSentReceive(
-						connection.recivedMessageQueue,
-						connection.recivedQueueProcessInterval,
-						this.response$ ,
 						connection.channel);
 				}).catch(error => {
 					this.loggerService.logInfo('error occured ' + connectionConfig.channel , 'QueueMannagerService');
@@ -95,18 +90,18 @@ export class QueueMannagerService {
 		});
 	}
 
-	private activateSentReceive(messageQueue: Array<any>, timeIntervalProcess: NodeJS.Timer,
+	private activateSentFromQueue(messageQueue: Array<any>, timeIntervalProcess: NodeJS.Timer,
 		socket: Rx.Subject<MessageEvent> , channel: number): void {
 		timeIntervalProcess = setInterval(() => {
 			if (messageQueue.length > 0) {
 				const msg: any = this.deQueueMessage(messageQueue);
-				const sendRecivedMsg = {
+				const sendMsg = {
 					data : {
 						data : msg,
 						connection : channel,
 					},
 				};
-				socket.next(<MessageEvent>sendRecivedMsg);
+				socket.next(<MessageEvent>sendMsg);
 			}
 		}, this.TIME_INTERVAL);
 	}
@@ -115,7 +110,13 @@ export class QueueMannagerService {
 		this.getConnectionByChannel(channel).then(connection => {
 			if (connection.connectedSocket && !connection.subscription) {
 				connection.subscription = connection.connectedSocket.subscribe(msg => {
-					this.enQueueMessage(msg.data, connection.recivedMessageQueue);
+					const recivedMsg = {
+						data : {
+							data : msg.data,
+							connection : channel,
+						},
+					};
+					this.response$.next(<MessageEvent>recivedMsg);
 					connection.pulseService.resetPulse();
 				}, error => {
 					this.loggerService.logError(error, 'QueueMannagerService');
@@ -134,9 +135,9 @@ export class QueueMannagerService {
 				connection.subscription.unsubscribe();
 				connection.subscription = null;
 				connection.sendMessageQueue = [];
-				connection.recivedMessageQueue =  [];
+				// connection.recivedMessageQueue =  [];
 				clearInterval(connection.sendQueueProcessInterval);
-				clearInterval(connection.recivedQueueProcessInterval);
+				// clearInterval(connection.recivedQueueProcessInterval);
 				connection.sendQueueProcessInterval = null;
 			}
 		});
