@@ -8,6 +8,7 @@ import { CommonWidgetModule } from './widgets/common-widgets/common-widget.modul
 import { CommunicationModule } from './app-backend/communication/communication.module';
 import { ConfigService } from './app-config/config.service';
 import { HttpModule } from '@angular/http';
+import { NetworkService } from './app-backend/network/network.service';
 import { NgModule } from '@angular/core';
 import { PriceModule } from './app-backend/price/price.module';
 import { PriceWidgetModule } from './widgets/price-widgets/price-widget.module';
@@ -32,7 +33,7 @@ import { WidgetLoaderService } from './widgets/widget-util/widget-loader.service
 		AuthModule,
 		TradeModule,
 	],
-	providers: [ConfigService, WidgetLoaderService, AuthGuardService],
+	providers: [ConfigService, WidgetLoaderService, AuthGuardService, NetworkService],
 	bootstrap: [AppComponent],
 })
 export class AppModule { }

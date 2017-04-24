@@ -2,7 +2,7 @@ import { CachePolicy } from '../../constants/enums/cache-policy.enum';
 import { DbController } from './db-controller';
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../utils/logger.service';
-import { NetworkController } from './interfaces/network-controller';
+import { NetworkService } from '../network/network.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 
@@ -12,7 +12,7 @@ export class CacheService {
 	private _version = 7;
 	private _dbController: DbController;
 
-	constructor(private network: NetworkController, private logger: LoggerService) {
+	constructor(private network: NetworkService, private logger: LoggerService) {
 		this._dbController = new DbController(this._version, logger);
 	}
 
