@@ -1,6 +1,5 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 
 @Component({
@@ -8,24 +7,21 @@ import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 	templateUrl: './side-bar.component.html',
 })
 export class SideBarComponent {
-	private tabs= [];
+	private tabs = [];
 	public selectedTab= '';
 
 	// If this is failing, add the initialisation to the main app component's constructor
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private http: Http,
-		private widgetLoader: WidgetLoaderService,
+		private widgetLoaderService: WidgetLoaderService,
 	) {
-		this.http.get('src/app/app-config/app-layout.json').map((res) => res.json()).subscribe(data => {
-			this.tabs = data.model[1].model;
-		});
+		this.tabs = widgetLoaderService.getTabs();
 	}
 
 	public loadTab(tab: any): void {
 		this.selectedTab = tab.id;
-		this.widgetLoader.loadTab(tab);
+		this.widgetLoaderService.loadTab(tab);
 
 		this.sideBarCloseClicked();
 	}
