@@ -4,6 +4,7 @@ import { DetailQuoteComponent } from './detail-quote/detail-quote.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { OrderBookComponent } from './order-book/order-book.component';
+import { RangeSliderComponent } from '../widget-util/sub-components/range-slider/range-slider.component';
 import { TimeAndSalesComponent } from './time-and-sales/time-and-sales.component';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { TimeAndSalesComponent } from './time-and-sales/time-and-sales.component
 		TimeAndSalesComponent,
 		ChartComponent,
 		OrderBookComponent,
+		RangeSliderComponent,
 	],
 })
 export class PriceWidgetModule { }

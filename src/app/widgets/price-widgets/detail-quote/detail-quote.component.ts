@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LocalizationService } from '../../../utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
+import { RangeSliderComponent } from '../../widget-util/sub-components/range-slider/range-slider.component';
 
 @Component({
 	selector: 'app-detail-quote',
