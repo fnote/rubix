@@ -13,6 +13,73 @@
 		{
 			"model": [
 				{
+					"title": "Test",
+					"path": "secondary-layout-three",
+					"outlet": "outlet2",
+					"model": [
+						{
+							"path": "chart",
+							"outlet": "outlet1",
+							"args": {"title": "One"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet2",
+							"args": {"title": "Two"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet3",
+							"args": {"title": "Three"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet4",
+							"args": {"title": "Four"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet5",
+							"args": {"title": "Five"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet6",
+							"args": {"title": "Six"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet7",
+							"args": {"title": "Seven"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet8",
+							"args": {"title": "Eight"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet9",
+							"args": {"title": "Nine"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet10",
+							"args": {"title": "Ten"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet11",
+							"args": {"title": "Eleven"}
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet12",
+							"args": {"title": "Twelve"}
+						}
+					]
+				},
+				{
 					"title": "Detail Quote",
 					"path": "secondary-layout-two",
 					"outlet": "outlet2",

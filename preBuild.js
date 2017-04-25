@@ -31,6 +31,9 @@ var getComponent = function (id) {
 		case 'secondary-layout-two':
 			component = 'SecondaryLayoutTwoComponent';
 			break;
+		case 'secondary-layout-three':
+			component = 'SecondaryLayoutThreeComponent';
+			break;
 		case 'time-and-sales':
 			component = 'TimeAndSalesComponent';
 			break;

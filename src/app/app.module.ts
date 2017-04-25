@@ -15,6 +15,7 @@ import { PriceModule } from './app-backend/price/price.module';
 import { PriceWidgetModule } from './widgets/price-widgets/price-widget.module';
 import { PrimaryLayoutOneComponent } from './layouts/primary-layout-one/primary-layout-one.component';
 import { SecondaryLayoutOneComponent } from './layouts/secondary-layout-one/secondary-layout-one.component';
+import { SecondaryLayoutThreeComponent } from './layouts/secondary-layout-three/secondary-layout-three.component';
 import { SecondaryLayoutTwoComponent } from './layouts/secondary-layout-two/secondary-layout-two.component';
 import { TradeModule } from './app-backend/trade/trade.module';
 import { UtilsModule } from './utils/utils.module';
@@ -27,6 +28,7 @@ import { WidgetLoaderService } from './widgets/widget-util/widget-loader.service
 		SecondaryLayoutOneComponent,
 		SecondaryLayoutTwoComponent,
 		BaseWidgetComponent,
+		SecondaryLayoutThreeComponent,
 	],
 	imports: [
 		BrowserModule,
