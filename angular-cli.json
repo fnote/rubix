@@ -8,10 +8,10 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
+        "./assets/assets",
         "favicon.ico",
-		"./app/app-config/app-config.json",
-		"./app/app-config/app-layout.json"
+		"./assets/config/app-config.json",
+		"./assets/config/app-layout.json"
       ],
       "index": "index.html",
       "main": "main.ts",
