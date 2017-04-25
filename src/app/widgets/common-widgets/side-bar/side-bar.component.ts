@@ -2,6 +2,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Languages } from '../../../constants/enums/languages.enum';
 import { LocalizationService } from '../../../utils/localization/localization.service';
+import { ThemeService } from '../../../utils/theme.service';
+import { Themes } from '../../../constants/enums/themes.enum';
 import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 
 @Component({
@@ -12,6 +14,7 @@ export class SideBarComponent {
 	public tabs: any = [];
 	public selectedTab= '';
 	public lanTitle = '';
+	public themeTitle = '';
 
 	// If this is failing, add the initialisation to the main app component's constructor
 	constructor(
@@ -19,6 +22,7 @@ export class SideBarComponent {
 		private route: ActivatedRoute,
 		private widgetLoaderService: WidgetLoaderService,
 		public localizationService: LocalizationService,
+		public themeService: ThemeService,
 	) {
 		widgetLoaderService.getTabs().then(layoutObj => {
 			this.tabs = layoutObj.model[1].model;
@@ -28,6 +32,12 @@ export class SideBarComponent {
 			this.lanTitle = this.localizationService.getLongDesc(Languages.AR);
 		} else {
 			this.lanTitle = this.localizationService.getLongDesc(Languages.EN);
+		}
+
+		if (this.themeService.selectedTheme === Themes.Light) {
+			this.themeTitle = this.themeService.getThemeDesc(Themes.Dark);
+		} else {
+			this.themeTitle = this.themeService.getThemeDesc(Themes.Light);
 		}
 	}
 
@@ -56,5 +66,19 @@ export class SideBarComponent {
 		} else {
 			this.localizationService.activeLanguageCode = Languages.EN;
 		}
+
+		this.hideSideBar();
+	}
+
+	public changeTheme(): void {
+		this.themeTitle = this.themeService.getThemeDesc();
+
+		if (this.themeService.selectedTheme === Themes.Light) {
+			this.themeService.selectedTheme = Themes.Dark;
+		} else {
+			this.themeService.selectedTheme = Themes.Light;
+		}
+
+		this.hideSideBar();
 	}
 }

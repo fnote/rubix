@@ -47,4 +47,13 @@ export class ThemeService {
 		const selectedThemeObj = this.supportedThemes[value];
 		return selectedThemeObj.code;
 	}
+
+	public getThemeDesc(value?: Themes): string  {
+		let param = value;
+		if (!param) {
+			param = this._selectedTheme;
+		}
+
+		return this.supportedThemes[param].displayName;
+	}
 }
