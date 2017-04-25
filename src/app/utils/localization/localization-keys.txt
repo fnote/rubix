@@ -36,5 +36,9 @@ export const EN = {
 	REMEMBER_ME: '[5707]',
 	FORGOT_PASSWORD: '[5524]',
 	LOGIN: '[5809]',
+	SPREAD_PER: '[10288]',
+	SPREAD: '[4335]',
+	RANGE_PER: '[10157]',
+	RANGE: '[994]',
 };
 

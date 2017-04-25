@@ -36,4 +36,8 @@
 	REMEMBER_ME: 'Remember me',
 	FORGOT_PASSWORD: 'Forgot Password?',
 	LOGIN: 'Login',
+	SPREAD_PER: 'Spread(%)',
+	SPREAD: 'Spread',
+	RANGE_PER: 'Range(%)',
+	RANGE: 'Range',
 };

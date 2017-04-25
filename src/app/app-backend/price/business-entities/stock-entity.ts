@@ -44,6 +44,10 @@ export class StockEntity extends BaseEntity {
 	private _rawLow52: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _low52: string = userSettings.marketData.defaultStringInitializer;
 	private _bidOffer: string = userSettings.marketData.defaultStringInitializer;
+	private _spreadPercentage: string = userSettings.marketData.defaultStringInitializer;
+	private _spread: string = userSettings.marketData.defaultStringInitializer;
+	private _rangePercentage: string = userSettings.marketData.defaultStringInitializer;
+	private _range: string = userSettings.marketData.defaultStringInitializer;
 
 	public get instrumentType(): number  {
 		return this._instrumentType;
@@ -353,6 +357,38 @@ export class StockEntity extends BaseEntity {
 
 	public get bidOffer(): string {
 		return this._bidOffer;
+	}
+
+	public get spreadPercentage(): string  {
+		return this._spreadPercentage;
+	}
+
+	public set spreadPercentage(value: string) {
+		this._spreadPercentage = value;
+	}
+
+	public get spread(): string  {
+		return this._spread;
+	}
+
+	public set spread(value: string) {
+		this._spread = value;
+	}
+
+	public get rangePercentage(): string  {
+		return this._rangePercentage;
+	}
+
+	public set rangePercentage(value: string) {
+		this._rangePercentage = value;
+	}
+
+	public get range(): string  {
+		return this._range;
+	}
+
+	public set range(value: string) {
+		this._range = value;
 	}
 
 	constructor(values: Object = {}) {
