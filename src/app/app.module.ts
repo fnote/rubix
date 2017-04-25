@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AuthGuardService } from './widgets/widget-util/auth-guard-service';
 import { AuthModule } from './app-backend/auth/auth.module';
+import { BaseWidgetComponent } from './widgets/widget-util/base-widget/base-widget.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonWidgetModule } from './widgets/common-widgets/common-widget.module';
 import { CommunicationModule } from './app-backend/communication/communication.module';
@@ -20,7 +21,13 @@ import { UtilsModule } from './utils/utils.module';
 import { WidgetLoaderService } from './widgets/widget-util/widget-loader.service';
 
 @NgModule({
-	declarations: [AppComponent, PrimaryLayoutOneComponent, SecondaryLayoutOneComponent, SecondaryLayoutTwoComponent],
+	declarations: [
+		AppComponent,
+		PrimaryLayoutOneComponent,
+		SecondaryLayoutOneComponent,
+		SecondaryLayoutTwoComponent,
+		BaseWidgetComponent,
+	],
 	imports: [
 		BrowserModule,
 		HttpModule,
@@ -33,7 +40,12 @@ import { WidgetLoaderService } from './widgets/widget-util/widget-loader.service
 		AuthModule,
 		TradeModule,
 	],
-	providers: [ConfigService, WidgetLoaderService, AuthGuardService, NetworkService],
+	providers: [
+		ConfigService,
+		WidgetLoaderService,
+		AuthGuardService,
+		NetworkService,
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule { }

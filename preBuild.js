@@ -43,6 +43,34 @@ var getComponent = function (id) {
 	return component;
 }
 
+var getDataString = function (data) {
+	var output = '';
+
+	if (data instanceof Array) {
+		output += '[';
+		for (var property in data) {
+			output = output + getDataString(data[property]);
+		}
+		output = output.slice(0,output.length-2) + ']';
+
+	}else if (data instanceof Object) {
+		output += '{ ';
+		for (var property in data) {
+			output = output +  property + ': ' + getDataString(data[property]);
+		}
+		output = output.slice(0,output.length-2) + ' }';
+	}else {
+		if (typeof data === 'string') {
+			output += "'" + data + "'";
+		}else {
+			output += data;
+		}
+	}
+	output += ', ';
+
+	return output;
+}
+
 var createRoute = function (profile, tabs) {
 
 	var tabString = '\t', shortTabString = '';
@@ -54,6 +82,10 @@ var createRoute = function (profile, tabs) {
 	var route = shortTabString + "{ path: '" + path + "', component: " + getComponent(path);
 	if (profile.outlet) {
 		route = route + ", outlet: '" + profile.outlet + "'"
+	}
+	if(profile.args){
+		route = route + ", data: " + getDataString(profile.args);
+		route = route.slice(0, route.length-2);
 	}
 	routesString = routesString + route + ',';
 

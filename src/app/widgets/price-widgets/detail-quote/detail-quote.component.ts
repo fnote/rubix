@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
 import { LocalizationService } from '../../../utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
 import { RangeSliderComponent } from '../../widget-util/sub-components/range-slider/range-slider.component';
@@ -7,14 +8,18 @@ import { RangeSliderComponent } from '../../widget-util/sub-components/range-sli
 	selector: 'app-detail-quote',
 	templateUrl: './detail-quote.component.html',
 })
-export class DetailQuoteComponent implements OnInit, OnDestroy {
+export class DetailQuoteComponent extends BaseWidgetComponent {
 
 	public response: Array<any> = [] ;
 	private session = '';
 	public stockObj;
-	private exgStock: [string, string] = ['TDWL', '1020'];
 
-	constructor(private priceService: PriceService, public localizationService: LocalizationService) {
+	constructor(
+		private priceService: PriceService,
+		public localizationService: LocalizationService,
+		injector: Injector,
+	) {
+		super(injector);
 		this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
 
 		// Temp
@@ -30,7 +35,7 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	public ngOnInit(): void {
+	public onInit(): void {
 		if (!this.stockObj) {
 			this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
 		}
@@ -39,7 +44,7 @@ export class DetailQuoteComponent implements OnInit, OnDestroy {
 		this.priceService.addSymbolRequest(this.exgStock);
 	}
 
-	public ngOnDestroy(): void {
+	public onDestroy(): void {
 		// Remove the symbol subscription
 		this.priceService.removeSymbolRequest(this.exgStock);
 	}
