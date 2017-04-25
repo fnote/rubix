@@ -8,7 +8,7 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "./assets/assets",
+		"./assets/assets/images",
         "favicon.ico",
 		"./config/app-config.json",
 		"./config/app-layout.json"
