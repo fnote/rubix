@@ -18,20 +18,20 @@ export const routes: Routes = [
 			{ path: 'side-bar', component: SideBarComponent, outlet: 'outlet1' },
 			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
 				children: [
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1' },
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1090'] } },
 				],
 			},
 			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
 				children: [
-					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet1' },
+					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1090'] } },
 				],
 			},
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
 				children: [
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1' },
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2' },
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet3' },
-					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4' },
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1010'] } },
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2', data: { exgStock: ['DFM', 'EMAAR'] } },
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet3', data: { exgStock: ['DFM', 'DIC'] } },
+					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
 				],
 			},
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
@@ -46,8 +46,8 @@ export const routes: Routes = [
 	},
 
 	{ path: '', redirectTo: 'login', pathMatch: 'full' },
-	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent },
-	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent },
+	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent, data: { exgStock: ['TDWL', '1010'] } },
+	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'test', component: RubixTestPageComponent },
 	{ path: 'login', component: LoginComponent },
 ];
