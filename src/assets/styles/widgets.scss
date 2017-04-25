@@ -113,42 +113,53 @@ body.ar {
 	position: absolute;
 	top: 0;
 	width: 100%;
-	padding: 10px;
+	padding: $padding-medium;
 	color: #fff;
 }
 
 .lang-bar-ar button {
-	padding: 0px 20px;
+	padding: 0px 20px 5px 20px;
 	background: none;
-	border: none;
-	font-size: 25px;
+	font-size: $font-xxx-large;
 	letter-spacing: 1px;
-	text-decoration: underline;
+	border-radius: 17px;
+	text-decoration: none;
+	border: 2px solid $login-lang-btn-border-color;
+	width: 100px;
 }
 
 .lang-bar-en button {
-	padding: 8px 20px;
+	padding: 6px 20px;
 	background: none;
-	width: 100px;
-	border: none;
-	font-size: 18px;
+	font-size: $font-x-large;
 	letter-spacing: 1px;
-	text-decoration: underline;
+	border-radius: 17px;
+	text-decoration: none;
+	border: 2px solid $login-lang-btn-border-color;
+	width: 100px;
+}
+
+.lang-bar-ar button:hover, .lang-bar-en button:hover {
+	background: $login-lang-btn-border-color;
+	color: #e0e1e0;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+	border: 2px solid $login-lang-btn-border-color;
 }
 
 .lang-bar-ar{
-	text-align: right;
+	text-align: $text-align-3;
 }
 
 .login .authenticateProgress{
-	text-align: center;
+	text-align: $text-align-2;
 	color: $success-msg-font-color;
 	font-size: $font-x-large;
 	font-weight: 100;
 }
 
 .login .authError{
-	text-align: center;
+	text-align: $text-align-2;
 	color: $error-msg-font-color;
 	font-size: $font-x-large;
 	font-weight: 100;
@@ -305,9 +316,9 @@ width: auto;
   margin: 0;
   padding: 0 20px;
   vertical-align: middle;
-  background: #f8f8f8;
+  background: $login-input-fields-bg-color;
   font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+  font-size: $font-xx-large;
   font-weight: 300;
   line-height: 50px;
   color: $login-input-text-color;
@@ -361,14 +372,14 @@ width: auto;
 .login button.btn:focus {
   outline: 0;
   opacity: 0.6;
-  background: #34abdc;
+  background: $login-btn-bg-color;
   color: #fff;
 }
 
 .login button.btn:active:focus, .login button.btn.active:focus {
   outline: 0;
   opacity: 0.6;
-  background: #34abdc;
+  background: $login-btn-bg-color;
   color: #fff;
 }
 
@@ -380,7 +391,7 @@ li {
 }
 
 .tg-list {
-	text-align: center;
+	text-align: $text-align-2;
 	display: flex;
 	align-items: center;
 	width: auto;
@@ -442,28 +453,28 @@ li {
 	+ .tgl-btn {
 		padding: 2px;
 		transition: all .4s ease;
-		border: 2px solid #c5c5c5;
+		border: 2px solid $login-tgl-btn-desabl-color;
 		border-radius: 2em;
 		&:after {
 			transition: all .4s ease;
-			background: #ccc;
+			background: $login-tgl-btn-desabl-color;
 			content: "";
 			border-radius: 1em;
 		}
 	}
 
 	&:checked + .tgl-btn {
-		border: 2px solid #fff;
+		border: 2px solid $login-tgl-btn-active-color;
 		&:after {
 			left: 50%;
-			background: #fff;
+			background: $login-tgl-btn-active-color;
 		}
 	}
 }
 
 .login-authenticating {
-	margin-top: 15px;
-	text-align: center;
+	margin-top: $margin-large;
+	text-align: $text-align-2;
 	width: 100%;
 }
 
@@ -471,6 +482,42 @@ li {
 	width: 100%;
 	display: inline-block;
 }
+
+/***** Language = Arabic *****/
+
+.ar .login .tg-list{
+	direction: ltr;
+}
+
+.ar .login .rememberme {
+	float: right;
+}
+
+.ar .login .tg-list {
+	float: right;
+}
+
+.ar .login .tg-list-item {
+	margin: 0 0 0 1em;
+}
+
+.ar .login .rememberme p {
+	float: right;
+}
+
+.ar .login .forget-pw {
+	float: right;
+}
+
+.ar .login .forget-pw a {
+	float: left;
+	text-align: left;
+}
+
+.ar .login .lang-bar-en {
+	text-align: left;
+}
+
 /***** Media queries *****/
 
 //large-monitors
@@ -510,12 +557,15 @@ li {
 @media (min-width: 768px) and (max-width: 991px) {
 	.login .forget-pw a {
 		font-size: 14px;
+		padding-top: 4px;
 	}
 	.login .tg-list li{
 		margin: 0 1em 0 0;
 	}
 	.login .rememberme p {
 		font-size: 14px;
+		height: 19px;
+		line-height: 19px;
 	}
 }
 
@@ -532,20 +582,20 @@ li {
 
 	.lang-bar-ar button {
 		width: 90px;
-		padding-bottom: 5px;
-		padding-top: 0px;
-		border: 1px solid #fff;
-		font-size: 15px;
+		padding-bottom: 8px;
+		padding-top: 4px;
+		border: 1px solid $login-lang-btn-border-color;
+		font-size: 12px;
 		border-radius: 17px;
 		text-decoration: none;
 	}
 
 	.lang-bar-en button {
 		width: 90px;
-		padding-bottom: 5px;
-		padding-top: 5px;
-		border: 1px solid #fff;
-		font-size: 13px;
+		padding-bottom: 7px;
+		padding-top: 7px;
+		border: 1px solid $login-lang-btn-border-color;
+		font-size: 11px;
 		border-radius: 17px;
 		text-decoration: none;
 	}
@@ -587,7 +637,7 @@ li {
 	.login .forget-pw a {
 		font-size: 11px;
 		padding:0;
-		padding: 4px 0 0;
+		padding: 2px 0 0;
 	}
 
 	.login .rememberme {
@@ -601,8 +651,8 @@ li {
 	}
 
 	.login .rememberme p {
-		height: 22px;
-		line-height: 22px;
+		height: 19px;
+		line-height: 19px;
 		font-size: 11px;
 	}
 
