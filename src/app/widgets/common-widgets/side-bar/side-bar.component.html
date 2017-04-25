@@ -1,7 +1,7 @@
 <nav>
 	<ul class="list-unstyled main-menu">
-		<li class="text-right"><a id="nav-close" class="nav-menu-close" (click)="sideBarCloseClicked($event)"></a></li>
-		<li *ngFor="let tab of tabs" (click)="loadTab(tab)"><a>{{tab.title}}</a></li>
+		<li><div class="left user-name">Welcome&nbsp;<span>name</span> </div> <div class="right text-right"><a id="nav-close" class="nav-menu-close" (click)="sideBarCloseClicked($event)"></a></div></li>
+		<li *ngFor="let tab of tabs" (click)="loadTab(tab)" class="clear"><a>{{tab.title}}</a></li>
 	</ul>
 
 	<div class="menu-settings">
