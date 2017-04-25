@@ -23,7 +23,7 @@ export class ConfigService {
 	public getStringConfigVal(key1: string, key2?: string, key3?: string): Promise<any> {
 		return new Promise((resolve, reject) => {
 			if (!this.configObj) {
-				this.http.get('./assets/config/app-config.json').map((res) => res.json()).subscribe(data => {
+				this.http.get('./config/app-config.json').map((res) => res.json()).subscribe(data => {
 					this.configObj = data;
 					resolve(this.getConfigurationVal(key1, key2, key3));
 				});

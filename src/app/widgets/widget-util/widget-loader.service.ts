@@ -29,7 +29,7 @@ export class WidgetLoaderService {
 	public getTabs(): Promise<any> {
 		return new Promise((resolve, reject) => {
 			if (!this.layoutObj) {
-				this.http.get('./assets/config/app-layout.json').map((res) => res.json()).subscribe(data => {
+				this.http.get('./config/app-layout.json').map((res) => res.json()).subscribe(data => {
 					this.layoutObj = data;
 					resolve(this.getLayoutObj());
 				});
