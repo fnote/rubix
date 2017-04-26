@@ -40,6 +40,9 @@ var getComponent = function (id) {
 		case 'primary-layout-one':
 			component = 'PrimaryLayoutOneComponent';
 			break;
+		case 'order-book':
+			component = 'OrderBookComponent';
+			break;
 		default:
 			console.log('An error occurred');
 	}

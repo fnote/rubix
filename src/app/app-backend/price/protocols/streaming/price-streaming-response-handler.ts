@@ -1,3 +1,4 @@
+import { DepthDataStore } from '../../data-stores/depth-data-store';
 import { ExchangeDataStore } from '../../data-stores/exchange-data-store';
 import { Injectable } from '@angular/core';
 import { PriceRequestTypes } from '../../../../constants/enums/price-request-types.enum';
@@ -18,7 +19,7 @@ export class PriceStreamingResponseHandler {
 	private timeAndSalesDataStore: TimeAndSalesDataStore;
 	private exchangeDataStore: ExchangeDataStore;
 
-	constructor(private streamRouteService: StreamRouteService) {
+	constructor(private streamRouteService: StreamRouteService, private depthDataStore: DepthDataStore) {
 		this.priceResponseStream$ = new Subject();
 		this.metaAuthResponseStream$ = new Subject();
 		this.priceAuthResponseStream$ = new Subject();
@@ -40,7 +41,7 @@ export class PriceStreamingResponseHandler {
 	}
 
 	private updatePriceModel(response: any): void {
-		switch (response.MT) {
+		switch (parseInt(response.MT, 10)) {
 			case PriceRequestTypes.AuthMeta:
 				this.metaAuthResponseStream$.next(response);
 				break;
@@ -63,7 +64,10 @@ export class PriceStreamingResponseHandler {
 			case PriceRequestTypes.ExchangeAndSubmarket:
 				this.exchangeDataStore.getOrAddExchange(response.exchangeCode).setValues(response);
 				break;
-
+			case PriceRequestTypes.MarketDepthByPrice:
+			case PriceRequestTypes.MarketDepthByOrder:
+				this.depthDataStore.updateDepthPriceModel(response);
+				break;
 			default:
 				// code here
 		}

@@ -1,50 +1,88 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
+import { DepthDataStore } from '../../../app-backend/price/data-stores/depth-data-store';
+import { LocalizationService } from '../../../utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
 
 @Component({
 	selector: 'app-order-book',
 	templateUrl: './order-book.component.html',
 })
-export class OrderBookComponent implements OnInit, OnDestroy {
+export class OrderBookComponent  extends BaseWidgetComponent {
 
 	public stockObj;
-	private exgStock: [string, string] = ['DFM', 'EMAAR'];
+	public depthObj;
+	private depthPriceRequestSent = false;
+	private depthOrderRequestSent = false;
+	public isPriceSelected = true;
 
-	constructor(private priceService: PriceService) {
+	constructor(private priceService: PriceService, private depthDataStore: DepthDataStore,
+		public localizationService: LocalizationService, injector: Injector) {
 		// Constructor
+		super(injector);
 		this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
-
-		// TODO: [Chaamini] Below is hardcoded until the login is impmented
-		const authParams: Object = {
-			priceVerion: '1',
-			userName: 'chaamini',
-			password: 'password',
-			userType: '30',
-			subType: '1',
-			omsId: 10,
-			brokerCode: 'MFS_UAT',
-		};
-		this.priceService.authenticateWithUsernameAndPassword(authParams, 2);
+		this.depthObj = this.depthDataStore.getDepthByPriceSymbol(this.exgStock);
 	}
 
-	public ngOnInit(): void {
+	public onInit(): void {
 		// on init
-		setTimeout(() => {
-			if (!this.stockObj) {
-				this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
-			}
+		if (!this.stockObj) {
+			this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
+		}
+		if (!this.depthObj) {
+			this.depthObj = this.depthDataStore.getDepthByPriceSymbol(this.exgStock);
+		}
+		if (!this.stockObj.isMetaDataLoaded) {
+			this.priceService.requestSymbolMeta(this.exgStock);
+		}
 
-			if (!this.stockObj.isMetaDataLoaded) {
-				this.priceService.requestSymbolMeta(this.exgStock);
-			}
-
-			// Add the symbol subscription
-			this.priceService.addSymbolRequest(this.exgStock);
-		}, 10000);
+		// Add the symbol subscription
+		this.priceService.addSymbolRequest(this.exgStock);
+		this.sendDepthPriceRequest();
 	}
 
-	public ngOnDestroy(): void {
+	public onDestroy(): void {
 		// Remove the symbol subscription
 		this.priceService.removeSymbolRequest(this.exgStock);
+		this.removeDepthPriceRequest();
+		if (this.depthOrderRequestSent) {
+			this.removeDepthOrderRequest();
+		}
+	}
+
+	public loadMarketDepthPrice(): void {
+		this.isPriceSelected = true;
+		this.depthObj = this.depthDataStore.getDepthByPriceSymbol(this.exgStock);
+		if (!this.depthPriceRequestSent) {
+			this.sendDepthPriceRequest();
+		}
+	}
+
+	public loadMarketDepthOrder(): void {
+		this.isPriceSelected = false;
+		this.depthObj = this.depthDataStore.getDepthByOrderSymbol(this.exgStock);
+		if (!this.depthOrderRequestSent) {
+			this.sendDepthOrderRequest();
+		}
+	}
+
+	private sendDepthPriceRequest(): void {
+		this.priceService.addMarketDepthByPriceRequest(this.exgStock);
+		this.depthPriceRequestSent = true;
+	}
+
+	private removeDepthPriceRequest(): void {
+		this.priceService.removeMarketDepthByPriceRequest(this.exgStock);
+		this.depthPriceRequestSent = false;
+	}
+
+	private sendDepthOrderRequest(): void {
+		this.priceService.addMarketDepthByOrderRequest(this.exgStock);
+		this.depthOrderRequestSent = true;
+	}
+
+	private removeDepthOrderRequest(): void {
+		this.priceService.removeMarketDepthByOrderRequest(this.exgStock);
+		this.depthOrderRequestSent = false;
 	}
 }

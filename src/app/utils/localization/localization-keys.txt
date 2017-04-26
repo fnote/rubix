@@ -40,5 +40,8 @@ export const EN = {
 	SPREAD: '[4335]',
 	RANGE_PER: '[10157]',
 	RANGE: '[994]',
+    OFFER: '[193]',
+    BID: '[8862]',
+    SEQ: '[11479]'
 };
 

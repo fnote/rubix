@@ -37,6 +37,18 @@
 					]
 				},
 				{
+					"title": "Order Book",
+					"path": "secondary-layout-two",
+					"outlet": "outlet2",
+					"model": [
+						{
+							"path": "order-book",
+							"outlet": "outlet1",
+							"args": {"exgStock": ["DFM", "GFH"]}
+						}
+					]
+				},
+				{
 					"title": "Summary",
 					"path": "secondary-layout-one",
 					"outlet": "outlet2",
@@ -52,9 +64,9 @@
 							"args": {"exgStock": ["DFM", "EMAAR"]}
 						},
 						{
-							"path": "detail-quote",
+							"path": "order-book",
 							"outlet": "outlet3",
-							"args": {"exgStock": ["TDWL", "1010"]}
+							"args": {"exgStock": ["DFM", "GFH"]}
 						},
 						{
 							"path": "time-and-sales",

@@ -266,7 +266,7 @@ export class PriceService {
 	}
 
 	public addMarketDepthByPriceRequest (exgSym: [string, string]): void {
-		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketDepthByPrice, exgSym[0], exgSym[1])) {
+		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.MarketDepthByPrice, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
 			req.mt = PriceRequestTypes.MarketDepthByPrice;
 			req.addParam(exgSym[0], exgSym[1]);
@@ -279,6 +279,33 @@ export class PriceService {
 		}
 	}
 
+	public addMarketDepthByOrderRequest (exgSym: [string, string]): void {
+		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.MarketDepthByOrder, exgSym[0], exgSym[1])) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.MarketDepthByOrder;
+			req.addParam(exgSym[0], exgSym[1]);
+
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
+	public removeMarketDepthByOrderRequest (exgSym: [string, string]): void {
+		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketDepthByOrder, exgSym[0], exgSym[1])) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.MarketDepthByOrder;
+			req.addParam(exgSym[0], exgSym[1]);
+
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
 	/**
 		 * Subscribe and Un-subscribe for a list of symbol updates.
 		 * @param {[string, string][]} exgSym - An array of tupples with Exchange Code and Symbol Code

@@ -40,4 +40,7 @@
 	SPREAD: 'Spread',
 	RANGE_PER: 'Range(%)',
 	RANGE: 'Range',
+	OFFER: 'Offer',
+	BID: 'Bid',
+	SEQ: 'Seq.',
 };

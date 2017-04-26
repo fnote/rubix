@@ -1,4 +1,5 @@
 import { Channels } from '../../../constants/enums/channels.enum';
+import { PriceRequestTypes } from '../../../constants/enums/price-request-types.enum';
 import { priceResponseTags } from '../../../constants/const/price-response-tags';
 
 export class PriceResponse {
@@ -76,30 +77,33 @@ export class PriceResponse {
 	private buildPriceResponse(response: {HED: string, DAT: string, MT: any}): Object {
 		let processedResponse = {};
 		const arrBuild: string[] = [];
-		if (response && response.HED && response.DAT) {
-			arrBuild.push('{');
-			const arrHed = response.HED.split('|');
-			const arrDat = response.DAT.split('|');
+		if (parseInt(response.MT, 10) !== PriceRequestTypes.MarketDepthByPrice &&
+			parseInt(response.MT, 10) !== PriceRequestTypes.MarketDepthByOrder) {
+			if (response && response.HED && response.DAT) {
+				arrBuild.push('{');
+				const arrHed = response.HED.split('|');
+				const arrDat = response.DAT.split('|');
 
-			for (let i = 0 ; i < arrHed.length ; i++) {
-				if (priceResponseTags[arrHed[i]]) {
-					arrBuild.push('"' + priceResponseTags[arrHed[i]] + '"');
-					arrBuild.push(':');
-					arrBuild.push('"' + arrDat[i].toString() + '"');
-					arrBuild.push(',');
+				for (let i = 0; i < arrHed.length; i++) {
+					if (priceResponseTags[arrHed[i]]) {
+						arrBuild.push('"' + priceResponseTags[arrHed[i]] + '"');
+						arrBuild.push(':');
+						arrBuild.push('"' + arrDat[i].toString() + '"');
+						arrBuild.push(',');
+					}
 				}
-			}
 
-			arrBuild.splice(-1 , 1);
-			arrBuild.push('}');
-			processedResponse =  JSON.parse(arrBuild.join(''));
-			Object.keys(processedResponse).forEach(key => {
-				processedResponse[key] = this.convertStringToValues(processedResponse[key]);
-			});
-			processedResponse['MT'] =  this.convertStringToValues(response.MT);
-			return processedResponse;
+				arrBuild.splice(-1, 1);
+				arrBuild.push('}');
+				processedResponse = JSON.parse(arrBuild.join(''));
+				Object.keys(processedResponse).forEach(key => {
+					processedResponse[key] = this.convertStringToValues(processedResponse[key]);
+				});
+				processedResponse['MT'] = this.convertStringToValues(response.MT);
+				return processedResponse;
+			}
+			response['MT'] = this.convertStringToValues(response.MT);
 		}
-		response['MT'] = this.convertStringToValues(response.MT);
 		return response;
 	}
 
