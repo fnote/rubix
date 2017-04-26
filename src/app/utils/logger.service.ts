@@ -1,6 +1,6 @@
-import { ConfigService } from '../app-config/config.service';
 import { Injectable } from '@angular/core';
 import { LogLevels } from '../constants/enums/log-levels.enum';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class LoggerService {
@@ -9,8 +9,8 @@ export class LoggerService {
 	private lastSentIndex = 0;
 	private isRequestInProgress = false;
 	private isPeriodicUpdateStarted = false;
-
-	constructor(private configService: ConfigService) { }
+	private systemLogLevel = environment.appLogLevel;
+	private serverLogLevel = environment.serverLogLevel;
 
 	public logError (logEntry: string, module?: string): void {
 		this.amendLog(logEntry, LogLevels.LogError, module);
@@ -36,16 +36,13 @@ export class LoggerService {
 		const logStr = module ? ['[', module, '] ', logEntry].join('') : logEntry;
 
 		try {
-			this.configService.getNumberConfigVal('loggerConfig', 'appLogLevel').then(logLevel => {
-				if (logLevel >= logType) {
-					this.amendLogConsole(logStr, logType);
-				}
-			});
-			this.configService.getNumberConfigVal('loggerConfig', 'serverLogLevel').then(logLevel => {
-				if (logLevel >= logType) {
-					this.amendLogToBuffer(logStr, logType);
-				}
-			});
+			if (this.systemLogLevel >= logType) {
+				this.amendLogConsole(logStr, logType);
+			}
+
+			if (this.serverLogLevel >= logType) {
+				this.amendLogToBuffer(logStr, logType);
+			}
 		} catch (e) {
 			this.amendLogConsole(['Logger error: ', e].join(''), LogLevels.LogError);
 		}

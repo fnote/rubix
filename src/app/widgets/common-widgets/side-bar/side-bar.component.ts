@@ -6,6 +6,7 @@ import { ThemeService } from '../../../utils/theme.service';
 import { Themes } from '../../../constants/enums/themes.enum';
 import { UserState } from '../../../model/user-state';
 import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
 	selector: 'app-side-bar',
@@ -17,6 +18,7 @@ export class SideBarComponent {
 	public lanTitle = '';
 	public themeTitle = '';
 	public custName = '-';
+	public version = environment.version;
 
 	// If this is failing, add the initialisation to the main app component's constructor
 	constructor(

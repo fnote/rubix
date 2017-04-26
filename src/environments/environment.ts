@@ -5,4 +5,9 @@
 
 export const environment = {
 	production: false,
+	version: require('../../package.json').version,
+
+	// Loglevels
+	appLogLevel: 6,
+	serverLogLevel: 1,
 };

@@ -1,8 +1,4 @@
 {
-	"loggerConfig" : {
-		"appLogLevel" : 6,
-		"serverLogLevel" : 0
-	},
 	"cacheConfig" : {
 		"appCacheVersion" : 1
 	},
