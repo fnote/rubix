@@ -811,7 +811,7 @@ body.nav-expanded {
 }
 
 .nav-menu-close{
-  padding:12px 0!important;
+  padding:12px;
 }
 
 .main-menu li {
@@ -1018,6 +1018,44 @@ footer{
     transition: all .3s;
     border: 2px solid #4e7b9a;
 }
+
+.menu-user-info{
+	background-color: #212225;
+  border-bottom: 1px solid #37393e;
+	color: #fff;
+}
+
+.menu-user-info a{
+	color: #6F7D8C;
+	cursor:pointer;
+}
+
+.menu-user-info a:hover{
+	color: #FFFFFF;
+  text-decoration: none;
+}
+
+.menu-user-info .user{
+	font-size: 12px;
+}
+
+.menu-user-info .user-name{
+	color: #FFFFFF;
+  text-decoration: none;
+}
+
+.menu-user-info .profile-pic{
+	  margin-top:-5px;
+}
+
+.menu-user-info .profile-pic img{
+	  height: 90px;
+    width: 90px;
+    border: 3px solid;
+    border-color: transparent;
+    border-color: rgba(255,255,255,0.2);
+}
+
 button{
 	outline: none;
 }

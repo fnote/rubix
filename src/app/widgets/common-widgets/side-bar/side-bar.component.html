@@ -1,11 +1,18 @@
 <nav>
-	<ul class="list-unstyled main-menu">
-		<li>
-			<div class="left user-name">Welcome&nbsp;<span>{{custName}}</span></div>
-			<div class="right text-right">
-				<a id="nav-close" class="nav-menu-close" (click)="sideBarCloseClicked($event)"></a>
+	<div class="menu-user-info container-fluid">
+		<div class="row">
+			<div class="col-xs-12 text-right">
+				<div class="row">
+					<a id="nav-close" class="right nav-menu-close" (click)="sideBarCloseClicked($event)"></a>
+				</div>
 			</div>
-		</li>
+			<div class="col-xs-12 text-center text">
+				<p class="profile-pic"><img src="assets/assets/images/default-avatar.jpg" class="circle" alt="Profile Image"></p>
+				<p class="user">Welcome&nbsp;<a class="user-name">{{custName}}</a></p>
+			</div>
+		</div>
+	</div>
+	<ul class="list-unstyled main-menu">
 		<li *ngFor="let tab of tabs" (click)="loadTab(tab)" class="clear"><a>{{tab.title}}</a></li>
 	</ul>
 
