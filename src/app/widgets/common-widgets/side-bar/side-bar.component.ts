@@ -4,6 +4,7 @@ import { Languages } from '../../../constants/enums/languages.enum';
 import { LocalizationService } from '../../../utils/localization/localization.service';
 import { ThemeService } from '../../../utils/theme.service';
 import { Themes } from '../../../constants/enums/themes.enum';
+import { UserState } from '../../../model/user-state';
 import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 
 @Component({
@@ -12,9 +13,10 @@ import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 })
 export class SideBarComponent {
 	public tabs: any = [];
-	public selectedTab= '';
+	public selectedTab = '';
 	public lanTitle = '';
 	public themeTitle = '';
+	public custName = '-';
 
 	// If this is failing, add the initialisation to the main app component's constructor
 	constructor(
@@ -39,6 +41,8 @@ export class SideBarComponent {
 		} else {
 			this.themeTitle = this.themeService.getThemeDesc(Themes.Light);
 		}
+
+		this.custName = UserState.getInstance().getTradeDetails().CUS_NME;
 	}
 
 	public loadTab(tab: any): void {
