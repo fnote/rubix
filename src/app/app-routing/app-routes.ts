@@ -29,9 +29,9 @@ export const routes: Routes = [
 			},
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
 				children: [
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1010'] } },
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['ADSM', 'ALDAR'] } },
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2', data: { exgStock: ['DFM', 'EMAAR'] } },
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet3', data: { exgStock: ['DFM', 'DIC'] } },
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet3', data: { exgStock: ['TDWL', '1010'] } },
 					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
 				],
 			},

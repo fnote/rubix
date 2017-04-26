@@ -44,7 +44,7 @@
 						{
 							"path": "detail-quote",
 							"outlet": "outlet1",
-							"args": {"exgStock": ["TDWL", "1010"]}
+							"args": {"exgStock": ["ADSM", "ALDAR"]}
 						},
 						{
 							"path": "detail-quote",
@@ -54,7 +54,7 @@
 						{
 							"path": "detail-quote",
 							"outlet": "outlet3",
-							"args": {"exgStock": ["DFM", "DIC"]}
+							"args": {"exgStock": ["TDWL", "1010"]}
 						},
 						{
 							"path": "time-and-sales",

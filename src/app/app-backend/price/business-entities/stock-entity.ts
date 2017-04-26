@@ -23,10 +23,14 @@ export class StockEntity extends BaseEntity {
 	private _lowPrice: string = userSettings.marketData.defaultStringInitializer;
 	private _closePrice: string = userSettings.marketData.defaultStringInitializer;
 	private _bestAskPrice: string = userSettings.marketData.defaultStringInitializer;
+	private _rawBestAskPrice: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;;
 	private _bestAskQty: string = userSettings.marketData.defaultStringInitializer;
+	private _rawBestBidPrice: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;;
 	private _bestBidPrice: string = userSettings.marketData.defaultStringInitializer;
 	private _bestBidQty: string = userSettings.marketData.defaultStringInitializer;
+	private _rawTotalBidQty: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _totalBidQty: string = userSettings.marketData.defaultStringInitializer;
+	private _rawTotalAskQty: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _totalAskQty: string = userSettings.marketData.defaultStringInitializer;
 	private _change: string = userSettings.marketData.defaultStringInitializer;
 	private _perChange: string = userSettings.marketData.defaultStringInitializer;
@@ -136,6 +140,7 @@ export class StockEntity extends BaseEntity {
 
 	public set rawHighPrice(value: number) {
 		this._rawHighPrice = value;
+		this.calculateRange();
 	}
 
 	public get highPrice(): string  {
@@ -153,6 +158,7 @@ export class StockEntity extends BaseEntity {
 
 	public set rawLowPrice(value: number) {
 		this._rawLowPrice = value;
+		this.calculateRange();
 	}
 
 	public get lowPrice(): string  {
@@ -172,12 +178,23 @@ export class StockEntity extends BaseEntity {
 		this._closePrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
+	public get rawBestAskPrice(): number  {
+		return this._rawBestAskPrice;
+	}
+
+	public set rawBestAskPrice(value: number) {
+		this._rawBestAskPrice = value;
+
+		this.calculateSpread();
+	}
+
 	public get bestAskPrice(): string  {
 		return this._bestAskPrice;
 	}
 
 	public set bestAskPrice(value: string) {
-		this._bestAskPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this.rawBestAskPrice = parseFloat(value);
+		this._bestAskPrice = this.commonHelperService.formatNumber(this.rawBestAskPrice, this.decimalPlaces);
 	}
 
 	public get bestAskQty(): string  {
@@ -188,12 +205,23 @@ export class StockEntity extends BaseEntity {
 		this._bestAskQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
+	public get rawBestBidPrice(): number  {
+		return this._rawBestBidPrice;
+	}
+
+	public set rawBestBidPrice(value: number) {
+		this._rawBestBidPrice = value;
+
+		this.calculateSpread();
+	}
+
 	public get bestBidPrice(): string  {
 		return this._bestBidPrice;
 	}
 
 	public set bestBidPrice(value: string) {
-		this._bestBidPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this.rawBestBidPrice = parseFloat(value);
+		this._bestBidPrice = this.commonHelperService.formatNumber(this.rawBestBidPrice, this.decimalPlaces);
 	}
 
 	public get bestBidQty(): string  {
@@ -204,18 +232,33 @@ export class StockEntity extends BaseEntity {
 		this._bestBidQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
+	public get rawTotalBidQty(): number  {
+		return this._rawTotalBidQty;
+	}
+
+	public set rawTotalBidQty(value: number) {
+		this._rawTotalBidQty = value;
+
+		this.calculateBidOfferRatio();
+	}
+
 	public get totalBidQty(): string  {
 		return this._totalBidQty;
 	}
 
 	public set totalBidQty(value: string) {
-		this._totalBidQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
+		this.rawTotalBidQty = parseFloat(value);
+		this._totalBidQty = this.commonHelperService.formatNumber(this.rawTotalBidQty, 0);
+	}
 
-		if (this.totalAskQty !== userSettings.marketData.defaultStringInitializer) {
-			const val = parseFloat(value) / parseFloat(this.totalAskQty.replace(',', ''));
-			this._bidOffer =
-				this.commonHelperService.formatNumber(val, this.decimalPlaces);
-		}
+	public get rawTotalAskQty(): number  {
+		return this._rawTotalAskQty;
+	}
+
+	public set rawTotalAskQty(value: number) {
+		this._rawTotalAskQty = value;
+
+		this.calculateBidOfferRatio();
 	}
 
 	public get totalAskQty(): string  {
@@ -223,13 +266,8 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set totalAskQty(value: string) {
-		this._totalAskQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
-
-		if (this.totalBidQty !== userSettings.marketData.defaultStringInitializer) {
-			const val = parseFloat(this.totalBidQty.replace(',', '')) / parseFloat(value);
-			this._bidOffer =
-				this.commonHelperService.formatNumber(val, this.decimalPlaces);
-		}
+		this.rawTotalAskQty = parseFloat(value);
+		this._totalAskQty = this.commonHelperService.formatNumber(this.rawTotalAskQty, 0);
 	}
 
 	public get change(): string {
@@ -398,5 +436,37 @@ export class StockEntity extends BaseEntity {
 		this.commonHelperService = injector.get(CommonHelperService);
 
 		this.setValues(values);
+	}
+
+	// Computed properties
+	private calculateBidOfferRatio(): void {
+		if (this.rawTotalAskQty > 0 && this.rawTotalBidQty) {
+			const val = this.rawTotalBidQty / this.rawTotalAskQty;
+			this._bidOffer = this.commonHelperService.formatNumber(val, this.decimalPlaces);
+		}
+	}
+
+	private calculateSpread(): void {
+		let spreadVal = 0;
+		let spreadPer = 0;
+		if (this.rawBestAskPrice > 0 && this.rawBestBidPrice > 0) {
+			spreadVal = this.rawBestAskPrice - this.rawBestBidPrice;
+			spreadPer = 100 * spreadVal * 2 / (this.rawBestAskPrice + this.rawBestBidPrice);
+		}
+
+		this.spread = this.commonHelperService.formatNumber(spreadVal, this.decimalPlaces);
+		this.spreadPercentage = this.commonHelperService.formatNumber(spreadPer, 2) + '%';
+	}
+
+	private calculateRange(): void {
+		let rangeVal = 0;
+		let rangePer = 0;
+		if (this._rawLowPrice > 0 && this.rawHighPrice > 0) {
+			rangeVal = this.rawHighPrice - this._rawLowPrice;
+			rangePer = 100 * rangeVal * 2 / (this.rawHighPrice + this.rawLowPrice);
+		}
+
+		this.range = this.commonHelperService.formatNumber(rangeVal, this.decimalPlaces);
+		this.rangePercentage = this.commonHelperService.formatNumber(rangePer, 2) + '%';
 	}
 }
