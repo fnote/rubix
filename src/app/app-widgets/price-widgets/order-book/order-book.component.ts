@@ -25,13 +25,6 @@ export class OrderBookComponent  extends BaseWidgetComponent {
 	}
 
 	public onInit(): void {
-		// on init
-		if (!this.stockObj) {
-			this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
-		}
-		if (!this.depthObj) {
-			this.depthObj = this.depthDataStore.getDepthByPriceSymbol(this.exgStock);
-		}
 		if (!this.stockObj.isMetaDataLoaded) {
 			this.priceService.requestSymbolMeta(this.exgStock);
 		}

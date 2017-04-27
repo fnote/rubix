@@ -1,52 +1,66 @@
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <thead>
-  <tr>
-    <th>{{localizationService.language.OPEN}}</th>
-    <th>{{localizationService.language.HIGH}}</th>
-    <th>{{localizationService.language.LOW}}</th>
-    <th>{{localizationService.language.CLOSE}}</th>
-    <th>{{localizationService.language.VOLUME}}</th>
-  </tr>
-  </thead>
+	<div class="widget-wrapper">
+		<div class="time-and-sales">
+			<div class="t-n-s-top-boxes">
+				<div class="t-n-s-inner-box">
+					<div class="box col-md-3 col-lg-3 col-sm-3 col-xs-6">
+						<div class="t-n-s-box-1 t-n-s-box-common col-md-12 col-lg-12 col-sm-12 col-xs-12">
+							<div>{{localizationService.language.OPEN}}</div>
+							<div>{{stockObj.openPrice}}</div>
+						</div>
+					</div>
 
-  <tbody>
-  <tr>
-    <td>{{stockObj.openPrice}}</td>
-    <td>{{stockObj.highPrice}}</td>
-    <td>{{stockObj.lowPrice}}</td>
-    <td>{{stockObj.closePrice}}</td>
-    <td>{{stockObj.volume}}</td>
-  <tr>
-  </tbody>
-</table>
+					<div class="box col-md-3 col-lg-3 col-sm-3 col-xs-6">
+						<div class="t-n-s-box-2 t-n-s-box-common col-md-12 col-lg-12 col-sm-12 col-xs-12">
+							<div>{{localizationService.language.HIGH}}</div>
+							<div>{{stockObj.highPrice}}</div>
+						</div>
+					</div>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <thead>
-  <tr>
-    <th>{{localizationService.language.TIME}}</th>
-    <th>{{localizationService.language.PRICE}}</th>
-    <th>{{localizationService.language.QTY}}</th>
-    <th>{{localizationService.language.CHANGE}}</th>
-    <th>{{localizationService.language.PER_CHANGE}}</th>
-    <th>{{localizationService.language.SPLITS}}</th>
-    <th>{{localizationService.language.TURNOVER}}</th>
-    <th>{{localizationService.language.TICK}}</th>
-    <th>{{localizationService.language.SIDE}}</th>
-  </tr>
-  </thead>
+					<div class="box col-md-3 col-lg-3 col-sm-3 col-xs-6">
+						<div class="t-n-s-box-3 t-n-s-box-common col-md-12 col-lg-12 col-sm-12 col-xs-12">
+							<div>{{localizationService.language.LOW}}</div>
+							<div>{{stockObj.lowPrice}}</div>
+						</div>
+					</div>
 
-  <tbody>
-    <tr *ngFor="let row of timeAndSalesDataArray">
-      <td>{{row.displayTime}}</td>
-      <td>{{row.lastTradePrice}}</td>
-      <td>{{row.totalQty}}</td>
-      <td>{{row.change}}</td>
-      <td>{{row.perChange}}</td>
-      <td>{{row.splits}}</td>
-      <td>{{row.turnOver}}</td>
-      <td><span  [ngClass] = "row.direction"></span></td>
-      <td><span  [ngClass] = "row.typeClass">{{row.typeString}}</span></td>
-    <tr>
-  </tbody>
-</table>
+					<div class="box col-md-3 col-lg-3 col-sm-3 col-xs-6">
+						<div class="t-n-s-box-4 t-n-s-box-common col-md-12 col-lg-12 col-sm-12 col-xs-12">
+							<div>{{localizationService.language.VOLUME}}</div>
+							<div>{{stockObj.volume}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
+			<div class="t-n-s-table">
+				<table class="table table-striped">
+					<thead>
+					<tr>
+						<th>{{localizationService.language.TIME}}</th>
+						<th>{{localizationService.language.PRICE}}</th>
+						<th>{{localizationService.language.QTY}}</th>
+						<th>{{localizationService.language.CHANGE}}</th>
+						<th>{{localizationService.language.PER_CHANGE}}</th>
+						<th>{{localizationService.language.SPLITS}}</th>
+						<th>{{localizationService.language.TURNOVER}}</th>
+						<th>{{localizationService.language.TICK}}</th>
+						<th>{{localizationService.language.SIDE}}</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr *ngFor="let row of timeAndSalesDataArray">
+						<td>{{row.displayTime}}</td>
+						<td>{{row.lastTradePrice}}</td>
+						<td>{{row.totalQty}}</td>
+						<td>{{row.change}}</td>
+						<td>{{row.perChange}}</td>
+						<td>{{row.splits}}</td>
+						<td>{{row.turnOver}}</td>
+						<td><span [ngClass]="row.direction"></span></td>
+						<td><span [ngClass]="row.typeClass">{{row.typeString}}</span></td>
+					<tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>

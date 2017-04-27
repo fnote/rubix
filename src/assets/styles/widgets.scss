@@ -117,7 +117,7 @@ body.ar {
 	color: #fff;
 }
 
-.lang-bar-ar button {
+.login .lang-bar-ar button {
 	padding: 0px 20px 5px 20px;
 	background: none;
 	font-size: $font-xxx-large;
@@ -128,7 +128,7 @@ body.ar {
 	width: 100px;
 }
 
-.lang-bar-en button {
+.login .lang-bar-en button {
 	padding: 6px 20px;
 	background: none;
 	font-size: $font-x-large;
@@ -139,7 +139,7 @@ body.ar {
 	width: 100px;
 }
 
-.lang-bar-ar button:hover, .lang-bar-en button:hover {
+.login .lang-bar-ar button:hover, .lang-bar-en button:hover {
 	background: $login-lang-btn-border-color;
 	color: #e0e1e0;
 	-webkit-transition: all .3s;
@@ -147,7 +147,7 @@ body.ar {
 	border: 2px solid $login-lang-btn-border-color;
 }
 
-.lang-bar-ar{
+.login .lang-bar-ar{
 	text-align: $text-align-3;
 }
 
@@ -1090,4 +1090,158 @@ button{
 
 .test-wrapper .widget-wrapper {
 	height:250px;
+}
+
+
+
+//Order book style start//
+
+.order_book .price_order,.order_book .buy_sell_box, .order_book_table_widget{
+	margin:10px;
+}
+.order_book .buy_sell_box{
+	padding: 5px 0;
+}
+.order_book .price_order div{
+	background-color:#efefef;
+	padding: 10px;
+	color: #c2c2c2;
+	letter-spacing: 1px;
+}
+
+.order_book .ob_active{
+	background-color: #20A8D9 !important;
+	color: white !important;
+	-webkit-transition: all .8s ease;
+	-moz-transition: all .8s ease;
+	-o-transition: all .8s ease;
+	transition: all .8s ease;
+}
+
+.order_book .buy_sell_box {
+	background: #f1f1f1;
+	border: 1px solid #d9d9d9;
+}
+.order_book .buy_sell_box span{
+	display: inline-block;
+	width: 100%;
+	padding: 5px 0;
+}
+.order_book .buy_sell_box div:nth-of-type(1){
+	color: #f86c6b;
+}
+.order_book .buy_sell_box div:nth-of-type(2){
+	text-align: center;
+	color: #767070;
+	margin-top: 22px;
+}
+.order_book .buy_sell_box div:nth-of-type(3){
+	text-align: right;
+	color:#4dbd73;
+}
+.order_book .buy_sell_box i{
+	color: #f86c6b;
+}
+.order_book .order_book_table{
+	float: left;
+	width: 50%;
+}
+
+.order_book .order_book_table table thead tr th{
+	text-align: left;
+}
+
+
+
+.ar .order_book .price_order div{
+float: right;
+}
+
+
+.ar .order_book .buy_sell_box div:nth-of-type(1){
+	float: right;
+	text-align: right;
+}
+.ar .order_book .buy_sell_box div:nth-of-type(2){
+	float: right;
+}
+.ar .order_book .buy_sell_box div:nth-of-type(3){
+	text-align: left;
+}
+//Order book style end//
+
+
+/*
+---
+------
+--------- Time and Sales
+*/
+
+.time-and-sales .t-n-s-box-common {
+	text-align: center;
+	padding: 10px;
+	font-size: 15px;
+	color: #fff;
+	height: 80px;
+	float: left;
+	text-align: center;
+}
+
+.time-and-sales .t-n-s-box-common div:nth-child(1) {
+	width: 100%;
+	float: left;
+	display: inline-block;
+	text-align: left;
+}
+
+.time-and-sales .t-n-s-box-common div:nth-child(2) {
+	width: 100%;
+	float: left;
+	display: inline-block;
+	font-size: 35px;
+	text-align: right;
+}
+
+.time-and-sales .box{
+	margin: 10px 0;
+}
+
+.time-and-sales .t-n-s-box-1{
+	background-color: #f8cb00;
+}
+
+.time-and-sales .t-n-s-box-2{
+	background-color: #4dbd73;
+}
+
+.time-and-sales .t-n-s-box-3{
+	background-color: #f86c6b ;
+}
+
+.time-and-sales .t-n-s-box-4{
+	background-color: #20a8d8;
+}
+
+.time-and-sales .table thead tr th{
+	text-align: left;
+}
+
+/*arabic style*/
+
+.ar .time-and-sales .table thead tr th{
+	text-align: right;
+}
+
+.ar .time-and-sales .t-n-s-box-common div:nth-child(2) {
+	float: right;
+	text-align: left;
+}
+
+.ar .time-and-sales .t-n-s-box-common div:nth-child(1) {
+	float: right;
+	text-align: right;
+}
+
+.time-and-sales .t-n-s-box-common {
+	float: right;
 }

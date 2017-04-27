@@ -268,10 +268,10 @@ export class CommonHelperService {
 		return new Date().getTime();
 	}
 
-	public getDirectionTickClasses(direction: number): string {
+	public getDirectionTickClasses(direction: number): string {//
 		switch (direction) {
 			case -1:
-				return 'down_1 down_2';
+				return 'arrdwn';
 			case 0:
 				return 'equal_1 equal_2';
 			case 1:
