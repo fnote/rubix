@@ -13,6 +13,7 @@ export class DetailQuoteComponent extends BaseWidgetComponent {
 	public response: Array<any> = [] ;
 	private session = '';
 	public stockObj;
+	public upDownStatus = 'up';
 
 	constructor(
 		private priceService: PriceService,
@@ -22,7 +23,7 @@ export class DetailQuoteComponent extends BaseWidgetComponent {
 		super(injector);
 		this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
 
-		// Temp
+		// Temp ?? Amila - What is this?
 		this.updatePriceResponse();
 	}
 
