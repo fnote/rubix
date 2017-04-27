@@ -25,7 +25,6 @@ export const priceResponseTags = {
 	62: 'vwap',
 	67: 'type',
 	75: 'trades',
-	76: 'lastTradeDate',
 	80: 'max',
 	81: 'min',
 	82: 'high52',
@@ -39,6 +38,7 @@ export const priceResponseTags = {
 	224: 'depthValue',
 	220: 'depthQty',
 	219: 'depthValue',
+	635: 'lastTradeDate',
 
 	EXCHANGE: 'exchangeCode',
 	SYMBOL: 'symbolCode',

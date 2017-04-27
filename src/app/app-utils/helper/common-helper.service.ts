@@ -41,13 +41,7 @@ export class CommonHelperService {
 	* @param exchange Exchange
 	* @param factor Multiplication factor
 	*/
-	public formatDate(
-		date: string,
-		pattern: string,
-		exchange: any,
-		factor: number,
-		dateForTimeZoneOffset: string,
-		): string {
+	public formatDate(date: string, pattern: string, exchange: any, dateForTimeZoneOffset: string): string {
 		// TODO: [Malindu] add correct type for exchange
 		const timeZoneOffSet: number = this.getTimeZoneOffSet(dateForTimeZoneOffset , exchange) || 0;
 		let inputFormat;

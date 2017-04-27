@@ -88,7 +88,7 @@ export class TimeAndSalesDataStore extends BaseDataStore {
     // TODO [Malindu] Implement this
     // var symbolDate = App.symbolManager.symbolMap.get(this.updateSymbol()).LTD.replace(/\//g,"");
 		symbolDate = null;
-		entity.displayTime =  this.commonHelperService.formatDate(entity.time, 'HH:mm:ss' , exchange, 1, symbolDate);
+		entity.displayTime =  this.commonHelperService.formatDate(entity.time, 'HH:mm:ss' , exchange, symbolDate);
 
 		this.timeAndSalesDataArray.unshift(entity);
 		this.timeAndSalesDataArray.sort(function(a: TimeAndSalesEntity, b: TimeAndSalesEntity): number {

@@ -36,10 +36,6 @@ export class DetailQuoteComponent extends BaseWidgetComponent {
 	}
 
 	public onInit(): void {
-		if (!this.stockObj) {
-			this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
-		}
-
 		this.priceService.requestSymbolMeta(this.exgStock);
 		this.priceService.addSymbolRequest(this.exgStock);
 	}

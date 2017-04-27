@@ -39,7 +39,7 @@ export class StockEntity extends BaseEntity {
 	private _volume: string = userSettings.marketData.defaultStringInitializer;
 	private _trades: string = userSettings.marketData.defaultStringInitializer;
 	private _totalQty: string = userSettings.marketData.defaultStringInitializer;
-	private _lastTradeDate: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
+	private _lastTradeDate: string = userSettings.marketData.defaultStringInitializer;
 	private _vwap: string = userSettings.marketData.defaultStringInitializer;
 	private _min: string = userSettings.marketData.defaultStringInitializer;
 	private _max: string = userSettings.marketData.defaultStringInitializer;
@@ -327,12 +327,12 @@ export class StockEntity extends BaseEntity {
 		this._totalQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
-	public get lastTradeDate(): number {
+	public get lastTradeDate(): string {
 		return this._lastTradeDate;
 	}
 
-	public set lastTradeDate(value: number) {
-		this._lastTradeDate = value;
+	public set lastTradeDate(value: string) {
+		this._lastTradeDate = this.commonHelperService.formatDate(value.toString(), 'YYYY-MM-DD hh:mm:ss', this.exchangeCode, '2');
 	}
 
 	public get vwap(): string {
