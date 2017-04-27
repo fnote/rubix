@@ -1,5 +1,5 @@
 <div class="container-fluid margin-medium-top">
-	<div class="row">
+	<!--<div class="row">
 		<div class="col-xs-6">
 			<div class="left margin-medium-bottom"> <span class="snap-current-price">{{stockObj.lastTradePrice}}</span> <span class="snap-current-price-currency">{{stockObj.currency}}</span>				</div>
 		</div>
@@ -12,8 +12,47 @@
 				<div class="single-line-text snap-date">{{stockObj.longDesc}} - {{stockObj.lastTradeDate}}</div>
 			</div>
 		</div>
-	</div>
-	<div class="h-sep-line margin-medium-top margin-medium-bottom"></div>
+	</div>-->
+
+	<div class="row">
+    	<div class="col-xs-12">
+        	<div class="general-quote up">
+            	<div class="row margin-small-bottom">
+                	<div class="col-xs-6">
+                    	<i class="arrow left"></i>
+                        <div class="short-name ellipsis">{{stockObj.longDesc}} </div>
+                    </div>
+                    <div class="col-xs-6 long-name text-right ellipsis">
+                    {{stockObj.longDesc}}
+                    </div>
+                </div>
+                <div class="row">
+    				<div class="col-xs-6">
+                    	<div class="price">{{stockObj.lastTradePrice}}</div>
+                        <div class="currency">{{stockObj.currency}}</div>
+                    </div>
+                    <div class="col-xs-6">
+                    	<div class="change-container right">
+                        	<div class="change">
+                            	{{stockObj.change}}
+                            </div>
+                            <div class="change-percentage">
+                            	{{stockObj.perChange}}%
+                            </div>
+                        </div>
+                    </div>
+    			</div>
+                <div class="h-sep-line margin-small-top margin-small-bottom"></div>
+                <div class="row">
+                	<div class="col-xs-12">
+                    	<span class="font-medium update-info">{{stockObj.lastTradeDate}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="h-sep-line margin-small-top margin-medium-bottom"></div>
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="row">
