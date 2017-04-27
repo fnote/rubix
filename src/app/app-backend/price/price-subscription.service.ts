@@ -1,9 +1,9 @@
-import { Channels } from '../../constants/enums/channels.enum';
+import { Channels } from '../../app-constants/enums/channels.enum';
 import { DataService } from '../communication/data.service';
 import { Injectable } from '@angular/core';
-import { LoggerService } from '../../utils/logger.service';
+import { LoggerService } from '../../app-utils/logger.service';
 import { PriceRequest } from './protocols/price-request';
-import { PriceRequestTypes } from '../../constants/enums/price-request-types.enum';
+import { PriceRequestTypes } from '../../app-constants/enums/price-request-types.enum';
 import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';
 
 /**

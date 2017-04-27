@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LogLevels } from '../constants/enums/log-levels.enum';
+import { LogLevels } from '../app-constants/enums/log-levels.enum';
 import { environment } from '../../environments/environment';
 
 @Injectable()

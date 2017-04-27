@@ -2,7 +2,7 @@ import * as Rx from 'rxjs/Rx';
 import { ConfigService } from '../../../app-config/config.service';
 import { Connection } from '../connection';
 import { Injectable } from '@angular/core';
-import { LoggerService } from '../../../utils/logger.service';
+import { LoggerService } from '../../../app-utils/logger.service';
 import { Observable } from 'rxjs/Observable';
 import { PulseService } from './pulse.service';
 import { WebsocketService } from './websocket.service';

@@ -1,5 +1,5 @@
-import { Languages } from '../constants/enums/languages.enum';
-import { Themes } from '../constants/enums/themes.enum';
+import { Languages } from '../app-constants/enums/languages.enum';
+import { Themes } from '../app-constants/enums/themes.enum';
 
 export const userSettings = {
 

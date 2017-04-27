@@ -1,4 +1,4 @@
-import { Channels } from '../../../constants/enums/channels.enum';
+import { Channels } from '../../../app-constants/enums/channels.enum';
 import { Injectable } from '@angular/core';
 import { PriceStreamingRequestHandler } from '../../price/protocols/streaming/price-streaming-request-handler';
 import { TradeStreamingRequestHandler } from '../../trade/protocols/streaming/trade-straming-request-handler';

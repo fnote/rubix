@@ -1,5 +1,5 @@
 import { BaseEntity } from './base-entity';
-import { CommonHelperService } from '../../../utils/helper/common-helper.service';
+import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
 import { ReflectiveInjector } from '@angular/core';
 import { userSettings } from '../../../app-config/user-settings';
 

@@ -1,6 +1,6 @@
 import { AjaxService } from './ajax/ajax.service';
 import { Injectable } from '@angular/core';
-import { LoggerService } from '../../utils/logger.service';
+import { LoggerService } from '../../app-utils/logger.service';
 import { QueueMannagerService } from './websocket/queue-mannager.service';
 import { Subject } from 'rxjs/Rx';
 

@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/map';
-import { Channels } from '../constants/enums/channels.enum';
+import { Channels } from '../app-constants/enums/channels.enum';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 

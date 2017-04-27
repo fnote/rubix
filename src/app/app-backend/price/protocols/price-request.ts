@@ -1,4 +1,4 @@
-import { PriceRequestTypes } from '../../../constants/enums/price-request-types.enum';
+import { PriceRequestTypes } from '../../../app-constants/enums/price-request-types.enum';
 
 export class PriceRequest {
 

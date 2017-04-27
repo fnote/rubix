@@ -1,7 +1,7 @@
 import { BaseDataStore } from './base-data-store';
-import { CommonHelperService } from '../../../utils/helper/common-helper.service';
+import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
 import { ExchangeDataStore } from './exchange-data-store';
-import { LocalizationService } from '../../../utils/localization/localization.service';
+import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { ReflectiveInjector } from '@angular/core';
 import { StockDataStore } from './stock-data-store';
 import { TimeAndSalesEntity } from '../business-entities/time-and-sales-entity';

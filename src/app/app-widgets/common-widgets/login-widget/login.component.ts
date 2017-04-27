@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../app-backend/auth/auth.service';
-import { Channels } from '../../../constants/enums/channels.enum';
-import { Languages } from '../../../constants/enums/languages.enum';
-import { LocalizationService } from '../../../utils/localization/localization.service';
+import { Channels } from '../../../app-constants/enums/channels.enum';
+import { Languages } from '../../../app-constants/enums/languages.enum';
+import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { Router } from '@angular/router';
 import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 

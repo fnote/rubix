@@ -1,7 +1,7 @@
-import { Channels } from '../../constants/enums/channels.enum';
+import { Channels } from '../../app-constants/enums/channels.enum';
 import { DataService } from './data.service';
 import { Injectable } from '@angular/core';
-import { LoggerService } from '../../utils/logger.service';
+import { LoggerService } from '../../app-utils/logger.service';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
