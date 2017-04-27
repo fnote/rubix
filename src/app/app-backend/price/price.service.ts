@@ -1,12 +1,12 @@
 import { BaseDataStore } from './data-stores/base-data-store';
-import { Channels } from '../../constants/enums/channels.enum';
-import { DataManagers } from '../../constants/enums/data-managers.enum';
+import { Channels } from '../../app-constants/enums/channels.enum';
+import { DataManagers } from '../../app-constants/enums/data-managers.enum';
 import { DataService } from '../communication/data.service';
 import { ExchangeDataStore } from './data-stores/exchange-data-store';
 import { Injectable } from '@angular/core';
 import { LocalizationService } from '../../utils/localization/localization.service';
 import { PriceRequest } from './protocols/price-request';
-import { PriceRequestTypes } from '../../constants/enums/price-request-types.enum';
+import { PriceRequestTypes } from '../../app-constants/enums/price-request-types.enum';
 import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';
 import { PriceStreamingResponseHandler } from './protocols/streaming/price-streaming-response-handler';
 import { PriceSubscriptionService } from './price-subscription.service';

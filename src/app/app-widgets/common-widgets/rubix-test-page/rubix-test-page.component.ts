@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Channels } from '../../../constants/enums/channels.enum';
+import { Channels } from '../../../app-constants/enums/channels.enum';
 import { CommonHelperService } from '../../../utils/helper/common-helper.service';
 import { DataService } from '../../../app-backend/communication/data.service';
-import { Languages } from '../../../constants/enums/languages.enum';
+import { Languages } from '../../../app-constants/enums/languages.enum';
 import { LocalizationService } from '../../../utils/localization/localization.service';
 import { LoggerService } from '../../../utils/logger.service';
 import { PriceService } from '../../../app-backend/price/price.service';
 import { ThemeService } from '../../../utils/theme.service';
-import { Themes } from '../../../constants/enums/themes.enum';
+import { Themes } from '../../../app-constants/enums/themes.enum';
 
 @Component({
 	selector: 'app-rubix-test-page',

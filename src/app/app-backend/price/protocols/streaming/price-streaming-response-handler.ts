@@ -1,7 +1,7 @@
 import { DepthDataStore } from '../../data-stores/depth-data-store';
 import { ExchangeDataStore } from '../../data-stores/exchange-data-store';
 import { Injectable } from '@angular/core';
-import { PriceRequestTypes } from '../../../../constants/enums/price-request-types.enum';
+import { PriceRequestTypes } from '../../../../app-constants/enums/price-request-types.enum';
 import { PriceResponse } from '../price-response';
 import { StockDataStore } from '../../data-stores/stock-data-store';
 import { StockEntity } from '../../business-entities/stock-entity';

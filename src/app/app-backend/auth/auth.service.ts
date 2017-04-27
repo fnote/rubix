@@ -1,10 +1,10 @@
-import { Channels } from '../../constants/enums/channels.enum';
+import { Channels } from '../../app-constants/enums/channels.enum';
 import { DataService } from '../communication/data.service';
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../utils/logger.service';
 import { PriceAuthHandler } from './price/price-auth-handler';
 import { PriceStreamingResponseHandler } from '../price/protocols/streaming/price-streaming-response-handler';
-import { ResponseStatus } from '../../constants/enums/response-status.enum';
+import { ResponseStatus } from '../../app-constants/enums/response-status.enum';
 import { Subject } from 'rxjs/Rx';
 import { TradeAuthHandler } from './trade/trade-auth-handler';
 import { TradeStreamingResponseHandler } from '../trade/protocols/streaming/trade-streaming-response-handler';

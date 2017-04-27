@@ -3,7 +3,7 @@ import { DepthDisplayEntity } from '../business-entities/depth-entity';
 import { DepthEntity } from '../business-entities/depth-entity';
 import { Injectable } from '@angular/core';
 import { StockEntity } from '../business-entities/stock-entity';
-import { priceResponseTags } from '../../../constants/const/price-response-tags';
+import { priceResponseTags } from '../../../app-constants/const/price-response-tags';
 
 @Injectable()
 export class DepthDataStore extends BaseDataStore {

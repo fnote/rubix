@@ -1,4 +1,4 @@
-import { CachePolicy } from '../constants/enums/cache-policy.enum';
+import { CachePolicy } from '../app-constants/enums/cache-policy.enum';
 export class CacheConfig {
 
 	private _classes = {

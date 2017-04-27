@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Themes } from '../constants/enums/themes.enum';
+import { Themes } from '../app-constants/enums/themes.enum';
 import { userSettings } from '../app-config/user-settings';
 
 @Injectable()

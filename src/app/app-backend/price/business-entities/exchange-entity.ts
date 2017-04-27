@@ -1,5 +1,5 @@
 import { BaseEntity } from './base-entity';
-import { MarketStatus } from '../../../constants/enums/market-status.enum';
+import { MarketStatus } from '../../../app-constants/enums/market-status.enum';
 import { userSettings } from '../../../app-config/user-settings';
 
 export class ExchangeEntity extends BaseEntity {

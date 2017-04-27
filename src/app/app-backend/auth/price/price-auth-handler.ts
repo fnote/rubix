@@ -1,6 +1,6 @@
 import { BaseAuthHandler } from '../base-auth-handler';
-import { Channels } from '../../../constants/enums/channels.enum';
-import { RequestTags } from '../../../constants/enums/request-tags.enum';
+import { Channels } from '../../../app-constants/enums/channels.enum';
+import { RequestTags } from '../../../app-constants/enums/request-tags.enum';
 import { UserState } from '../../../model/user-state';
 
 export class PriceAuthHandler extends BaseAuthHandler {

@@ -1,10 +1,10 @@
-import { AuthenticationResponseTypes } from '../../../../constants/enums/trade-meta/authentication/authentication-response-types.enum';
+import { AuthenticationResponseTypes } from '../../../../app-constants/enums/trade-meta/authentication/authentication-response-types.enum';
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../../../utils/logger.service';
 import { StreamRouteService } from '../../../communication/stream-route.service';
 import { Subject } from 'rxjs/Rx';
-import { SystemResponseTypes } from '../../../../constants/enums/trade-meta/system/system-response-types.enum';
-import { TradeMetaGroups } from '../../../../constants/enums/trade-meta/trade-meta-groups.enum';
+import { SystemResponseTypes } from '../../../../app-constants/enums/trade-meta/system/system-response-types.enum';
+import { TradeMetaGroups } from '../../../../app-constants/enums/trade-meta/trade-meta-groups.enum';
 
 @Injectable()
 export class TradeStreamingResponseHandler {

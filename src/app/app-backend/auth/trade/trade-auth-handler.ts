@@ -1,9 +1,9 @@
-import { AuthenticationRequestTypes } from '../../../constants/enums/trade-meta/authentication/authentication-request-types.enum';
+import { AuthenticationRequestTypes } from '../../../app-constants/enums/trade-meta/authentication/authentication-request-types.enum';
 import { BaseAuthHandler } from '../base-auth-handler';
-import { Channels } from '../../../constants/enums/channels.enum';
-import { DeviceChannels } from '../../../constants/enums/device-channels.enum';
+import { Channels } from '../../../app-constants/enums/channels.enum';
+import { DeviceChannels } from '../../../app-constants/enums/device-channels.enum';
 import { Md5 } from 'ts-md5/dist/md5';
-import { TradeMetaGroups } from '../../../constants/enums/trade-meta/trade-meta-groups.enum';
+import { TradeMetaGroups } from '../../../app-constants/enums/trade-meta/trade-meta-groups.enum';
 
 export class TradeAuthHandler extends BaseAuthHandler {
 

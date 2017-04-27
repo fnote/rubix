@@ -1,4 +1,4 @@
-import { CachePolicy } from '../../constants/enums/cache-policy.enum';
+import { CachePolicy } from '../../app-constants/enums/cache-policy.enum';
 import { DbController } from './db-controller';
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../utils/logger.service';

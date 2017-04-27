@@ -1,6 +1,6 @@
-import { Channels } from '../../../constants/enums/channels.enum';
-import { PriceRequestTypes } from '../../../constants/enums/price-request-types.enum';
-import { priceResponseTags } from '../../../constants/const/price-response-tags';
+import { Channels } from '../../../app-constants/enums/channels.enum';
+import { PriceRequestTypes } from '../../../app-constants/enums/price-request-types.enum';
+import { priceResponseTags } from '../../../app-constants/const/price-response-tags';
 
 export class PriceResponse {
 

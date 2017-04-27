@@ -1,6 +1,6 @@
-import { DeviceChannels } from '../../../../constants/enums/device-channels.enum';
-import { SystemRequestTypes } from '../../../../constants/enums/trade-meta/system/system-request-types.enum';
-import { TradeMetaGroups } from '../../../../constants/enums/trade-meta/trade-meta-groups.enum';
+import { DeviceChannels } from '../../../../app-constants/enums/device-channels.enum';
+import { SystemRequestTypes } from '../../../../app-constants/enums/trade-meta/system/system-request-types.enum';
+import { TradeMetaGroups } from '../../../../app-constants/enums/trade-meta/trade-meta-groups.enum';
 import { UserState } from '../../../../model/user-state';
 
 export class TradeStreamingRequestHandler {
