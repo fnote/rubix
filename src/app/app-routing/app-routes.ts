@@ -3,12 +3,12 @@ import { ChartComponent } from '../app-widgets/price-widgets/chart/chart.compone
 import { DetailQuoteComponent } from '../app-widgets/price-widgets/detail-quote/detail-quote.component';
 import { LoginComponent } from '../app-widgets/common-widgets/login-widget/login.component';
 import { OrderBookComponent } from '../app-widgets/price-widgets/order-book/order-book.component';
-import { PrimaryLayoutOneComponent } from '../layouts/primary-layout-one/primary-layout-one.component';
+import { PrimaryLayoutOneComponent } from '../app-layouts/primary-layout-one/primary-layout-one.component';
 import { Routes } from '@angular/router';
 import { RubixTestPageComponent } from '../app-widgets/common-widgets/rubix-test-page/rubix-test-page.component';
-import { SecondaryLayoutOneComponent } from '../layouts/secondary-layout-one/secondary-layout-one.component';
-import { SecondaryLayoutThreeComponent } from '../layouts/secondary-layout-three/secondary-layout-three.component';
-import { SecondaryLayoutTwoComponent } from '../layouts/secondary-layout-two/secondary-layout-two.component';
+import { SecondaryLayoutOneComponent } from '../app-layouts/secondary-layout-one/secondary-layout-one.component';
+import { SecondaryLayoutThreeComponent } from '../app-layouts/secondary-layout-three/secondary-layout-three.component';
+import { SecondaryLayoutTwoComponent } from '../app-layouts/secondary-layout-two/secondary-layout-two.component';
 import { SideBarComponent } from '../app-widgets/common-widgets/side-bar/side-bar.component';
 import { TimeAndSalesComponent } from '../app-widgets/price-widgets/time-and-sales/time-and-sales.component';
 
