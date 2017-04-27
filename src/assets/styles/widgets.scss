@@ -117,7 +117,7 @@ body.ar {
 	color: #fff;
 }
 
-.lang-bar-ar button {
+.login .lang-bar-ar button {
 	padding: 0px 20px 5px 20px;
 	background: none;
 	font-size: $font-xxx-large;
@@ -128,7 +128,7 @@ body.ar {
 	width: 100px;
 }
 
-.lang-bar-en button {
+.login .lang-bar-en button {
 	padding: 6px 20px;
 	background: none;
 	font-size: $font-x-large;
@@ -139,7 +139,7 @@ body.ar {
 	width: 100px;
 }
 
-.lang-bar-ar button:hover, .lang-bar-en button:hover {
+.login .lang-bar-ar button:hover, .lang-bar-en button:hover {
 	background: $login-lang-btn-border-color;
 	color: #e0e1e0;
 	-webkit-transition: all .3s;
@@ -147,7 +147,7 @@ body.ar {
 	border: 2px solid $login-lang-btn-border-color;
 }
 
-.lang-bar-ar{
+.login .lang-bar-ar{
 	text-align: $text-align-3;
 }
 
@@ -1092,6 +1092,8 @@ button{
 	height:250px;
 }
 
+
+
 //Order book style start//
 
 .order_book .price_order,.order_book .buy_sell_box, .order_book_table_widget{
@@ -1167,3 +1169,79 @@ float: right;
 	text-align: left;
 }
 //Order book style end//
+
+
+/*
+---
+------
+--------- Time and Sales
+*/
+
+.time-and-sales .t-n-s-box-common {
+	text-align: center;
+	padding: 10px;
+	font-size: 15px;
+	color: #fff;
+	height: 80px;
+	float: left;
+	text-align: center;
+}
+
+.time-and-sales .t-n-s-box-common div:nth-child(1) {
+	width: 100%;
+	float: left;
+	display: inline-block;
+	text-align: left;
+}
+
+.time-and-sales .t-n-s-box-common div:nth-child(2) {
+	width: 100%;
+	float: left;
+	display: inline-block;
+	font-size: 35px;
+	text-align: right;
+}
+
+.time-and-sales .box{
+	margin: 10px 0;
+}
+
+.time-and-sales .t-n-s-box-1{
+	background-color: #f8cb00;
+}
+
+.time-and-sales .t-n-s-box-2{
+	background-color: #4dbd73;
+}
+
+.time-and-sales .t-n-s-box-3{
+	background-color: #f86c6b ;
+}
+
+.time-and-sales .t-n-s-box-4{
+	background-color: #20a8d8;
+}
+
+.time-and-sales .table thead tr th{
+	text-align: left;
+}
+
+/*arabic style*/
+
+.ar .time-and-sales .table thead tr th{
+	text-align: right;
+}
+
+.ar .time-and-sales .t-n-s-box-common div:nth-child(2) {
+	float: right;
+	text-align: left;
+}
+
+.ar .time-and-sales .t-n-s-box-common div:nth-child(1) {
+	float: right;
+	text-align: right;
+}
+
+.time-and-sales .t-n-s-box-common {
+	float: right;
+}

@@ -122,7 +122,7 @@ export class TimeAndSalesDataStore extends BaseDataStore {
 		}
 	}
 
-	public getDisplayType(entity: TimeAndSalesEntity): [string, string] {
+	public getDisplayType(entity: TimeAndSalesEntity): [string, string] {//
 		if (parseInt(entity.type, 10) === 1) {
 			return [this.localizationService.language.BUY, 'Green_text'];
 		}else {
