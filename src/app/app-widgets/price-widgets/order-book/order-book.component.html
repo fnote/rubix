@@ -1,91 +1,91 @@
-	<div class="widget-wrapper">
+<div class="widget-wrapper">
 
 
 
 
-		<div class="container-fluid order_book">
-			<div class="row price_order">
-				<div class="col-md-6 col-xs-6 ob_active text-center" (click)="loadMarketDepthPrice()">BY PRICE</div>
-				<div class="col-md-6 col-xs-6 text-center" (click)="loadMarketDepthOrder()">BY ORDER</div>
+	<div class="container-fluid order_book">
+		<div class="row price_order">
+			<div class="col-md-6 col-xs-6 ob_active text-center" (click)="loadMarketDepthPrice()">BY PRICE</div>
+			<div class="col-md-6 col-xs-6 text-center" (click)="loadMarketDepthOrder()">BY ORDER</div>
+		</div>
+
+		<div class="row buy_sell_box">
+			<div class="col-md-5 col-xs-5">
+				<span>SELL</span>
+				<span class="fa-2x"> {{stockObj.bestBidPrice }}</span>
+				<span>L:{{stockObj.lowPrice}}</span>
 			</div>
-
-			<div class="row buy_sell_box">
-				<div class="col-md-5 col-xs-5">
-					<span>SELL</span>
-					<span class="fa-2x"> {{stockObj.bestBidPrice }}</span>
-					<span>L:{{stockObj.lowPrice}}</span>
-				</div>
-				<div class="col-md-2 col-xs-2"><i class="fa fa-long-arrow-up fa-2x" aria-hidden="true"></i><span>0.9</span></div>
-				<div class="col-md-5 col-xs-5">
-					<span >BUY</span>
-					<span class="fa-2x">{{stockObj.bestAskPrice }}</span>
-					<span >H:{{stockObj.highPrice}}</span>
-
-				</div>
-
+			<div class="col-md-2 col-xs-2"><i class="fa fa-long-arrow-up fa-2x" aria-hidden="true"></i><span>0.9</span></div>
+			<div class="col-md-5 col-xs-5">
+				<span >BUY</span>
+				<span class="fa-2x">{{stockObj.bestAskPrice }}</span>
+				<span >H:{{stockObj.highPrice}}</span>
 
 			</div>
 
 
-
-
-
-
-
-
-<div class="row order_book_table_widget">
-
-		<div class="order_book_table">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
-				<thead>
-				<tr>
-					<th>
-						<div *ngIf="isPriceSelected">{{localizationService.language.SPLITS}}</div>
-						<div *ngIf="!isPriceSelected">{{localizationService.language.SEQ}}</div>
-					</th>
-					<th>{{localizationService.language.BID_QTY}}</th>
-					<th>{{localizationService.language.BID}}</th>
-				</tr>
-				</thead>
-
-				<tbody>
-				<tr *ngFor="let bidObj of depthObj.bidDisplayPoints">
-					<td>
-						<div *ngIf="isPriceSelected">{{bidObj.depthSplit}}</div>
-						<div *ngIf="!isPriceSelected">{{bidObj.depthID}}</div>
-					</td>
-					<td>{{bidObj.depthQty}}</td>
-					<td>{{bidObj.depthValue}}</td>
-				<tr>
-				</tbody>
-			</table>
 		</div>
 
-		<div class="order_book_table">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
-				<thead>
-				<tr>
-					<th>{{localizationService.language.OFFER}}</th>
-					<th>{{localizationService.language.OFFER_QTY}}</th>
-					<th>
-						<div *ngIf="isPriceSelected">{{localizationService.language.SPLITS}}</div>
-						<div *ngIf="!isPriceSelected">{{localizationService.language.SEQ}}</div>
-					</th>
-				</tr>
-				</thead>
 
-				<tbody>
-				<tr *ngFor="let offerObj of depthObj.offerDisplayPoints">
-					<td>{{offerObj.depthValue}}</td>
-					<td>{{offerObj.depthQty}}</td>
-					<td>
-						<div *ngIf="isPriceSelected">{{offerObj.depthSplit}}</div>
-						<div *ngIf="!isPriceSelected">{{offerObj.depthID}}</div>
-					</td>
-				<tr>
-				</tbody>
-			</table>
+
+
+
+
+
+
+		<div class="row order_book_table_widget">
+
+			<div class="order_book_table">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+					<thead>
+					<tr>
+						<th>
+							<div *ngIf="isPriceSelected">{{localizationService.language.SPLITS}}</div>
+							<div *ngIf="!isPriceSelected">{{localizationService.language.SEQ}}</div>
+						</th>
+						<th>{{localizationService.language.BID_QTY}}</th>
+						<th>{{localizationService.language.BID}}</th>
+					</tr>
+					</thead>
+
+					<tbody>
+					<tr *ngFor="let bidObj of depthObj.bidDisplayPoints">
+						<td>
+							<div *ngIf="isPriceSelected">{{bidObj.depthSplit}}</div>
+							<div *ngIf="!isPriceSelected">{{bidObj.depthID}}</div>
+						</td>
+						<td>{{bidObj.depthQty}}</td>
+						<td>{{bidObj.depthValue}}</td>
+					<tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="order_book_table">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
+					<thead>
+					<tr>
+						<th>{{localizationService.language.OFFER}}</th>
+						<th>{{localizationService.language.OFFER_QTY}}</th>
+						<th>
+							<div *ngIf="isPriceSelected">{{localizationService.language.SPLITS}}</div>
+							<div *ngIf="!isPriceSelected">{{localizationService.language.SEQ}}</div>
+						</th>
+					</tr>
+					</thead>
+
+					<tbody>
+					<tr *ngFor="let offerObj of depthObj.offerDisplayPoints">
+						<td>{{offerObj.depthValue}}</td>
+						<td>{{offerObj.depthQty}}</td>
+						<td>
+							<div *ngIf="isPriceSelected">{{offerObj.depthSplit}}</div>
+							<div *ngIf="!isPriceSelected">{{offerObj.depthID}}</div>
+						</td>
+					<tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
+	</div>
 </div>
-	</div>
-	</div>
