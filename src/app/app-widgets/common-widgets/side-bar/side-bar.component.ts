@@ -4,7 +4,7 @@ import { Languages } from '../../../app-constants/enums/languages.enum';
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { ThemeService } from '../../../app-utils/theme.service';
 import { Themes } from '../../../app-constants/enums/themes.enum';
-import { UserState } from '../../../model/user-state';
+import { UserState } from '../../../app-backend/auth/user-state';
 import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
 import { environment } from '../../../../environments/environment';
 

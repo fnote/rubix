@@ -8,7 +8,7 @@ import { ResponseStatus } from '../../app-constants/enums/response-status.enum';
 import { Subject } from 'rxjs/Rx';
 import { TradeAuthHandler } from './trade/trade-auth-handler';
 import { TradeStreamingResponseHandler } from '../trade/protocols/streaming/trade-streaming-response-handler';
-import { UserState } from '../../model/user-state';
+import { UserState } from './user-state';
 
 interface AuthStatus {
 	isAuthenticate: boolean;
