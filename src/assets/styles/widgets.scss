@@ -1245,3 +1245,57 @@ float: right;
 .time-and-sales .t-n-s-box-common {
 	float: right;
 }
+
+
+//Detail quote V2 start
+.general-quote .arrow, .general-quote .price, .general-quote .currency,  .general-quote .change-container, .general-quote .change, .general-quote .change-percentage{
+	display: inline-block;
+	}
+.general-quote.up .arrow:before {
+    content: "\f062";
+	font-family:'FontAwesome';
+    font-style: normal;
+    font-size: 1.5rem;
+	padding: 0 10px 0 0;
+}
+.general-quote.down .arrow:before {
+    content: "\f063";
+	font-family:'FontAwesome';
+    font-style: normal;
+    font-size: 1.5rem;
+	padding: 0 10px 0 0;
+}
+.ar .general-quote.up .arrow:before, .ar .general-quote.down .arrow:before {
+	padding: 0 0 0 10px!important;
+}
+.general-quote .short-name{
+	line-height:1.5;
+	}
+.general-quote .long-name{
+	line-height:1.5;
+	color:#757575;
+	}
+.general-quote .price{
+	font-size:30px;
+	color:#212121;
+	}	
+.general-quote .currency{
+	font-size:14px;
+	color:#9e9e9e;
+	}
+.general-quote .change-container{
+	margin:15px 0 0 0;
+	}			
+.general-quote .change{
+	margin:0 10px;
+	}
+.general-quote.up .change, .general-quote.up .change-percentage, .general-quote.up .arrow{
+	color: #4caf50;
+	}	
+.general-quote.down .change, .general-quote.down .change-percentage, .general-quote.down .arrow{
+	color: #d32f2f;
+	}
+.general-quote .update-info{
+	color: #9e9e9e;
+	}
+	//Detail quote V2 end
