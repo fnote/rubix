@@ -4,7 +4,7 @@ import { DataManagers } from '../../app-constants/enums/data-managers.enum';
 import { DataService } from '../communication/data.service';
 import { ExchangeDataStore } from './data-stores/exchange-data-store';
 import { Injectable } from '@angular/core';
-import { LocalizationService } from '../../utils/localization/localization.service';
+import { LocalizationService } from '../../app-utils/localization/localization.service';
 import { PriceRequest } from './protocols/price-request';
 import { PriceRequestTypes } from '../../app-constants/enums/price-request-types.enum';
 import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';

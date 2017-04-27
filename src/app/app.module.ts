@@ -18,7 +18,7 @@ import { SecondaryLayoutOneComponent } from './app-layouts/secondary-layout-one/
 import { SecondaryLayoutThreeComponent } from './app-layouts/secondary-layout-three/secondary-layout-three.component';
 import { SecondaryLayoutTwoComponent } from './app-layouts/secondary-layout-two/secondary-layout-two.component';
 import { TradeModule } from './app-backend/trade/trade.module';
-import { UtilsModule } from './utils/utils.module';
+import { UtilsModule } from './app-utils/utils.module';
 import { WidgetLoaderService } from './app-widgets/widget-util/widget-loader.service';
 
 @NgModule({

@@ -1,6 +1,6 @@
 import { CacheConfig } from '../../app-config/cache-config';
 import { LocalforageController } from './localforage-controller';
-import { LoggerService } from '../../utils/logger.service';
+import { LoggerService } from '../../app-utils/logger.service';
 import { StorageController } from './interfaces/storage-controller';
 
 export class DbController implements StorageController {

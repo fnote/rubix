@@ -1,8 +1,8 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Languages } from '../../../app-constants/enums/languages.enum';
-import { LocalizationService } from '../../../utils/localization/localization.service';
-import { ThemeService } from '../../../utils/theme.service';
+import { LocalizationService } from '../../../app-utils/localization/localization.service';
+import { ThemeService } from '../../../app-utils/theme.service';
 import { Themes } from '../../../app-constants/enums/themes.enum';
 import { UserState } from '../../../model/user-state';
 import { WidgetLoaderService } from '../../widget-util/widget-loader.service';

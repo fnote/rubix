@@ -1,5 +1,5 @@
 import { CacheController } from './interfaces/cache-controller';
-import { LoggerService } from '../../utils/logger.service';
+import { LoggerService } from '../../app-utils/logger.service';
 import { StorageController } from './interfaces/storage-controller';
 import localForage from 'localforage';
 

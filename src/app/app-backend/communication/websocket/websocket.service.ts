@@ -1,7 +1,7 @@
 import * as Rx from 'rxjs/Rx';
 import { Connection } from '../connection';
 import { Injectable } from '@angular/core';
-import { LoggerService } from '../../../utils/logger.service';
+import { LoggerService } from '../../../app-utils/logger.service';
 import { PulseService } from './pulse.service';
 
 @Injectable()

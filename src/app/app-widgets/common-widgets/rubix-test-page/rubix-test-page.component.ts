@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Channels } from '../../../app-constants/enums/channels.enum';
-import { CommonHelperService } from '../../../utils/helper/common-helper.service';
+import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
 import { DataService } from '../../../app-backend/communication/data.service';
 import { Languages } from '../../../app-constants/enums/languages.enum';
-import { LocalizationService } from '../../../utils/localization/localization.service';
-import { LoggerService } from '../../../utils/logger.service';
+import { LocalizationService } from '../../../app-utils/localization/localization.service';
+import { LoggerService } from '../../../app-utils/logger.service';
 import { PriceService } from '../../../app-backend/price/price.service';
-import { ThemeService } from '../../../utils/theme.service';
+import { ThemeService } from '../../../app-utils/theme.service';
 import { Themes } from '../../../app-constants/enums/themes.enum';
 
 @Component({

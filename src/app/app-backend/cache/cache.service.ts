@@ -1,7 +1,7 @@
 import { CachePolicy } from '../../app-constants/enums/cache-policy.enum';
 import { DbController } from './db-controller';
 import { Injectable } from '@angular/core';
-import { LoggerService } from '../../utils/logger.service';
+import { LoggerService } from '../../app-utils/logger.service';
 import { NetworkService } from '../network/network.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';

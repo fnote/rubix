@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, ReflectiveInjector, SimpleChanges } from '@angular/core';
-import { CommonHelperService } from '../../../../utils/helper/common-helper.service';
+import { CommonHelperService } from '../../../../app-utils/helper/common-helper.service';
 
 @Component({
 	selector: 'app-range-slider',

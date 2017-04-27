@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
-import { LocalizationService } from '../../../utils/localization/localization.service';
+import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
 
 @Component({
