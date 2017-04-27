@@ -1,32 +1,42 @@
-	<div>
-		<div>
-			<div>
-				<div style="float:left">SELL</div>
-				<div style="float:right">BUY</div>
-				<br>
+	<div class="widget-wrapper">
 
-				<div style="float:left">L:{{stockObj.lowPrice}}</div>
-				<div style="float:right">H:{{stockObj.highPrice}}</div>
 
-				<!--<div>-->
-				<!--<div>{{{ view.buySellDifference }}}</div>-->
-				<!--</div>-->
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td><span style="float:left"> {{stockObj.bestBidPrice }}</span></td>
-						<td><span style="float:right">{{stockObj.bestAskPrice }}</span></td>
-					</tr>
-				</table>
+
+
+		<div class="container-fluid order_book">
+			<div class="row price_order">
+				<div class="col-md-6 col-xs-6 ob_active text-center" (click)="loadMarketDepthPrice()">BY PRICE</div>
+				<div class="col-md-6 col-xs-6 text-center" (click)="loadMarketDepthOrder()">BY ORDER</div>
 			</div>
-		</div>
 
-		<button (click)="loadMarketDepthPrice()">Price</button>
-		<button (click)="loadMarketDepthOrder()">Order</button>
+			<div class="row buy_sell_box">
+				<div class="col-md-5 col-xs-5">
+					<span>SELL</span>
+					<span class="fa-2x"> {{stockObj.bestBidPrice }}</span>
+					<span>L:{{stockObj.lowPrice}}</span>
+				</div>
+				<div class="col-md-2 col-xs-2"><i class="fa fa-long-arrow-up fa-2x" aria-hidden="true"></i><span>0.9</span></div>
+				<div class="col-md-5 col-xs-5">
+					<span >BUY</span>
+					<span class="fa-2x">{{stockObj.bestAskPrice }}</span>
+					<span >H:{{stockObj.highPrice}}</span>
 
-		<br><br>
+				</div>
 
-		<div style="width:49%; float:left">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+			</div>
+
+
+
+
+
+
+
+
+<div class="row order_book_table_widget">
+
+		<div class="order_book_table">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
 				<thead>
 				<tr>
 					<th>
@@ -51,8 +61,8 @@
 			</table>
 		</div>
 
-		<div style="width:49%; float:right">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<div class="order_book_table">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped">
 				<thead>
 				<tr>
 					<th>{{localizationService.language.OFFER}}</th>
@@ -76,4 +86,6 @@
 				</tbody>
 			</table>
 		</div>
+</div>
+	</div>
 	</div>
