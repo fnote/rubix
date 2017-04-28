@@ -32,6 +32,7 @@ export class StockEntity extends BaseEntity {
 	private _totalBidQty: string = userSettings.marketData.defaultStringInitializer;
 	private _rawTotalAskQty: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _totalAskQty: string = userSettings.marketData.defaultStringInitializer;
+	private _rawChange: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _change: string = userSettings.marketData.defaultStringInitializer;
 	private _perChange: string = userSettings.marketData.defaultStringInitializer;
 	private _previousClosePrice: string = userSettings.marketData.defaultStringInitializer;
@@ -270,12 +271,21 @@ export class StockEntity extends BaseEntity {
 		this._totalAskQty = this.commonHelperService.formatNumber(this.rawTotalAskQty, 0);
 	}
 
+	public get rawChange(): number {
+		return this._rawChange;
+	}
+
+	public set rawChange(value: number) {
+		this._rawChange = value;
+	}
+
 	public get change(): string {
 		return this._change;
 	}
 
 	public set change(value: string) {
-		this._change = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this.rawChange = parseFloat(value);
+		this._change = this.commonHelperService.formatNumber(this.rawChange, this.decimalPlaces);
 	}
 
 	public get perChange(): string {

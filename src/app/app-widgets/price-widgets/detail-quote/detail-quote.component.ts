@@ -9,11 +9,9 @@ import { RangeSliderComponent } from '../../widget-util/sub-components/range-sli
 	templateUrl: './detail-quote.component.html',
 })
 export class DetailQuoteComponent extends BaseWidgetComponent {
-
 	public response: Array<any> = [] ;
 	private session = '';
 	public stockObj;
-	public upDownStatus = 'up';
 
 	constructor(
 		private priceService: PriceService,
