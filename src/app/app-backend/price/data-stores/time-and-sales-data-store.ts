@@ -113,9 +113,9 @@ export class TimeAndSalesDataStore extends BaseDataStore {
 
 	public getDisplayType(entity: TimeAndSalesEntity): [string, string] {
 		if (parseInt(entity.type, 10) === 1) {
-			return [this.localizationService.language.BUY, 'Green_text'];
+			return [this.localizationService.language.BUY, 'buy_Green'];
 		}else {
-			return [this.localizationService.language.SELL, 'Red_text'];
+			return [this.localizationService.language.SELL, 'sell_Red'];
 		}
 	}
 
