@@ -1,5 +1,6 @@
 import { CommonHelperService } from './helper/common-helper.service';
 import { CommonModule } from '@angular/common';
+import { FormatArrowForBidAskDifPipe } from './helper/pipes';
 import { LocalizationService } from './localization/localization.service';
 import { LoggerService } from './logger.service';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,9 @@ import { TradeHelperService } from './helper/trade-helper.service';
 	imports: [
 		CommonModule,
 	],
-	declarations: [],
+	declarations: [
+		FormatArrowForBidAskDifPipe,
+	],
 	providers: [
 		StorageService,
 		LoggerService,
@@ -19,6 +22,9 @@ import { TradeHelperService } from './helper/trade-helper.service';
 		LocalizationService,
 		CommonHelperService,
 		TradeHelperService,
+	],
+	exports: [
+		FormatArrowForBidAskDifPipe,
 	],
 })
 export class UtilsModule { }

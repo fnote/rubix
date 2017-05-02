@@ -27,9 +27,9 @@ export class StockEntity extends BaseEntity {
 	private _lowPrice: string = userSettings.marketData.defaultStringInitializer;
 	private _closePrice: string = userSettings.marketData.defaultStringInitializer;
 	private _bestAskPrice: string = userSettings.marketData.defaultStringInitializer;
-	private _rawBestAskPrice: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;;
+	private _rawBestAskPrice: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
 	private _bestAskQty: string = userSettings.marketData.defaultStringInitializer;
-	private _rawBestBidPrice: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;;
+	private _rawBestBidPrice: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
 	private _bestBidPrice: string = userSettings.marketData.defaultStringInitializer;
 	private _bestBidQty: string = userSettings.marketData.defaultStringInitializer;
 	private _rawTotalBidQty: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
@@ -57,6 +57,7 @@ export class StockEntity extends BaseEntity {
 	private _spread: string = userSettings.marketData.defaultStringInitializer;
 	private _rangePercentage: string = userSettings.marketData.defaultStringInitializer;
 	private _range: string = userSettings.marketData.defaultStringInitializer;
+	private _bidOfferDifference: string = userSettings.marketData.defaultStringInitializer;
 
 	public get instrumentType(): number  {
 		return this._instrumentType;
@@ -186,6 +187,7 @@ export class StockEntity extends BaseEntity {
 		this._rawBestAskPrice = value;
 
 		this.calculateSpread();
+		this.calculateBidOfferDifference();
 	}
 
 	public get bestAskPrice(): string  {
@@ -213,6 +215,7 @@ export class StockEntity extends BaseEntity {
 		this._rawBestBidPrice = value;
 
 		this.calculateSpread();
+		this.calculateBidOfferDifference();
 	}
 
 	public get bestBidPrice(): string  {
@@ -438,6 +441,14 @@ export class StockEntity extends BaseEntity {
 		this._range = value;
 	}
 
+	public get bidOfferDifference(): string {
+		return this._bidOfferDifference;
+	}
+
+	public set bidOfferDifference(value: string) {
+		this._bidOfferDifference = value;
+	}
+
 	constructor(values: Object = {}) {
 		super();
 
@@ -477,5 +488,14 @@ export class StockEntity extends BaseEntity {
 
 		this.range = this.commonHelperService.formatNumber(rangeVal, this.decimalPlaces);
 		this.rangePercentage = this.commonHelperService.formatNumber(rangePer, 2) + '%';
+	}
+
+	private calculateBidOfferDifference(): void {
+		let difference = 0;
+		if (this._rawBestAskPrice !== userSettings.marketData.defaultNumberInitializer.minusOneInitializer &&
+			this._rawBestBidPrice !== userSettings.marketData.defaultNumberInitializer.minusOneInitializer) {
+			difference = this._rawBestAskPrice - this._rawBestBidPrice;
+			this.bidOfferDifference = this.commonHelperService.formatNumber(difference, this.decimalPlaces);
+		}
 	}
 }

@@ -2,7 +2,6 @@ import { BaseDataStore } from './base-data-store';
 import { DepthDisplayEntity } from '../business-entities/depth-entity';
 import { DepthEntity } from '../business-entities/depth-entity';
 import { Injectable } from '@angular/core';
-import { StockEntity } from '../business-entities/stock-entity';
 import { priceResponseTags } from '../../../app-constants/const/price-response-tags';
 
 @Injectable()
@@ -10,7 +9,7 @@ export class DepthDataStore extends BaseDataStore {
 	private depthPriceStore = {};
 	private depthOrderStore = {};
 
-	public getDepthByPriceSymbol (exgSym: [string, string]): StockEntity {
+	public getDepthByPriceSymbol (exgSym: [string, string]): DepthDisplayEntity {
 		// TODO: [Chaamini] Get a common "keyGenerator" in utils package
 		const key: string = exgSym[0] + '~' + exgSym[1]; // utils.keyGenerator.getKey(exchange, stockCode);
 		let depthObj = this.depthPriceStore[key];
@@ -22,7 +21,7 @@ export class DepthDataStore extends BaseDataStore {
 		return depthObj;
 	}
 
-	public getDepthByOrderSymbol (exgSym: [string, string]): StockEntity {
+	public getDepthByOrderSymbol (exgSym: [string, string]): DepthDisplayEntity {
 		// TODO: [Chaamini] Get a common "keyGenerator" in utils package
 		const key: string = exgSym[0] + '~' + exgSym[1]; // utils.keyGenerator.getKey(exchange, stockCode);
 		let depthObj = this.depthOrderStore[key];
@@ -46,7 +45,6 @@ export class DepthDataStore extends BaseDataStore {
 		return new DepthDisplayEntity({
 			exchangeCode: exgSym[0],
 			symbolCode: exgSym[1],
-			summary: { totalBidQty: 0, totalOfferQty: 0, ACT_totalBidQty: 0, ACT_totalOfferQty: 0 },
 			bidDisplayPoints: bidLevels,
 			offerDisplayPoints : offerLevels,
 		});
@@ -63,7 +61,6 @@ export class DepthDataStore extends BaseDataStore {
 		return new DepthDisplayEntity({
 			exchangeCode: exgSym[0],
 			symbolCode: exgSym[1],
-			summary: { totalBidQty: 0, totalOfferQty: 0, ACT_totalBidQty: 0, ACT_totalOfferQty: 0 },
 			bidDisplayPoints: bidLevels,
 			offerDisplayPoints : offerLevels,
 		});
@@ -144,9 +141,7 @@ export class DepthDataStore extends BaseDataStore {
 				resetStatus.offerSeqN = i;
 			}
 		}
-		depthDisplayObj.ACT_totalBidQty = totalBidQty;
 		depthDisplayObj.totalBidQty = totalBidQty;
-		depthDisplayObj.ACT_totalOfferQty = totalOfferQty;
 		depthDisplayObj.totalOfferQty = totalOfferQty;
 
 		if (resetStatus.bidStatus || resetStatus.offerStatus) {

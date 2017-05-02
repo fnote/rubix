@@ -7,9 +7,10 @@ import { NgModule } from '@angular/core';
 import { OrderBookComponent } from './order-book/order-book.component';
 import { RangeSliderComponent } from '../widget-util/sub-components/range-slider/range-slider.component';
 import { TimeAndSalesComponent } from './time-and-sales/time-and-sales.component';
+import { UtilsModule } from '../../app-utils/utils.module';
 
 @NgModule({
-	imports: [CommonModule, FormsModule],
+	imports: [CommonModule, FormsModule, UtilsModule],
 	declarations: [
 		DetailQuoteComponent,
 		TimeAndSalesComponent,

@@ -43,4 +43,6 @@
 	OFFER: 'Offer',
 	BID: 'Bid',
 	SEQ: 'Seq.',
+	BY_ORDER: 'By Order',
+	BY_PRICE: 'By Price',
 };
