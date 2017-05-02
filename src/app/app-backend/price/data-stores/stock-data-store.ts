@@ -1,22 +1,11 @@
 import { BaseDataStore } from './base-data-store';
+import { Injectable } from '@angular/core';
 import { StockEntity } from '../business-entities/stock-entity';
 
+@Injectable()
 export class StockDataStore extends BaseDataStore {
 
-	private static instance: StockDataStore;
 	private allStockStore = {};
-
-	public static getInstance(): StockDataStore {
-		StockDataStore.instance = StockDataStore.instance || new StockDataStore();
-		return StockDataStore.instance;
-	}
-
-	constructor() {
-		super();
-		if (StockDataStore.instance) {
-			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
-		}
-	}
 
 	public getOrAddStock(exgSym: [string, string]): StockEntity {
         // TODO: [Amila] implement a common "keyGenerator" in utils package

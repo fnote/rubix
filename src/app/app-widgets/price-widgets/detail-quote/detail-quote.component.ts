@@ -3,6 +3,7 @@ import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.c
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
 import { RangeSliderComponent } from '../../widget-util/sub-components/range-slider/range-slider.component';
+import { StockDataStore } from '../../../app-backend/price/data-stores/stock-data-store';
 
 @Component({
 	selector: 'app-detail-quote',
@@ -13,13 +14,11 @@ export class DetailQuoteComponent extends BaseWidgetComponent {
 	private session = '';
 	public stockObj;
 
-	constructor(
-		private priceService: PriceService,
-		public localizationService: LocalizationService,
-		injector: Injector,
+	constructor(private priceService: PriceService, public localizationService: LocalizationService,
+		private stockDataStore: StockDataStore, injector: Injector,
 	) {
 		super(injector);
-		this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
+		this.stockObj = this.stockDataStore.getOrAddStock(this.exgStock);
 
 		// Temp ?? Amila - What is this?
 		this.updatePriceResponse();

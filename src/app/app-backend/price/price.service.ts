@@ -2,7 +2,6 @@ import { BaseDataStore } from './data-stores/base-data-store';
 import { Channels } from '../../app-constants/enums/channels.enum';
 import { DataManagers } from '../../app-constants/enums/data-managers.enum';
 import { DataService } from '../communication/data.service';
-import { ExchangeDataStore } from './data-stores/exchange-data-store';
 import { Injectable } from '@angular/core';
 import { LocalizationService } from '../../app-utils/localization/localization.service';
 import { PriceRequest } from './protocols/price-request';
@@ -16,14 +15,9 @@ import { Subject } from 'rxjs/Rx';
 @Injectable()
 export class PriceService {
 
-	public stockDM: StockDataStore;
-	public exchangeDM: ExchangeDataStore;
-
 	constructor(private dataService: DataService, private priceStreamingResponseHandler: PriceStreamingResponseHandler,
-		private priceSubscriptionService: PriceSubscriptionService, private localizationService: LocalizationService) {
-		this.stockDM = StockDataStore.getInstance();
-		this.exchangeDM = ExchangeDataStore.getInstance();
-	}
+		private priceSubscriptionService: PriceSubscriptionService, private localizationService: LocalizationService,
+		private stockDataStore: StockDataStore) {}
 
 	/**
 	 * Get the price response handler
@@ -353,7 +347,7 @@ export class PriceService {
 	// API to handle price related meta
 	//
 	public requestSymbolMeta (exgSym: [string, string]): void {
-		if (!this.stockDM.getOrAddStock(exgSym).isMetaDataLoaded) {
+		if (!this.stockDataStore.getOrAddStock(exgSym).isMetaDataLoaded) {
 			const req = new PriceRequest();
 			req.mt = PriceRequestTypes.SymbolMeta;
 			req.tkn = 1;
@@ -376,7 +370,7 @@ export class PriceService {
 		req.lan = this.localizationService.getshortCode();
 
 		for (const sym of exgSym) {
-			if (!this.stockDM.getOrAddStock(sym).isMetaDataLoaded) {
+			if (!this.stockDataStore.getOrAddStock(sym).isMetaDataLoaded) {
 				req.addParam(sym[0], sym[1]);
 				isValidItemsAvailable = true;
 			}

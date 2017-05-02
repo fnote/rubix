@@ -13,22 +13,17 @@ const MAX_TABLE_LENGTH = 20;
 export class TimeAndSalesDataStore extends BaseDataStore {
 
 	private commonHelperService: CommonHelperService;
-	public exchangeDM: ExchangeDataStore;
-	public stockDS: StockDataStore;
 	private localizationService: LocalizationService;
 	private timeAndSalesDataArray: TimeAndSalesEntity[] = [];
 	private exgSym: [string, string] = ['' ,  ''];
 	private priceModificationFactor = 1;
 
-	constructor() {
+	constructor(private stockDataStore: StockDataStore, private exchangeDataStore: ExchangeDataStore) {
 		super();
 
 		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService, LocalizationService]);
 		this.commonHelperService = injector.get(CommonHelperService);
 		this.localizationService = injector.get(LocalizationService);
-		this.exchangeDM = ExchangeDataStore.getInstance();
-		this.stockDS = StockDataStore.getInstance();
-
 	}
 
 	public getTimeAndSalesDataArray(): TimeAndSalesEntity[] {
@@ -53,14 +48,15 @@ export class TimeAndSalesDataStore extends BaseDataStore {
 	}): void {
 		// console.log('........ '+new Date().getTime());
 		const previousEntity = this.timeAndSalesDataArray[0];
-		const exchange = this.exchangeDM.getOrAddExchange(this.exgSym[0]);
+		const exchange = this.exchangeDataStore.getOrAddExchange(this.exgSym[0]);
 		let displayTypeArray;
 		const entity = new TimeAndSalesEntity();
 		let symbolDate;
 
 		entity.symbolCode = values.symbolCode || previousEntity.symbolCode;
 		entity.exchangeCode = values.exchangeCode || previousEntity.exchangeCode;
-		entity.decimalPlaces = this.stockDS.getOrAddStock([entity.exchangeCode, entity.symbolCode]).decimalPlaces;
+		entity.decimalPlaces =
+			this.stockDataStore.getOrAddStock([entity.exchangeCode, entity.symbolCode]).decimalPlaces;
 		entity.splits = values.splits || previousEntity.splits;
 		entity.time = values.time || previousEntity.time;
 		entity.sequence = values.sequence || previousEntity.sequence;

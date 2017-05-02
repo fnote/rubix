@@ -15,19 +15,13 @@ export class PriceStreamingResponseHandler {
 	private priceResponseStream$: Subject<Object>;
 	private metaAuthResponseStream$: Subject<any>;
 	private priceAuthResponseStream$: Subject<any>;
-	public stockDataStore: StockDataStore;
-	private exchangeDataStore: ExchangeDataStore;
 
-	constructor(
-		private streamRouteService: StreamRouteService,
-		private depthDataStore: DepthDataStore,
-		private timeAndSalesDataStore: TimeAndSalesDataStore,
-	) {
+	constructor(private streamRouteService: StreamRouteService, private depthDataStore: DepthDataStore,
+		private timeAndSalesDataStore: TimeAndSalesDataStore, private stockDataStore: StockDataStore,
+		private exchangeDataStore: ExchangeDataStore) {
 		this.priceResponseStream$ = new Subject();
 		this.metaAuthResponseStream$ = new Subject();
 		this.priceAuthResponseStream$ = new Subject();
-		this.stockDataStore = StockDataStore.getInstance();
-		this.exchangeDataStore = ExchangeDataStore.getInstance();
 		this.updatePriceResponseStream();
 	}
 
