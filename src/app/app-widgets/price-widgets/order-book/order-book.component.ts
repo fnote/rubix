@@ -3,6 +3,7 @@ import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.c
 import { DepthDataStore } from '../../../app-backend/price/data-stores/depth-data-store';
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
+import { StockDataStore } from '../../../app-backend/price/data-stores/stock-data-store';
 
 @Component({
 	selector: 'app-order-book',
@@ -17,10 +18,10 @@ export class OrderBookComponent  extends BaseWidgetComponent {
 	public isPriceSelected = true;
 
 	constructor(private priceService: PriceService, private depthDataStore: DepthDataStore,
-		public localizationService: LocalizationService, injector: Injector) {
+		private stockDataStore: StockDataStore,  public localizationService: LocalizationService, injector: Injector) {
 		// Constructor
 		super(injector);
-		this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
+		this.stockObj = this.stockDataStore.getOrAddStock(this.exgStock);
 		this.depthObj = this.depthDataStore.getDepthByPriceSymbol(this.exgStock);
 	}
 
