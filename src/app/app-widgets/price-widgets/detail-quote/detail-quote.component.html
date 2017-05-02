@@ -18,21 +18,18 @@
 		<div class="col-xs-12">
 			<div [ngClass]="{'general-quote': true, 'up': stockObj.rawChange > 0, 'down': stockObj.rawChange < 0, 'no-change': stockObj.rawChange == 0}">
 				<div class="row margin-small-bottom">
-					<div class="col-xs-6">
-						<i class="arrow left"></i>
+					<div class="col-xs-6 text-left">
 						<div class="short-name ellipsis">{{stockObj.dispCode}}</div>
 					</div>
-					<div class="col-xs-6 long-name text-right ellipsis">
-						{{stockObj.longDesc}}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6">
+					<div class="col-xs-6 text-right">
 						<div class="price">{{stockObj.getDispLastTradePrice()}}</div>
 						<div class="currency">{{stockObj.currency}}</div>
 					</div>
-					<div class="col-xs-6">
-						<div class="change-container right">
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="change-container right">						
+							<i class="arrow left"></i>
 							<div class="change">
 								{{stockObj.change}}
 							</div>
@@ -43,8 +40,11 @@
 					</div>
 				</div>
 				<div class="h-sep-line margin-small-top margin-small-bottom"></div>
-				<div class="row">
-					<div class="col-xs-12">
+				<div class="row">					
+					<div class="col-xs-6 long-name text-left ellipsis">
+						{{stockObj.longDesc}}
+					</div>
+					<div class="col-xs-6 text-right">
 						<span class="font-medium update-info">{{stockObj.lastTradeDate}}</span>
 					</div>
 				</div>
