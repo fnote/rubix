@@ -14,8 +14,12 @@ export class StockEntity extends BaseEntity {
 	private _currency: string = userSettings.marketData.defaultStringInitializer;
 	private _decimalPlaces: number = userSettings.marketData.defaultDecimalPlaces;
 	private _decimalCorrectionFactor: number = userSettings.marketData.defaultDecimalPlaces;
-	private _rawlastTradePrice: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
-	private _lastTradePrice: string = userSettings.marketData.defaultStringInitializer;
+
+	private _lastTradePrice: [string, number] = [
+		userSettings.marketData.defaultStringInitializer,
+		userSettings.marketData.defaultNumberInitializer.zeroInitializer,
+	];
+
 	private _openPrice: string = userSettings.marketData.defaultStringInitializer;
 	private _rawHighPrice: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _highPrice: string = userSettings.marketData.defaultStringInitializer;
@@ -110,21 +114,16 @@ export class StockEntity extends BaseEntity {
 		this._decimalCorrectionFactor = value;
 	}
 
-	public get rawLastTradePrice(): number  {
-		return this._rawlastTradePrice;
+	public getDispLastTradePrice(): string  {
+		return this._lastTradePrice[0];
 	}
 
-	public set rawLastTradePrice(value: number) {
-		this._rawlastTradePrice = value;
+	public getRawLastTradePrice(): number  {
+		return this._lastTradePrice[1];
 	}
 
-	public get lastTradePrice(): string  {
-		return this._lastTradePrice;
-	}
-
-	public set lastTradePrice(value: string) {
-		this.rawLastTradePrice = parseFloat(value);
-		this._lastTradePrice = this.commonHelperService.formatNumber(this.rawLastTradePrice, this.decimalPlaces);
+	public set lastTradePrice(value: number) {
+		this._lastTradePrice = [this.commonHelperService.formatNumber(value, this.decimalPlaces), value];
 	}
 
 	public get openPrice(): string  {
