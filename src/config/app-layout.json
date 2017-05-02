@@ -76,8 +76,8 @@
 					]
 				},
 				{
-					"title": "Chart",
-					"path": "secondary-layout-one",
+					"title": "Sample Layout",
+					"path": "secondary-layout-three",
 					"outlet": "outlet2",
 					"model": [
 						{
@@ -95,6 +95,10 @@
 						{
 							"path": "chart",
 							"outlet": "outlet4"
+						},
+						{
+							"path": "chart",
+							"outlet": "outlet5"
 						}
 					]
 				}

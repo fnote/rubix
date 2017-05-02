@@ -2,10 +2,11 @@
 	<div class="time-and-sales">
 		<div class="t-n-s-top-boxes">
 			<div class="t-n-s-inner-box">
-				<app-disp-box [title]="localizationService.language.OPEN" [dispValue]="stockObj.openPrice" [bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-1']"></app-disp-box>
+				<app-disp-box [title]="localizationService.language.VOLUME" [dispValue]="stockObj.volume" [bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-4']"></app-disp-box>
+				<app-disp-box [title]="localizationService.language.TRADES" [dispValue]="stockObj.trades" [bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-1']"></app-disp-box>
 				<app-disp-box [title]="localizationService.language.HIGH" [dispValue]="stockObj.highPrice" [bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-2']"></app-disp-box>
 				<app-disp-box [title]="localizationService.language.LOW" [dispValue]="stockObj.lowPrice" [bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-3']"></app-disp-box>
-				<app-disp-box [title]="localizationService.language.VOLUME" [dispValue]="stockObj.volume" [bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-4']"></app-disp-box>
+				
 			</div>
 		</div>
 

@@ -1,62 +1,45 @@
 <div class="row main-container test-wrapper">
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
+	<div class="col-xs-12 col-sm-4">
+		<div class="widget-wrapper one">
 			<router-outlet name="outlet1"></router-outlet>
 		</div>
 	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
+	<div class="col-xs-12 col-sm-8">
+		<div class="widget-wrapper two">
 			<router-outlet name="outlet2"></router-outlet>
 		</div>	
 	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
+	<div class="col-xs-12 col-sm-4 visible-xs">
+		<div class="widget-wrapper three">
 			<router-outlet name="outlet3"></router-outlet>
 		</div>	
 	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
+	<div class="col-xs-12 col-sm-8 col-sm-push-4">
+		<div class="widget-wrapper four">
 			<router-outlet name="outlet4"></router-outlet>
 		</div>	
 	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
+	<div class="col-xs-12 col-sm-4 col-sm-pull-8">
+		<div class="widget-wrapper five">
 			<router-outlet name="outlet5"></router-outlet>
 		</div>
 	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
-			<router-outlet name="outlet6"></router-outlet>
-		</div>	
-	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
-			<router-outlet name="outlet7"></router-outlet>
-		</div>	
-	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
-			<router-outlet name="outlet8"></router-outlet>
-		</div>	
-	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
-			<router-outlet name="outlet9"></router-outlet>
-		</div>
-	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
-			<router-outlet name="outlet10"></router-outlet>
-		</div>	
-	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
-			<router-outlet name="outlet11"></router-outlet>
-		</div>	
-	</div>
-	<div class="col-xs-12 col-sm-4 col-lg-3">
-		<div class="widget-wrapper">
-			<router-outlet name="outlet12"></router-outlet>
-		</div>	
-	</div>
 </div>
+
+<style>
+	.one{
+  background-color:#FFC107;
+  } 
+ .two{
+  background-color:#3F51B5;
+  } 
+ .three{
+  background-color:#00BCD4;
+  } 
+ .four{
+  background-color:#8BC34A;
+  }
+  .five{
+  background-color:#FF0000;
+  }
+</style>	
