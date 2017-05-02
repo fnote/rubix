@@ -395,7 +395,7 @@ li {
 	display: flex;
 	align-items: center;
 	width: auto;
-	float: $float-1;
+	float: left;
 }
 
 .tg-list-item {
@@ -510,7 +510,7 @@ li {
 }
 
 .ar .login .forget-pw a {
-	float: $float-1;
+	float: left;
 	text-align: left;
 }
 
@@ -543,11 +543,11 @@ li {
 
 	.login .tg-list {
 		width: 35%;
-		float: $float-1;
+		float: left;
 	}
 
 	.login .tg-list  li{
-		float: $float-1;
+		float: left;
 		margin-left: 0;
 		margin-right: 1em;
 	}
@@ -854,7 +854,7 @@ body.nav-expanded {
 }
 
 .ar .main-menu li > a > span.menu-more-icon, .ar .main-menu li > a > span.menu-toggle-icon  {
-  float: $float-1;
+  float: left;
   }
 
 .main-menu li > a:hover > span.menu-more-icon, .main-menu li > a:hover > span.menu-toggle-icon {
@@ -864,7 +864,7 @@ body.nav-expanded {
 }
 
 .ar .main-menu li > a:hover > span.menu-more-icon,.ar .main-menu li > a:hover > span.menu-toggle-icon {
-  float: $float-1;
+  float: left;
   margin: 0 0 -0.1em 0.8em;
   opacity: 1;
 }
@@ -1104,7 +1104,7 @@ button{
 }
 .order_book .price_order div{
 	background-color:#efefef;
-	padding: $padding-medium;
+	padding: 10px;
 	color: #c2c2c2;
 	letter-spacing: 1px;
 }
@@ -1131,12 +1131,11 @@ button{
 	color: #f86c6b;
 }
 .order_book .buy_sell_box div:nth-of-type(2){
-	text-align: $text-align-2;
+	text-align: center;
 	color: #767070;
-	margin-top: 22px;
 }
 .order_book .buy_sell_box div:nth-of-type(3){
-	text-align: right;
+
 	color:#4dbd73;
 }
 .order_book .buy_sell_box i{
@@ -1151,6 +1150,16 @@ button{
 	text-align: left;
 }
 
+@media (max-width: 480px){
+
+.order_book_table_full{
+	overflow: overlay;
+}
+	.order_book_table_widget{
+		width: 370px;
+	}
+}
+
 
 
 .ar .order_book .price_order div{
@@ -1158,16 +1167,7 @@ float: right;
 }
 
 
-.ar .order_book .buy_sell_box div:nth-of-type(1){
-	float: right;
-	text-align: right;
-}
-.ar .order_book .buy_sell_box div:nth-of-type(2){
-	float: right;
-}
-.ar .order_book .buy_sell_box div:nth-of-type(3){
-	text-align: left;
-}
+
 //Order book style end//
 
 
@@ -1178,25 +1178,28 @@ float: right;
 */
 
 .time-and-sales .t-n-s-box-common {
-	text-align: $text-align-2;
-	padding: $padding-medium;
+	text-align: center;
+	padding: 10px;
 	font-size: 15px;
 	color: #fff;
 	height: 80px;
-	float: $float-1;
+	float: left;
+	text-align: center;
 }
 
 .time-and-sales .t-n-s-box-common div:nth-child(1) {
-	float: $float-1;
+	width: 100%;
+	float: left;
 	display: inline-block;
-	text-align: $text-align-1;
+	text-align: left;
 }
 
 .time-and-sales .t-n-s-box-common div:nth-child(2) {
-	float: $float-1;
+	width: 100%;
+	float: left;
 	display: inline-block;
 	font-size: 35px;
-	text-align: $text-align-3;
+	text-align: right;
 }
 
 .time-and-sales .box{
@@ -1204,7 +1207,7 @@ float: right;
 }
 
 .time-and-sales .t-n-s-box-1{
-	background-color: #20a8d8;
+	background-color: #f8cb00;
 }
 
 .time-and-sales .t-n-s-box-2{
@@ -1220,76 +1223,28 @@ float: right;
 }
 
 .time-and-sales .table thead tr th{
-	text-align: $float-1;
-}
-
-.buy_Green{
-	color: #4dbd73;
-}
-.sell_Red{
-	color: #f86c6b;
-}
-
-.fa-long-arrow-down:before{
-	content: '';
-	font-size: 16px;
-	color: #d32f2f;
-	padding-left: 12px;
-}
-
-span.timeAndSalesEqual:before{
-	content: '=';
-	color: #20a8d8;
-	font-size: 17px;
-	font-weight: bold;
-	padding-left: 10px;
-}
-
-.fa-long-arrow-up:before{
-	content: '';
-	font-size: 16px;
-	color: #4caf50;
-	padding-left: 12px;
+	text-align: left;
 }
 
 /*arabic style*/
 
 .ar .time-and-sales .table thead tr th{
-	text-align: $text-align-3;
+	text-align: right;
 }
 
 .ar .time-and-sales .t-n-s-box-common div:nth-child(2) {
-	float: $float-2;
-	text-align: $text-align-1;
+	float: right;
+	text-align: left;
 }
 
 .ar .time-and-sales .t-n-s-box-common div:nth-child(1) {
-	float: $float-2;
-	text-align: $text-align-3;
+	float: right;
+	text-align: right;
 }
 
 .time-and-sales .t-n-s-box-common {
-	float: $float-2;
+	float: right;
 }
-
-@media (max-width: 767px) {
-	.time-and-sales .t-n-s-box-common div:nth-child(1) {
-		text-align: center;
-		padding: 5px 0;
-	}
-
-	.time-and-sales .t-n-s-box-common div:nth-child(2) {
-		font-size: 15px;
-		text-align: center;
-	}
-}
-
-/*
----
-------
---------- Time and Sales scss end
-*/
-
 
 
 //Detail quote V2 start
@@ -1348,7 +1303,7 @@ span.timeAndSalesEqual:before{
 	display: none;
 	}
 .general-quote.no-change .change, .general-quote.no-change .change-percentage{
-	color: #20a8d8;
+	color: #648afd;
 	}
 .general-quote .update-info{
 	color: #9e9e9e;
