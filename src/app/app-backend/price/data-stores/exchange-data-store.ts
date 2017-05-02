@@ -1,23 +1,11 @@
 import { BaseDataStore } from './base-data-store';
 import { ExchangeEntity } from '../business-entities/exchange-entity';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class ExchangeDataStore extends BaseDataStore {
 
-	private static _instance: ExchangeDataStore = new ExchangeDataStore();
 	private allExchangeStore = {};
-
-	public static getInstance(): ExchangeDataStore {
-		return ExchangeDataStore._instance;
-	}
-
-	constructor() {
-		super();
-		if (ExchangeDataStore._instance) {
-			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
-		}
-
-		ExchangeDataStore._instance = this;
-	}
 
 	public getOrAddExchange(exchangeCode: string): ExchangeEntity {
 		let exgObj: ExchangeEntity = this.allExchangeStore[exchangeCode];
