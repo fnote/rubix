@@ -1,6 +1,7 @@
 import { BaseDataStore } from './base-data-store';
 import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
 import { ExchangeDataStore } from './exchange-data-store';
+import { Injectable } from '@angular/core';
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { ReflectiveInjector } from '@angular/core';
 import { StockDataStore } from './stock-data-store';
@@ -8,9 +9,9 @@ import { TimeAndSalesEntity } from '../business-entities/time-and-sales-entity';
 
 const MAX_TABLE_LENGTH = 20;
 
+@Injectable()
 export class TimeAndSalesDataStore extends BaseDataStore {
 
-	private static instance: TimeAndSalesDataStore;
 	private commonHelperService: CommonHelperService;
 	public exchangeDM: ExchangeDataStore;
 	public stockDS: StockDataStore;
@@ -18,11 +19,6 @@ export class TimeAndSalesDataStore extends BaseDataStore {
 	private timeAndSalesDataArray: TimeAndSalesEntity[] = [];
 	private exgSym: [string, string] = ['' ,  ''];
 	private priceModificationFactor = 1;
-
-	public static getInstance(): TimeAndSalesDataStore {
-		TimeAndSalesDataStore.instance = TimeAndSalesDataStore.instance || new TimeAndSalesDataStore();
-		return TimeAndSalesDataStore.instance;
-	}
 
 	constructor() {
 		super();
@@ -33,9 +29,6 @@ export class TimeAndSalesDataStore extends BaseDataStore {
 		this.exchangeDM = ExchangeDataStore.getInstance();
 		this.stockDS = StockDataStore.getInstance();
 
-		if (TimeAndSalesDataStore.instance) {
-			throw new Error('Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.');
-		}
 	}
 
 	public getTimeAndSalesDataArray(): TimeAndSalesEntity[] {
@@ -122,7 +115,7 @@ export class TimeAndSalesDataStore extends BaseDataStore {
 		}
 	}
 
-	public getDisplayType(entity: TimeAndSalesEntity): [string, string] {//
+	public getDisplayType(entity: TimeAndSalesEntity): [string, string] {
 		if (parseInt(entity.type, 10) === 1) {
 			return [this.localizationService.language.BUY, 'Green_text'];
 		}else {

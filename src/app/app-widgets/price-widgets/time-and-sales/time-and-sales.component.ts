@@ -2,6 +2,7 @@ import { Component, Injector } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
+import { TimeAndSalesDataStore } from '../../../app-backend/price/data-stores/time-and-sales-data-store';
 
 @Component({
 	selector: 'app-time-and-sales',
@@ -16,11 +17,12 @@ export class TimeAndSalesComponent extends BaseWidgetComponent {
 		private priceService: PriceService,
 		public localizationService: LocalizationService,
 		injector: Injector,
+		private timeAndSalesDataStore: TimeAndSalesDataStore,
 	) {
 		super(injector);
 		this.stockObj = this.priceService.stockDM.getOrAddStock(this.exgStock);
-		this.priceService.timeAndSalesDM.reset(this.exgStock);
-		this.timeAndSalesDataArray = this.priceService.timeAndSalesDM.getTimeAndSalesDataArray();
+		this.timeAndSalesDataStore.reset(this.exgStock);
+		this.timeAndSalesDataArray = this.timeAndSalesDataStore.getTimeAndSalesDataArray();
 	}
 
 	public onInit(): void {

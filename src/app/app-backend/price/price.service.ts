@@ -12,20 +12,17 @@ import { PriceStreamingResponseHandler } from './protocols/streaming/price-strea
 import { PriceSubscriptionService } from './price-subscription.service';
 import { StockDataStore } from './data-stores/stock-data-store';
 import { Subject } from 'rxjs/Rx';
-import { TimeAndSalesDataStore } from './data-stores/time-and-sales-data-store';
 
 @Injectable()
 export class PriceService {
 
 	public stockDM: StockDataStore;
-	public timeAndSalesDM: TimeAndSalesDataStore;
 	public exchangeDM: ExchangeDataStore;
 
 	constructor(private dataService: DataService, private priceStreamingResponseHandler: PriceStreamingResponseHandler,
 		private priceSubscriptionService: PriceSubscriptionService, private localizationService: LocalizationService) {
 		this.stockDM = StockDataStore.getInstance();
 		this.exchangeDM = ExchangeDataStore.getInstance();
-		this.timeAndSalesDM = TimeAndSalesDataStore.getInstance();
 	}
 
 	/**

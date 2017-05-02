@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { PriceService } from './price.service';
 import { PriceStreamingResponseHandler } from './protocols/streaming/price-streaming-response-handler';
 import { PriceSubscriptionService } from './price-subscription.service';
+import { TimeAndSalesDataStore } from './data-stores/time-and-sales-data-store';
 
 @NgModule({
 	imports: [CommonModule],
@@ -13,6 +14,7 @@ import { PriceSubscriptionService } from './price-subscription.service';
 		PriceStreamingResponseHandler,
 		PriceSubscriptionService,
 		DepthDataStore,
+		TimeAndSalesDataStore,
 	],
 })
 export class PriceModule { }
