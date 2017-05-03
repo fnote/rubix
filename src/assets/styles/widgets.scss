@@ -1210,7 +1210,7 @@ float: right;
 }
 
 .time-and-sales .t-n-s-box-1{
-	background-color: #f8cb00;
+	background-color: #20a8d8; //#f8cb00;
 }
 
 .time-and-sales .t-n-s-box-2{
@@ -1229,6 +1229,37 @@ float: right;
 	text-align: left;
 }
 
+.time-and-sales .fa-long-arrow-down:before {
+	margin-left: 8px;
+	font-size: 15px;
+	color: #f86c6b;
+}
+
+.time-and-sales .fa-long-arrow-up:before {
+	margin-left: 8px;
+	font-size: 15px;
+	color: #4dbd73;
+}
+
+.time-and-sales .timeAndSalesEqual:before{
+	content: '=';
+	margin-left: 8px;
+	font-size: 16px;
+	color: #20a8d8;
+	font-weight: bold;
+}
+
+.time-and-sales .sell_Red{
+	color: #f86c6b;
+	font-weight: 400;
+}
+
+.time-and-sales .buy_Green{
+	color: #4dbd73;
+	font-weight: 400;
+}
+
+
 /*arabic style*/
 
 .ar .time-and-sales .table thead tr th{
@@ -1245,9 +1276,21 @@ float: right;
 	text-align: right;
 }
 
-.time-and-sales .t-n-s-box-common {
+.ar .time-and-sales .t-n-s-box-common {
 	float: right;
 }
+
+.ar .time-and-sales .timeAndSalesEqual:before, .ar .time-and-sales .fa-long-arrow-up:before, .ar .time-and-sales .fa-long-arrow-down:before{
+	margin-right: 8px;
+}
+
+
+
+/*
+---
+------
+--------- Time and Sales end
+*/
 
 
 //Detail quote V2 start
