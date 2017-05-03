@@ -1150,7 +1150,9 @@ button{
 .order_book .order_book_table table thead tr th{
 	text-align: left;
 }
-
+.order_book .chart-with-hight{
+	height: 75px;
+}
 @media (max-width: 480px){
 
 .order_book_table_full{
