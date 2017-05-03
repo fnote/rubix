@@ -1129,13 +1129,14 @@ button{
 }
 .order_book .buy_sell_box div:nth-of-type(1){
 	color: #f86c6b;
+	margin-top: 15px;
 }
 .order_book .buy_sell_box div:nth-of-type(2){
 	text-align: center;
 	color: #767070;
 }
 .order_book .buy_sell_box div:nth-of-type(3){
-
+	margin-top: 15px;
 	color:#4dbd73;
 }
 .order_book .buy_sell_box i{
@@ -1166,7 +1167,9 @@ button{
 float: right;
 }
 
-
+.ar .order_book_table table thead tr th, .ar .order_book_table table thead tr th div {
+	text-align: right;
+}
 
 //Order book style end//
 
@@ -1284,13 +1287,13 @@ float: right;
 	margin:0;
 	}
 .general-quote .change{
-	margin:0 10px;	
+	margin:0 10px;
 	font-size: 2rem;
 	}
 .general-quote .change-percentage{
-	margin:0;	
+	margin:0;
 	font-size: 2rem;
-	}	
+	}
 .general-quote.up .change, .general-quote.up .change-percentage, .general-quote.up .arrow{
 	color: #4caf50;
 	}
