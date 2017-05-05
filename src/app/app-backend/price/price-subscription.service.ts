@@ -143,15 +143,15 @@ export class PriceSubscriptionService {
 		const symbolInfoObject = exchangeNodeObject.subscribedSymbolInfo.get(symbol);
 		if  (exchangeNodeObject.isExchangeSubscribed) {
 			symbolInfoObject.isSymbolSubscribed = false;
-			symbolInfoObject.symbolSubscriptionCount = symbolInfoObject.symbolSubscriptionCount + 1;
+			symbolInfoObject.symbolSubscriptionCount++;
 			return false;
 		} else {
 			if (symbolInfoObject.isSymbolSubscribed) {
-				symbolInfoObject.symbolSubscriptionCount = symbolInfoObject.symbolSubscriptionCount + 1;
+				symbolInfoObject.symbolSubscriptionCount++;
 				return false;
 			} else {
 				symbolInfoObject.isSymbolSubscribed = true;
-				symbolInfoObject.symbolSubscriptionCount = symbolInfoObject.symbolSubscriptionCount + 1;
+				symbolInfoObject.symbolSubscriptionCount++;
 				return true;
 			}
 		}
@@ -165,11 +165,11 @@ export class PriceSubscriptionService {
 	 */
 	private isExchangeSubscription(exchange: string, exchangeNodeObject: NodeObject): boolean {
 		if (exchangeNodeObject.isExchangeSubscribed) {
-			exchangeNodeObject.exchangeSubscriptionCount = exchangeNodeObject.exchangeSubscriptionCount + 1;
+			exchangeNodeObject.exchangeSubscriptionCount++;
 			return false;
 		} else {
 			exchangeNodeObject.isExchangeSubscribed = true;
-			exchangeNodeObject.exchangeSubscriptionCount = exchangeNodeObject.exchangeSubscriptionCount + 1;
+			exchangeNodeObject.exchangeSubscriptionCount++;
 			// unsubscribe symbols
 			this.manageSymbolSubscriptions(exchange, exchangeNodeObject, false);
 			return true;
@@ -210,14 +210,14 @@ export class PriceSubscriptionService {
 		const symbolInfoObject = exchangeNodeObject.subscribedSymbolInfo.get(symbol);
 		if  (exchangeNodeObject.isExchangeSubscribed) {
 			symbolInfoObject.isSymbolSubscribed = false;
-			symbolInfoObject.symbolSubscriptionCount = symbolInfoObject.symbolSubscriptionCount - 1;
+			symbolInfoObject.symbolSubscriptionCount--;
 			if (symbolInfoObject.symbolSubscriptionCount === 0) {
 				exchangeNodeObject.subscribedSymbolInfo.delete(symbol);
 			}
 			return false;
 		} else {
 			if (symbolInfoObject.isSymbolSubscribed) {
-				symbolInfoObject.symbolSubscriptionCount = symbolInfoObject.symbolSubscriptionCount - 1;
+				symbolInfoObject.symbolSubscriptionCount--;
 				if (symbolInfoObject.symbolSubscriptionCount === 0) {
 					symbolInfoObject.isSymbolSubscribed = false;
 					exchangeNodeObject.subscribedSymbolInfo.delete(symbol);
@@ -256,17 +256,21 @@ export class PriceSubscriptionService {
 	private logSubscriptionTree(): void {
 		this.subscriptionMap.forEach((value: Map<string, NodeObject>, key: PriceRequestTypes) => {
 			// tslint:disable-next-line:no-console
+			console.log('===========================');
+			// tslint:disable-next-line:no-console
 			console.log('Level 1 Map key :  Request Type : ' + key);
 			value.forEach((exchangeNode: NodeObject, exchangeCode: string) => {
 				// tslint:disable-next-line:no-console
-				console.log('- Level 2 Map key : exchange code : ' + exchangeCode);
+				console.log('Level 2 Map key : exchange code : ' + exchangeCode);
 				exchangeNode.printObj();
 				exchangeNode.subscribedSymbolInfo.forEach((symbolNode: SymbolNodeObject, symbolCode: string) => {
 						// tslint:disable-next-line:no-console
-					console.log('-- Level 3 Map key : symbol code : ' + symbolCode);
+					console.log('Level 3 Map key : symbol code : ' + symbolCode);
 					symbolNode.printObj();
 				});
 			});
+			// tslint:disable-next-line:no-console
+			console.log('===========================');
 		});
 	}
 

@@ -49,6 +49,17 @@
 					]
 				},
 				{
+					"title": "Chart",
+					"path": "secondary-layout-two",
+					"outlet": "outlet2",
+					"model": [
+						{
+							"path": "chart",
+							"outlet": "outlet1"
+						}
+					]
+				},
+				{
 					"title": "Summary",
 					"path": "secondary-layout-one",
 					"outlet": "outlet2",

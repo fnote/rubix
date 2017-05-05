@@ -34,10 +34,15 @@ export const routes: Routes = [
 					{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet1', data: { exgStock: ['DFM', 'GFH'] } },
 				],
 			},
+			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
+				children: [
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet1'},
+				],
+			},
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
 				children: [
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['ADSM', 'ALDAR'] } },
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2', data: { exgStock: ['DFM', 'EMAAR'] } },
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet2' },
 					{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet3', data: { exgStock: ['DFM', 'GFH'] } },
 					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
 				],
@@ -54,6 +59,7 @@ export const routes: Routes = [
 		],
 	},
 	{ path: '', redirectTo: 'login', pathMatch: 'full' },
+	{ path: 'chart', canActivate: [AuthGuardService], component: ChartComponent },
 	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'order-book', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['DFM', 'GFH'] } },
@@ -63,7 +69,7 @@ export const routes: Routes = [
 	{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent,
 		children: [
 			{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['ADSM', 'ALDAR'] } },
-			{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2', data: { exgStock: ['PFX', 'EURUSD'] } },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet2' },
 			{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet3', data: { exgStock: ['DFM', 'GFH'] } },
 			{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
 		],
