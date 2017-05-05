@@ -8,50 +8,34 @@ import { Component , OnInit } from '@angular/core';
 export class C3ChartComponent implements OnInit {
 
 	public ngOnInit(): void {
-		this.drawLineChart();
+		this.drawAreaChart();
 	}
 
 	// tslint:disable-next-line:typedef
-	private drawLineChart() {
-		const lineChart = c3.generate({
-			bindto: '#lineChart',
+	private drawAreaChart() {
+		const areaChart = c3.generate({
+			bindto: '#areaChart',
 			data: {
 				columns: [
 					// tslint:disable-next-line:indent
 					// tslint:disable-next-line:no-magic-numbers
-					['data1', 30, 200, 100, 400, 150, 250],
+					['data1', 0, 10, 15, 20, 25, 30, 90, 100, 400, 150, 250, 100, 80, 40, 20, 0],
 				],
+				types: {
+					data1: 'area',
+				},
 				colors: {
-					data1: '#80bfff',
+					data1: '#648afd',
 				},
 			},
 			axis: {
+				x: { show: false },
 				y: { show: false },
+			},
+			point: {
+				show: false,
 			},
 
 		});
-		// tslint:disable-next-line:typedef
-		setTimeout(function () {
-			lineChart.load({
-				columns: [
-					// tslint:disable-next-line:indent
-					// tslint:disable-next-line:no-magic-numbers
-					['data1', 230, 190, 300, 500, 300, 400],
-				],
-			});
-			// tslint:disable-next-line:no-magic-numbers
-		}, 1000);
-
-		// tslint:disable-next-line:typedef
-		setTimeout(function () {
-			lineChart.load({
-				columns: [
-					// tslint:disable-next-line:indent
-					// tslint:disable-next-line:no-magic-numbers
-					['data1', 130, 150, 200, 300, 200, 100],
-				],
-			});
-			// tslint:disable-next-line:no-magic-numbers
-		}, 1500);
 	}
 }

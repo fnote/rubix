@@ -1357,3 +1357,30 @@ float: right;
 	margin-top: 3px;
 	}
 	//Detail quote V2 end
+
+
+/*
+---
+------
+--------- C3 chart
+*/
+
+.c3-axis-x, .c3-axis-y {
+	fill:none;
+	stroke:#648afd;
+}
+
+.c3-area {
+	fill: #b3d1ff  !important;
+	opacity: 5 !important;
+}
+
+.c3-line {
+	fill: none !important;
+}
+
+/*
+---
+------
+--------- C3 Chart custom css end
+*/
