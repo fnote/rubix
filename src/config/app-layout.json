@@ -70,9 +70,8 @@
 							"args": {"exgStock": ["ADSM", "ALDAR"]}
 						},
 						{
-							"path": "detail-quote",
-							"outlet": "outlet2",
-							"args": {"exgStock": ["DFM", "EMAAR"]}
+							"path": "chart",
+							"outlet": "outlet2"
 						},
 						{
 							"path": "order-book",
