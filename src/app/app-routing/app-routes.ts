@@ -53,11 +53,20 @@ export const routes: Routes = [
 			},
 		],
 	},
-
 	{ path: '', redirectTo: 'login', pathMatch: 'full' },
 	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'order-book', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['DFM', 'GFH'] } },
 	{ path: 'test', component: RubixTestPageComponent },
 	{ path: 'login', component: LoginComponent },
+
+	{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent,
+		children: [
+			{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['ADSM', 'ALDAR'] } },
+			{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2', data: { exgStock: ['PFX', 'EURUSD'] } },
+			{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet3', data: { exgStock: ['DFM', 'GFH'] } },
+			{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
+		],
+	},
 ];
+// http://localhost:4200/secondary-layout-one/(outlet1:detail-quote//outlet2:detail-quote//outlet3:order-book//outlet4:time-and-sales)

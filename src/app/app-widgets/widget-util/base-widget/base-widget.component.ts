@@ -1,5 +1,5 @@
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ReflectiveInjector } from '@angular/core';
 
 @Component({
@@ -8,6 +8,7 @@ import { ReflectiveInjector } from '@angular/core';
 })
 export class BaseWidgetComponent implements OnInit, OnDestroy {
 
+	protected queryParameters: {};
 	private route;
 	private _exgStock: [string, string];
 
@@ -17,6 +18,10 @@ export class BaseWidgetComponent implements OnInit, OnDestroy {
 			.subscribe((values: Object = {}) => {
 				Object.assign(this, values);
 			});
+
+		this.route.queryParams.subscribe((params: Params) => {
+			this.queryParameters = params;
+		});
 	}
 
 	public ngOnInit(): void {
