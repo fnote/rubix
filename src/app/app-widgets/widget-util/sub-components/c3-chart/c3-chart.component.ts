@@ -1,31 +1,61 @@
 import * as c3 from 'c3';
-import { Component , OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
 	selector: 'app-c3-chart-component',
 	templateUrl: './c3-chart.component.html',
 })
-export class C3ChartComponent implements OnInit {
+export class C3ChartComponent implements OnInit, OnChanges {
+	@Input() public bidData;
+	@Input() public offerData;
+	private values = [];
 
 	public ngOnInit(): void {
+		// iterate the depth object and populate the values array
+		// this.populateChart();
+	}
+
+	private populateChart(): void {
+		this.values = [];
+		this.values.push('values');
+
+		if (this.bidData) {
+			const reverseBids = this.bidData.reverse();
+			this.values.push(reverseBids);
+		}
+
+		if (this.offerData) {
+			this.values.push(this.offerData);
+		}
+
 		this.drawAreaChart();
 	}
 
-	// tslint:disable-next-line:typedef
-	private drawAreaChart() {
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (changes['bidData'] || changes['OfferData']) {
+			this.populateChart();
+		}
+	}
+
+	private drawAreaChart(): void {
 		const areaChart = c3.generate({
-			bindto: '#areaChart',
+			bindto: '#c3Chart',
+			legend: {
+				show: false,
+			},
 			data: {
 				columns: [
-					// tslint:disable-next-line:indent
-					// tslint:disable-next-line:no-magic-numbers
-					['data1', 0, 10, 15, 20, 25, 30, 90, 100, 400, 150, 250, 100, 80, 40, 20, 0],
+					this.values,
 				],
 				types: {
-					data1: 'area',
+					values: 'bar',
 				},
 				colors: {
-					data1: '#648afd',
+					values: '#4dbd73',
+				},
+				color: function (color: any, d: any): any {
+            		// tslint:disable-next-line:no-magic-numbers
+					return d.id && d.x > 4 ? '#f86c6b' : color;
 				},
 			},
 			axis: {
@@ -35,7 +65,6 @@ export class C3ChartComponent implements OnInit {
 			point: {
 				show: false,
 			},
-
 		});
 	}
 }

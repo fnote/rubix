@@ -71,23 +71,26 @@ export class DepthDataStore extends BaseDataStore {
 		const splitTag =  isPrice ? '227' : '221';
 		const hedArray = response['HED'].split('|');
 		const datArray = response['DAT'].split('|');
-		const symbol: [string, string] = [datArray[hedArray.indexOf('4')], datArray[hedArray.indexOf('3')]];
+		const exgSym: [string, string] = [datArray[hedArray.indexOf('4')], datArray[hedArray.indexOf('3')]];
 		const idx = hedArray.indexOf(splitTag);
 		let noRecords = 0;
 		let arrBuild: string[] = [];
+
 		hedArray.splice(0, idx);
 		datArray.splice(0, idx);
+
 		for (let i = 0; i < hedArray.length; i++) {
 			if (splitTag === hedArray[i] || hedArray[i] === '') {
 				arrBuild.splice(-1, 1);
 				arrBuild.push('}');
 				if (noRecords !== 0) {
-					this.processMarketDepthRecord(JSON.parse(arrBuild.join('')), symbol, isPrice);
+					this.processMarketDepthRecord(JSON.parse(arrBuild.join('')), exgSym, isPrice);
 				}
 				noRecords++;
 				arrBuild = [];
 				arrBuild.push('{');
 			}
+
 			if (priceResponseTags[hedArray[i]]) {
 				arrBuild.push('"' + priceResponseTags[hedArray[i]] + '"');
 				arrBuild.push(':');
@@ -95,10 +98,12 @@ export class DepthDataStore extends BaseDataStore {
 				arrBuild.push(',');
 			}
 		}
-		this.processMarketDepthReset(symbol, isPrice);
+
+		this.processMarketDepthReset(exgSym, isPrice);
 	}
 
 	private  processMarketDepthRecord (depObject: DepthEntity, exgSym: [string, string], type: boolean): void {
+		// TODO: [Chaamini] Implement a key generation function at the common helper and use it here.
 		const key: string = exgSym[0] + '~' + exgSym[1];
 		const depthDisplayObj = type ? this.depthPriceStore[key] : this.depthOrderStore[key];
 		const bidArray = depthDisplayObj.bidDisplayPoints;
@@ -107,11 +112,13 @@ export class DepthDataStore extends BaseDataStore {
 		const updateArray = isBid ? bidArray : offerArray;
 		const id = depObject.depthID;
 		let depObj: DepthEntity;
+
 		if (id) {
 			if (!updateArray[id]) {
 				depObj = new DepthEntity({ ACT_depthID: id + 1 });
 				updateArray.push(depObj);
 			}
+
 			depObj = updateArray[id];
 			depObj.setValues(depObject);
 		}
@@ -176,7 +183,7 @@ export class DepthDataStore extends BaseDataStore {
 					row = params.bidArray[i];
 					row.depthID = '--';
 					row.depthValue = '--';
-					row.depthQty = '--';
+					row.depthQty = '0';
 					row.depthSplit = '--';
 				}
 			}
@@ -187,7 +194,7 @@ export class DepthDataStore extends BaseDataStore {
 					row = params.offerArray[i];
 					row.depthID = '--';
 					row.depthValue = '--';
-					row.depthQty = '--';
+					row.depthQty = '0';
 					row.depthSplit = '--';
 				}
 			}

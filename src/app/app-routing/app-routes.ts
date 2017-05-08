@@ -42,8 +42,8 @@ export const routes: Routes = [
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
 				children: [
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['ADSM', 'ALDAR'] } },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet2' },
-					{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet3', data: { exgStock: ['DFM', 'GFH'] } },
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2', data: { exgStock: ['PFX', 'EURUSD'] } },
+					{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet3', data: { exgStock: ['LKCSE', 'SAMP.N0000`N'] } },
 					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
 				],
 			},
@@ -69,10 +69,10 @@ export const routes: Routes = [
 	{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent,
 		children: [
 			{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['ADSM', 'ALDAR'] } },
-			{ path: 'chart', component: ChartComponent, outlet: 'outlet2' },
-			{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet3', data: { exgStock: ['DFM', 'GFH'] } },
+			{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2', data: { exgStock: ['PFX', 'EURUSD'] } },
+			{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet3', data: { exgStock: ['TDWL', '1090'] } },
 			{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
 		],
 	},
 ];
-// http://localhost:4200/secondary-layout-one/(outlet1:detail-quote//outlet2:detail-quote//outlet3:order-book//outlet4:time-and-sales)
+// http://localhost:4001/secondary-layout-one/(outlet1:detail-quote//outlet2:detail-quote//outlet3:order-book//outlet4:time-and-sales)

@@ -19,7 +19,6 @@ export class OrderBookComponent  extends BaseWidgetComponent {
 
 	constructor(private priceService: PriceService, private depthDataStore: DepthDataStore,
 		private stockDataStore: StockDataStore,  public localizationService: LocalizationService, injector: Injector) {
-		// Constructor
 		super(injector);
 		this.stockObj = this.stockDataStore.getOrAddStock(this.exgStock);
 		this.depthObj = this.depthDataStore.getDepthByPriceSymbol(this.exgStock);
