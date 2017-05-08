@@ -15,7 +15,7 @@ export class DepthDataStore extends BaseDataStore {
 		let depthObj = this.depthPriceStore[key];
 
 		if (!depthObj) {
-			depthObj = this.createDepthPriceDisplayEntity(exgSym);
+			depthObj = this.createDepthDisplayEntity(exgSym, 'P');
 			this.depthPriceStore[key] = depthObj;
 		}
 		return depthObj;
@@ -27,17 +27,19 @@ export class DepthDataStore extends BaseDataStore {
 		let depthObj = this.depthOrderStore[key];
 
 		if (!depthObj) {
-			depthObj = this.createDepthOrderDisplayEntity(exgSym);
+			depthObj = this.createDepthDisplayEntity(exgSym, 'D');
 			this.depthOrderStore[key] = depthObj;
 		}
 		return depthObj;
 	}
 
-	private createDepthPriceDisplayEntity (exgSym: [string, string]): DepthDisplayEntity {
+	private createDepthDisplayEntity (exgSym: [string, string], type: string): DepthDisplayEntity {
 		const bidLevels = [];
 		const offerLevels = [];
 		const depthPriceCount = 5;
-		for (let i = 0; i < depthPriceCount; i++) {
+		const depthOrderCount = 10;
+		const entryCount = type === 'P' ? depthPriceCount : depthOrderCount;
+		for (let i = 0; i < entryCount; i++) {
 			bidLevels[i] = new DepthEntity({ ACT_depthID: i + 1 });
 			offerLevels[i] = new DepthEntity({ ACT_depthID: i + 1 });
 		}
@@ -45,22 +47,8 @@ export class DepthDataStore extends BaseDataStore {
 		return new DepthDisplayEntity({
 			exchangeCode: exgSym[0],
 			symbolCode: exgSym[1],
-			bidDisplayPoints: bidLevels,
-			offerDisplayPoints : offerLevels,
-		});
-	}
-
-	private createDepthOrderDisplayEntity (exgSym: [string, string]): DepthDisplayEntity {
-		const bidLevels = [];
-		const offerLevels = [];
-		for (let i = 0; i < 10; i++) {
-			bidLevels[i] = new DepthEntity({ ACT_depthID: i + 1 });
-			offerLevels[i] = new DepthEntity({ ACT_depthID: i + 1 });
-		}
-
-		return new DepthDisplayEntity({
-			exchangeCode: exgSym[0],
-			symbolCode: exgSym[1],
+			bidQtyArray: [],
+			offerQtyArray: [],
 			bidDisplayPoints: bidLevels,
 			offerDisplayPoints : offerLevels,
 		});
@@ -108,8 +96,11 @@ export class DepthDataStore extends BaseDataStore {
 		const depthDisplayObj = type ? this.depthPriceStore[key] : this.depthOrderStore[key];
 		const bidArray = depthDisplayObj.bidDisplayPoints;
 		const offerArray = depthDisplayObj.offerDisplayPoints;
+		const bidQtyArray = depthDisplayObj.bidQtyArray;
+		const offerQtyArray = depthDisplayObj.offerQtyArray;
 		const isBid = parseInt(depObject.depthType, 10) === 0 ? true : false;
 		const updateArray = isBid ? bidArray : offerArray;
+		const updateQtyArray = isBid ? bidQtyArray : offerQtyArray;
 		const id = depObject.depthID;
 		let depObj: DepthEntity;
 
@@ -121,6 +112,7 @@ export class DepthDataStore extends BaseDataStore {
 
 			depObj = updateArray[id];
 			depObj.setValues(depObject);
+			updateQtyArray[id] = depObject.depthQty;
 		}
 	}
 
@@ -157,8 +149,7 @@ export class DepthDataStore extends BaseDataStore {
 				bidSeqN: resetStatus.bidSeqN,
 				bidStatus: resetStatus.bidStatus,
 				offerStatus: resetStatus.offerStatus,
-				offerArray : offerArray,
-				bidArray: bidArray,
+				depthObj: depthDisplayObj,
 			});
 		}
 	}
@@ -175,27 +166,33 @@ export class DepthDataStore extends BaseDataStore {
 	}
 
 	private resetMarketDepth(params: {offerSeqN: number, bidSeqN: number, bidStatus: boolean, offerStatus: boolean,
-		offerArray: Array<DepthEntity> , bidArray: Array<DepthEntity>}): void {
+		depthObj: DepthDisplayEntity}): void {
 		let row: DepthEntity;
 		if (params.bidStatus) {
-			for (let i = 0; i < params.bidArray.length; i++) {
+			const bidArray = params.depthObj.bidDisplayPoints;
+			const bidQtyArray = params.depthObj.bidQtyArray;
+			for (let i = 0; i < bidArray.length; i++) {
 				if (i >= params.bidSeqN) {
-					row = params.bidArray[i];
+					row = bidArray[i];
 					row.depthID = '--';
 					row.depthValue = '--';
 					row.depthQty = '0';
 					row.depthSplit = '--';
+					bidQtyArray[i] = '';
 				}
 			}
 		}
 		if (params.offerStatus) {
-			for (let i = 0; i < params.offerArray.length; i++) {
+			const offerArray = params.depthObj.offerDisplayPoints;
+			const offerQtyArray = params.depthObj.offerQtyArray;
+			for (let i = 0; i < offerArray.length; i++) {
 				if (i >= params.offerSeqN) {
-					row = params.offerArray[i];
+					row = offerArray[i];
 					row.depthID = '--';
 					row.depthValue = '--';
 					row.depthQty = '0';
 					row.depthSplit = '--';
+					offerQtyArray[i] = '';
 				}
 			}
 		}

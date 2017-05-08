@@ -1,18 +1,23 @@
 <div class="widget-wrapper">
-	<div class="time-and-sales">
-		<div class="t-n-s-top-boxes">
+	<div class="time-and-sales container-fluid">
+
+		<div class="t-n-s-top-boxes row">
 			<div class="t-n-s-inner-box">
-				<app-disp-box [title]="localizationService.language.VOLUME" [dispValue]="stockObj.volume" [bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-4']"></app-disp-box>
-				<app-disp-box [title]="localizationService.language.TRADES" [dispValue]="stockObj.trades" [bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-1']"></app-disp-box>
-				<app-disp-box [title]="localizationService.language.HIGH" [dispValue]="stockObj.highPrice" [bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-2']"></app-disp-box>
-				<app-disp-box [title]="localizationService.language.LOW" [dispValue]="stockObj.lowPrice" [bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-3']"></app-disp-box>
-				
+				<app-disp-box [title]="localizationService.language.VOLUME" [dispValue]="stockObj.volume"
+											[bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-4']"></app-disp-box>
+				<app-disp-box [title]="localizationService.language.TRADES" [dispValue]="stockObj.trades"
+											[bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-1']"></app-disp-box>
+				<app-disp-box [title]="localizationService.language.HIGH" [dispValue]="stockObj.highPrice"
+											[bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-2']"></app-disp-box>
+				<app-disp-box [title]="localizationService.language.LOW" [dispValue]="stockObj.lowPrice"
+											[bgClass]="['t-n-s-box-common', 'col-md-12', 'col-lg-12', 'col-sm-12', 'col-xs-12', 't-n-s-box-3']"></app-disp-box>
 			</div>
 		</div>
 
-		<div class="t-n-s-table">
-			<table class="table table-striped">
-				<thead>
+		<div class="t-n-s-main-table-wrapper">
+			<div class="t-n-s-table">
+				<table class="table table-striped">
+					<thead>
 					<tr>
 						<th>{{localizationService.language.TIME}}</th>
 						<th>{{localizationService.language.PRICE}}</th>
@@ -24,8 +29,8 @@
 						<th>{{localizationService.language.TICK}}</th>
 						<th>{{localizationService.language.SIDE}}</th>
 					</tr>
-				</thead>
-				<tbody>
+					</thead>
+					<tbody>
 					<tr *ngFor="let row of timeAndSalesDataArray">
 						<td>{{row.displayTime}}</td>
 						<td>{{row.lastTradePrice}}</td>
@@ -36,9 +41,10 @@
 						<td>{{row.turnOver}}</td>
 						<td><span [ngClass]="row.direction"></span></td>
 						<td><span [ngClass]="row.typeClass">{{row.typeString}}</span></td>
-						<tr>
-				</tbody>
-			</table>
+					<tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
