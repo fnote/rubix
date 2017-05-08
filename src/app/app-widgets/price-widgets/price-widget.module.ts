@@ -1,4 +1,4 @@
-import { C3ChartComponent } from '../widget-util/sub-components/c3-chart/c3-chart.component';
+import { C3ChartComponent } from '../widget-util/sub-components/depth-bar-chart/depth-bar-chart.component';
 import { ChartComponent } from './chart/chart.component';
 import { CommonModule } from '@angular/common';
 import { DetailQuoteComponent } from './detail-quote/detail-quote.component';

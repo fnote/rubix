@@ -2,8 +2,8 @@ import * as c3 from 'c3';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-	selector: 'app-c3-chart-component',
-	templateUrl: './c3-chart.component.html',
+	selector: 'app-depth-bar-chart-component',
+	templateUrl: './depth-bar-chart.component.html',
 })
 export class C3ChartComponent implements OnChanges {
 	@Input() public bidData;
@@ -39,7 +39,7 @@ export class C3ChartComponent implements OnChanges {
 
 	private drawAreaChart(): void {
 		// tslint:disable-next-line:no-magic-numbers
-		const pos = this.depthType ? 4 : 9;
+		const pos = this.depthType ? this.bidData.length - 1 : this.offerData.length - 1;
 		const areaChart = c3.generate({
 			bindto: '#c3Chart',
 			legend: {
