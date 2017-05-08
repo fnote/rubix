@@ -32,7 +32,7 @@
 						{
 							"path": "time-and-sales",
 							"outlet": "outlet1",
-							"args": {"exgStock": ["TDWL", "1090"]}
+							"args": {"exgStock": ["TDWL", "1010"]}
 						}
 					]
 				},
@@ -81,7 +81,7 @@
 						{
 							"path": "time-and-sales",
 							"outlet": "outlet4",
-							"args": {"exgStock": ["TDWL", "1090"]}
+							"args": {"exgStock": ["TDWL", "1010"]}
 						}
 					]
 				},

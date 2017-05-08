@@ -1193,14 +1193,12 @@ float: right;
 }
 
 .time-and-sales .t-n-s-box-common div:nth-child(1) {
-	width: 100%;
 	float: left;
 	display: inline-block;
 	text-align: left;
 }
 
 .time-and-sales .t-n-s-box-common div:nth-child(2) {
-	width: 100%;
 	float: left;
 	display: inline-block;
 	font-size: 35px;
@@ -1259,6 +1257,37 @@ float: right;
 .time-and-sales .buy_Green{
 	color: #4dbd73;
 	font-weight: 400;
+}
+
+//tabs
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+//mobiles
+@media (max-width: 580px) {
+	.time-and-sales .t-n-s-box-common div:nth-child(1) {
+		text-align: center;
+		padding: 7px 0;
+	}
+
+	.time-and-sales .t-n-s-box-common div:nth-child(2) {
+		font-size: 15px;
+		text-align: center;
+	}
+
+	.t-n-s-main-table-wrapper{
+		overflow: overlay;
+	}
+
+	.t-n-s-table{
+		width: 620px;
+		text-align: center;
+	}
+
+	.time-and-sales .table thead tr th {
+		text-align: center;
+	}
 }
 
 
