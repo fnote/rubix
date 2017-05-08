@@ -112,7 +112,7 @@ export class DepthDataStore extends BaseDataStore {
 
 			depObj = updateArray[id];
 			depObj.setValues(depObject);
-			updateQtyArray[id] = depObject.depthQty;
+			updateQtyArray[id] = parseFloat(depObject.depthQty);
 		}
 	}
 
@@ -178,10 +178,11 @@ export class DepthDataStore extends BaseDataStore {
 					row.depthValue = '--';
 					row.depthQty = '0';
 					row.depthSplit = '--';
-					bidQtyArray[i] = '';
+					bidQtyArray[i] = 0;
 				}
 			}
 		}
+
 		if (params.offerStatus) {
 			const offerArray = params.depthObj.offerDisplayPoints;
 			const offerQtyArray = params.depthObj.offerQtyArray;
@@ -192,7 +193,7 @@ export class DepthDataStore extends BaseDataStore {
 					row.depthValue = '--';
 					row.depthQty = '0';
 					row.depthSplit = '--';
-					offerQtyArray[i] = '';
+					offerQtyArray[i] = 0;
 				}
 			}
 		}

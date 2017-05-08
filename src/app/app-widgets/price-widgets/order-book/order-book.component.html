@@ -16,11 +16,11 @@
 
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<app-c3-chart-component></app-c3-chart-component>
+				<app-c3-chart-component [bidData]="depthObj.bidQtyArray" [offerData]="depthObj.offerQtyArray" [totalBid]="depthObj.displayTotalBidQty" [totalOffer]="depthObj.displayTotalOfferQty" [depthType]= "isPriceSelected"></app-c3-chart-component>
 			</div>
 			<div class="col-xs-12 col-sm-4 text-center">
 				<span>{{localizationService.language.TOTAL_OFFER_QTY}}</span>
-				<span class="fa-2x">{{depthObj.displayTotalBidQty}}</span>
+				<span class="fa-2x">{{depthObj.displayTotalOfferQty}}</span>
 
 			</div>
 		</div>

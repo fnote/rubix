@@ -75,8 +75,8 @@ export class DepthDisplayEntity extends BaseEntity {
 	private commonHelperService: CommonHelperService;
 	private _bidDisplayPoints: Array<DepthEntity>;
 	private _offerDisplayPoints: Array<DepthEntity>;
-	private _bidQtyArray: Array<string>;
-	private _offerQtyArray: Array<string>;
+	private _bidQtyArray: Array<number>;
+	private _offerQtyArray: Array<number>;
 	private _totalBidQty: [string, string] = [
 		userSettings.marketData.defaultStringInitializer,
 		userSettings.marketData.defaultStringInitializer,
@@ -134,19 +134,19 @@ export class DepthDisplayEntity extends BaseEntity {
 		this._subscriptionCount = value;
 	}
 
-	public get bidQtyArray(): Array<string> {
+	public get bidQtyArray(): Array<number> {
 		return this._bidQtyArray;
 	}
 
-	public set bidQtyArray(value: Array<string>) {
+	public set bidQtyArray(value: Array<number>) {
 		this._bidQtyArray = value;
 	}
 
-	public get offerQtyArray(): Array<string> {
+	public get offerQtyArray(): Array<number> {
 		return this._offerQtyArray;
 	}
 
-	public set offerQtyArray(value: Array<string>) {
+	public set offerQtyArray(value: Array<number>) {
 		this._offerQtyArray = value;
 	}
 

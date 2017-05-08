@@ -1,11 +1,11 @@
-import { Component, Input, OnChanges, OnInit, ReflectiveInjector, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, ReflectiveInjector, SimpleChanges } from '@angular/core';
 import { CommonHelperService } from '../../../../app-utils/helper/common-helper.service';
 
 @Component({
 	selector: 'app-range-slider',
 	templateUrl: './range-slider.component.html',
 })
-export class RangeSliderComponent implements OnInit, OnChanges {
+export class RangeSliderComponent implements OnChanges {
 	@Input() public title: string;
 	@Input() public lowVal: number;
 	@Input() public highVal: number;
@@ -18,10 +18,6 @@ export class RangeSliderComponent implements OnInit, OnChanges {
 	constructor() {
 		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
 		this.commonHelperService = injector.get(CommonHelperService);
-	}
-
-	public ngOnInit(): void {
-		this.calculatePercentage();
 	}
 
 	public ngOnChanges(changes: SimpleChanges): void {
