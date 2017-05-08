@@ -60,9 +60,6 @@ export class C3ChartComponent implements OnChanges {
 				x: { show: false },
 				y: { show: false },
 			},
-			point: {
-				show: false,
-			},
 		});
 	}
 }
