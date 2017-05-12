@@ -38,7 +38,6 @@ export class C3ChartComponent implements OnChanges {
 	}
 
 	private drawAreaChart(): void {
-		// tslint:disable-next-line:no-magic-numbers
 		const pos = this.depthType ? this.bidData.length - 1 : this.offerData.length - 1;
 		const areaChart = c3.generate({
 			bindto: '#c3Chart',
