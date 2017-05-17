@@ -8,7 +8,7 @@ import { ReflectiveInjector } from '@angular/core';
 })
 export class BaseWidgetComponent implements OnInit, OnDestroy {
 
-	protected queryParameters: {};
+	private queryParameters: {};
 	private route;
 	private _exgStock: [string, string];
 
@@ -48,5 +48,13 @@ export class BaseWidgetComponent implements OnInit, OnDestroy {
 
 	public set exgStock(value: [string, string]) {
 		this._exgStock = value;
+	}
+
+	public getQueryParam(key: string): string {
+		if (this.queryParameters[key]) {
+			return this.queryParameters[key];
+		}
+
+		return '';
 	}
 }

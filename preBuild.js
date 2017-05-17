@@ -10,6 +10,9 @@ var routesString = 'export const routes: Routes = [\n';
 var getComponent = function (id) {
 	var component;
 	switch (id) {
+		case 'login':
+			component = 'LoginComponent'
+			break;
 		case 'order-ticket':
 			component = 'OrderTicketComponent';
 			break;
@@ -85,14 +88,27 @@ var createRoute = function (profile, tabs) {
 		shortTabString = shortTabString + '\t'
 	}
 	var path = profile.path;
-	var route = shortTabString + "{ path: '" + path + "', component: " + getComponent(path);
-	if (profile.outlet) {
-		route = route + ", outlet: '" + profile.outlet + "'"
+	var route = shortTabString;
+	
+	if (path) {
+		route += "{ path: '" + path + "', component: " + getComponent(path);
+	} else {
+		route += "{ path: '', pathMatch: 'full', redirectTo: '" + profile.redirectTo + "'";
 	}
-	if(profile.args){
-		route = route + ", data: " + getDataString(profile.args);
+	
+	if (profile.needsAuthentication) {
+		route += ", canActivate: [AuthGuardService]"
+	}
+
+	if (profile.outlet) {
+		route += ", outlet: '" + profile.outlet + "'"
+	}
+
+	if(profile.args) {
+		route += ", data: " + getDataString(profile.args);
 		route = route.slice(0, route.length-2);
 	}
+
 	routesString = routesString + route + ',';
 
 	if (profile.model) {
@@ -100,27 +116,30 @@ var createRoute = function (profile, tabs) {
 		for (var i = 0; i < profile.model.length; i++) {
 			if (profile.model[i].path) {
 				createRoute(profile.model[i], tabs + 2);
-			}
-			else {
+			} else {
 				var model = profile.model[i].model;
 				for (var j = 0; j < model.length; j++) {
 					createRoute(model[j], tabs + 2);
 				}
 			}
 		}
-		routesString = routesString + tabString + '],\n' + shortTabString;
+
+		routesString += tabString + '],\n' + shortTabString;
 	}
 
 	if (routesString.endsWith(',')) {
 		routesString = routesString.slice(0, -1);
-		routesString = routesString + ' ';
+		routesString += ' ';
 	}
 
 	routesString = routesString + '},\n';
 }
 
-createRoute(profile, 1);
-routesString = routesString + '];\n';
+for (var i = 0; i < profile.routes.length; i++) {
+	createRoute(profile.routes[i], 1);
+}
+
+routesString += '];\n';
 
 var imports = fs.readFileSync('src/app/app-routing/app-routes.ts', "utf8").split('// endOfImports //')[0];
 var out = fs.createWriteStream('src/app/app-routing/app-routes.ts', { encoding: "utf8" });

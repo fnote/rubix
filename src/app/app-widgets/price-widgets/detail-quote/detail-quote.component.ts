@@ -18,22 +18,16 @@ export class DetailQuoteComponent extends BaseWidgetComponent {
 		private stockDataStore: StockDataStore, injector: Injector,
 	) {
 		super(injector);
-		this.stockObj = this.stockDataStore.getOrAddStock(this.exgStock);
-
-		// Temp ?? Amila - What is this?
-		this.updatePriceResponse();
-	}
-
-	private updatePriceResponse(): void {
-		this.priceService.getPriceResponseStream().subscribe(response => {
-			this.response.push(response);
-			if (response && response[0] && response[0].MT === '-1') {
-				this.session = response[0].SESSION;
-			}
-		});
 	}
 
 	public onInit(): void {
+		const paramSymbol = this.getQueryParam('s');
+		const paramExg = this.getQueryParam('e');
+		if (paramSymbol && paramExg) {
+			this.exgStock = [paramExg.toUpperCase(), paramSymbol.toUpperCase()];
+		}
+
+		this.stockObj = this.stockDataStore.getOrAddStock(this.exgStock);
 		this.priceService.requestSymbolMeta(this.exgStock);
 		this.priceService.addSymbolRequest(this.exgStock);
 	}

@@ -41,9 +41,9 @@ export class WidgetLoaderService {
 
 	public loadDefaultTab(): void {
 		this.getTabs().then(layoutObj => {
-			const sideBar = layoutObj.model[0].model[0];
-			const staticUrl = '/' + layoutObj.path + '/(' + sideBar.outlet + ':' + sideBar.path;
-			this.router.navigateByUrl(staticUrl + this.getUrlforTab(layoutObj.model[1].model[0]) + ')');
+			const sideBar = layoutObj.routes[0].model[0].model[0];
+			const staticUrl = '/' + layoutObj.routes[0].path + '/(' + sideBar.outlet + ':' + sideBar.path;
+			this.router.navigateByUrl(staticUrl + this.getUrlforTab(layoutObj.routes[0].model[1].model[0]) + ')');
 		});
 
 	}

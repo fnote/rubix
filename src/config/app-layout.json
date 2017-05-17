@@ -1,119 +1,194 @@
 {
-	"path": "primary-layout-one",
-	"model": [
+	"routes": [
 		{
+			"path": "primary-layout-one",
+			"needsAuthentication": "true",
 			"model": [
 				{
-					"title": "Side Bar",
-					"path": "side-bar",
-					"outlet": "outlet1"
+					"model": [
+						{
+							"title": "Side Bar",
+							"path": "side-bar",
+							"outlet": "outlet1"
+						}
+					]
+				},
+				{
+					"model": [
+						{
+							"title": "Detail Quote",
+							"path": "secondary-layout-two",
+							"outlet": "outlet2",
+							"model": [
+								{
+									"path": "detail-quote",
+									"outlet": "outlet1",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
+								}
+							]
+						},
+						{
+							"title": "Time and Sales",
+							"path": "secondary-layout-two",
+							"outlet": "outlet2",
+							"model": [
+								{
+									"path": "time-and-sales",
+									"outlet": "outlet1",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1010"
+										]
+									}
+								}
+							]
+						},
+						{
+							"title": "Order Book",
+							"path": "secondary-layout-two",
+							"outlet": "outlet2",
+							"model": [
+								{
+									"path": "order-book",
+									"outlet": "outlet1",
+									"args": {
+										"exgStock": [
+											"DFM",
+											"GFH"
+										]
+									}
+								}
+							]
+						},
+						{
+							"title": "Chart",
+							"path": "secondary-layout-two",
+							"outlet": "outlet2",
+							"model": [
+								{
+									"path": "chart",
+									"outlet": "outlet1"
+								}
+							]
+						},
+						{
+							"title": "Summary",
+							"path": "secondary-layout-one",
+							"outlet": "outlet2",
+							"model": [
+								{
+									"path": "detail-quote",
+									"outlet": "outlet1",
+									"args": {
+										"exgStock": [
+											"ADSM",
+											"ALDAR"
+										]
+									}
+								},
+								{
+									"path": "detail-quote",
+									"outlet": "outlet2",
+									"args": {
+										"exgStock": [
+											"PFX",
+											"EURUSD"
+										]
+									}
+								},
+								{
+									"path": "order-book",
+									"outlet": "outlet3",
+									"args": {
+										"exgStock": [
+											"DFM",
+											"GFH"
+										]
+									}
+								},
+								{
+									"path": "time-and-sales",
+									"outlet": "outlet4",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1010"
+										]
+									}
+								}
+							]
+						},
+						{
+							"title": "Sample Layout",
+							"path": "secondary-layout-three",
+							"outlet": "outlet2",
+							"model": [
+								{
+									"path": "chart",
+									"outlet": "outlet1"
+								},
+								{
+									"path": "chart",
+									"outlet": "outlet2"
+								},
+								{
+									"path": "chart",
+									"outlet": "outlet3"
+								},
+								{
+									"path": "chart",
+									"outlet": "outlet4"
+								},
+								{
+									"path": "chart",
+									"outlet": "outlet5"
+								}
+							]
+						}
+					]
 				}
 			]
 		},
 		{
-			"model": [
-				{
-					"title": "Detail Quote",
-					"path": "secondary-layout-two",
-					"outlet": "outlet2",
-					"model": [
-						{
-							"path": "detail-quote",
-							"outlet": "outlet1",
-							"args": {"exgStock": ["TDWL", "1090"]}
-						}
-					]
-				},
-				{
-					"title": "Time and Sales",
-					"path": "secondary-layout-two",
-					"outlet": "outlet2",
-					"model": [
-						{
-							"path": "time-and-sales",
-							"outlet": "outlet1",
-							"args": {"exgStock": ["TDWL", "1010"]}
-						}
-					]
-				},
-				{
-					"title": "Order Book",
-					"path": "secondary-layout-two",
-					"outlet": "outlet2",
-					"model": [
-						{
-							"path": "order-book",
-							"outlet": "outlet1",
-							"args": {"exgStock": ["DFM", "GFH"]}
-						}
-					]
-				},
-				{
-					"title": "Chart",
-					"path": "secondary-layout-two",
-					"outlet": "outlet2",
-					"model": [
-						{
-							"path": "chart",
-							"outlet": "outlet1"
-						}
-					]
-				},
-				{
-					"title": "Summary",
-					"path": "secondary-layout-one",
-					"outlet": "outlet2",
-					"model": [
-						{
-							"path": "detail-quote",
-							"outlet": "outlet1",
-							"args": {"exgStock": ["ADSM", "ALDAR"]}
-						},
-						{
-							"path": "detail-quote",
-							"outlet": "outlet2",
-							"args": {"exgStock": ["PFX", "EURUSD"]}
-						},
-						{
-							"path": "order-book",
-							"outlet": "outlet3",
-							"args": {"exgStock": ["DFM", "GFH"]}
-						},
-						{
-							"path": "time-and-sales",
-							"outlet": "outlet4",
-							"args": {"exgStock": ["TDWL", "1010"]}
-						}
-					]
-				},
-				{
-					"title": "Sample Layout",
-					"path": "secondary-layout-three",
-					"outlet": "outlet2",
-					"model": [
-						{
-							"path": "chart",
-							"outlet": "outlet1"
-						},
-						{
-							"path": "chart",
-							"outlet": "outlet2"
-						},
-						{
-							"path": "chart",
-							"outlet": "outlet3"
-						},
-						{
-							"path": "chart",
-							"outlet": "outlet4"
-						},
-						{
-							"path": "chart",
-							"outlet": "outlet5"
-						}
-					]
-				}
-			]
+			"path": "login"
+		},
+		{
+			"redirectTo": "login"
+		},
+		{
+			"path": "detail-quote",
+			"needsAuthentication": "true", "args": {
+				"exgStock": [
+					"PFX",
+					"EURUSD"
+				]
+			}
+		},
+		{
+			"path": "time-and-sales",
+			"needsAuthentication": "true",
+			"args": {
+				"exgStock": [
+					"TDWL",
+					"1010"
+				]
+			}
+		},
+		{
+			"path": "order-book",
+			"needsAuthentication": "true",
+			"args": {
+				"exgStock": [
+					"TDWL",
+					"1010"
+				]
+			}
 		}
 	]
 }
