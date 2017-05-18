@@ -19,4 +19,5 @@ export enum PriceRequestTypes {
 	OHLCFullMarket,
 	SymbolMeta = 46,
 	TopStocks = 50,
+	MarketMeta = 80,
 }

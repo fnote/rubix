@@ -7,6 +7,8 @@ export class PriceRequest {
 	private _lan: string = null;
 	private _tkn: number = null;
 	private _param: [string, string][];
+	private _seg: string[];
+	private _exg: string[];
 
 	public get mt(): PriceRequestTypes  {
 		return this._mt;
@@ -38,6 +40,22 @@ export class PriceRequest {
 
 	public set tkn(value: number) {
 		this._tkn = value;
+	}
+
+	public get seg(): string[] {
+		return this._seg;
+	}
+
+	public set seg(value: string[]) {
+		this._seg = value;
+	}
+
+	public get exg(): string[] {
+		return this._exg;
+	}
+
+	public set exg(value: string[]) {
+		this._exg = value;
 	}
 
 	public addParam(exg: string, sym?: string): void {
@@ -82,8 +100,20 @@ export class PriceRequest {
 
 		if (this.lan) {
 			arrBuild.push('"LAN":');
-			arrBuild.push(this.lan);
+			arrBuild.push(String(this.lan));
 			arrBuild.push(',');
+		}
+
+		if (this.seg) {
+			arrBuild.push('"SEG":["');
+			arrBuild.push(this.seg.join('","'));
+			arrBuild.push('"],');
+		}
+
+		if (this.exg) {
+			arrBuild.push('"EXG":["');
+			arrBuild.push(this.exg.join('","'));
+			arrBuild.push('"],');
 		}
 
 		const tmp = this.getParam();

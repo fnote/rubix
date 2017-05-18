@@ -1,5 +1,6 @@
 import { DepthDataStore } from '../../data-stores/depth-data-store';
 import { ExchangeDataStore } from '../../data-stores/exchange-data-store';
+import { GmsMapDataStore } from '../../data-stores/gms-map-data-store';
 import { Injectable } from '@angular/core';
 import { PriceRequestTypes } from '../../../../app-constants/enums/price-request-types.enum';
 import { PriceResponse } from '../price-response';
@@ -18,7 +19,7 @@ export class PriceStreamingResponseHandler {
 
 	constructor(private streamRouteService: StreamRouteService, private depthDataStore: DepthDataStore,
 		private timeAndSalesDataStore: TimeAndSalesDataStore, private stockDataStore: StockDataStore,
-		private exchangeDataStore: ExchangeDataStore) {
+		private exchangeDataStore: ExchangeDataStore, private gmsMapDataStore: GmsMapDataStore) {
 		this.priceResponseStream$ = new Subject();
 		this.metaAuthResponseStream$ = new Subject();
 		this.priceAuthResponseStream$ = new Subject();
@@ -63,6 +64,9 @@ export class PriceStreamingResponseHandler {
 			case PriceRequestTypes.MarketDepthByPrice:
 			case PriceRequestTypes.MarketDepthByOrder:
 				this.depthDataStore.updateDepthPriceModel(response);
+				break;
+			case PriceRequestTypes.MarketMeta:
+				this.gmsMapDataStore.updateMapDataModel(response);
 				break;
 			default:
 				// code here

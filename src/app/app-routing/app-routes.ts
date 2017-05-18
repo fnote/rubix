@@ -11,17 +11,18 @@ import { SecondaryLayoutThreeComponent } from '../app-layouts/secondary-layout-t
 import { SecondaryLayoutTwoComponent } from '../app-layouts/secondary-layout-two/secondary-layout-two.component';
 import { SideBarComponent } from '../app-widgets/common-widgets/side-bar/side-bar.component';
 import { TimeAndSalesComponent } from '../app-widgets/price-widgets/time-and-sales/time-and-sales.component';
+import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/map-selector.component';
+// { path: 'map', component: MapSelectorComponent },
 
 // endOfImports //
 export const routes: Routes = [
-	{ path: 'primary-layout-one',  canActivate: [AuthGuardService],  component: PrimaryLayoutOneComponent,
+	{ path: 'map', component: MapSelectorComponent },
+	{ path: 'primary-layout-one', component: PrimaryLayoutOneComponent,
 		children: [
 			{ path: 'side-bar', component: SideBarComponent, outlet: 'outlet1' },
 			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
 				children: [
-					// { path: 'detail-quote', component: DetailQuoteComponent
-					// , outlet: 'outlet1', data: { exgStock: ['PFX', 'EURUSD'] } },
-					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['DFM', 'EMAAR'] } },
+					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1090'] } },
 				],
 			},
 			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
@@ -36,15 +37,15 @@ export const routes: Routes = [
 			},
 			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
 				children: [
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet1'},
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet1' },
 				],
 			},
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
 				children: [
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['ADSM', 'ALDAR'] } },
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2', data: { exgStock: ['PFX', 'EURUSD'] } },
-					{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet3', data: { exgStock: ['LKCSE', 'SAMP.N0000`N'] } },
-					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
+					{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet3', data: { exgStock: ['DFM', 'GFH'] } },
+					{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1010'] } },
 				],
 			},
 			{ path: 'secondary-layout-three', component: SecondaryLayoutThreeComponent, outlet: 'outlet2',
@@ -75,4 +76,3 @@ export const routes: Routes = [
 		],
 	},
 ];
-// http://localhost:4001/secondary-layout-one/(outlet1:detail-quote//outlet2:detail-quote//outlet3:order-book//outlet4:time-and-sales)

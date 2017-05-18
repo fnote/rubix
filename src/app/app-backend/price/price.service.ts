@@ -322,6 +322,33 @@ export class PriceService {
 		}
 	}
 
+	public addGMSMapSymbolList (exgCodes: string[]): void {
+		let isValidItemsAvailable = false;
+		const req = new PriceRequest();
+
+		// if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketMeta, exgCodes)) {
+		if(true){
+			req.mt = PriceRequestTypes.MarketMeta;
+			req.exg = exgCodes;
+			req.seg = exgCodes;
+			req.tkn = 1;
+
+
+
+
+			req.lan = this.localizationService.getshortCode();
+
+			isValidItemsAvailable = true;
+		}
+		if (isValidItemsAvailable) {
+			const request = {
+				channel : Channels.PriceMeta,
+				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
 	public removeSymbolListRequest (exgSym: [string, string][]): void {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
