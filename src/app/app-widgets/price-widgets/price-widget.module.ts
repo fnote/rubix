@@ -9,6 +9,8 @@ import { OrderBookComponent } from './order-book/order-book.component';
 import { RangeSliderComponent } from '../widget-util/sub-components/range-slider/range-slider.component';
 import { TimeAndSalesComponent } from './time-and-sales/time-and-sales.component';
 import { UtilsModule } from '../../app-utils/utils.module';
+import { NewsAnnouncementsCombinedListComponent } from './news-announcements-combined-list/news-announcements-combined-list.component';
+import { MiniChartComponent } from './mini-chart/mini-chart.component';
 
 @NgModule({
 	imports: [CommonModule, FormsModule, UtilsModule],
@@ -20,7 +22,8 @@ import { UtilsModule } from '../../app-utils/utils.module';
 		RangeSliderComponent,
 		DispBoxComponent,
 		C3ChartComponent,
-
+		NewsAnnouncementsCombinedListComponent,
+		MiniChartComponent,
 	],
 })
 export class PriceWidgetModule { }

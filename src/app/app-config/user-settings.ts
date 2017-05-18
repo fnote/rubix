@@ -21,7 +21,6 @@ export const userSettings = {
 			applyThousandSeperator: true,
 			thousandSeperator: ',',
 		},
-
 	},
 
 	tradeData: {
@@ -43,5 +42,4 @@ export const userSettings = {
 		defaultTimeFormat: 'HH:MM',
 		defaultDateTimeFormat: 'YYYY/MM/DD HH:MM',
 	},
-
 };
