@@ -1,6 +1,8 @@
 import { AuthGuardService } from '../app-widgets/widget-util/auth-guard-service';
 import { ChartComponent } from '../app-widgets/price-widgets/chart/chart.component';
 import { DetailQuoteComponent } from '../app-widgets/price-widgets/detail-quote/detail-quote.component';
+import { FdDetailQuoteComponent } from '../app-widgets/fd-page-widgets/fd-detail-quote/fd-detail-quote.component';
+import { FdLayoutComponent } from '../app-layouts/fd-layout/fd-layout.component';
 import { LoginComponent } from '../app-widgets/common-widgets/login-widget/login.component';
 import { OrderBookComponent } from '../app-widgets/price-widgets/order-book/order-book.component';
 import { PrimaryLayoutOneComponent } from '../app-layouts/primary-layout-one/primary-layout-one.component';
@@ -57,22 +59,33 @@ export const routes: Routes = [
 					{ path: 'chart', component: ChartComponent, outlet: 'outlet5' },
 				],
 			},
+			{ path: 'fd-layout', component: FdLayoutComponent, outlet: 'outlet2',
+				children: [
+					{ path: 'fd-detail-quote', component: FdDetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1010'] } },
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet2' },
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet3' },
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet4' },
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet5' },
+				],
+			},
 		],
 	},
-	{ path: '', redirectTo: 'login', pathMatch: 'full' },
-	{ path: 'chart', canActivate: [AuthGuardService], component: ChartComponent },
-	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent, data: { exgStock: ['TDWL', '1010'] } },
-	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['TDWL', '1010'] } },
-	{ path: 'order-book', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['DFM', 'GFH'] } },
-	{ path: 'test', component: RubixTestPageComponent },
 	{ path: 'login', component: LoginComponent },
-
-	{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent,
+	{ path: '', pathMatch: 'full', redirectTo: 'login' },
+	{ path: 'detail-quote', component: DetailQuoteComponent, canActivate: [AuthGuardService], data: { exgStock: ['PFX', 'EURUSD'] } },
+	{ path: 'time-and-sales', component: TimeAndSalesComponent, canActivate: [AuthGuardService], data: { exgStock: ['TDWL', '1010'] } },
+	{ path: 'order-book', component: OrderBookComponent, canActivate: [AuthGuardService], data: { exgStock: ['TDWL', '1010'] } },
+	{ path: 'fd-layout', component: FdLayoutComponent, canActivate: [AuthGuardService],
 		children: [
-			{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['ADSM', 'ALDAR'] } },
-			{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2', data: { exgStock: ['PFX', 'EURUSD'] } },
-			{ path: 'order-book', component: OrderBookComponent, outlet: 'outlet3', data: { exgStock: ['TDWL', '1090'] } },
-			{ path: 'time-and-sales', component: TimeAndSalesComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
+			{ path: 'fd-detail-quote', component: FdDetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1010'] } },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet2' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet3' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet4' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet5' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet6' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet7' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet8' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet9' },
 		],
 	},
 ];

@@ -9,6 +9,8 @@ import { ChartModule } from 'angular2-highcharts';
 import { CommonWidgetModule } from './app-widgets/common-widgets/common-widget.module';
 import { CommunicationModule } from './app-backend/communication/communication.module';
 import { ConfigService } from './app-config/config.service';
+import { FdLayoutComponent } from './app-layouts/fd-layout/fd-layout.component';
+import { FdPageWidgetModule } from './app-widgets/fd-page-widgets/fd-page-widget.module';
 import { HttpModule } from '@angular/http';
 import { NetworkService } from './app-backend/network/network.service';
 import { NgModule } from '@angular/core';
@@ -32,6 +34,7 @@ export declare let require: any;
 		SecondaryLayoutTwoComponent,
 		BaseWidgetComponent,
 		SecondaryLayoutThreeComponent,
+		FdLayoutComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -40,6 +43,7 @@ export declare let require: any;
 		CommunicationModule,
 		PriceModule,
 		PriceWidgetModule,
+		FdPageWidgetModule,
 		CommonWidgetModule,
 		UtilsModule,
 		AuthModule,

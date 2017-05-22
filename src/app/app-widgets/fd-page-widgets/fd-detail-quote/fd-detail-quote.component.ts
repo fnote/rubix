@@ -2,15 +2,15 @@ import { Component, Injector } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
-import { RangeSliderComponent } from '../../widget-util/sub-components/range-slider/range-slider.component';
 import { StockDataStore } from '../../../app-backend/price/data-stores/stock-data-store';
 import { widgetQueryParams } from '../../../app-constants/const/widget-query-params';
 
 @Component({
-	selector: 'app-detail-quote',
-	templateUrl: './detail-quote.component.html',
+	selector: 'app-fd-detail-quote',
+	templateUrl: './fd-detail-quote.component.html',
+	styleUrls: ['./fd-detail-quote.component.scss'],
 })
-export class DetailQuoteComponent extends BaseWidgetComponent {
+export class FdDetailQuoteComponent extends BaseWidgetComponent {
 	public stockObj;
 
 	constructor(private priceService: PriceService, public localizationService: LocalizationService,

@@ -53,9 +53,10 @@ export class ConfigService {
 		return new Promise((resolve => {
 			this.getStringConfigVal('connectionConfig').then(conConfig => {
 				const connections = [
-					{ channel: Channels.Trade, url: conConfig.trade.url + '/appsocket', isSecure: false },
-					{ channel: Channels.Price, url: conConfig.price.url  + '/websocket/price', isSecure: false },
-					{ channel: Channels.PriceMeta, url: conConfig.price.url  + '/websocket/meta', isSecure: false },
+					// { channel: Channels.Trade, url: conConfig.trade.url + '/appsocket', isSecure: true },
+					{ channel: Channels.Trade, url: conConfig.trade.url + '/appsocket', isSecure: true },
+					{ channel: Channels.Price, url: conConfig.price.url  + '/websocket/price', isSecure: true },
+					{ channel: Channels.PriceMeta, url: conConfig.price.url  + '/websocket/meta', isSecure: true },
 				];
 				resolve(connections);
 			});

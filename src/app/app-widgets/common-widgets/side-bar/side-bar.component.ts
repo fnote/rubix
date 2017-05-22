@@ -29,7 +29,7 @@ export class SideBarComponent {
 		public themeService: ThemeService,
 	) {
 		widgetLoaderService.getTabs().then(layoutObj => {
-			this.tabs = layoutObj.model[1].model;
+			this.tabs = layoutObj.routes[0].model[1].model;
 		});
 
 		if (this.localizationService.activeLanguageCode === Languages.EN) {

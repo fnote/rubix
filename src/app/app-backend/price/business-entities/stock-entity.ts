@@ -14,6 +14,7 @@ export class StockEntity extends BaseEntity {
 	private _currency: string = userSettings.marketData.defaultStringInitializer;
 	private _decimalPlaces: number = userSettings.marketData.defaultDecimalPlaces;
 	private _decimalCorrectionFactor: number = userSettings.marketData.defaultDecimalPlaces;
+	private _sectorCode: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 
 	private _lastTradePrice: [string, number] = [
 		userSettings.marketData.defaultStringInitializer,
@@ -113,6 +114,14 @@ export class StockEntity extends BaseEntity {
 
 	public set decimalCorrectionFactor(value: number) {
 		this._decimalCorrectionFactor = value;
+	}
+
+	public get sectorCode(): number  {
+		return this._sectorCode;
+	}
+
+	public set sectorCode(value: number) {
+		this._sectorCode = value;
 	}
 
 	public getDispLastTradePrice(): string  {

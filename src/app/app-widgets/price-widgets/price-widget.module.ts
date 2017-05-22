@@ -14,6 +14,8 @@ import { MapSelectorComponent } from './map-selector/map-selector.component';
 
 export declare let require: any;
 
+import { NewsAnnouncementsCombinedListComponent } from './news-announcements-combined-list/news-announcements-combined-list.component';
+import { MiniChartComponent } from './mini-chart/mini-chart.component';
 
 @NgModule({
 	imports: [CommonModule, FormsModule, UtilsModule,
@@ -28,6 +30,8 @@ export declare let require: any;
 		RangeSliderComponent,
 		DispBoxComponent,
 		C3ChartComponent,
+		NewsAnnouncementsCombinedListComponent,
+		MiniChartComponent,
 		MapSelectorComponent,
 
 	],
