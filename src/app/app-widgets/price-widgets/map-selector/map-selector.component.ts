@@ -1,34 +1,56 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
-import { CountryList } from './country-list';
-import { GmsMapDataStore } from '../../../app-backend/price/data-stores/gms-map-data-store';
+import { IndexDataStore } from '../../../app-backend/price/data-stores/index-data-store';
+import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
-import { WorldMap } from './world-map';
+import { WorldMapCordinates } from './world-map-cordinates';
 
 @Component({
 	selector: 'app-map-selector',
 	templateUrl: './map-selector.component.html',
 	styleUrls: ['./map-selector.component.scss'],
 })
-export class MapSelectorComponent  extends BaseWidgetComponent {
 
+export class MapSelectorComponent extends BaseWidgetComponent {
 	private options: Object;
 	private lblSec0 = 0;
 	private lblSec1 = 0.5;
 	private lblSec2 = 1;
-	private allIndeces;
+	public allIndeces = [];
 	public selectedIndexList;
 	private title = 'All indices';
 
+	constructor(private priceService: PriceService, private indexDataStore: IndexDataStore,
+		private injector: Injector, public localizationService: LocalizationService) {
+		super(injector);
+		this.allIndeces = this.indexDataStore.getAllIndexList();
+		this.indexDataStore.indicesLodingState.subscribe(() => this.onDataLoad());
+	}
+
+	public onInit(): void {
+		const exgs = [
+			'TDWL',
+			'CASE',
+			'ISE',
+			'DFM',
+		];
+		const segs = [
+			'GMS',
+		];
+
+		this.priceService.addGMSMapSymbolList(exgs, segs);
+		this.allIndeces = this.indexDataStore.getAllIndexList();
+	}
+
 	public setIndicesForCountry(event: any): void {
 		if (event == null) {
-			this.selectedIndexList = this.gmsMapDataStore.getAllIndexList();
+			this.selectedIndexList = this.indexDataStore.getAllIndexList();
 			this.title = 'All indices';
 		} else {
 			this.selectedIndexList = [];
 			const cc = event.context.code;
 			const ind = [];
-			for (const idx of this.gmsMapDataStore.getAllIndexList()) {
+			for (const idx of this.indexDataStore.getAllIndexList()) {
 				if (idx.code === cc || cc == null) {
 					ind.push(idx);
 				}
@@ -38,25 +60,13 @@ export class MapSelectorComponent  extends BaseWidgetComponent {
 		}
 	}
 
-	public onInit(): void {
-
-		console.log("Oninit");
-		const exgs = [
-			'EXG',
-			'EXGFE',
-		];
-		this.priceService.addGMSMapSymbolList(exgs);
-        //
-	}
-
-	constructor(private priceService: PriceService, private gmsMapDataStore: GmsMapDataStore, injector: Injector) {
-		super(injector);
-		this.allIndeces = this.gmsMapDataStore.getAllIndexList();
-		this.selectedIndexList = this.gmsMapDataStore.getAllIndexList();
+	private onDataLoad(): void {
+		this.selectedIndexList = this.indexDataStore.getAllIndexList();
 		this.loadMap();
 	}
 
 	private loadMap(): void {
+		this.allIndeces = this.indexDataStore.getAllIndexList();
 		this.options = {
 			chart: {
 				reflow: true,
@@ -69,7 +79,7 @@ export class MapSelectorComponent  extends BaseWidgetComponent {
 
 			legend: {
 				title: {
-					text: 'Profit and Loss distribution',
+					text: this.localizationService.language.BEST_BID,
 				},
 
 			},
@@ -87,14 +97,14 @@ export class MapSelectorComponent  extends BaseWidgetComponent {
 				minColor: '#efecf3',
 				maxColor: '#990041',
 				labels: {
-					formatter: function (){
+					formatter: function (): string{
 						if (this.isFirst) {
 							return 'Loss';
 						} else if (this.isLast) {
 							return 'Profit';
 						}
-					}
-				}
+					},
+				},
 			},
 
 			mapNavigation: {
@@ -104,10 +114,9 @@ export class MapSelectorComponent  extends BaseWidgetComponent {
 				},
 			},
 
-
 			series: [{
 				data: this.allIndeces,
-				mapData: WorldMap,
+				mapData: WorldMapCordinates,
 				joinBy: ['iso-a2', 'code'],
 
 				allowPointSelect: true,
@@ -130,13 +139,11 @@ export class MapSelectorComponent  extends BaseWidgetComponent {
 	}
 
 	private onChartSelection (event: any): void {
-		// if (event.context) {
-		// 	this.setIndicesForCountry(event.context.code);
-		// }
+		// Not implemented yet
 	}
 
 	private onUnselect (event: any): void {
-		// Not implemented
+		// Not implemented yet
 	}
 
 	private onMouseOver (event: any): void {

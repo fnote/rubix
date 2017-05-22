@@ -322,24 +322,19 @@ export class PriceService {
 		}
 	}
 
-	public addGMSMapSymbolList (exgCodes: string[]): void {
+	public addGMSMapSymbolList (exgs: string[], segs: string[]): void {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
 
 		// if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketMeta, exgCodes)) {
-		if(true){
-			req.mt = PriceRequestTypes.MarketMeta;
-			req.exg = exgCodes;
-			req.seg = exgCodes;
-			req.tkn = 1;
+		req.mt = PriceRequestTypes.MarketMeta;
+		req.exg = exgs;
+		req.seg = segs;
+		req.tkn = 1;
+		req.addParam('', '');
+		req.lan = this.localizationService.getshortCode();
+		isValidItemsAvailable = true;
 
-
-
-
-			req.lan = this.localizationService.getshortCode();
-
-			isValidItemsAvailable = true;
-		}
 		if (isValidItemsAvailable) {
 			const request = {
 				channel : Channels.PriceMeta,

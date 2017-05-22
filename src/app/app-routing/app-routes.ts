@@ -18,7 +18,7 @@ import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/
 
 // endOfImports //
 export const routes: Routes = [
-	{ path: 'map', component: MapSelectorComponent },
+	{ path: 'map', canActivate: [AuthGuardService], component: MapSelectorComponent },
 	{ path: 'primary-layout-one', component: PrimaryLayoutOneComponent,
 		children: [
 			{ path: 'side-bar', component: SideBarComponent, outlet: 'outlet1' },
@@ -70,6 +70,16 @@ export const routes: Routes = [
 			},
 		],
 	},
+
+
+
+
+	{ path: '', redirectTo: 'login', pathMatch: 'full' },
+	{ path: 'chart', canActivate: [AuthGuardService], component: ChartComponent },
+	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent, data: { exgStock: ['TDWL', '1010'] } },
+	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['TDWL', '1010'] } },
+	{ path: 'order-book', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['DFM', 'GFH'] } },
+	{ path: 'test', component: RubixTestPageComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: '', pathMatch: 'full', redirectTo: 'login' },
 	{ path: 'detail-quote', component: DetailQuoteComponent, canActivate: [AuthGuardService], data: { exgStock: ['PFX', 'EURUSD'] } },

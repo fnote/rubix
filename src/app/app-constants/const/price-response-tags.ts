@@ -49,6 +49,10 @@ export const priceResponseTags = {
 	DECIMAL_PLACES: 'decimalPlaces',
 	CORRECTION_FACTOR: 'decimalCorrectionFactor',
 	DS: 'dispCode',
+	DES: 'des',
+	SDES: 'sDes',
+	CON: 'con',
+	CAT: 'cat',
 	SECTOR: 'sectorCode',
 
 	// refatcor below
