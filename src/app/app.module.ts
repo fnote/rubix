@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonWidgetModule } from './app-widgets/common-widgets/common-widget.module';
 import { CommunicationModule } from './app-backend/communication/communication.module';
 import { ConfigService } from './app-config/config.service';
+import { FdLayoutComponent } from './app-layouts/fd-layout/fd-layout.component';
 import { FdPageWidgetModule } from './app-widgets/fd-page-widgets/fd-page-widget.module';
 import { HttpModule } from '@angular/http';
 import { NetworkService } from './app-backend/network/network.service';
@@ -30,6 +31,7 @@ import { WidgetLoaderService } from './app-widgets/widget-util/widget-loader.ser
 		SecondaryLayoutTwoComponent,
 		BaseWidgetComponent,
 		SecondaryLayoutThreeComponent,
+		FdLayoutComponent,
 	],
 	imports: [
 		BrowserModule,

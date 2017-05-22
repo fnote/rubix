@@ -150,6 +150,39 @@
 									"outlet": "outlet5"
 								}
 							]
+						},
+						{
+							"title": "FD Layout",
+							"path": "fd-layout",
+							"outlet": "outlet2",
+							"model": [
+								{
+									"path": "fd-detail-quote",
+									"outlet": "outlet1",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1010"
+										]
+									}
+								},
+								{
+									"path": "chart",
+									"outlet": "outlet2"
+								},
+								{
+									"path": "chart",
+									"outlet": "outlet3"
+								},
+								{
+									"path": "chart",
+									"outlet": "outlet4"
+								},
+								{
+									"path": "chart",
+									"outlet": "outlet5"
+								}
+							]
 						}
 					]
 				}
@@ -163,7 +196,8 @@
 		},
 		{
 			"path": "detail-quote",
-			"needsAuthentication": "true", "args": {
+			"needsAuthentication": "true",
+			"args": {
 				"exgStock": [
 					"PFX",
 					"EURUSD"
@@ -189,6 +223,55 @@
 					"1010"
 				]
 			}
+		},
+		{
+			"title": "FD Layout",
+			"path": "fd-layout",
+			"needsAuthentication": "true",
+			"model": [
+				{
+					"path": "fd-detail-quote",
+					"outlet": "outlet1",
+					"args": {
+						"exgStock": [
+							"TDWL",
+							"1010"
+						]
+					}
+				},
+				{
+					"path": "chart",
+					"outlet": "outlet2"
+				},
+				{
+					"path": "chart",
+					"outlet": "outlet3"
+				},
+				{
+					"path": "chart",
+					"outlet": "outlet4"
+				},
+				{
+					"path": "chart",
+					"outlet": "outlet5"
+				},
+				{
+					"path": "chart",
+					"outlet": "outlet6"
+				},
+				{
+					"path": "chart",
+					"outlet": "outlet7"
+				},
+				{
+					"path": "chart",
+					"outlet": "outlet8"
+				},
+				{
+					"path": "chart",
+					"outlet": "outlet9"
+				}
+			]
 		}
 	]
 }

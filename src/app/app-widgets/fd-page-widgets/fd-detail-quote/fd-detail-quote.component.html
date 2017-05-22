@@ -1,3 +1,21 @@
-<p>
-  fd-detail-quote works!
-</p>
+<div>
+	{{stockObj.longDesc}}<br> {{stockObj.sectorCode}}
+	<br> {{stockObj.currency}}&nbsp;{{stockObj.getDispLastTradePrice()}}&nbsp;&nbsp;Vol:&nbsp;{{stockObj.volume}}&nbsp;&nbsp;
+	<div class="change-container right">
+		<i class="arrow left"></i>
+		<div class="change">
+			{{stockObj.change}}
+		</div>
+		<div class="change-percentage">
+			{{stockObj.perChange}}%
+		</div>
+	</div>
+	<br><br>
+	Current Open RTA
+	<br>
+	Open&nbsp;&nbsp;&nbsp;{{stockObj.openPrice}}
+	High&nbsp;&nbsp;&nbsp;{{stockObj.highPrice}}
+	<br>
+	Low&nbsp;&nbsp;&nbsp;{{stockObj.lowPrice}}
+	Close&nbsp;&nbsp;&nbsp;{{stockObj.closePrice}}
+</div>

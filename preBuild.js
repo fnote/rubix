@@ -46,6 +46,12 @@ var getComponent = function (id) {
 		case 'order-book':
 			component = 'OrderBookComponent';
 			break;
+		case 'fd-detail-quote':
+			component = 'FdDetailQuoteComponent';
+			break;
+		case 'fd-layout':
+			component = 'FdLayoutComponent';
+			break
 		default:
 			console.log('An error occurred');
 	}

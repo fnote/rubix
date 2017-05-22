@@ -11,8 +11,6 @@ import { widgetQueryParams } from '../../../app-constants/const/widget-query-par
 	templateUrl: './detail-quote.component.html',
 })
 export class DetailQuoteComponent extends BaseWidgetComponent {
-	public response: Array<any> = [] ;
-	private session = '';
 	public stockObj;
 
 	constructor(private priceService: PriceService, public localizationService: LocalizationService,

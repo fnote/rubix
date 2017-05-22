@@ -1,6 +1,8 @@
 import { AuthGuardService } from '../app-widgets/widget-util/auth-guard-service';
 import { ChartComponent } from '../app-widgets/price-widgets/chart/chart.component';
 import { DetailQuoteComponent } from '../app-widgets/price-widgets/detail-quote/detail-quote.component';
+import { FdDetailQuoteComponent } from '../app-widgets/fd-page-widgets/fd-detail-quote/fd-detail-quote.component';
+import { FdLayoutComponent } from '../app-layouts/fd-layout/fd-layout.component';
 import { LoginComponent } from '../app-widgets/common-widgets/login-widget/login.component';
 import { OrderBookComponent } from '../app-widgets/price-widgets/order-book/order-book.component';
 import { PrimaryLayoutOneComponent } from '../app-layouts/primary-layout-one/primary-layout-one.component';
@@ -54,6 +56,15 @@ export const routes: Routes = [
 					{ path: 'chart', component: ChartComponent, outlet: 'outlet5' },
 				],
 			},
+			{ path: 'fd-layout', component: FdLayoutComponent, outlet: 'outlet2',
+				children: [
+					{ path: 'fd-detail-quote', component: FdDetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1010'] } },
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet2' },
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet3' },
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet4' },
+					{ path: 'chart', component: ChartComponent, outlet: 'outlet5' },
+				],
+			},
 		],
 	},
 	{ path: 'login', component: LoginComponent },
@@ -61,4 +72,17 @@ export const routes: Routes = [
 	{ path: 'detail-quote', component: DetailQuoteComponent, canActivate: [AuthGuardService], data: { exgStock: ['PFX', 'EURUSD'] } },
 	{ path: 'time-and-sales', component: TimeAndSalesComponent, canActivate: [AuthGuardService], data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'order-book', component: OrderBookComponent, canActivate: [AuthGuardService], data: { exgStock: ['TDWL', '1010'] } },
+	{ path: 'fd-layout', component: FdLayoutComponent, canActivate: [AuthGuardService],
+		children: [
+			{ path: 'fd-detail-quote', component: FdDetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1010'] } },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet2' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet3' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet4' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet5' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet6' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet7' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet8' },
+			{ path: 'chart', component: ChartComponent, outlet: 'outlet9' },
+		],
+	},
 ];
