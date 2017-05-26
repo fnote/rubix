@@ -51,9 +51,13 @@ export const priceResponseTags = {
 	DS: 'dispCode',
 	DES: 'des',
 	SDES: 'sDes',
-	CON: 'con',
+	CON: 'contry',
 	CAT: 'cat',
 	SECTOR: 'sectorCode',
+	S: 'indexSymbolCode',
+	L: 'language',
+	SEC: 'section',
+	SYMT: 'symt',
 
 	// refatcor below
 	/*0: 'NODATA',

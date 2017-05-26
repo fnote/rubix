@@ -48,6 +48,7 @@ export declare let require: any;
 		UtilsModule,
 		AuthModule,
 		TradeModule,
+
 		ChartModule.forRoot(require('highcharts/highmaps')),
 
 	],

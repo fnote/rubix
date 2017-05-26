@@ -23,7 +23,6 @@ export class MapSelectorComponent extends BaseWidgetComponent {
 	constructor(private priceService: PriceService, private indexDataStore: IndexDataStore,
 		private injector: Injector, public localizationService: LocalizationService) {
 		super(injector);
-		this.allIndeces = this.indexDataStore.getAllIndexList();
 		this.indexDataStore.indicesLodingState.subscribe(() => this.onDataLoad());
 	}
 
@@ -37,9 +36,7 @@ export class MapSelectorComponent extends BaseWidgetComponent {
 		const segs = [
 			'GMS',
 		];
-
-		this.priceService.addGMSMapSymbolList(exgs, segs);
-		this.allIndeces = this.indexDataStore.getAllIndexList();
+		this.priceService.addIndexList(exgs, segs);
 	}
 
 	public setIndicesForCountry(event: any): void {
@@ -71,17 +68,23 @@ export class MapSelectorComponent extends BaseWidgetComponent {
 			chart: {
 				reflow: true,
 				animation: false,
+				height: 600,
 			},
 
 			title: {
-				text: 'World Markets',
+				text: '',
+				enabled: false,
+			},
+
+			tooltip: {
+				enabled: false,
 			},
 
 			legend: {
 				title: {
 					text: this.localizationService.language.BEST_BID,
 				},
-
+				enabled: false,
 			},
 
 			colorAxis: {
@@ -129,9 +132,6 @@ export class MapSelectorComponent extends BaseWidgetComponent {
 						borderColor: 'black',
 						dashStyle: 'dot',
 					},
-				},
-				tooltip: {
-					valuePrefix: '$',
 				},
 			},
 			],

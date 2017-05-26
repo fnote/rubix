@@ -322,18 +322,20 @@ export class PriceService {
 		}
 	}
 
-	public addGMSMapSymbolList (exgs: string[], segs: string[]): void {
+	public addIndexList (exgs: string[], segs: string[]): void {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
 
-		// if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketMeta, exgCodes)) {
-		req.mt = PriceRequestTypes.MarketMeta;
-		req.exg = exgs;
-		req.seg = segs;
-		req.tkn = 1;
-		req.addParam('', '');
-		req.lan = this.localizationService.getshortCode();
-		isValidItemsAvailable = true;
+		for (const exg of exgs) {
+			if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.MarketMeta, exg)) {
+				req.mt = PriceRequestTypes.MarketMeta;
+				req.exg = exgs;
+				req.seg = segs;
+				req.tkn = 1;
+				req.lan = this.localizationService.getshortCode();
+				isValidItemsAvailable = true;
+			}
+		}
 
 		if (isValidItemsAvailable) {
 			const request = {
@@ -342,6 +344,15 @@ export class PriceService {
 			};
 			this.dataService.sendToWs(request);
 		}
+	}
+
+	public addIndexListAjax (exgs: string[], segs: string[]): void {
+
+		// const str =  'http://mfg-uat-phoenix.mubashertrade.com/bl?22=MFS_UAT/';
+		// const str2 = 'TRS01-malindag-14957105241333145977&24=30&1000=1&req={';
+		// const str3 = '"MT": 80,		"TKN": 1,			"LAN": "EN",			"SEG": [			"GMS"		],			"EXG": [			"TDWL",			"CASE",			"ISE","DFM"]}';
+		// const request = str + str2 + str3;
+		// this.dataService.sendAjaxRequest(request);
 	}
 
 	public removeSymbolListRequest (exgSym: [string, string][]): void {

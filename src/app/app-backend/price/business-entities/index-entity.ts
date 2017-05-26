@@ -5,9 +5,17 @@ import { ReflectiveInjector } from '@angular/core';
 export class IndexEntity extends BaseEntity {
 	private _des: string;
 	private _sDes: string;
-	private _con: string;
+	private _contry: string;
 	private _cat: string;
+	// private _sec: string;
+	// private _dep: string;
+	// private _symt: string;
+	// private _isg: string;
+	// private _pri: string;
+	// private _clf: string;
+
 	private _symbolList: string[];
+	private _indexSymbolCode: string;
 	private commonHelperService: CommonHelperService;
 
 	constructor(values: Object = {}) {
@@ -35,12 +43,12 @@ export class IndexEntity extends BaseEntity {
 		this._sDes = value;
 	}
 
-	public get con(): string {
-		return this._con;
+	public get contry(): string {
+		return this._contry;
 	}
 
-	public set con(value: string) {
-		this._con = value;
+	public set contry(value: string) {
+		this._contry = value;
 	}
 
 	public get cat(): string {
@@ -57,5 +65,13 @@ export class IndexEntity extends BaseEntity {
 
 	public set symbolList(value: string[]) {
 		this._symbolList = value;
+	}
+
+	public get indexSymbolCode(): string {
+		return this._indexSymbolCode;
+	}
+
+	public set indexSymbolCode(value: string) {
+		this._indexSymbolCode = value;
 	}
 }

@@ -86,12 +86,6 @@ export class PriceRequest {
 			arrBuild.push(',');
 		}
 
-		if (this.mt) {
-			arrBuild.push('"MT":');
-			arrBuild.push(String(this.mt));
-			arrBuild.push(',');
-		}
-
 		if (this.tkn) {
 			arrBuild.push('"TKN":');
 			arrBuild.push(String(this.tkn));
@@ -120,11 +114,16 @@ export class PriceRequest {
 		if (tmp.length > 0) {
 			arrBuild.push('"PRM":["');
 			arrBuild.push(tmp.join('","'));
-			arrBuild.push('"]');
+			arrBuild.push('"],');
+		}
+
+		if (this.mt) {
+			arrBuild.push('"MT":');
+			arrBuild.push(String(this.mt));
+			// arrBuild.push(',');
 		}
 
 		arrBuild.push('}');
-
 		return arrBuild.join('').trim();
 	}
 
