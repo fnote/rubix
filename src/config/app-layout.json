@@ -73,7 +73,13 @@
 							"model": [
 								{
 									"path": "chart",
-									"outlet": "outlet1"
+									"outlet": "outlet1",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
 								}
 							]
 						},
@@ -131,23 +137,53 @@
 							"model": [
 								{
 									"path": "chart",
-									"outlet": "outlet1"
+									"outlet": "outlet1",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
 								},
 								{
 									"path": "chart",
-									"outlet": "outlet2"
+									"outlet": "outlet2",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
 								},
 								{
 									"path": "chart",
-									"outlet": "outlet3"
+									"outlet": "outlet3",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
 								},
 								{
 									"path": "chart",
-									"outlet": "outlet4"
+									"outlet": "outlet4",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
 								},
 								{
 									"path": "chart",
-									"outlet": "outlet5"
+									"outlet": "outlet5",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
 								}
 							]
 						},
@@ -168,19 +204,43 @@
 								},
 								{
 									"path": "chart",
-									"outlet": "outlet2"
+									"outlet": "outlet2",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
 								},
 								{
 									"path": "chart",
-									"outlet": "outlet3"
+									"outlet": "outlet3",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
 								},
 								{
 									"path": "chart",
-									"outlet": "outlet4"
+									"outlet": "outlet4",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
 								},
 								{
 									"path": "chart",
-									"outlet": "outlet5"
+									"outlet": "outlet5",
+									"args": {
+										"exgStock": [
+											"TDWL",
+											"1090"
+										]
+									}
 								}
 							]
 						}
@@ -241,35 +301,83 @@
 				},
 				{
 					"path": "chart",
-					"outlet": "outlet2"
+					"outlet": "outlet2",
+					"args": {
+						"exgStock": [
+							"TDWL",
+							"1090"
+						]
+					}
 				},
 				{
 					"path": "chart",
-					"outlet": "outlet3"
+					"outlet": "outlet3",
+					"args": {
+						"exgStock": [
+							"TDWL",
+							"1090"
+						]
+					}
 				},
 				{
 					"path": "chart",
-					"outlet": "outlet4"
+					"outlet": "outlet4",
+					"args": {
+						"exgStock": [
+							"TDWL",
+							"1090"
+						]
+					}
 				},
 				{
 					"path": "chart",
-					"outlet": "outlet5"
+					"outlet": "outlet5",
+					"args": {
+						"exgStock": [
+							"TDWL",
+							"1090"
+						]
+					}
 				},
 				{
 					"path": "chart",
-					"outlet": "outlet6"
+					"outlet": "outlet6",
+					"args": {
+						"exgStock": [
+							"TDWL",
+							"1090"
+						]
+					}
 				},
 				{
 					"path": "chart",
-					"outlet": "outlet7"
+					"outlet": "outlet7",
+					"args": {
+						"exgStock": [
+							"TDWL",
+							"1090"
+						]
+					}
 				},
 				{
 					"path": "chart",
-					"outlet": "outlet8"
+					"outlet": "outlet8",
+					"args": {
+						"exgStock": [
+							"TDWL",
+							"1090"
+						]
+					}
 				},
 				{
 					"path": "chart",
-					"outlet": "outlet9"
+					"outlet": "outlet9",
+					"args": {
+						"exgStock": [
+							"TDWL",
+							"1090"
+						]
+					}
 				}
 			]
 		}
