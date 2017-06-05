@@ -1,6 +1,6 @@
 import { C3ChartComponent } from '../widget-util/sub-components/depth-bar-chart/depth-bar-chart.component';
-import { ChartModule } from 'angular2-highcharts';
 import { ChartComponent } from './chart/chart.component';
+import { ChartModule } from 'angular2-highcharts';
 import { CommonModule } from '@angular/common';
 import { DetailQuoteComponent } from './detail-quote/detail-quote.component';
 import { DispBoxComponent } from '../widget-util/sub-components/disp-box/disp-box.component';
@@ -14,11 +14,9 @@ import { RangeSliderComponent } from '../widget-util/sub-components/range-slider
 import { TimeAndSalesComponent } from './time-and-sales/time-and-sales.component';
 import { UtilsModule } from '../../app-utils/utils.module';
 
-export declare let require: any;
-
 @NgModule({
 	imports: [CommonModule, FormsModule, UtilsModule,
-		ChartModule.forRoot(require('highcharts')),
+		ChartModule,
 	],
 	declarations: [
 		DetailQuoteComponent,

@@ -18,7 +18,7 @@ import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/
 
 // endOfImports //
 export const routes: Routes = [
-	{ path: 'map', canActivate: [AuthGuardService], component: MapSelectorComponent },
+	{ path: 'map',   component: MapSelectorComponent },
 	{ path: 'primary-layout-one', component: PrimaryLayoutOneComponent,
 		children: [
 			{ path: 'side-bar', component: SideBarComponent, outlet: 'outlet1' },
@@ -70,7 +70,6 @@ export const routes: Routes = [
 			},
 		],
 	},
-
 
 
 

@@ -11,6 +11,7 @@ import { CommunicationModule } from './app-backend/communication/communication.m
 import { ConfigService } from './app-config/config.service';
 import { FdLayoutComponent } from './app-layouts/fd-layout/fd-layout.component';
 import { FdPageWidgetModule } from './app-widgets/fd-page-widgets/fd-page-widget.module';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { HttpModule } from '@angular/http';
 import { NetworkService } from './app-backend/network/network.service';
 import { NgModule } from '@angular/core';
@@ -24,7 +25,9 @@ import { TradeModule } from './app-backend/trade/trade.module';
 import { UtilsModule } from './app-utils/utils.module';
 import { WidgetLoaderService } from './app-widgets/widget-util/widget-loader.service';
 
-export declare let require: any;
+export function highchartsFactory(): any {
+	return require('highcharts/highmaps');
+}
 
 @NgModule({
 	declarations: [
@@ -48,8 +51,7 @@ export declare let require: any;
 		UtilsModule,
 		AuthModule,
 		TradeModule,
-
-		ChartModule.forRoot(require('highcharts/highmaps')),
+		ChartModule,
 
 	],
 	providers: [
@@ -57,6 +59,10 @@ export declare let require: any;
 		WidgetLoaderService,
 		AuthGuardService,
 		NetworkService,
+		{
+			provide: HighchartsStatic,
+			useFactory: highchartsFactory,
+		},
 	],
 	bootstrap: [AppComponent],
 })

@@ -4,6 +4,7 @@ import { IndexDataStore } from '../../../app-backend/price/data-stores/index-dat
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { PriceService } from '../../../app-backend/price/price.service';
 import { WorldMapCordinates } from './world-map-cordinates';
+import { widgetQueryParams } from '../../../app-constants/const/widget-query-params';
 
 @Component({
 	selector: 'app-map-selector',
@@ -27,6 +28,7 @@ export class MapSelectorComponent extends BaseWidgetComponent {
 	}
 
 	public onInit(): void {
+		const sessionID = this.getQueryParam(widgetQueryParams.SESSION_ID);
 		const exgs = [
 			'TDWL',
 			'CASE',
@@ -36,7 +38,9 @@ export class MapSelectorComponent extends BaseWidgetComponent {
 		const segs = [
 			'GMS',
 		];
-		this.priceService.addIndexList(exgs, segs);
+
+		this.priceService.addIndexListAjax(exgs, segs, sessionID);
+		// this.priceService.addIndexList(exgs, segs);
 	}
 
 	public setIndicesForCountry(event: any): void {
@@ -68,7 +72,11 @@ export class MapSelectorComponent extends BaseWidgetComponent {
 			chart: {
 				reflow: true,
 				animation: false,
-				height: 600,
+				height: 200,
+			},
+
+			credits: {
+				enabled: false,
 			},
 
 			title: {

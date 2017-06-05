@@ -14,6 +14,7 @@ export class StreamRouteService {
 		this.priceResponseStream$ = new Subject();
 		this.tradeResponseStream$ = new Subject();
 		this.routeResponseStream();
+		this.routeAjaxResponseStream();
 	}
 
 	private routeResponseStream(): void {
@@ -31,6 +32,12 @@ export class StreamRouteService {
 				default :
 					this.loggerService.logError('Invalid Channel Found...!', 'StreamRouteService');
 			}
+		});
+	}
+
+	private routeAjaxResponseStream(): void {
+		this.dataService.getAjaxResponseSteam().subscribe(response => {
+			this.priceResponseStream$.next({ data : response.data , channel : Channels.PriceMeta });
 		});
 	}
 
