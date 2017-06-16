@@ -13,10 +13,13 @@ import { SecondaryLayoutThreeComponent } from '../app-layouts/secondary-layout-t
 import { SecondaryLayoutTwoComponent } from '../app-layouts/secondary-layout-two/secondary-layout-two.component';
 import { SideBarComponent } from '../app-widgets/common-widgets/side-bar/side-bar.component';
 import { TimeAndSalesComponent } from '../app-widgets/price-widgets/time-and-sales/time-and-sales.component';
+import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/map-selector.component';
+// { path: 'map', component: MapSelectorComponent },
 
 // endOfImports //
 export const routes: Routes = [
-	{ path: 'primary-layout-one', component: PrimaryLayoutOneComponent, canActivate: [AuthGuardService],
+	{ path: 'map',   component: MapSelectorComponent },
+	{ path: 'primary-layout-one', component: PrimaryLayoutOneComponent,
 		children: [
 			{ path: 'side-bar', component: SideBarComponent, outlet: 'outlet1' },
 			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
@@ -67,6 +70,15 @@ export const routes: Routes = [
 			},
 		],
 	},
+
+
+
+	{ path: '', redirectTo: 'login', pathMatch: 'full' },
+	{ path: 'chart', canActivate: [AuthGuardService], component: ChartComponent },
+	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent, data: { exgStock: ['TDWL', '1010'] } },
+	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['TDWL', '1010'] } },
+	{ path: 'order-book', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['DFM', 'GFH'] } },
+	{ path: 'test', component: RubixTestPageComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: '', pathMatch: 'full', redirectTo: 'login' },
 	{ path: 'detail-quote', component: DetailQuoteComponent, canActivate: [AuthGuardService], data: { exgStock: ['PFX', 'EURUSD'] } },

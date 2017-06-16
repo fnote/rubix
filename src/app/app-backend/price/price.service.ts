@@ -1,6 +1,7 @@
 import { BaseDataStore } from './data-stores/base-data-store';
 import { Channels } from '../../app-constants/enums/channels.enum';
 import { ChartDataStore } from './data-stores/chart-data-store';
+import { ConfigService } from '../../app-config/config.service';
 import { DataManagers } from '../../app-constants/enums/data-managers.enum';
 import { DataService } from '../communication/data.service';
 import { Injectable } from '@angular/core';
@@ -10,6 +11,7 @@ import { PriceRequestTypes } from '../../app-constants/enums/price-request-types
 import { PriceStreamingRequestHandler } from './protocols/streaming/price-streaming-request-handler';
 import { PriceStreamingResponseHandler } from './protocols/streaming/price-streaming-response-handler';
 import { PriceSubscriptionService } from './price-subscription.service';
+import { RequestMethod } from '@angular/http';
 import { StockDataStore } from './data-stores/stock-data-store';
 import { Subject } from 'rxjs/Rx';
 
@@ -18,6 +20,7 @@ export class PriceService {
 
 	constructor(
 		private chartDataStore: ChartDataStore,
+		private configService: ConfigService,
 		private dataService: DataService,
 		private priceStreamingResponseHandler: PriceStreamingResponseHandler,
 		private priceSubscriptionService: PriceSubscriptionService,
@@ -395,6 +398,47 @@ export class PriceService {
 			};
 			this.dataService.sendToWs(request);
 		}
+	}
+
+	public addIndexList (exgs: string[], segs: string[]): void {
+		let isValidItemsAvailable = false;
+		const req = new PriceRequest();
+
+		for (const exg of exgs) {
+			if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.MarketMeta, exg)) {
+				req.mt = PriceRequestTypes.MarketMeta;
+				req.exg = exgs;
+				req.seg = segs;
+				req.tkn = 1;
+				req.lan = this.localizationService.getshortCode();
+				isValidItemsAvailable = true;
+			}
+		}
+
+		if (isValidItemsAvailable) {
+			const request = {
+				channel : Channels.PriceMeta,
+				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
+	public addIndexListAjax (exgs: string[], segs: string[], sessionID: string): void {
+		this.configService.getStringConfigVal('connectionConfig', 'price', 'ajax_url').then(url => {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.MarketMeta;
+			req.exg = exgs;
+			req.seg = segs;
+			req.tkn = 1;
+			req.lan = this.localizationService.getshortCode();
+			const reqURL = PriceStreamingRequestHandler.getInstance().generateAddAjaxRequest(url, sessionID, req);
+			const request = {
+				url: reqURL,
+				method: RequestMethod.Get,
+			};
+			this.dataService.sendAjaxRequest(request);
+		});
 	}
 
 	public removeSymbolListRequest (exgSym: [string, string][]): void {

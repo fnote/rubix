@@ -8,6 +8,7 @@ import { Subject } from 'rxjs/Rx';
 export class DataService {
 
 	private responseStream$: Subject<any> ;
+	private responseAjaxStream$: Subject<any> ;
 
 	constructor(private queueMannagerService: QueueMannagerService, private ajaxService: AjaxService,
 		private loggerService: LoggerService) {
@@ -16,7 +17,9 @@ export class DataService {
 
 	private init(): void {
 		this.responseStream$ = new Subject();
+		this.responseAjaxStream$ = new Subject();
 		this.updateResponseStream();
+		this.updateAjaxResponseStream();
 	}
 
 	/**
@@ -56,11 +59,15 @@ export class DataService {
      * @returns {Promise<any>} Response
      */
 	public sendAjaxRequest(requestOptions: any): Promise<any> {
-		return this.ajaxService.send(requestOptions);
+		return this.ajaxService.send(requestOptions, true);
 	}
 
 	public getResponseSteam(): Subject<any> {
 		return this.responseStream$;
+	}
+
+	public getAjaxResponseSteam(): Subject<any> {
+		return this.responseAjaxStream$;
 	}
 
 	private updateResponseStream(): void {
@@ -71,4 +78,11 @@ export class DataService {
 		});
 	}
 
+	private updateAjaxResponseStream(): void {
+		this.ajaxService.getResponse().subscribe(msg => {
+			if (msg && msg.data) {
+				this.responseAjaxStream$.next(msg.data);
+			}
+		});
+	}
 }

@@ -9,6 +9,8 @@ export class PriceRequest {
 	private _tkn: string = null;
 	private _typ: number = null;
 	private _param: [string, string][];
+	private _seg: string[];
+	private _exg: string[];
 
 	public get mt(): PriceRequestTypes  {
 		return this._mt;
@@ -58,6 +60,22 @@ export class PriceRequest {
 		this._typ = value;
 	}
 
+	public get seg(): string[] {
+		return this._seg;
+	}
+
+	public set seg(value: string[]) {
+		this._seg = value;
+	}
+
+	public get exg(): string[] {
+		return this._exg;
+	}
+
+	public set exg(value: string[]) {
+		this._exg = value;
+	}
+
 	public addParam(exg: string, sym?: string): void {
 		this._param.push([exg, sym]);
 	}
@@ -86,12 +104,6 @@ export class PriceRequest {
 			arrBuild.push(',');
 		}
 
-		if (this.mt) {
-			arrBuild.push('"MT":');
-			arrBuild.push(String(this.mt));
-			arrBuild.push(',');
-		}
-
 		if (this.tkn) {
 			arrBuild.push('"TKN":"');
 			arrBuild.push(this.tkn);
@@ -106,7 +118,7 @@ export class PriceRequest {
 
 		if (this.lan) {
 			arrBuild.push('"LAN":');
-			arrBuild.push(this.lan);
+			arrBuild.push(String(this.lan));
 			arrBuild.push(',');
 		}
 
@@ -117,15 +129,32 @@ export class PriceRequest {
 			arrBuild.push(',');
 		}
 
+		if (this.seg) {
+			arrBuild.push('"SEG":["');
+			arrBuild.push(this.seg.join('","'));
+			arrBuild.push('"],');
+		}
+
+		if (this.exg) {
+			arrBuild.push('"EXG":["');
+			arrBuild.push(this.exg.join('","'));
+			arrBuild.push('"],');
+		}
+
 		const tmp = this.getParam();
 		if (tmp.length > 0) {
 			arrBuild.push('"PRM":["');
 			arrBuild.push(tmp.join('","'));
-			arrBuild.push('"]');
+			arrBuild.push('"],');
+		}
+
+		if (this.mt) {
+			arrBuild.push('"MT":');
+			arrBuild.push(String(this.mt));
+			// arrBuild.push(',');
 		}
 
 		arrBuild.push('}');
-
 		return arrBuild.join('').trim();
 	}
 

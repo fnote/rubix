@@ -19,7 +19,7 @@ export class UserState {
 		}
 	}
 
-	public getTradeDetails(): any {
+	public   getTradeDetails (): any {
 		return this.tradeDetails;
 	}
 
