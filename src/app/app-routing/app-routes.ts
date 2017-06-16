@@ -74,7 +74,7 @@ export const routes: Routes = [
 
 
 	{ path: '', redirectTo: 'login', pathMatch: 'full' },
-	{ path: 'chart', canActivate: [AuthGuardService], component: ChartComponent },
+	{ path: 'chart', canActivate: [AuthGuardService], component: BaseC3ChartComponent },
 	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'order-book', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['DFM', 'GFH'] } },

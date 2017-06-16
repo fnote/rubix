@@ -409,7 +409,7 @@ export class PriceService {
 				req.mt = PriceRequestTypes.MarketMeta;
 				req.exg = exgs;
 				req.seg = segs;
-				req.tkn = 1;
+				req.tkn = '1';
 				req.lan = this.localizationService.getshortCode();
 				isValidItemsAvailable = true;
 			}
@@ -430,7 +430,7 @@ export class PriceService {
 			req.mt = PriceRequestTypes.MarketMeta;
 			req.exg = exgs;
 			req.seg = segs;
-			req.tkn = 1;
+			req.tkn = '1';
 			req.lan = this.localizationService.getshortCode();
 			const reqURL = PriceStreamingRequestHandler.getInstance().generateAddAjaxRequest(url, sessionID, req);
 			const request = {
