@@ -1,5 +1,6 @@
 import { BaseDataStore } from './data-stores/base-data-store';
 import { Channels } from '../../app-constants/enums/channels.enum';
+import { ChartDataStore } from './data-stores/chart-data-store';
 import { DataManagers } from '../../app-constants/enums/data-managers.enum';
 import { DataService } from '../communication/data.service';
 import { Injectable } from '@angular/core';
@@ -15,9 +16,14 @@ import { Subject } from 'rxjs/Rx';
 @Injectable()
 export class PriceService {
 
-	constructor(private dataService: DataService, private priceStreamingResponseHandler: PriceStreamingResponseHandler,
-		private priceSubscriptionService: PriceSubscriptionService, private localizationService: LocalizationService,
-		private stockDataStore: StockDataStore) {}
+	constructor(
+		private chartDataStore: ChartDataStore,
+		private dataService: DataService,
+		private priceStreamingResponseHandler: PriceStreamingResponseHandler,
+		private priceSubscriptionService: PriceSubscriptionService,
+		private localizationService: LocalizationService,
+		private stockDataStore: StockDataStore,
+	) {}
 
 	/**
 	 * Get the price response handler
@@ -177,6 +183,75 @@ export class PriceService {
 			const request = {
 				channel : Channels.Price,
 				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
+	public addChartHistoryRequest (exgSym: [string, string]): void {
+		this.chartDataStore.getHistory(exgSym).subscribe(history => {
+			if (history.length === 0) {
+				const key: string = exgSym[0] + '~' + exgSym[1];
+				const req = new PriceRequest();
+				req.mt = PriceRequestTypes.PriceHistory;
+				req.tkn = key;
+				req.sym = [key];
+				req.addParam(exgSym[0], exgSym[1]);
+
+				const request = {
+					channel : Channels.PriceMeta,
+					data : PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
+				};
+				this.dataService.sendToWs(request);
+			}
+		});
+	}
+
+	public addChartOHLCBacklogRequest (exgSym: [string, string]): void {
+		const key: string = exgSym[0] + '~' + exgSym[1];
+		const req = new PriceRequest();
+		req.mt = PriceRequestTypes.OHLCBacklog;
+		req.tkn = key;
+		req.typ = 1;
+		req.sym = [key];
+		req.addParam(exgSym[0], exgSym[1]);
+
+		const request = {
+			channel : Channels.PriceMeta,
+			data : PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
+		};
+		this.dataService.sendToWs(request);
+
+		this.addChartOHLCRequest(exgSym);
+
+	}
+
+	public removeChartOHLCRequest (exgSym: [string, string]): void {
+		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.OHLCSymbol, exgSym[0], exgSym[1])) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.OHLCSymbol;
+			req.addParam(exgSym[0], exgSym[1]);
+
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
+	public addChartOHLCRequest (exgSym: [string, string]): void {
+		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.OHLCSymbol, exgSym[0], exgSym[1])) {
+			const key: string = exgSym[0] + '~' + exgSym[1];
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.OHLCSymbol;
+			req.tkn = key;
+			req.sym = [key];
+			req.addParam(exgSym[0], exgSym[1]);
+
+			const request = {
+				channel: Channels.Price,
+				data: PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
 			};
 			this.dataService.sendToWs(request);
 		}
@@ -350,7 +425,7 @@ export class PriceService {
 		if (!this.stockDataStore.getOrAddStock(exgSym).isMetaDataLoaded) {
 			const req = new PriceRequest();
 			req.mt = PriceRequestTypes.SymbolMeta;
-			req.tkn = 1;
+			req.tkn = '1';
 			req.lan = this.localizationService.getshortCode();
 			req.addParam(exgSym[0], exgSym[1]);
 
@@ -366,7 +441,7 @@ export class PriceService {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
 		req.mt = PriceRequestTypes.SymbolMeta;
-		req.tkn = 1;
+		req.tkn = '1';
 		req.lan = this.localizationService.getshortCode();
 
 		for (const sym of exgSym) {

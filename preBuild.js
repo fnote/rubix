@@ -23,7 +23,7 @@ var getComponent = function (id) {
 			component = 'WatchListComponent';
 			break;
 		case 'chart':
-			component = 'ChartComponent';
+			component = 'BaseC3ChartComponent';
 			break;
 		case 'side-bar':
 			component = 'SideBarComponent';
@@ -95,13 +95,13 @@ var createRoute = function (profile, tabs) {
 	}
 	var path = profile.path;
 	var route = shortTabString;
-	
+
 	if (path) {
 		route += "{ path: '" + path + "', component: " + getComponent(path);
 	} else {
 		route += "{ path: '', pathMatch: 'full', redirectTo: '" + profile.redirectTo + "'";
 	}
-	
+
 	if (profile.needsAuthentication) {
 		route += ", canActivate: [AuthGuardService]"
 	}

@@ -1,3 +1,4 @@
+import { ChartDataStore } from '../../data-stores/chart-data-store';
 import { DepthDataStore } from '../../data-stores/depth-data-store';
 import { ExchangeDataStore } from '../../data-stores/exchange-data-store';
 import { Injectable } from '@angular/core';
@@ -16,9 +17,14 @@ export class PriceStreamingResponseHandler {
 	private metaAuthResponseStream$: Subject<any>;
 	private priceAuthResponseStream$: Subject<any>;
 
-	constructor(private streamRouteService: StreamRouteService, private depthDataStore: DepthDataStore,
-		private timeAndSalesDataStore: TimeAndSalesDataStore, private stockDataStore: StockDataStore,
-		private exchangeDataStore: ExchangeDataStore) {
+	constructor(
+		private chartDataStore: ChartDataStore,
+		private streamRouteService: StreamRouteService,
+		private depthDataStore: DepthDataStore,
+		private timeAndSalesDataStore: TimeAndSalesDataStore,
+		private stockDataStore: StockDataStore,
+		private exchangeDataStore: ExchangeDataStore,
+	) {
 		this.priceResponseStream$ = new Subject();
 		this.metaAuthResponseStream$ = new Subject();
 		this.priceAuthResponseStream$ = new Subject();
@@ -56,6 +62,15 @@ export class PriceStreamingResponseHandler {
 					stockObj.setValues(symObj);
 					stockObj.isMetaDataLoaded = true;
 				}
+				break;
+			case PriceRequestTypes.PriceHistory:
+				this.chartDataStore.updateHistory(response);
+				break;
+			case PriceRequestTypes.OHLCBacklog:
+				this.chartDataStore.updateOHLCHistory(response);
+				break;
+			case PriceRequestTypes.OHLCSymbol:
+				this.chartDataStore.updateOHLC(response);
 				break;
 			case PriceRequestTypes.ExchangeAndSubmarket:
 				this.exchangeDataStore.getOrAddExchange(response.exchangeCode).setValues(response);

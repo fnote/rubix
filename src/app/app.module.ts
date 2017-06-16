@@ -5,6 +5,7 @@ import { AuthGuardService } from './app-widgets/widget-util/auth-guard-service';
 import { AuthModule } from './app-backend/auth/auth.module';
 import { BaseWidgetComponent } from './app-widgets/widget-util/base-widget/base-widget.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { ChartWidgetModule } from './app-widgets/chart-widgets/chart-widget.module';
 import { CommonWidgetModule } from './app-widgets/common-widgets/common-widget.module';
 import { CommunicationModule } from './app-backend/communication/communication.module';
 import { ConfigService } from './app-config/config.service';
@@ -40,6 +41,7 @@ import { WidgetLoaderService } from './app-widgets/widget-util/widget-loader.ser
 		CommunicationModule,
 		PriceModule,
 		PriceWidgetModule,
+		ChartWidgetModule,
 		FdPageWidgetModule,
 		CommonWidgetModule,
 		UtilsModule,

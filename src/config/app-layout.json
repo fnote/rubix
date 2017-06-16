@@ -78,7 +78,8 @@
 										"exgStock": [
 											"TDWL",
 											"1090"
-										]
+										],
+										"chartOutletID": "outlet1"
 									}
 								}
 							]
@@ -142,7 +143,8 @@
 										"exgStock": [
 											"TDWL",
 											"1090"
-										]
+										],
+										"chartOutletID": "outlet2"
 									}
 								},
 								{
@@ -151,8 +153,9 @@
 									"args": {
 										"exgStock": [
 											"TDWL",
-											"1090"
-										]
+											"1010"
+										],
+										"chartOutletID": "outlet3"
 									}
 								},
 								{
@@ -160,9 +163,10 @@
 									"outlet": "outlet3",
 									"args": {
 										"exgStock": [
-											"TDWL",
-											"1090"
-										]
+											"CASE",
+											"OTMT"
+										],
+										"chartOutletID": "outlet4"
 									}
 								},
 								{
@@ -170,9 +174,10 @@
 									"outlet": "outlet4",
 									"args": {
 										"exgStock": [
-											"TDWL",
-											"1090"
-										]
+											"DFM",
+											"EMAAR"
+										],
+										"chartOutletID": "outlet5"
 									}
 								},
 								{
@@ -180,9 +185,10 @@
 									"outlet": "outlet5",
 									"args": {
 										"exgStock": [
-											"TDWL",
-											"1090"
-										]
+											"CASE",
+											"OTMT"
+										],
+										"chartOutletID": "outlet6"
 									}
 								}
 							]

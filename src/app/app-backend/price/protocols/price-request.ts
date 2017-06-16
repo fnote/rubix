@@ -5,7 +5,9 @@ export class PriceRequest {
 	private _mt: PriceRequestTypes = null;
 	private _rt: number = null;
 	private _lan: string = null;
-	private _tkn: number = null;
+	private _sym: string[] = null;
+	private _tkn: string = null;
+	private _typ: number = null;
 	private _param: [string, string][];
 
 	public get mt(): PriceRequestTypes  {
@@ -32,12 +34,28 @@ export class PriceRequest {
 		this._lan = value;
 	}
 
-	public get tkn(): number  {
+	public get sym(): string[]  {
+		return this._sym;
+	}
+
+	public set sym(value: string[]) {
+		this._sym = value;
+	}
+
+	public get tkn(): string  {
 		return this._tkn;
 	}
 
-	public set tkn(value: number) {
+	public set tkn(value: string) {
 		this._tkn = value;
+	}
+
+	public get typ(): number  {
+		return this._typ;
+	}
+
+	public set typ(value: number) {
+		this._typ = value;
 	}
 
 	public addParam(exg: string, sym?: string): void {
@@ -75,14 +93,27 @@ export class PriceRequest {
 		}
 
 		if (this.tkn) {
-			arrBuild.push('"TKN":');
-			arrBuild.push(String(this.tkn));
+			arrBuild.push('"TKN":"');
+			arrBuild.push(this.tkn);
+			arrBuild.push('",');
+		}
+
+		if (this.typ) {
+			arrBuild.push('"TYP":');
+			arrBuild.push(this.typ.toString());
 			arrBuild.push(',');
 		}
 
 		if (this.lan) {
 			arrBuild.push('"LAN":');
 			arrBuild.push(this.lan);
+			arrBuild.push(',');
+		}
+
+		if (this.sym) {
+			arrBuild.push('"SYM":["');
+			arrBuild.push(this.sym.join('","'));
+			arrBuild.push('"]');
 			arrBuild.push(',');
 		}
 

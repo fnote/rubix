@@ -1,5 +1,5 @@
 import { AuthGuardService } from '../app-widgets/widget-util/auth-guard-service';
-import { ChartComponent } from '../app-widgets/price-widgets/chart/chart.component';
+import { BaseC3ChartComponent } from '../app-widgets/chart-widgets/c3-chart/base/base-c3-chart.component';
 import { DetailQuoteComponent } from '../app-widgets/price-widgets/detail-quote/detail-quote.component';
 import { FdDetailQuoteComponent } from '../app-widgets/fd-page-widgets/fd-detail-quote/fd-detail-quote.component';
 import { FdLayoutComponent } from '../app-layouts/fd-layout/fd-layout.component';
@@ -36,7 +36,7 @@ export const routes: Routes = [
 			},
 			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
 				children: [
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1090'] } },
+					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1090'], chartOutletID: 'outlet1' } },
 				],
 			},
 			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
@@ -49,20 +49,20 @@ export const routes: Routes = [
 			},
 			{ path: 'secondary-layout-three', component: SecondaryLayoutThreeComponent, outlet: 'outlet2',
 				children: [
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1090'] } },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet2', data: { exgStock: ['TDWL', '1090'] } },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet3', data: { exgStock: ['TDWL', '1090'] } },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet5', data: { exgStock: ['TDWL', '1090'] } },
+					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1090'], chartOutletID: 'outlet2' } },
+					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet2', data: { exgStock: ['TDWL', '1010'], chartOutletID: 'outlet3' } },
+					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet3', data: { exgStock: ['CASE', 'OTMT'], chartOutletID: 'outlet4' } },
+					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet4', data: { exgStock: ['DFM', 'EMAAR'], chartOutletID: 'outlet5' } },
+					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet5', data: { exgStock: ['CASE', 'OTMT'], chartOutletID: 'outlet6' } },
 				],
 			},
 			{ path: 'fd-layout', component: FdLayoutComponent, outlet: 'outlet2',
 				children: [
 					{ path: 'fd-detail-quote', component: FdDetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1010'] } },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet2', data: { exgStock: ['TDWL', '1090'] } },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet3', data: { exgStock: ['TDWL', '1090'] } },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
-					{ path: 'chart', component: ChartComponent, outlet: 'outlet5', data: { exgStock: ['TDWL', '1090'] } },
+					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet2', data: { exgStock: ['TDWL', '1090'] } },
+					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet3', data: { exgStock: ['TDWL', '1090'] } },
+					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
+					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet5', data: { exgStock: ['TDWL', '1090'] } },
 				],
 			},
 		],
@@ -75,14 +75,14 @@ export const routes: Routes = [
 	{ path: 'fd-layout', component: FdLayoutComponent, canActivate: [AuthGuardService],
 		children: [
 			{ path: 'fd-detail-quote', component: FdDetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1010'] } },
-			{ path: 'chart', component: ChartComponent, outlet: 'outlet2', data: { exgStock: ['TDWL', '1090'] } },
-			{ path: 'chart', component: ChartComponent, outlet: 'outlet3', data: { exgStock: ['TDWL', '1090'] } },
-			{ path: 'chart', component: ChartComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
-			{ path: 'chart', component: ChartComponent, outlet: 'outlet5', data: { exgStock: ['TDWL', '1090'] } },
-			{ path: 'chart', component: ChartComponent, outlet: 'outlet6', data: { exgStock: ['TDWL', '1090'] } },
-			{ path: 'chart', component: ChartComponent, outlet: 'outlet7', data: { exgStock: ['TDWL', '1090'] } },
-			{ path: 'chart', component: ChartComponent, outlet: 'outlet8', data: { exgStock: ['TDWL', '1090'] } },
-			{ path: 'chart', component: ChartComponent, outlet: 'outlet9', data: { exgStock: ['TDWL', '1090'] } },
+			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet2', data: { exgStock: ['TDWL', '1090'] } },
+			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet3', data: { exgStock: ['TDWL', '1090'] } },
+			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
+			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet5', data: { exgStock: ['TDWL', '1090'] } },
+			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet6', data: { exgStock: ['TDWL', '1090'] } },
+			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet7', data: { exgStock: ['TDWL', '1090'] } },
+			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet8', data: { exgStock: ['TDWL', '1090'] } },
+			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet9', data: { exgStock: ['TDWL', '1090'] } },
 		],
 	},
 ];
