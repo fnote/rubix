@@ -4,8 +4,10 @@ import { DetailQuoteComponent } from '../app-widgets/price-widgets/detail-quote/
 import { FdDetailQuoteComponent } from '../app-widgets/fd-page-widgets/fd-detail-quote/fd-detail-quote.component';
 import { FdLayoutComponent } from '../app-layouts/fd-layout/fd-layout.component';
 import { LoginComponent } from '../app-widgets/common-widgets/login-widget/login.component';
+import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/map-selector.component';
 import { OrderBookComponent } from '../app-widgets/price-widgets/order-book/order-book.component';
 import { PrimaryLayoutOneComponent } from '../app-layouts/primary-layout-one/primary-layout-one.component';
+import { RealTimeAdviceComponent } from '../app-widgets/price-widgets/real-time-advice/real-time-advice.component';
 import { Routes } from '@angular/router';
 import { RubixTestPageComponent } from '../app-widgets/common-widgets/rubix-test-page/rubix-test-page.component';
 import { SecondaryLayoutOneComponent } from '../app-layouts/secondary-layout-one/secondary-layout-one.component';
@@ -13,7 +15,6 @@ import { SecondaryLayoutThreeComponent } from '../app-layouts/secondary-layout-t
 import { SecondaryLayoutTwoComponent } from '../app-layouts/secondary-layout-two/secondary-layout-two.component';
 import { SideBarComponent } from '../app-widgets/common-widgets/side-bar/side-bar.component';
 import { TimeAndSalesComponent } from '../app-widgets/price-widgets/time-and-sales/time-and-sales.component';
-import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/map-selector.component';
 // { path: 'map', component: MapSelectorComponent },
 
 // endOfImports //
@@ -71,10 +72,9 @@ export const routes: Routes = [
 		],
 	},
 
-
-
 	{ path: '', redirectTo: 'login', pathMatch: 'full' },
 	{ path: 'chart', canActivate: [AuthGuardService], component: BaseC3ChartComponent },
+	{ path: 'real-time-advices', canActivate: [AuthGuardService], component: RealTimeAdviceComponent },
 	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'order-book', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['DFM', 'GFH'] } },

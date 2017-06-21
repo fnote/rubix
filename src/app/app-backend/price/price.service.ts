@@ -260,6 +260,17 @@ export class PriceService {
 		}
 	}
 
+	public addRealTimeAdviceRequest(): void {
+		const req = new PriceRequest();
+		req.mt = PriceRequestTypes.RealTimeAvice;
+		req.lan = this.localizationService.getshortCode();
+		const request = {
+			channel : Channels.PriceMeta,
+			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+		};
+		this.dataService.sendToWs(request);
+	}
+
 	public addTimeAndSalesRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.TimeAndSalesSymbol, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();

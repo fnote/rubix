@@ -11,6 +11,8 @@ import { NewsAnnouncementsCombinedListComponent } from './news-announcements-com
 import { NgModule } from '@angular/core';
 import { OrderBookComponent } from './order-book/order-book.component';
 import { RangeSliderComponent } from '../widget-util/sub-components/range-slider/range-slider.component';
+import { RealTimeAdviceComponent } from './real-time-advice/real-time-advice.component';
+import { RtaBoxComponent } from './rta-box/rta-box.component';
 import { TimeAndSalesComponent } from './time-and-sales/time-and-sales.component';
 import { UtilsModule } from '../../app-utils/utils.module';
 
@@ -29,6 +31,8 @@ import { UtilsModule } from '../../app-utils/utils.module';
 		NewsAnnouncementsCombinedListComponent,
 		MiniChartComponent,
 		MapSelectorComponent,
+		RealTimeAdviceComponent,
+		RtaBoxComponent,
 
 	],
 })
