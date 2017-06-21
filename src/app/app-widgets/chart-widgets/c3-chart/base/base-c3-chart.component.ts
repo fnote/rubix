@@ -33,7 +33,6 @@ export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnCha
 	}
 
 	public onInit(): void {
-		window['baseC3Chart'] = this;
 		const paramSymbol = this.getQueryParam(widgetQueryParams.SYMBOL);
 		const paramExg = this.getQueryParam(widgetQueryParams.EXCHANGE);
 		const chartData = [];
@@ -66,7 +65,7 @@ export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnCha
 				}
 			});
 
-		}else {
+		} else {
 			this.subscription$ = this.processedChartDataStore.getHistory(exgStock, period).subscribe(history => {
 				if (history.length !== 0) {
 					for (const item of history) {
