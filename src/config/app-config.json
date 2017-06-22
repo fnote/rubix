@@ -4,11 +4,11 @@
 	},
 	"connectionConfig": {
 		"trade" : {
-			"url" : "ws://mtplusglobal-uat.mubashertrade.com:8800"
+			"url" : "wss://mtplusglobal-uat.mubashertrade.com:8800"
 		},
 		"price" : {
-			"url" : "ws://mfg-uat-phoenix.mubashertrade.com:9090",
-			"ajax_url" : "http://mfg-uat-phoenix.mubashertrade.com"
+			"url" : "wss://mfg-uat-phoenix.mubashertrade.com:9090",
+			"ajax_url" : "https://mfg-uat-phoenix.mubashertrade.com"
 		}
 	},
 	"companyLogo" : "https://mfg-uat-phoenix.mubashertrade.com/companylogo?COMPANYID="
