@@ -262,8 +262,27 @@ export class PriceService {
 
 	public addRealTimeAdviceRequest(): void {
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.RealTimeAvice;
+		req.mt = PriceRequestTypes.TradingAdvicesBacklog;
 		req.lan = this.localizationService.getshortCode();
+		const request = {
+			channel : Channels.PriceMeta,
+			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+		};
+		this.dataService.sendToWs(request);
+	}
+
+	public addBacklogRTARequest(requestParms: {exg: string[],
+		apm: Object,
+		pgi: number,
+		pgs: number}): void {
+		const req = new PriceRequest();
+		req.mt = PriceRequestTypes.TradingAdvicesBacklog;
+		req.lan = this.localizationService.getshortCode();
+		req.exg = requestParms.exg;
+		req.apm = requestParms.apm;
+		req.pgi = requestParms.pgi;
+		req.pgs = requestParms.pgs;
+
 		const request = {
 			channel : Channels.PriceMeta,
 			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),

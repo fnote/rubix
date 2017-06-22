@@ -11,6 +11,9 @@ export class PriceRequest {
 	private _param: [string, string][];
 	private _seg: string[];
 	private _exg: string[];
+	private _apm: Object;
+	private _pgi: number;
+	private _pgs: number;
 
 	public get mt(): PriceRequestTypes  {
 		return this._mt;
@@ -74,6 +77,30 @@ export class PriceRequest {
 
 	public set exg(value: string[]) {
 		this._exg = value;
+	}
+
+	public get apm(): Object {
+		return this._apm;
+	}
+
+	public set apm(value: Object) {
+		this._apm = value;
+	}
+
+	public get pgi(): number {
+		return this._pgi;
+	}
+
+	public set pgi(value: number) {
+		this._pgi = value;
+	}
+
+	public get pgs(): number {
+		return this._pgs;
+	}
+
+	public set pgs(value: number){
+		this._pgs = value;
 	}
 
 	public addParam(exg: string, sym?: string): void {
@@ -148,10 +175,31 @@ export class PriceRequest {
 			arrBuild.push('"],');
 		}
 
+		if (this.pgi) {
+			arrBuild.push('"PGI":');
+			arrBuild.push(this.pgi.toString() + ',');
+		}
+
+		if (this.pgs) {
+			arrBuild.push('"PGS":');
+			arrBuild.push(this.pgs.toString() + ',');
+		}
+
+		if (this.apm) {
+			arrBuild.push('"APM":{');
+			for (const key in this.apm){
+				if (this.apm.hasOwnProperty(key)) {
+					arrBuild.push('"' + key + '":"' + this.apm[key] + '"');
+					arrBuild.push(',');
+				}
+			}
+			arrBuild.pop();
+			arrBuild.push('},');
+		}
+
 		if (this.mt) {
 			arrBuild.push('"MT":');
 			arrBuild.push(String(this.mt));
-			// arrBuild.push(',');
 		}
 
 		arrBuild.push('}');

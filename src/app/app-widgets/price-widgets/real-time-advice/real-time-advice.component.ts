@@ -7,11 +7,23 @@ import { PriceService } from '../../../app-backend/price/price.service';
 })
 export class RealTimeAdviceComponent implements OnInit {
 
-	constructor(private priceService: PriceService) {
-		// code here
-	}
+	constructor(private priceService: PriceService) {}
 
 	public ngOnInit(): void {
-		// code here
+		this.subscribeForBacklogRTA();
+	}
+
+	private subscribeForBacklogRTA(): void {
+		const requestParms = {
+			exg: ['DFM'],
+			pgi: 0,
+			pgs: 20,
+			apm : {
+				ED : '20170621000000',
+				HIST : 'TRUE',
+				SD : '20170323000000',
+			},
+		};
+		this.priceService.addBacklogRTARequest(requestParms);
 	}
 }
