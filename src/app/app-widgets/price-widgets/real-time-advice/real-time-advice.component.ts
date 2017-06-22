@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ContentDisplayBoxComponent } from '../../widget-util/sub-components/content-display-box/content-display-box.component';
 import { PriceService } from '../../../app-backend/price/price.service';
 
 @Component({
@@ -51,5 +52,9 @@ export class RealTimeAdviceComponent implements OnInit {
 			GL2: '',
 		};
 		this.priceService.removeRealTimeAdviceRequest(apm, exg);
+	}
+
+	public onEventEmit(button: string): void {
+		alert(button);
 	}
 }

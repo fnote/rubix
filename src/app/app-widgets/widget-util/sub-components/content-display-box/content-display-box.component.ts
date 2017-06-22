@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
 	selector: 'app-content-display-box',
@@ -6,6 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
 	styleUrls: ['./content-display-box.component.scss'],
 })
 export class ContentDisplayBoxComponent implements OnInit {
+
+	@Output() public testEventEmitter: EventEmitter<string> = new EventEmitter();
 
 	constructor() {
 		// code
@@ -15,4 +17,8 @@ export class ContentDisplayBoxComponent implements OnInit {
 		// code
 	}
 
+	public onActionBubble(event: Event, sampleString: string): void {
+		event.stopPropagation();
+		this.testEventEmitter.next(sampleString);
+	}
 }
