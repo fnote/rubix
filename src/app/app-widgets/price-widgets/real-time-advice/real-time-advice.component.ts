@@ -16,12 +16,12 @@ export class RealTimeAdviceComponent implements OnInit {
 	}
 
 	private subscribeForRealTimeRTA(): void {
-		const prm =  ['ADSM', 'DIFX', 'DFM'];
+		const exg =  ['ADSM', 'DIFX', 'DFM'];
 		const apm = {
 			BKL: 0,
 			GL2: '',
 		};
-		this.priceService.addRealTimeAdviceRequest(apm, prm);
+		this.priceService.addRealTimeAdviceRequest(apm, exg);
 	}
 
 	private subscribeForBacklogRTA(): void {

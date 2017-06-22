@@ -260,12 +260,12 @@ export class PriceService {
 		}
 	}
 
-	public addRealTimeAdviceRequest(apm: Object, sym: Array<string>): void {
+	public addRealTimeAdviceRequest(apm: Object, exg: Array<string>): void {
 		const req = new PriceRequest();
 		req.mt = PriceRequestTypes.TradingAdvices;
 		req.lan = this.localizationService.getshortCode();
 		req.apm = apm;
-		req.sym = sym;
+		req.sym = exg;
 		const request = {
 			channel : Channels.Price,
 			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
