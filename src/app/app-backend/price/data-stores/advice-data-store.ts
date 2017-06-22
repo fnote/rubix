@@ -75,7 +75,8 @@ export class AdviceDataStore extends BaseDataStore {
 
 		trackRecordEntity.setValues(values);
 		trackRecordEntity.successRate = (Math.round(100 * parseFloat(values.successRate) / numberOfRecords)).toString() + '%';
-		trackRecordEntity.displaySymbol = trackRecordEntity.symbolCode + '.' + trackRecordEntity.exchangeCode; // TODO :[Malindu] correctly implement this.
+		trackRecordEntity.displaySymbol = trackRecordEntity.symbolCode + '.' + trackRecordEntity.exchangeCode;
+		// TODO :[Malindu] correctly implement the above.
 	}
 
 	public addRTA(values: {
