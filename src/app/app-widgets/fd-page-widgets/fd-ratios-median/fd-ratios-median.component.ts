@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 	templateUrl: './fd-ratios-median.component.html',
 	styleUrls: ['./fd-ratios-median.component.scss'],
 })
-export class FdRatiosMedianComponent { //implements OnInit {
+export class FdRatiosMedianComponent { // implements OnInit {
 
 	// constructor() { }
 
