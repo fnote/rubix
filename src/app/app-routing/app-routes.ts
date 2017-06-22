@@ -7,7 +7,6 @@ import { LoginComponent } from '../app-widgets/common-widgets/login-widget/login
 import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/map-selector.component';
 import { OrderBookComponent } from '../app-widgets/price-widgets/order-book/order-book.component';
 import { PrimaryLayoutOneComponent } from '../app-layouts/primary-layout-one/primary-layout-one.component';
-import { RealTimeAdviceComponent } from '../app-widgets/price-widgets/real-time-advice/real-time-advice.component';
 import { Routes } from '@angular/router';
 import { RubixTestPageComponent } from '../app-widgets/common-widgets/rubix-test-page/rubix-test-page.component';
 import { SecondaryLayoutOneComponent } from '../app-layouts/secondary-layout-one/secondary-layout-one.component';
@@ -74,7 +73,6 @@ export const routes: Routes = [
 
 	{ path: '', redirectTo: 'login', pathMatch: 'full' },
 	{ path: 'chart', canActivate: [AuthGuardService], component: BaseC3ChartComponent },
-	{ path: 'real-time-advices', canActivate: [AuthGuardService], component: RealTimeAdviceComponent },
 	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'order-book', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['DFM', 'GFH'] } },

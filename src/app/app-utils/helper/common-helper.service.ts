@@ -2,6 +2,8 @@ import 'moment/locale/ar-ma';
 import * as moment from 'moment';
 import { ExchangeEntity } from '../../app-backend/price/business-entities/exchange-entity';
 import { Injectable } from '@angular/core';
+import { LocalizationService } from '../../app-utils/localization/localization.service';
+import { ReflectiveInjector } from '@angular/core';
 import { TradeHelperService } from './trade-helper.service';
 import { userSettings } from '../../app-config/user-settings';
 
@@ -17,6 +19,13 @@ const DATE_TIME_LENGTH = 14;
 export class CommonHelperService {
 
 	private tradeHelperManager: TradeHelperService;
+	private localizationService: LocalizationService;
+
+	constructor() {
+		const injector = ReflectiveInjector.resolveAndCreate([LocalizationService]);
+		this.localizationService = injector.get(LocalizationService);
+		// TODO [MAlindu] Above will create more than one instance. Try to correct this
+	}
 
 	////////////////////// Date Formatters //////////////////////
 
@@ -102,6 +111,51 @@ export class CommonHelperService {
 
 		// return offSet;
 		return 0;
+	}
+
+	public getMonthString(month: string): string {
+		let monthString;
+		switch (month) {
+			case '01':
+				monthString = this.localizationService.language.JAN;
+				break;
+			case '02':
+				monthString = this.localizationService.language.FEB;
+				break;
+			case '03':
+				monthString = this.localizationService.language.MAR;
+				break;
+			case '04':
+				monthString = this.localizationService.language.APR;
+				break;
+			case '05':
+				monthString = this.localizationService.language.MAY;
+				break;
+			case '06':
+				monthString = this.localizationService.language.JUN;
+				break;
+			case '07':
+				monthString = this.localizationService.language.JUL;
+				break;
+			case '08':
+				monthString = this.localizationService.language.AUG;
+				break;
+			case '09':
+				monthString = this.localizationService.language.SEP;
+				break;
+			case '10':
+				monthString = this.localizationService.language.OCT;
+				break;
+			case '11':
+				monthString = this.localizationService.language.NOV;
+				break;
+			case '12':
+				monthString = this.localizationService.language.DEC;
+				break;
+			default:
+				break;
+		}
+		return monthString;
 	}
 
 	////////////////////// Date Formatters END //////////////////////

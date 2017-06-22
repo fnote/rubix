@@ -13,6 +13,7 @@ export const userSettings = {
 		defaultDecimalPlaces: 2,
 		defaultPercentageDecimalPlaces: 2,
 		defaultStringInitializer: '-',
+		defaultBooleanInitializer: false,
 		defaultNumberInitializer: {
 			minusOneInitializer: -1,
 			zeroInitializer: 0,

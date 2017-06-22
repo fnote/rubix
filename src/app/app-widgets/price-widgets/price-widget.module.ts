@@ -2,6 +2,7 @@ import { C3ChartComponent } from '../widget-util/sub-components/depth-bar-chart/
 import { ChartComponent } from './chart/chart.component';
 import { ChartModule } from 'angular2-highcharts';
 import { CommonModule } from '@angular/common';
+import { ContentDisplayBoxComponent } from '../widget-util/sub-components/content-display-box/content-display-box.component';
 import { DetailQuoteComponent } from './detail-quote/detail-quote.component';
 import { DispBoxComponent } from '../widget-util/sub-components/disp-box/disp-box.component';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +13,6 @@ import { NgModule } from '@angular/core';
 import { OrderBookComponent } from './order-book/order-book.component';
 import { RangeSliderComponent } from '../widget-util/sub-components/range-slider/range-slider.component';
 import { RealTimeAdviceComponent } from './real-time-advice/real-time-advice.component';
-import { RtaBoxComponent } from './rta-box/rta-box.component';
 import { TimeAndSalesComponent } from './time-and-sales/time-and-sales.component';
 import { UtilsModule } from '../../app-utils/utils.module';
 
@@ -32,8 +32,7 @@ import { UtilsModule } from '../../app-utils/utils.module';
 		MiniChartComponent,
 		MapSelectorComponent,
 		RealTimeAdviceComponent,
-		RtaBoxComponent,
-
+		ContentDisplayBoxComponent,
 	],
 })
 export class PriceWidgetModule { }

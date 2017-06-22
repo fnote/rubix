@@ -29,7 +29,7 @@ export const EN = {
 	SIDE: '[9683]',
 	BUY: '[9477]',
 	SELL: '[526]',
-	DAY_RANGE: '[13913]',,
+	DAY_RANGE: '[13913]',
 	FIFTY_TWO_WK_RANGE: '[14729]',
 	USERNAME: '[5401]',
 	PASSWORD: '[3376]',
@@ -44,6 +44,18 @@ export const EN = {
   BID: '[8862]',
   SEQ: '[11479]',
   BY_ORDER: '[5473]',
-  BY_PRICE: '[5474]'
+  BY_PRICE: '[5474]',
+  JAN: '[4157]',
+  FEB: '[9443]',
+  MAR: '[4159]',
+  APR: '[4160]',
+  MAY: '[2694]',
+  JUN: '[4162]',
+  JUL: '[4163]',
+  AUG: '[4164]',
+  SEP: '[9444]',
+  OCT: '[4166]',
+  NOV: '[4167]',
+  DEC: '[4168]'
 };
 
