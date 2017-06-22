@@ -1,3 +1,4 @@
+import { AdviceDataStore } from './data-stores/advice-data-store';
 import { ChartDataStore } from './data-stores/chart-data-store';
 import { CommonModule } from '@angular/common';
 import { DepthDataStore } from './data-stores/depth-data-store';
@@ -23,6 +24,7 @@ import { TimeAndSalesDataStore } from './data-stores/time-and-sales-data-store';
 		IndexDataStore,
 		ExchangeDataStore,
 		ChartDataStore,
+		AdviceDataStore,
 	],
 })
 export class PriceModule { }

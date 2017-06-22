@@ -1,3 +1,4 @@
+import { AdviceDataStore } from '../../data-stores/advice-data-store';
 import { ChartDataStore } from '../../data-stores/chart-data-store';
 import { DepthDataStore } from '../../data-stores/depth-data-store';
 import { ExchangeDataStore } from '../../data-stores/exchange-data-store';
@@ -26,6 +27,7 @@ export class PriceStreamingResponseHandler {
 		private stockDataStore: StockDataStore,
 		private exchangeDataStore: ExchangeDataStore,
 		private indexDataStore: IndexDataStore,
+		private adviceDataStore: AdviceDataStore,
 	) {
 		this.priceResponseStream$ = new Subject();
 		this.metaAuthResponseStream$ = new Subject();
@@ -83,6 +85,9 @@ export class PriceStreamingResponseHandler {
 				break;
 			case PriceRequestTypes.MarketMeta:
 				this.indexDataStore.updateIndexDataStote(response);
+				break;
+			case PriceRequestTypes.TradingAdvices:
+				this.adviceDataStore.updateTradingAdvices(response);
 				break;
 			default:
 				// code here

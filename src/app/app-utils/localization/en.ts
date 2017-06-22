@@ -1,4 +1,5 @@
-﻿export const EN = {
+﻿
+export const EN = {
 	VWAP: 'VWAP',
 	PREV_CLOSE: 'Prev. Close',
 	OPEN: 'Open',
@@ -45,4 +46,16 @@
 	SEQ: 'Seq.',
 	BY_ORDER: 'By Order',
 	BY_PRICE: 'By Price',
+	JAN: 'Jan',
+	FEB: 'Feb',
+	MAR: 'Mar',
+	APR: 'Apr',
+	MAY: 'May',
+	JUN: 'Jun',
+	JUL: 'Jul',
+	AUG: 'Aug',
+	SEP: 'Sep',
+	OCT: 'Oct',
+	NOV: 'Nov',
+	DEC: 'Dec',
 };
