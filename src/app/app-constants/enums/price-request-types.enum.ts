@@ -21,6 +21,6 @@ export enum PriceRequestTypes {
 	PriceHistory = 44,
 	SymbolMeta = 46,
 	TopStocks = 50,
-	TradingAdvicesBacklog = 60,
+	TradingAdvices = 60,
 	MarketMeta = 80,
 }

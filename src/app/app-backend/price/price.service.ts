@@ -260,12 +260,14 @@ export class PriceService {
 		}
 	}
 
-	public addRealTimeAdviceRequest(): void {
+	public addRealTimeAdviceRequest(apm: Object, sym: Array<string>): void {
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.TradingAdvicesBacklog;
+		req.mt = PriceRequestTypes.TradingAdvices;
 		req.lan = this.localizationService.getshortCode();
+		req.apm = apm;
+		req.sym = sym;
 		const request = {
-			channel : Channels.PriceMeta,
+			channel : Channels.Price,
 			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
 		};
 		this.dataService.sendToWs(request);
@@ -276,7 +278,7 @@ export class PriceService {
 		pgi: number,
 		pgs: number}): void {
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.TradingAdvicesBacklog;
+		req.mt = PriceRequestTypes.TradingAdvices;
 		req.lan = this.localizationService.getshortCode();
 		req.exg = requestParms.exg;
 		req.apm = requestParms.apm;

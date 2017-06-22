@@ -4,6 +4,7 @@ import { PriceService } from '../../../app-backend/price/price.service';
 @Component({
 	selector: 'app-real-time-advice',
 	templateUrl: './real-time-advice.component.html',
+	styleUrls: ['./real-time-advice.component.scss'],
 })
 export class RealTimeAdviceComponent implements OnInit {
 
@@ -11,6 +12,16 @@ export class RealTimeAdviceComponent implements OnInit {
 
 	public ngOnInit(): void {
 		this.subscribeForBacklogRTA();
+		this.subscribeForRealTimeRTA();
+	}
+
+	private subscribeForRealTimeRTA(): void {
+		const prm =  ['ADSM', 'DIFX', 'DFM'];
+		const apm = {
+			BKL: 0,
+			GL2: '',
+		};
+		this.priceService.addRealTimeAdviceRequest(apm, prm);
 	}
 
 	private subscribeForBacklogRTA(): void {

@@ -187,7 +187,7 @@ export class PriceRequest {
 
 		if (this.apm) {
 			arrBuild.push('"APM":{');
-			for (const key in this.apm){
+			for (const key in this.apm) {
 				if (this.apm.hasOwnProperty(key)) {
 					arrBuild.push('"' + key + '":"' + this.apm[key] + '"');
 					arrBuild.push(',');
