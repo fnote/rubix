@@ -37,4 +37,13 @@ export class RealTimeAdviceComponent implements OnInit {
 		};
 		this.priceService.addBacklogRTARequest(requestParms);
 	}
+
+	public onDestroy(): void {
+		const exg =  ['ADSM', 'DIFX', 'DFM'];
+		const apm = {
+			BKL: 0,
+			GL2: '',
+		};
+		this.priceService.removeRealTimeAdviceRequest(apm, exg);
+	}
 }

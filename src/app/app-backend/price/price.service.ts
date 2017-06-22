@@ -260,17 +260,46 @@ export class PriceService {
 		}
 	}
 
-	public addRealTimeAdviceRequest(apm: Object, exg: Array<string>): void {
-		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.TradingAdvices;
-		req.lan = this.localizationService.getshortCode();
-		req.apm = apm;
-		req.sym = exg;
-		const request = {
-			channel : Channels.Price,
-			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
-		};
-		this.dataService.sendToWs(request);
+	public addRealTimeAdviceRequest(apm: Object, exgList: Array<string>): void {
+		const subExgList = [];
+		for (const exg of exgList) {
+			if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.TradingAdvices, exg)) {
+				subExgList.push(exg);
+			}
+		}
+		if (subExgList.length > 0) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.TradingAdvices;
+			req.lan = this.localizationService.getshortCode();
+			req.apm = apm;
+			req.sym = subExgList;
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
+	}
+
+	public removeRealTimeAdviceRequest(apm: Object, exgList: Array<string>): void {
+		const unsubExgList = [];
+		for (const exg of exgList) {
+			if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.TradingAdvices, exg)) {
+				unsubExgList.push(exg);
+			}
+		}
+		if (unsubExgList.length > 0) {
+			const req = new PriceRequest();
+			req.mt = PriceRequestTypes.TradingAdvices;
+			req.lan = this.localizationService.getshortCode();
+			req.apm = apm;
+			req.sym = unsubExgList;
+			const request = {
+				channel : Channels.Price,
+				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
+			};
+			this.dataService.sendToWs(request);
+		}
 	}
 
 	public addBacklogRTARequest(requestParms: {exg: string[],
