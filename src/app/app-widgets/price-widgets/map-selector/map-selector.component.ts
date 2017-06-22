@@ -13,13 +13,13 @@ import { widgetQueryParams } from '../../../app-constants/const/widget-query-par
 })
 
 export class MapSelectorComponent extends BaseWidgetComponent {
-	private options: Object;
+	public options: Object;
+	public allIndeces = [];
+	public selectedIndexList;
+	public title = 'All indices';
 	private lblSec0 = 0;
 	private lblSec1 = 0.5;
 	private lblSec2 = 1;
-	public allIndeces = [];
-	public selectedIndexList;
-	private title = 'All indices';
 
 	constructor(private priceService: PriceService, private indexDataStore: IndexDataStore,
 		private injector: Injector, public localizationService: LocalizationService) {
@@ -146,21 +146,25 @@ export class MapSelectorComponent extends BaseWidgetComponent {
 		};
 	}
 
-	private onChartSelection (event: any): void {
+	public onChartSelection (event: any): void {
 		// Not implemented yet
 	}
 
-	private onUnselect (event: any): void {
+	public onUnselect (event: any): void {
 		// Not implemented yet
 	}
 
-	private onMouseOver (event: any): void {
+	public onMouseOver (event: any): void {
 		if (event.context) {
 			this.setIndicesForCountry(event);
 		}
 	}
 
-	private onMouseOut (event: any): void {
+	public onMouseOut (event: any): void {
 		this.setIndicesForCountry(null);
+	}
+
+	public onMouseOverChart (event: any): void {
+		// Not implemented yet
 	}
 }

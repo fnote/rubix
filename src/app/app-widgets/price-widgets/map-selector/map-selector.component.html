@@ -1,7 +1,7 @@
 
 <h3>{{title}}</h3>
 
-<chart type="Map" [options]="options" (series.point.mouseOver)="onMouse($event)" >
+<chart type="Map" [options]="options" (series.point.mouseOver)="onMouseOverChart($event)" >
 	 <series>
 		 <point  (mouseOver)="onMouseOver($event)" (mouseOut)="onMouseOut($event)" (select)="onChartSelection($event)" (unselect)="onUnselect($event)"></point>
 	 </series>

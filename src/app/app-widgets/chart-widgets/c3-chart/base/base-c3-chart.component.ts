@@ -17,11 +17,12 @@ import { widgetQueryParams } from '../../../../app-constants/const/widget-query-
 export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnChanges*/{
 	@Input() public data;
 
-	private stockObj;
+	public stockObj;
+	public chartOutletID;
+
 	private period = '1m'; // TODO [Malindu]:put these in constants
 	private isOHLC = true;
 	private subscription$;
-	private chartOutletID;
 
 	constructor(
 		private priceService: PriceService,
