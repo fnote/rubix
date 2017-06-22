@@ -39,7 +39,10 @@
     {
       "files": "src/**/*.ts",
       "project": "src/tsconfig.json",
-	  "exclude": "src/test.ts"
+	  "exclude": [
+	      "src/test.ts",
+          "src/app/app-widgets/price-widgets/map-selector/world-map-cordinates.ts"
+	  ]
     },
     {
       "files": "e2e/**/*.ts",
