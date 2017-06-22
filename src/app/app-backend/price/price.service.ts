@@ -303,7 +303,7 @@ export class PriceService {
 	}
 
 	public addBacklogRTARequest(requestParms: {exg: string[],
-		apm: Object,
+		apm?: Object,
 		pgi: number,
 		pgs: number}): void {
 		const req = new PriceRequest();

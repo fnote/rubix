@@ -25,7 +25,7 @@ export class RealTimeAdviceComponent implements OnInit {
 	}
 
 	private subscribeForBacklogRTA(): void {
-		const requestParms = {
+		const trackRcrdRqstParms = {
 			exg: ['DFM'],
 			pgi: 0,
 			pgs: 20,
@@ -35,7 +35,13 @@ export class RealTimeAdviceComponent implements OnInit {
 				SD : '20170323000000',
 			},
 		};
-		this.priceService.addBacklogRTARequest(requestParms);
+		const blRtaRqstParms = {
+			exg: ['DFM'],
+			pgi: 0,
+			pgs: 20,
+		};
+		this.priceService.addBacklogRTARequest(trackRcrdRqstParms);
+		this.priceService.addBacklogRTARequest(blRtaRqstParms);
 	}
 
 	public onDestroy(): void {
