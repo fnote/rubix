@@ -175,12 +175,12 @@
 		"CallExpression": {"arguments": "first"}
 		}],
 	"ter-max-len": [true, {
-		"code": 120,
-    	"ignoreImports": true,
-    	"ignoreUrls": true,
+    "code": 140,
+    "ignoreImports": true,
+    "ignoreUrls": true,
 		"ignoreStrings": true,
 		"ignoreTrailingComments": true,
-    	"ignorePattern": "^\\s*(let|const)\\s.+=\\s*require\\s*\\("
+    "ignorePattern": "^\\s*(let|const)\\s.+=\\s*require\\s*\\("
   	}],
 	"new-parens": true,
 	"no-consecutive-blank-lines": [true, 1],
