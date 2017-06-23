@@ -88,7 +88,7 @@ export class PriceStreamingRequestHandler {
 	public generateAddAjaxRequest(url: string, sessionID: string, req: PriceRequest): string {
 		req.rt = 1;
 		const priceReq = req.buildMessage();
-		//TODO : url creation should be strategic
+		// TODO : url creation should be strategic
 		return url + '/bl?22=' + sessionID + '&24=30&1000=1&req=' + priceReq;
 	}
 
