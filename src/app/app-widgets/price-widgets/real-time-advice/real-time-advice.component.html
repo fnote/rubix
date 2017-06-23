@@ -1,6 +1,17 @@
 <p>
   real-time-advice works!
 </p>
-<app-content-display-box (testEventEmitter)="onEventEmit($event)"></app-content-display-box>
-
+<ul>
+  <li *ngFor="let contentItem of contentData">
+    <app-content-display-box (testEventEmitter)="onEventEmit($event)" 
+      [contentData]="contentItem"
+      [imageUrl]= "contentItem.imageUrl"
+      [title]= "contentItem.title"
+      [discription]= "contentItem.discription"
+      [fotterDis]= "contentItem.fotterDis"
+      [action1]= "contentItem.action1"
+      [action2]= "contentItem.action2"
+    ></app-content-display-box>
+  </li>
+</ul>
 

@@ -6,7 +6,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 	styleUrls: ['./content-display-box.component.scss'],
 })
 export class ContentDisplayBoxComponent implements OnInit {
-
+	@Input() public contentData: Object;
+	@Input() public imageUrl: string;
+	@Input() public title: string;
+	@Input() public discription: string;
+	@Input() public fotterDis: string;
+	@Input() public action1: string;
+	@Input() public action2: string;
 	@Output() public testEventEmitter: EventEmitter<string> = new EventEmitter();
 
 	constructor() {
