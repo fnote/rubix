@@ -3,7 +3,6 @@ import { BaseDataStore } from './base-data-store';
 import { ChartDataEntity } from '../business-entities/chart-data-entity';
 import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
 import { Injectable } from '@angular/core';
-import { ReflectiveInjector } from '@angular/core';
 import { StockDataStore } from './stock-data-store';
 
 @Injectable()
@@ -11,14 +10,10 @@ export class ChartDataStore extends BaseDataStore {
 
 	private historyStore = {};
 	private ohlcStore = {};
-	private stockDataStore: StockDataStore;
 	public id;
 
-	constructor() {
+	constructor(private stockDataStore : StockDataStore) {
 		super();
-		window['chartDataStore'] = this;
-		const injector = ReflectiveInjector.resolveAndCreate([StockDataStore]);
-		this.stockDataStore = injector.get(StockDataStore);
 	}
 
 	public getHistory(exgSym: [string, string]): ReplaySubject<ChartDataEntity[]> {
