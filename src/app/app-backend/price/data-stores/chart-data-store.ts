@@ -12,7 +12,7 @@ export class ChartDataStore extends BaseDataStore {
 	private ohlcStore = {};
 	public id;
 
-	constructor(private stockDataStore : StockDataStore) {
+	constructor(private stockDataStore: StockDataStore, private commonHelperService: CommonHelperService) {
 		super();
 	}
 
@@ -60,7 +60,9 @@ export class ChartDataStore extends BaseDataStore {
 		let dataEntity;
 
 		for (const item of values.HIST){
-			dataEntity = new ChartDataEntity(item);
+			dataEntity = new ChartDataEntity();
+			dataEntity.commonHelperService = this.commonHelperService;
+			dataEntity.setValues(item);
 			dataEntity.decimalPlaces = this.stockDataStore.getOrAddStock([exgSym[0], exgSym[1]]).decimalPlaces;
 			historyArray.push(dataEntity);
 		}
@@ -85,7 +87,9 @@ export class ChartDataStore extends BaseDataStore {
 		let dataEntity;
 
 		for (const item of values.HIST){
-			dataEntity = new ChartDataEntity(item);
+			dataEntity = new ChartDataEntity();
+			dataEntity.commonHelperService = this.commonHelperService;
+			dataEntity.setValues(item);
 			dataEntity.isHistory = false;
 			dataEntity.decimalPlaces = this.stockDataStore.getOrAddStock([exgSym[0], exgSym[1]]).decimalPlaces;
 			historyArray.push(dataEntity);
@@ -109,7 +113,9 @@ export class ChartDataStore extends BaseDataStore {
 		const key = values.exchangeCode + '~' + values.symbolCode;
 		const exgSym = [values.exchangeCode, values.symbolCode];
 		const ohlcArray$ = this.ohlcStore[key];
-		const dataEntity = new ChartDataEntity(values);
+		const dataEntity = new ChartDataEntity();
+		dataEntity.commonHelperService = this.commonHelperService;
+		dataEntity.setValues(values);
 
 		dataEntity.isHistory = false;
 		dataEntity.decimalPlaces = this.stockDataStore.getOrAddStock([exgSym[0], exgSym[1]]).decimalPlaces;

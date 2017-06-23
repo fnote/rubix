@@ -1,11 +1,10 @@
 import { BaseEntity } from './base-entity';
 import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
-import { ReflectiveInjector } from '@angular/core';
 import { userSettings } from '../../../app-config/user-settings';
 
 export class ChartDataEntity extends BaseEntity {
 
-	private commonHelperService: CommonHelperService;
+	private _commonHelperService: CommonHelperService;
 	private _rawHighPrice: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _highPrice: string = userSettings.marketData.defaultStringInitializer;
 	private _rawLowPrice: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
@@ -22,6 +21,10 @@ export class ChartDataEntity extends BaseEntity {
 	private _adjClosePrice: string = userSettings.marketData.defaultStringInitializer;
 	private _isHistory = true;
 
+	public set commonHelperService(value: CommonHelperService) {
+		this._commonHelperService = value;
+	}
+
 	public get rawHighPrice(): number  {
 		return this._rawHighPrice;
 	}
@@ -36,7 +39,7 @@ export class ChartDataEntity extends BaseEntity {
 
 	public set highPrice(value: string) {
 		this.rawHighPrice = parseFloat(value);
-		this._highPrice = this.commonHelperService.formatNumber(this.rawHighPrice, this._decimalPlaces);
+		this._highPrice = this._commonHelperService.formatNumber(this.rawHighPrice, this._decimalPlaces);
 	}
 
 	public get rawLowPrice(): number  {
@@ -53,7 +56,7 @@ export class ChartDataEntity extends BaseEntity {
 
 	public set lowPrice(value: string) {
 		this.rawLowPrice = parseFloat(value);
-		this._lowPrice = this.commonHelperService.formatNumber(this.rawLowPrice, this._decimalPlaces);
+		this._lowPrice = this._commonHelperService.formatNumber(this.rawLowPrice, this._decimalPlaces);
 	}
 
 	public get rawClosePrice(): number  {
@@ -70,7 +73,7 @@ export class ChartDataEntity extends BaseEntity {
 
 	public set closePrice(value: string) {
 		this.rawClosePrice = parseFloat(value);
-		this._closePrice = this.commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
+		this._closePrice = this._commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
 		this._adjClosePrice = this.closePrice;
 	}
 
@@ -79,7 +82,7 @@ export class ChartDataEntity extends BaseEntity {
 	}
 
 	public set openPrice(value: string) {
-		this._openPrice = this.commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
+		this._openPrice = this._commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get volume(): string {
@@ -87,7 +90,7 @@ export class ChartDataEntity extends BaseEntity {
 	}
 
 	public set volume(value: string) {
-		this._volume = this.commonHelperService.formatNumber(parseFloat(value), 0);
+		this._volume = this._commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public set decimalPlaces(value: number) {
@@ -126,7 +129,7 @@ export class ChartDataEntity extends BaseEntity {
 
 	public set lastTradedPrice(value: string) {
 		this.rawLastTradedPrice = parseFloat(value);
-		this._lastTradedPrice = this.commonHelperService.formatNumber(this.rawLastTradedPrice, this._decimalPlaces);
+		this._lastTradedPrice = this._commonHelperService.formatNumber(this.rawLastTradedPrice, this._decimalPlaces);
 	}
 
 	public get adjClosePrice(): string  {
@@ -143,10 +146,6 @@ export class ChartDataEntity extends BaseEntity {
 
 	constructor(values: Object = {}) {
 		super();
-
-		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
-		this.commonHelperService = injector.get(CommonHelperService);
-
 		this.setValues(values);
 	}
 }
