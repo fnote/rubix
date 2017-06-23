@@ -54,7 +54,7 @@ export class RealTimeAdviceComponent implements OnInit {
 		this.priceService.removeRealTimeAdviceRequest(apm, exg);
 	}
 
-	public onEventEmit(button: string): void {
-		alert(button);
+	public onEventEmit(testString: string): void {
+		alert(testString);
 	}
 }
