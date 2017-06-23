@@ -1,6 +1,4 @@
 import { BaseEntity } from './base-entity';
-import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
-import { ReflectiveInjector } from '@angular/core';
 
 export class IndexEntity extends BaseEntity {
 	private _des: string;
@@ -16,13 +14,9 @@ export class IndexEntity extends BaseEntity {
 
 	private _symbolList: string[];
 	private _indexSymbolCode: string;
-	private commonHelperService: CommonHelperService;
 
 	constructor(values: Object = {}) {
 		super();
-
-		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
-		this.commonHelperService = injector.get(CommonHelperService);
 
 		this.setValues(values);
 	}

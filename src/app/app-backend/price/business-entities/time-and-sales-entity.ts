@@ -1,11 +1,10 @@
 import { BaseEntity } from './base-entity';
 import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
-import { ReflectiveInjector } from '@angular/core';
 import { userSettings } from '../../../app-config/user-settings';
 
 export class TimeAndSalesEntity extends BaseEntity {
 
-	private commonHelperService: CommonHelperService;
+	private _commonHelperService: CommonHelperService;
 	private _splits: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _time: string = userSettings.marketData.defaultStringInitializer;
 	private _sequence: string = userSettings.marketData.defaultStringInitializer;
@@ -20,6 +19,10 @@ export class TimeAndSalesEntity extends BaseEntity {
 	private _typeClass: string;
 	private _displayTime: string;
 	private _decimalPlaces: number;
+
+	public set commonHelperService(value: CommonHelperService) {
+		this._commonHelperService = value;
+	}
 
 	public get splits(): number {
 		return this._splits;
@@ -66,7 +69,7 @@ export class TimeAndSalesEntity extends BaseEntity {
 	}
 
 	public set change(value: string) {
-		this._change = this.commonHelperService.roundNumber(parseFloat(value), this._decimalPlaces);
+		this._change = this._commonHelperService.roundNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get perChange(): string {
@@ -74,7 +77,7 @@ export class TimeAndSalesEntity extends BaseEntity {
 	}
 
 	public set perChange(value: string) {
-		this._perChange = this.commonHelperService.roundNumber(parseFloat(value), this._decimalPlaces);
+		this._perChange = this._commonHelperService.roundNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get turnOver(): string {
@@ -131,8 +134,6 @@ export class TimeAndSalesEntity extends BaseEntity {
 
 	constructor(values: Object = {}) {
 		super();
-		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
-		this.commonHelperService = injector.get(CommonHelperService);
 		this.setValues(values);
 	}
 }

@@ -3,7 +3,6 @@ import { CommonHelperService } from '../../../app-utils/helper/common-helper.ser
 import { ExchangeDataStore } from './exchange-data-store';
 import { Injectable } from '@angular/core';
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
-import { ReflectiveInjector } from '@angular/core';
 import { StockDataStore } from './stock-data-store';
 import { TimeAndSalesEntity } from '../business-entities/time-and-sales-entity';
 
@@ -12,18 +11,17 @@ const MAX_TABLE_LENGTH = 20;
 @Injectable()
 export class TimeAndSalesDataStore extends BaseDataStore {
 
-	private commonHelperService: CommonHelperService;
-	private localizationService: LocalizationService;
 	private timeAndSalesDataArray: TimeAndSalesEntity[] = [];
 	private exgSym: [string, string] = ['' ,  ''];
 	private priceModificationFactor = 1;
 
-	constructor(private stockDataStore: StockDataStore, private exchangeDataStore: ExchangeDataStore) {
+	constructor(
+		private stockDataStore: StockDataStore,
+		private exchangeDataStore: ExchangeDataStore,
+		private commonHelperService: CommonHelperService,
+		private localizationService: LocalizationService,
+	) {
 		super();
-
-		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService, LocalizationService]);
-		this.commonHelperService = injector.get(CommonHelperService);
-		this.localizationService = injector.get(LocalizationService);
 	}
 
 	public getTimeAndSalesDataArray(): TimeAndSalesEntity[] {
@@ -53,6 +51,7 @@ export class TimeAndSalesDataStore extends BaseDataStore {
 		const entity = new TimeAndSalesEntity();
 		let symbolDate;
 
+		entity.commonHelperService = this.commonHelperService;
 		entity.symbolCode = values.symbolCode || previousEntity.symbolCode;
 		entity.exchangeCode = values.exchangeCode || previousEntity.exchangeCode;
 		entity.decimalPlaces =

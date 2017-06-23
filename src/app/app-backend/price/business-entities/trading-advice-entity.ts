@@ -1,11 +1,10 @@
 import { BaseEntity } from './base-entity';
 import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
-import { ReflectiveInjector } from '@angular/core';
 import { userSettings } from '../../../app-config/user-settings';
 
 export class TradingAdviceEntity extends BaseEntity {
 
-	private commonHelperService: CommonHelperService;
+	private _commonHelperService: CommonHelperService;
 
 	private _title: string =  userSettings.marketData.defaultStringInitializer;
 	private _rawDate: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
@@ -29,6 +28,10 @@ export class TradingAdviceEntity extends BaseEntity {
 	private _gicsL4: string = userSettings.marketData.defaultStringInitializer;
 	private _companyId: string = userSettings.marketData.defaultStringInitializer;
 	private _decimalPlaces: number;
+
+	public set commonHelperService(value: CommonHelperService) {
+		this._commonHelperService = value;
+	}
 
 	public get title(): string  {
 		return this._title;
@@ -100,7 +103,7 @@ export class TradingAdviceEntity extends BaseEntity {
 	}
 
 	public set unrealizedReturn(value: string) {
-		this._unrealizedReturn = this.commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
+		this._unrealizedReturn = this._commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get remainingPotential(): string  {
@@ -108,7 +111,7 @@ export class TradingAdviceEntity extends BaseEntity {
 	}
 
 	public set remainingPotential(value: string) {
-		this._remainingPotential = this.commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
+		this._remainingPotential = this._commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get entryPrice(): string  {
@@ -117,7 +120,7 @@ export class TradingAdviceEntity extends BaseEntity {
 
 	public set entryPrice(value: string) {
 
-		this._entryPrice = this.commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
+		this._entryPrice = this._commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get stopLoss(): string  {
@@ -125,7 +128,7 @@ export class TradingAdviceEntity extends BaseEntity {
 	}
 
 	public set stopLoss(value: string) {
-		this._stopLoss = this.commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
+		this._stopLoss = this._commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get takeProfit(): string  {
@@ -133,7 +136,7 @@ export class TradingAdviceEntity extends BaseEntity {
 	}
 
 	public set takeProfit(value: string) {
-		this._takeProfit = this.commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
+		this._takeProfit = this._commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get exitPrice(): string  {
@@ -141,7 +144,7 @@ export class TradingAdviceEntity extends BaseEntity {
 	}
 
 	public set exitPrice(value: string) {
-		this._exitPrice = this.commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
+		this._exitPrice = this._commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get indexPercentageChange(): string  {
@@ -149,7 +152,7 @@ export class TradingAdviceEntity extends BaseEntity {
 	}
 
 	public set indexPercentageChange(value: string) {
-		this._indexPercentageChange = this.commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
+		this._indexPercentageChange = this._commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get realizedProfit(): string  {
@@ -157,7 +160,7 @@ export class TradingAdviceEntity extends BaseEntity {
 	}
 
 	public set realizedProfit(value: string) {
-		this._realizedProfit = this.commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
+		this._realizedProfit = this._commonHelperService.formatNumber(parseFloat(value), this._decimalPlaces);
 	}
 
 	public get report(): string  {
@@ -206,8 +209,6 @@ export class TradingAdviceEntity extends BaseEntity {
 
 	constructor(values: Object = {}) {
 		super();
-		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
-		this.commonHelperService = injector.get(CommonHelperService);
 		this.setValues(values);
 	}
 }

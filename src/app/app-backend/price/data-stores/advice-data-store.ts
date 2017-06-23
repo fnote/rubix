@@ -1,4 +1,5 @@
 import { BaseDataStore } from './base-data-store';
+import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
 import { ConfigService } from '../../../app-config/config.service';
 import { Injectable } from '@angular/core';
 import { StockDataStore } from './stock-data-store';
@@ -11,11 +12,17 @@ export class AdviceDataStore extends BaseDataStore {
 
 	private rtaDataArray: TradingAdviceEntity[] = [];
 	private rtaTrackRecordDataArray: TradingAdviceEntity[] = [];
-	private trackRecordEntity: TrackRecordEntity = new TrackRecordEntity();
+	private trackRecordEntity: TrackRecordEntity;
 	private exgSym: [string, string] = ['' ,  ''];
 
-	constructor(private stockDataStore: StockDataStore, private configService: ConfigService) {
+	constructor(
+		private stockDataStore: StockDataStore,
+		private configService: ConfigService,
+		private commonHelperService: CommonHelperService,
+	) {
 		super();
+		this.trackRecordEntity = new TrackRecordEntity();
+		this.trackRecordEntity.commonHelperService = commonHelperService;
 	}
 
 	public getRTADataArray(): TradingAdviceEntity[] {
@@ -107,6 +114,7 @@ export class AdviceDataStore extends BaseDataStore {
 		const exgSym: [string, string] = [values.symbolCode, values.exchangeCode];
 		const stockObject = this.stockDataStore.getOrAddStock(exgSym);
 
+		rtaDataEntity.commonHelperService = this.commonHelperService;
 		rtaDataEntity.decimalPlaces = this.stockDataStore.getOrAddStock(exgSym).decimalPlaces;
 		rtaDataEntity.setValues(values);
 		rtaDataEntity.isTradable = true;

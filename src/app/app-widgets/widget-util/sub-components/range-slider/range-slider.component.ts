@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ReflectiveInjector, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonHelperService } from '../../../../app-utils/helper/common-helper.service';
 
 @Component({
@@ -13,11 +13,9 @@ export class RangeSliderComponent implements OnChanges {
 
 	public dispPercentage = '';
 	public percentage = 0;
-	private commonHelperService: CommonHelperService;
 
-	constructor() {
-		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
-		this.commonHelperService = injector.get(CommonHelperService);
+	constructor(private commonHelperService: CommonHelperService) {
+
 	}
 
 	public ngOnChanges(changes: SimpleChanges): void {

@@ -1,11 +1,10 @@
 import { BaseEntity } from './base-entity';
 import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
-import { ReflectiveInjector } from '@angular/core';
 import { userSettings } from '../../../app-config/user-settings';
 
 export class StockEntity extends BaseEntity {
 
-	private commonHelperService: CommonHelperService;
+	private _commonHelperService: CommonHelperService;
 
 	private _instrumentType: number = userSettings.marketData.defaultDecimalPlaces;
 	private _longDesc: string = userSettings.marketData.defaultStringInitializer;
@@ -59,6 +58,10 @@ export class StockEntity extends BaseEntity {
 	private _rangePercentage: string = userSettings.marketData.defaultStringInitializer;
 	private _range: string = userSettings.marketData.defaultStringInitializer;
 	private _bidOfferDifference: string = userSettings.marketData.defaultStringInitializer;
+
+	public set commonHelperService(value: CommonHelperService) {
+		this._commonHelperService = value;
+	}
 
 	public get instrumentType(): number  {
 		return this._instrumentType;
@@ -133,7 +136,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set lastTradePrice(value: number) {
-		this._lastTradePrice = [this.commonHelperService.formatNumber(value, this.decimalPlaces), value];
+		this._lastTradePrice = [this._commonHelperService.formatNumber(value, this.decimalPlaces), value];
 	}
 
 	public get openPrice(): string  {
@@ -141,7 +144,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set openPrice(value: string) {
-		this._openPrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this._openPrice = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get rawHighPrice(): number  {
@@ -159,7 +162,7 @@ export class StockEntity extends BaseEntity {
 
 	public set highPrice(value: string) {
 		this.rawHighPrice = parseFloat(value);
-		this._highPrice = this.commonHelperService.formatNumber(this.rawHighPrice, this.decimalPlaces);
+		this._highPrice = this._commonHelperService.formatNumber(this.rawHighPrice, this.decimalPlaces);
 	}
 
 	public get rawLowPrice(): number  {
@@ -177,7 +180,7 @@ export class StockEntity extends BaseEntity {
 
 	public set lowPrice(value: string) {
 		this.rawLowPrice = parseFloat(value);
-		this._lowPrice = this.commonHelperService.formatNumber(this.rawLowPrice, this.decimalPlaces);
+		this._lowPrice = this._commonHelperService.formatNumber(this.rawLowPrice, this.decimalPlaces);
 	}
 
 	public get closePrice(): string  {
@@ -185,7 +188,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set closePrice(value: string) {
-		this._closePrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this._closePrice = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get rawBestAskPrice(): number  {
@@ -205,7 +208,7 @@ export class StockEntity extends BaseEntity {
 
 	public set bestAskPrice(value: string) {
 		this.rawBestAskPrice = parseFloat(value);
-		this._bestAskPrice = this.commonHelperService.formatNumber(this.rawBestAskPrice, this.decimalPlaces);
+		this._bestAskPrice = this._commonHelperService.formatNumber(this.rawBestAskPrice, this.decimalPlaces);
 	}
 
 	public get bestAskQty(): string  {
@@ -213,7 +216,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set bestAskQty(value: string) {
-		this._bestAskQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
+		this._bestAskQty = this._commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public get rawBestBidPrice(): number  {
@@ -233,7 +236,7 @@ export class StockEntity extends BaseEntity {
 
 	public set bestBidPrice(value: string) {
 		this.rawBestBidPrice = parseFloat(value);
-		this._bestBidPrice = this.commonHelperService.formatNumber(this.rawBestBidPrice, this.decimalPlaces);
+		this._bestBidPrice = this._commonHelperService.formatNumber(this.rawBestBidPrice, this.decimalPlaces);
 	}
 
 	public get bestBidQty(): string  {
@@ -241,7 +244,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set bestBidQty(value: string) {
-		this._bestBidQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
+		this._bestBidQty = this._commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public get rawTotalBidQty(): number  {
@@ -260,7 +263,7 @@ export class StockEntity extends BaseEntity {
 
 	public set totalBidQty(value: string) {
 		this.rawTotalBidQty = parseFloat(value);
-		this._totalBidQty = this.commonHelperService.formatNumber(this.rawTotalBidQty, 0);
+		this._totalBidQty = this._commonHelperService.formatNumber(this.rawTotalBidQty, 0);
 	}
 
 	public get rawTotalAskQty(): number  {
@@ -279,7 +282,7 @@ export class StockEntity extends BaseEntity {
 
 	public set totalAskQty(value: string) {
 		this.rawTotalAskQty = parseFloat(value);
-		this._totalAskQty = this.commonHelperService.formatNumber(this.rawTotalAskQty, 0);
+		this._totalAskQty = this._commonHelperService.formatNumber(this.rawTotalAskQty, 0);
 	}
 
 	public get rawChange(): number {
@@ -296,7 +299,7 @@ export class StockEntity extends BaseEntity {
 
 	public set change(value: string) {
 		this.rawChange = parseFloat(value);
-		this._change = this.commonHelperService.formatNumber(this.rawChange, this.decimalPlaces);
+		this._change = this._commonHelperService.formatNumber(this.rawChange, this.decimalPlaces);
 	}
 
 	public get perChange(): string {
@@ -304,7 +307,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set perChange(value: string) {
-		this._perChange = this.commonHelperService.formatNumber(
+		this._perChange = this._commonHelperService.formatNumber(
 			parseFloat(value), userSettings.marketData.defaultPercentageDecimalPlaces);
 	}
 
@@ -313,7 +316,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set previousClosePrice(value: string) {
-		this._previousClosePrice = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this._previousClosePrice = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get turnover(): string {
@@ -321,7 +324,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set turnover(value: string) {
-		this._turnover = this.commonHelperService.formatNumber(parseFloat(value), 0);
+		this._turnover = this._commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public get volume(): string {
@@ -329,7 +332,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set volume(value: string) {
-		this._volume = this.commonHelperService.formatNumber(parseFloat(value), 0);
+		this._volume = this._commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public get trades(): string {
@@ -337,7 +340,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set trades(value: string) {
-		this._trades = this.commonHelperService.formatNumber(parseFloat(value), 0);
+		this._trades = this._commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public get totalQty(): string {
@@ -345,7 +348,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set totalQty(value: string) {
-		this._totalQty = this.commonHelperService.formatNumber(parseFloat(value), 0);
+		this._totalQty = this._commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public get lastTradeDate(): string {
@@ -353,7 +356,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set lastTradeDate(value: string) {
-		this._lastTradeDate = this.commonHelperService.formatDate(value.toString(), 'YYYY-MM-DD hh:mm:ss', this.exchangeCode, '2');
+		this._lastTradeDate = this._commonHelperService.formatDate(value.toString(), 'YYYY-MM-DD hh:mm:ss', this.exchangeCode, '2');
 	}
 
 	public get vwap(): string {
@@ -361,7 +364,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set vwap(value: string) {
-		this._vwap = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this._vwap = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get min(): string {
@@ -369,7 +372,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set min(value: string) {
-		this._min = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this._min = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get max(): string {
@@ -377,7 +380,7 @@ export class StockEntity extends BaseEntity {
 	}
 
 	public set max(value: string) {
-		this._max = this.commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+		this._max = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get rawHigh52(): number {
@@ -394,7 +397,7 @@ export class StockEntity extends BaseEntity {
 
 	public set high52(value: string) {
 		this.rawHigh52 = parseFloat(value);
-		this._high52 = this.commonHelperService.formatNumber(this.rawHigh52, this.decimalPlaces);
+		this._high52 = this._commonHelperService.formatNumber(this.rawHigh52, this.decimalPlaces);
 	}
 
 	public get rawLow52(): number {
@@ -411,7 +414,7 @@ export class StockEntity extends BaseEntity {
 
 	public set low52(value: string) {
 		this.rawLow52 = parseFloat(value);
-		this._low52 = this.commonHelperService.formatNumber(this.rawLow52, this.decimalPlaces);
+		this._low52 = this._commonHelperService.formatNumber(this.rawLow52, this.decimalPlaces);
 	}
 
 	public get bidOffer(): string {
@@ -460,10 +463,6 @@ export class StockEntity extends BaseEntity {
 
 	constructor(values: Object = {}) {
 		super();
-
-		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
-		this.commonHelperService = injector.get(CommonHelperService);
-
 		this.setValues(values);
 	}
 
@@ -471,7 +470,7 @@ export class StockEntity extends BaseEntity {
 	private calculateBidOfferRatio(): void {
 		if (this.rawTotalAskQty > 0 && this.rawTotalBidQty) {
 			const val = this.rawTotalBidQty / this.rawTotalAskQty;
-			this._bidOffer = this.commonHelperService.formatNumber(val, this.decimalPlaces);
+			this._bidOffer = this._commonHelperService.formatNumber(val, this.decimalPlaces);
 		}
 	}
 
@@ -483,8 +482,8 @@ export class StockEntity extends BaseEntity {
 			spreadPer = 100 * spreadVal * 2 / (this.rawBestAskPrice + this.rawBestBidPrice);
 		}
 
-		this.spread = this.commonHelperService.formatNumber(spreadVal, this.decimalPlaces);
-		this.spreadPercentage = this.commonHelperService.formatNumber(spreadPer, 2) + '%';
+		this.spread = this._commonHelperService.formatNumber(spreadVal, this.decimalPlaces);
+		this.spreadPercentage = this._commonHelperService.formatNumber(spreadPer, 2) + '%';
 	}
 
 	private calculateRange(): void {
@@ -495,8 +494,8 @@ export class StockEntity extends BaseEntity {
 			rangePer = 100 * rangeVal * 2 / (this.rawHighPrice + this.rawLowPrice);
 		}
 
-		this.range = this.commonHelperService.formatNumber(rangeVal, this.decimalPlaces);
-		this.rangePercentage = this.commonHelperService.formatNumber(rangePer, 2) + '%';
+		this.range = this._commonHelperService.formatNumber(rangeVal, this.decimalPlaces);
+		this.rangePercentage = this._commonHelperService.formatNumber(rangePer, 2) + '%';
 	}
 
 	private calculateBidOfferDifference(): void {
@@ -504,7 +503,7 @@ export class StockEntity extends BaseEntity {
 		if (this._rawBestAskPrice !== userSettings.marketData.defaultNumberInitializer.minusOneInitializer &&
 			this._rawBestBidPrice !== userSettings.marketData.defaultNumberInitializer.minusOneInitializer) {
 			difference = this._rawBestAskPrice - this._rawBestBidPrice;
-			this.bidOfferDifference = this.commonHelperService.formatNumber(difference, this.decimalPlaces);
+			this.bidOfferDifference = this._commonHelperService.formatNumber(difference, this.decimalPlaces);
 		}
 	}
 }

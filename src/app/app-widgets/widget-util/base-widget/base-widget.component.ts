@@ -1,6 +1,5 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-import { ReflectiveInjector } from '@angular/core';
 
 @Component({
 	selector: 'app-base-widget',

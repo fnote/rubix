@@ -1,11 +1,10 @@
 import { BaseEntity } from './base-entity';
 import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
-import { ReflectiveInjector } from '@angular/core';
 import { userSettings } from '../../../app-config/user-settings';
 
 export class DepthEntity {
 
-	private commonHelperService: CommonHelperService;
+	private _commonHelperService: CommonHelperService;
 	private _depthID = userSettings.marketData.defaultStringInitializer;
 	private _depthType: string;
 	private _depthValue = userSettings.marketData.defaultStringInitializer;
@@ -14,6 +13,10 @@ export class DepthEntity {
 		userSettings.marketData.defaultStringInitializer,
 	];
 	private _depthSplit = userSettings.marketData.defaultStringInitializer;
+
+	public set commonHelperService(value: CommonHelperService) {
+		this._commonHelperService = value;
+	}
 
 	public get depthID(): string {
 		return this._depthID;
@@ -36,7 +39,7 @@ export class DepthEntity {
 	}
 
 	public set depthValue(value: string) {
-		this._depthValue =  this.commonHelperService.formatNumber(parseFloat(value), 3);
+		this._depthValue =  this._commonHelperService.formatNumber(parseFloat(value), 3);
 	}
 
 	public get depthQty(): string {
@@ -48,7 +51,7 @@ export class DepthEntity {
 	}
 
 	public set depthQty(value: string) {
-		this._depthQty = [this.commonHelperService.formatNumber(parseFloat(value), 0), value];
+		this._depthQty = [this._commonHelperService.formatNumber(parseFloat(value), 0), value];
 	}
 
 	public get depthSplit(): string {
@@ -56,7 +59,7 @@ export class DepthEntity {
 	}
 
 	public set depthSplit(value: string) {
-		this._depthSplit = this.commonHelperService.formatNumber(parseFloat(value), 0);
+		this._depthSplit = this._commonHelperService.formatNumber(parseFloat(value), 0);
 	}
 
 	public setValues(values: Object = {}): void {
@@ -64,15 +67,13 @@ export class DepthEntity {
 	}
 
 	constructor(values: Object = {}) {
-		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
-		this.commonHelperService = injector.get(CommonHelperService);
 		this.setValues(values);
 	}
 }
 
 export class DepthDisplayEntity extends BaseEntity {
 
-	private commonHelperService: CommonHelperService;
+	private _commonHelperService: CommonHelperService;
 	private _bidDisplayPoints: Array<DepthEntity>;
 	private _offerDisplayPoints: Array<DepthEntity>;
 	private _bidQtyArray: Array<number>;
@@ -86,6 +87,10 @@ export class DepthDisplayEntity extends BaseEntity {
 		userSettings.marketData.defaultStringInitializer,
 	];
 	private _subscriptionCount = 0 ;
+
+	public set commonHelperService(value: CommonHelperService) {
+		this._commonHelperService = value;
+	}
 
 	public get bidDisplayPoints(): Array<DepthEntity> {
 		return this._bidDisplayPoints;
@@ -112,7 +117,7 @@ export class DepthDisplayEntity extends BaseEntity {
 	}
 
 	public set totalBidQty(value: string) {
-		this._totalBidQty = [this.commonHelperService.formatNumber(parseFloat(value), 0), value];
+		this._totalBidQty = [this._commonHelperService.formatNumber(parseFloat(value), 0), value];
 	}
 
 	public get totalOfferQty(): string {
@@ -124,7 +129,7 @@ export class DepthDisplayEntity extends BaseEntity {
 	}
 
 	public set totalOfferQty (value: string) {
-		this._totalOfferQty = [this.commonHelperService.formatNumber(parseFloat(value), 0), value];
+		this._totalOfferQty = [this._commonHelperService.formatNumber(parseFloat(value), 0), value];
 	}
 	public get subscriptionCount(): number {
 		return this._subscriptionCount;
@@ -152,8 +157,6 @@ export class DepthDisplayEntity extends BaseEntity {
 
 	constructor(values: Object = {}) {
 		super();
-		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
-		this.commonHelperService = injector.get(CommonHelperService);
 		this.setValues(values);
 	}
 }

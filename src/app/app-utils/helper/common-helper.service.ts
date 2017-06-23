@@ -3,7 +3,6 @@ import * as moment from 'moment';
 import { ExchangeEntity } from '../../app-backend/price/business-entities/exchange-entity';
 import { Injectable } from '@angular/core';
 import { LocalizationService } from '../../app-utils/localization/localization.service';
-import { ReflectiveInjector } from '@angular/core';
 import { TradeHelperService } from './trade-helper.service';
 import { userSettings } from '../../app-config/user-settings';
 
@@ -19,12 +18,8 @@ const DATE_TIME_LENGTH = 14;
 export class CommonHelperService {
 
 	private tradeHelperManager: TradeHelperService;
-	private localizationService: LocalizationService;
 
-	constructor() {
-		const injector = ReflectiveInjector.resolveAndCreate([LocalizationService]);
-		this.localizationService = injector.get(LocalizationService);
-		// TODO [MAlindu] Above will create more than one instance. Try to correct this
+	constructor(private localizationService: LocalizationService) {
 	}
 
 	////////////////////// Date Formatters //////////////////////

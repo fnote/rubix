@@ -1,6 +1,5 @@
 import { BaseEntity } from './base-entity';
 import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
-import { ReflectiveInjector } from '@angular/core';
 import { userSettings } from '../../../app-config/user-settings';
 
 const DATE_START_INDEX = 6;
@@ -10,7 +9,7 @@ const MONTH_END_INDEX = 6;
 
 export class TrackRecordEntity extends BaseEntity {
 
-	private commonHelperService: CommonHelperService;
+	private _commonHelperService: CommonHelperService;
 
 	private _bestSymbolRate: string =  userSettings.marketData.defaultStringInitializer;
 	private _successRate: string = userSettings.marketData.defaultStringInitializer;
@@ -22,12 +21,16 @@ export class TrackRecordEntity extends BaseEntity {
 	private _startDate: string = userSettings.marketData.defaultStringInitializer;
 	private _endDate: string = userSettings.marketData.defaultStringInitializer;
 
+	public set commonHelperService(value: CommonHelperService) {
+		this._commonHelperService = value;
+	}
+
 	public get bestSymbolRate(): string  {
 		return this._bestSymbolRate;
 	}
 
 	public set bestSymbolRate(value: string) {
-		this._bestSymbolRate  = this.commonHelperService.formatNumber(parseFloat(value), 2) + '%';
+		this._bestSymbolRate  = this._commonHelperService.formatNumber(parseFloat(value), 2) + '%';
 	}
 
 	public get successRate(): string  {
@@ -43,7 +46,7 @@ export class TrackRecordEntity extends BaseEntity {
 	}
 
 	public set averageReturn(value: string) {
-		this._averageReturn  = this.commonHelperService.formatNumber(parseFloat(value), 2) + '%';
+		this._averageReturn  = this._commonHelperService.formatNumber(parseFloat(value), 2) + '%';
 	}
 
 	public get marketIndex(): string  {
@@ -51,7 +54,7 @@ export class TrackRecordEntity extends BaseEntity {
 	}
 
 	public set marketIndex(value: string) {
-		this._marketIndex  = this.commonHelperService.formatNumber(parseFloat(value), 2) + '%';
+		this._marketIndex  = this._commonHelperService.formatNumber(parseFloat(value), 2) + '%';
 	}
 
 	public get displaySymbol(): string  {
@@ -85,7 +88,7 @@ export class TrackRecordEntity extends BaseEntity {
 		this._rawStartDate = value;
 		this._startDate =  value.substring(DATE_START_INDEX, DATE_END_INDEX) +
 		'-' +
-		this.commonHelperService.getMonthString(value.substring(MONTH_START_INDEX, MONTH_END_INDEX));
+		this._commonHelperService.getMonthString(value.substring(MONTH_START_INDEX, MONTH_END_INDEX));
 	}
 
 	public get endDate(): string  {
@@ -96,13 +99,11 @@ export class TrackRecordEntity extends BaseEntity {
 		this._rawEndDate = value;
 		this._endDate =  value.substring(DATE_START_INDEX, DATE_END_INDEX) +
 		'-' +
-		this.commonHelperService.getMonthString(value.substring(MONTH_START_INDEX, MONTH_END_INDEX));
+		this._commonHelperService.getMonthString(value.substring(MONTH_START_INDEX, MONTH_END_INDEX));
 	}
 
 	constructor(values: Object = {}) {
 		super();
-		const injector = ReflectiveInjector.resolveAndCreate([CommonHelperService]);
-		this.commonHelperService = injector.get(CommonHelperService);
 		this.setValues(values);
 	}
 }

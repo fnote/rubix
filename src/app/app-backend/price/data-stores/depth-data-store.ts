@@ -1,4 +1,5 @@
 import { BaseDataStore } from './base-data-store';
+import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
 import { DepthDisplayEntity } from '../business-entities/depth-entity';
 import { DepthEntity } from '../business-entities/depth-entity';
 import { Injectable } from '@angular/core';
@@ -8,6 +9,10 @@ import { priceResponseTags } from '../../../app-constants/const/price-response-t
 export class DepthDataStore extends BaseDataStore {
 	private depthPriceStore = {};
 	private depthOrderStore = {};
+
+	constructor(private commonHelperService: CommonHelperService) {
+		super();
+	}
 
 	public getDepthByPriceSymbol (exgSym: [string, string]): DepthDisplayEntity {
 		// TODO: [Chaamini] Get a common "keyGenerator" in utils package
@@ -39,12 +44,20 @@ export class DepthDataStore extends BaseDataStore {
 		const depthPriceCount = 5;
 		const depthOrderCount = 10;
 		const entryCount = type === 'P' ? depthPriceCount : depthOrderCount;
+		const depthDisplayEntity = new DepthDisplayEntity();
+
 		for (let i = 0; i < entryCount; i++) {
-			bidLevels[i] = new DepthEntity({ ACT_depthID: i + 1 });
-			offerLevels[i] = new DepthEntity({ ACT_depthID: i + 1 });
+			bidLevels[i] = new DepthEntity();
+			bidLevels[i].commonHelperService = this.commonHelperService;
+			bidLevels[i].setValues({ ACT_depthID: i + 1 });
+
+			offerLevels[i] = new DepthEntity();
+			offerLevels[i].commonHelperService = this.commonHelperService;
+			offerLevels[i].setValues({ ACT_depthID: i + 1 });
 		}
 
-		return new DepthDisplayEntity({
+		depthDisplayEntity.commonHelperService = this.commonHelperService;
+		depthDisplayEntity.setValues({
 			exchangeCode: exgSym[0],
 			symbolCode: exgSym[1],
 			bidQtyArray: [],
@@ -52,6 +65,8 @@ export class DepthDataStore extends BaseDataStore {
 			bidDisplayPoints: bidLevels,
 			offerDisplayPoints : offerLevels,
 		});
+
+		return depthDisplayEntity;
 	}
 
 	public updateDepthPriceModel(response: Object): void {
@@ -106,7 +121,9 @@ export class DepthDataStore extends BaseDataStore {
 
 		if (id) {
 			if (!updateArray[id]) {
-				depObj = new DepthEntity({ ACT_depthID: id + 1 });
+				depObj = new DepthEntity();
+				depObj.commonHelperService = this.commonHelperService;
+				depObj.setValues({ ACT_depthID: id + 1 });
 				updateArray.push(depObj);
 			}
 
