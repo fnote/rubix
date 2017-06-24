@@ -40,5 +40,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Minimun Requirements
 
-Angular CLI : version 1.0.0-beta.31
-Node : version 6.9.0 
+Angular CLI : version 1.1.3
+Node : version 6.9.5

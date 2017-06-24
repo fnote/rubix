@@ -16,9 +16,9 @@ export class TimeAndSalesDataStore extends BaseDataStore {
 	private priceModificationFactor = 1;
 
 	constructor(
+		public commonHelperService: CommonHelperService,
 		private stockDataStore: StockDataStore,
 		private exchangeDataStore: ExchangeDataStore,
-		private commonHelperService: CommonHelperService,
 		private localizationService: LocalizationService,
 	) {
 		super();

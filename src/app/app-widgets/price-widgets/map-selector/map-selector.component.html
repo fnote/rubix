@@ -1,11 +1,10 @@
-
 <h3>{{title}}</h3>
 
-<chart type="Map" [options]="options" (series.point.mouseOver)="onMouseOverChart($event)" >
-	 <series>
-		 <point  (mouseOver)="onMouseOver($event)" (mouseOut)="onMouseOut($event)" (select)="onChartSelection($event)" (unselect)="onUnselect($event)"></point>
-	 </series>
- </chart>
+<chart type="Map" [options]="options" (series.point.mouseOver)="onMouseOverChart($event)">
+	<series>
+		<point (mouseOver)="onMouseOver($event)" (mouseOut)="onMouseOut($event)" (select)="onChartSelection($event)" (unselect)="onUnselect($event)"></point>
+	</series>
+</chart>
 
 <table style="width:100%;">
 	<td>
@@ -20,7 +19,7 @@
 	<td>
 		Code
 	</td>
-	<tr *ngFor="let indx of selectedIndexList" >
+	<tr *ngFor="let indx of selectedIndexList">
 		<td>
 			{{indx.name}}
 		</td>

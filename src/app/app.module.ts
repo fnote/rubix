@@ -14,6 +14,7 @@ import { FdLayoutComponent } from './app-layouts/fd-layout/fd-layout.component';
 import { FdPageWidgetModule } from './app-widgets/fd-page-widgets/fd-page-widget.module';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { HttpModule } from '@angular/http';
+import { MutualFundsWidgetModule } from './app-widgets/mutual-funds-widgets/mutual-funds-widget.module';
 import { NetworkService } from './app-backend/network/network.service';
 import { NgModule } from '@angular/core';
 import { PriceModule } from './app-backend/price/price.module';
@@ -23,6 +24,7 @@ import { SecondaryLayoutOneComponent } from './app-layouts/secondary-layout-one/
 import { SecondaryLayoutThreeComponent } from './app-layouts/secondary-layout-three/secondary-layout-three.component';
 import { SecondaryLayoutTwoComponent } from './app-layouts/secondary-layout-two/secondary-layout-two.component';
 import { TradeModule } from './app-backend/trade/trade.module';
+import { TwoByTwoLayoutComponent } from './app-layouts/two-by-two-layout/two-by-two-layout.component';
 import { UtilsModule } from './app-utils/utils.module';
 import { WidgetLoaderService } from './app-widgets/widget-util/widget-loader.service';
 
@@ -39,6 +41,7 @@ export function highchartsFactory(): any {
 		BaseWidgetComponent,
 		SecondaryLayoutThreeComponent,
 		FdLayoutComponent,
+		TwoByTwoLayoutComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -51,6 +54,7 @@ export function highchartsFactory(): any {
 		ChartWidgetModule,
 		FdPageWidgetModule,
 		CommonWidgetModule,
+		MutualFundsWidgetModule,
 
 		AuthModule,
 		TradeModule,
