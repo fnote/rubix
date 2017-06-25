@@ -17,6 +17,14 @@ export class StreamRouteService {
 		this.routeAjaxResponseStream();
 	}
 
+	public getPriceResponseStream(): Subject<any> {
+		return this.priceResponseStream$;
+	}
+
+	public getTradeResponseStream(): Subject<any> {
+		return this.tradeResponseStream$;
+	}
+
 	private routeResponseStream(): void {
 		this.dataService.getResponseSteam().subscribe(response => {
 			switch (response.connection) {
@@ -40,13 +48,4 @@ export class StreamRouteService {
 			this.priceResponseStream$.next({ data : response.data , channel : Channels.PriceMeta });
 		});
 	}
-
-	public getPriceResponseStream(): Subject<any> {
-		return this.priceResponseStream$;
-	}
-
-	public getTradeResponseStream(): Subject<any> {
-		return this.tradeResponseStream$;
-	}
-
 }

@@ -15,13 +15,6 @@ export class DataService {
 		this.init();
 	}
 
-	private init(): void {
-		this.responseStream$ = new Subject();
-		this.responseAjaxStream$ = new Subject();
-		this.updateResponseStream();
-		this.updateAjaxResponseStream();
-	}
-
 	/**
      * Send websocket message
      * @param {any} data - An object with following properties set
@@ -68,6 +61,13 @@ export class DataService {
 
 	public getAjaxResponseSteam(): Subject<any> {
 		return this.responseAjaxStream$;
+	}
+
+	private init(): void {
+		this.responseStream$ = new Subject();
+		this.responseAjaxStream$ = new Subject();
+		this.updateResponseStream();
+		this.updateAjaxResponseStream();
 	}
 
 	private updateResponseStream(): void {

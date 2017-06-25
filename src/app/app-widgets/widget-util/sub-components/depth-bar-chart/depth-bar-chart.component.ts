@@ -15,6 +15,12 @@ export class C3ChartComponent implements OnChanges {
 	private values = [];
 	private iterableDiffer;
 
+	public ngOnChanges(changes: SimpleChanges): void {
+		if (changes['totalBid'] || changes['totalOffer'] || changes['depthType']) {
+			this.populateChart();
+		}
+	}
+
 	private populateChart(): void {
 		this.values = [];
 		this.values.push('values');
@@ -29,12 +35,6 @@ export class C3ChartComponent implements OnChanges {
 		}
 
 		this.drawAreaChart();
-	}
-
-	public ngOnChanges(changes: SimpleChanges): void {
-		if (changes['totalBid'] || changes['totalOffer'] || changes['depthType']) {
-			this.populateChart();
-		}
 	}
 
 	private drawAreaChart(): void {

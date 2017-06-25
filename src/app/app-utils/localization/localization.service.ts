@@ -61,6 +61,10 @@ export class LocalizationService {
 		return this.supportedLanguages[param].shortCode;
 	}
 
+	public isRTL(): boolean {
+		return this.layout === 'rtl';
+	}
+
 	private setOrientationClass (): void {
 		const head = document.getElementsByTagName('head')[0];
 		const body = document.getElementsByTagName('body')[0];
@@ -73,9 +77,5 @@ export class LocalizationService {
 			head.classList.remove('ar');
 			body.classList.remove('ar');
 		}
-	}
-
-	public isRTL(): boolean {
-		return this.layout === 'rtl';
 	}
 }

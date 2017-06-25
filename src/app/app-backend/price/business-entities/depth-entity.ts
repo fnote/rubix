@@ -14,6 +14,10 @@ export class DepthEntity {
 	];
 	private _depthSplit = userSettings.marketData.defaultStringInitializer;
 
+	constructor(values: Object = {}) {
+		this.setValues(values);
+	}
+
 	public set commonHelperService(value: CommonHelperService) {
 		this._commonHelperService = value;
 	}
@@ -64,10 +68,6 @@ export class DepthEntity {
 
 	public setValues(values: Object = {}): void {
 		Object.assign(this, values);
-	}
-
-	constructor(values: Object = {}) {
-		this.setValues(values);
 	}
 }
 

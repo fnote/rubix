@@ -38,37 +38,6 @@ export class DepthDataStore extends BaseDataStore {
 		return depthObj;
 	}
 
-	private createDepthDisplayEntity (exgSym: [string, string], type: string): DepthDisplayEntity {
-		const bidLevels = [];
-		const offerLevels = [];
-		const depthPriceCount = 5;
-		const depthOrderCount = 10;
-		const entryCount = type === 'P' ? depthPriceCount : depthOrderCount;
-		const depthDisplayEntity = new DepthDisplayEntity();
-
-		for (let i = 0; i < entryCount; i++) {
-			bidLevels[i] = new DepthEntity();
-			bidLevels[i].commonHelperService = this.commonHelperService;
-			bidLevels[i].setValues({ ACT_depthID: i + 1 });
-
-			offerLevels[i] = new DepthEntity();
-			offerLevels[i].commonHelperService = this.commonHelperService;
-			offerLevels[i].setValues({ ACT_depthID: i + 1 });
-		}
-
-		depthDisplayEntity.commonHelperService = this.commonHelperService;
-		depthDisplayEntity.setValues({
-			exchangeCode: exgSym[0],
-			symbolCode: exgSym[1],
-			bidQtyArray: [],
-			offerQtyArray: [],
-			bidDisplayPoints: bidLevels,
-			offerDisplayPoints : offerLevels,
-		});
-
-		return depthDisplayEntity;
-	}
-
 	public updateDepthPriceModel(response: Object): void {
 		const isPrice =  response['MT'] === '25' ? true : false;
 		const splitTag =  isPrice ? '227' : '221';
@@ -103,6 +72,37 @@ export class DepthDataStore extends BaseDataStore {
 		}
 
 		this.processMarketDepthReset(exgSym, isPrice);
+	}
+
+	private createDepthDisplayEntity (exgSym: [string, string], type: string): DepthDisplayEntity {
+		const bidLevels = [];
+		const offerLevels = [];
+		const depthPriceCount = 5;
+		const depthOrderCount = 10;
+		const entryCount = type === 'P' ? depthPriceCount : depthOrderCount;
+		const depthDisplayEntity = new DepthDisplayEntity();
+
+		for (let i = 0; i < entryCount; i++) {
+			bidLevels[i] = new DepthEntity();
+			bidLevels[i].commonHelperService = this.commonHelperService;
+			bidLevels[i].setValues({ ACT_depthID: i + 1 });
+
+			offerLevels[i] = new DepthEntity();
+			offerLevels[i].commonHelperService = this.commonHelperService;
+			offerLevels[i].setValues({ ACT_depthID: i + 1 });
+		}
+
+		depthDisplayEntity.commonHelperService = this.commonHelperService;
+		depthDisplayEntity.setValues({
+			exchangeCode: exgSym[0],
+			symbolCode: exgSym[1],
+			bidQtyArray: [],
+			offerQtyArray: [],
+			bidDisplayPoints: bidLevels,
+			offerDisplayPoints : offerLevels,
+		});
+
+		return depthDisplayEntity;
 	}
 
 	private  processMarketDepthRecord (depObject: DepthEntity, exgSym: [string, string], type: boolean): void {

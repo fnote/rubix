@@ -35,6 +35,18 @@ export class PriceStreamingResponseHandler {
 		this.updatePriceResponseStream();
 	}
 
+	public getPriceResponseStream(): Subject<Object> {
+		return this.priceResponseStream$;
+	}
+
+	public getMetaAuthResponseStream(): Subject<any> {
+		return this.metaAuthResponseStream$;
+	}
+
+	public getPriceAuthResponseStream(): Subject<any> {
+		return this.priceAuthResponseStream$;
+	}
+
 	private updatePriceResponseStream(): void {
 		this.streamRouteService.getPriceResponseStream().map(response => {
 			return this.processPriceResponseStream(response);
@@ -102,17 +114,5 @@ export class PriceStreamingResponseHandler {
 		};
 		const processedResponse = priceResponse.processPriceResponse(parsedResponse);
 		return processedResponse;
-	}
-
-	public getPriceResponseStream(): Subject<Object> {
-		return this.priceResponseStream$;
-	}
-
-	public getMetaAuthResponseStream(): Subject<any> {
-		return this.metaAuthResponseStream$;
-	}
-
-	public getPriceAuthResponseStream(): Subject<any> {
-		return this.priceAuthResponseStream$;
 	}
 }

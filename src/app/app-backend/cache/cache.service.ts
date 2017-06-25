@@ -16,12 +16,16 @@ export class CacheService {
 		this._dbController = new DbController(this._version, logger);
 	}
 
-	private _isExpired(persistTime: number, ttl: number): boolean {
-		return Date.now() > persistTime + ttl;
+	public search(key: string): Observable<number|string | Blob> {
+		const self = this;
+		return new Observable((observer: Subscriber<any>): void => {
+			observer.next(1);
+			observer.complete();
+		});
 	}
 
-	private _getTimeStamp(): number {
-		return Date.now();
+	public clear(): void {
+		this._dbController.clean();
 	}
 
 	public get(key: string): Observable<number|string | Blob> {
@@ -152,15 +156,11 @@ export class CacheService {
 		});
 	}
 
-	public search(key: string): Observable<number|string | Blob> {
-		const self = this;
-		return new Observable((observer: Subscriber<any>): void => {
-			observer.next(1);
-			observer.complete();
-		});
+	private _isExpired(persistTime: number, ttl: number): boolean {
+		return Date.now() > persistTime + ttl;
 	}
 
-	public clear(): void {
-		this._dbController.clean();
+	private _getTimeStamp(): number {
+		return Date.now();
 	}
 }

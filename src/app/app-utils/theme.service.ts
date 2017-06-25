@@ -43,11 +43,6 @@ export class ThemeService {
 		return this._selectedTheme;
 	}
 
-	private getThemeCode(value: Themes): string {
-		const selectedThemeObj = this.supportedThemes[value];
-		return selectedThemeObj.code;
-	}
-
 	public getThemeDesc(value?: Themes): string  {
 		let param = value;
 		if (!param) {
@@ -55,5 +50,10 @@ export class ThemeService {
 		}
 
 		return this.supportedThemes[param].displayName;
+	}
+
+	private getThemeCode(value: Themes): string {
+		const selectedThemeObj = this.supportedThemes[value];
+		return selectedThemeObj.code;
 	}
 }

@@ -5,6 +5,8 @@ import { FdDetailQuoteComponent } from '../app-widgets/fd-page-widgets/fd-detail
 import { FdLayoutComponent } from '../app-layouts/fd-layout/fd-layout.component';
 import { LoginComponent } from '../app-widgets/common-widgets/login-widget/login.component';
 import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/map-selector.component';
+import { MutualFundCategoryComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-category/mutual-fund-category.component';
+import { MutualFundPerformanceComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-performance/mutual-fund-performance.component';
 import { OrderBookComponent } from '../app-widgets/price-widgets/order-book/order-book.component';
 import { PrimaryLayoutOneComponent } from '../app-layouts/primary-layout-one/primary-layout-one.component';
 import { Routes } from '@angular/router';
@@ -14,12 +16,12 @@ import { SecondaryLayoutThreeComponent } from '../app-layouts/secondary-layout-t
 import { SecondaryLayoutTwoComponent } from '../app-layouts/secondary-layout-two/secondary-layout-two.component';
 import { SideBarComponent } from '../app-widgets/common-widgets/side-bar/side-bar.component';
 import { TimeAndSalesComponent } from '../app-widgets/price-widgets/time-and-sales/time-and-sales.component';
+import { TwoByTwoLayoutComponent } from '../app-layouts/two-by-two-layout/two-by-two-layout.component';
 // { path: 'map', component: MapSelectorComponent },
 
 // endOfImports //
 export const routes: Routes = [
-	{ path: 'map',   component: MapSelectorComponent },
-	{ path: 'primary-layout-one', component: PrimaryLayoutOneComponent,
+	{ path: 'primary-layout-one', component: PrimaryLayoutOneComponent, canActivate: [AuthGuardService],
 		children: [
 			{ path: 'side-bar', component: SideBarComponent, outlet: 'outlet1' },
 			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
@@ -70,13 +72,6 @@ export const routes: Routes = [
 			},
 		],
 	},
-
-	{ path: '', redirectTo: 'login', pathMatch: 'full' },
-	{ path: 'chart', canActivate: [AuthGuardService], component: BaseC3ChartComponent },
-	{ path: 'detail-quote', canActivate: [AuthGuardService], component: DetailQuoteComponent, data: { exgStock: ['TDWL', '1010'] } },
-	{ path: 'time-and-sales', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['TDWL', '1010'] } },
-	{ path: 'order-book', canActivate: [AuthGuardService], component: TimeAndSalesComponent, data: { exgStock: ['DFM', 'GFH'] } },
-	{ path: 'test', component: RubixTestPageComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: '', pathMatch: 'full', redirectTo: 'login' },
 	{ path: 'detail-quote', component: DetailQuoteComponent, canActivate: [AuthGuardService], data: { exgStock: ['PFX', 'EURUSD'] } },
@@ -93,6 +88,14 @@ export const routes: Routes = [
 			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet7', data: { exgStock: ['TDWL', '1090'] } },
 			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet8', data: { exgStock: ['TDWL', '1090'] } },
 			{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet9', data: { exgStock: ['TDWL', '1090'] } },
+		],
+	},
+	{ path: 'two-by-two-layout', component: TwoByTwoLayoutComponent,
+		children: [
+			{ path: 'mutual-fund-performance', component: MutualFundPerformanceComponent, outlet: 'outlet1' },
+			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2' },
+			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3' },
+			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4' },
 		],
 	},
 ];

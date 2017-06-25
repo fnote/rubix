@@ -34,6 +34,10 @@ export class TradeAuthHandler extends BaseAuthHandler {
 		return request;
 	}
 
+	public processAuthRseponse(response: any): void {
+		// code here
+	}
+
 	private getTradeAuthHeader(): any {
 		const tradeAuthHeder =  {
 			MSG_GRP: TradeMetaGroups.Authentication,
@@ -59,9 +63,5 @@ export class TradeAuthHandler extends BaseAuthHandler {
 			INST_ID: '',
 		};
 		return tradeAuthBody;
-	}
-
-	public processAuthRseponse(response: any): void {
-		// code here
 	}
 }

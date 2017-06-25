@@ -25,6 +25,23 @@ export class LoginComponent implements OnInit {
 		// implement this
 	}
 
+	public login(): void {
+		if (this.checkUserInputs()) {
+			this.isAuthenticating = true;
+			this.rejectReson = 'Authenticating....';
+			this.authenticateUser();
+		}
+		this.setAuthClass();
+	}
+
+	public changeLanguage(): void {
+		if (this.localizationService.activeLanguageCode === Languages.EN) {
+			this.localizationService.activeLanguageCode = Languages.AR;
+		} else {
+			this.localizationService.activeLanguageCode = Languages.EN;
+		}
+	}
+
 	private setAuthClass(): void {
 		this.authClass =  {
 			authenticateProgress: this.isAuthenticating,
@@ -58,23 +75,6 @@ export class LoginComponent implements OnInit {
 			return false;
 		}else {
 			return true;
-		}
-	}
-
-	public login(): void {
-		if (this.checkUserInputs()) {
-			this.isAuthenticating = true;
-			this.rejectReson = 'Authenticating....';
-			this.authenticateUser();
-		}
-		this.setAuthClass();
-	}
-
-	public changeLanguage(): void {
-		if (this.localizationService.activeLanguageCode === Languages.EN) {
-			this.localizationService.activeLanguageCode = Languages.AR;
-		} else {
-			this.localizationService.activeLanguageCode = Languages.EN;
 		}
 	}
 }

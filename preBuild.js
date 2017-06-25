@@ -51,7 +51,16 @@ var getComponent = function (id) {
 			break;
 		case 'fd-layout':
 			component = 'FdLayoutComponent';
-			break
+			break;
+		case 'two-by-two-layout':
+			component = 'TwoByTwoLayoutComponent';
+			break;
+		case 'mutual-fund-performance':
+			component = 'MutualFundPerformanceComponent';
+			break;
+		case 'mutual-fund-category':
+			component = 'MutualFundCategoryComponent';
+			break;
 		default:
 			console.log('An error occurred');
 	}

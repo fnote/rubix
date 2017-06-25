@@ -59,11 +59,6 @@ export class SideBarComponent {
 		this.hideSideBar();
 	}
 
-	private hideSideBar(): void {
-		const body = document.getElementsByTagName('body')[0];
-		body.classList.remove('nav-expanded');
-	}
-
 	public changeLanguage(): void {
 		this.lanTitle = this.localizationService.getLongDesc();
 
@@ -86,5 +81,10 @@ export class SideBarComponent {
 		}
 
 		this.hideSideBar();
+	}
+
+	private hideSideBar(): void {
+		const body = document.getElementsByTagName('body')[0];
+		body.classList.remove('nav-expanded');
 	}
 }

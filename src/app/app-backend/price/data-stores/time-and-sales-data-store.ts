@@ -73,8 +73,8 @@ export class TimeAndSalesDataStore extends BaseDataStore {
 		displayTypeArray = this.getDisplayType(entity);
 		entity.typeString = displayTypeArray[0];
 		entity.typeClass = displayTypeArray[1];
-    // TODO [Malindu] Implement this
-    // var symbolDate = App.symbolManager.symbolMap.get(this.updateSymbol()).LTD.replace(/\//g,"");
+		// TODO [Malindu] Implement this
+		// var symbolDate = App.symbolManager.symbolMap.get(this.updateSymbol()).LTD.replace(/\//g,"");
 		symbolDate = null;
 		entity.displayTime =  this.commonHelperService.formatDate(entity.time, 'HH:mm:ss' , exchange, symbolDate);
 

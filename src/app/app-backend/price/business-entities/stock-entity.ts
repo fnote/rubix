@@ -59,6 +59,11 @@ export class StockEntity extends BaseEntity {
 	private _range: string = userSettings.marketData.defaultStringInitializer;
 	private _bidOfferDifference: string = userSettings.marketData.defaultStringInitializer;
 
+	constructor(values: Object = {}) {
+		super();
+		this.setValues(values);
+	}
+
 	public set commonHelperService(value: CommonHelperService) {
 		this._commonHelperService = value;
 	}
@@ -459,11 +464,6 @@ export class StockEntity extends BaseEntity {
 
 	public set bidOfferDifference(value: string) {
 		this._bidOfferDifference = value;
-	}
-
-	constructor(values: Object = {}) {
-		super();
-		this.setValues(values);
 	}
 
 	// Computed properties

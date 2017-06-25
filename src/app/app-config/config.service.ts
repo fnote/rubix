@@ -10,16 +10,6 @@ export class ConfigService {
 
 	constructor(private http: Http) { }
 
-	private getConfigurationVal(key1: string, key2?: string, key3?: string): any {
-		if (key3 && key2) {
-			return this.configObj[key1][key2][key3];
-		} else if (key2) {
-			return this.configObj[key1][key2];
-		} else {
-			return this.configObj[key1];
-		}
-	}
-
 	public getStringConfigVal(key1: string, key2?: string, key3?: string): Promise<any> {
 		return new Promise((resolve, reject) => {
 			if (!this.configObj) {
@@ -61,5 +51,15 @@ export class ConfigService {
 				resolve(connections);
 			});
 		}));
+	}
+
+	private getConfigurationVal(key1: string, key2?: string, key3?: string): any {
+		if (key3 && key2) {
+			return this.configObj[key1][key2][key3];
+		} else if (key2) {
+			return this.configObj[key1][key2];
+		} else {
+			return this.configObj[key1];
+		}
 	}
 }

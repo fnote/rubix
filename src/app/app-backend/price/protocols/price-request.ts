@@ -15,6 +15,9 @@ export class PriceRequest {
 	private _pgi: number;
 	private _pgs: number;
 
+	constructor() {
+		this._param = [];
+	}
 	public get mt(): PriceRequestTypes  {
 		return this._mt;
 	}
@@ -107,20 +110,6 @@ export class PriceRequest {
 		this._param.push([exg, sym]);
 	}
 
-	private getParam(): string[] {
-		const arrParam: string[] = [];
-
-		for (const item of this._param) {
-			if (item[1]) {
-				arrParam.push(item[0] + '~' + item[1]);
-			} else {
-				arrParam.push(item[0]);
-			}
-		}
-
-		return arrParam;
-	}
-
 	public buildMessage(): string {
 		const arrBuild: string[] = [];
 		arrBuild.push('{');
@@ -206,7 +195,17 @@ export class PriceRequest {
 		return arrBuild.join('').trim();
 	}
 
-	constructor() {
-		this._param = [];
+	private getParam(): string[] {
+		const arrParam: string[] = [];
+
+		for (const item of this._param) {
+			if (item[1]) {
+				arrParam.push(item[0] + '~' + item[1]);
+			} else {
+				arrParam.push(item[0]);
+			}
+		}
+
+		return arrParam;
 	}
 }

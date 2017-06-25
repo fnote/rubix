@@ -24,7 +24,13 @@ export class ProcessedChartDataStore extends BaseDataStore {
 		super();
 		this.history$ = new ReplaySubject(1);
 		this.ohlc$ = new ReplaySubject(1);
+	}
 
+	public removeSubscriptions(exgSym: [string, string]): void {
+		if (this.subscription$) {
+			this.subscription$.unsubscribe();
+		}
+		this.priceService.removeChartOHLCRequest(exgSym);
 	}
 
 	public getHistory(exgSym: [string, string], period: string): ReplaySubject<ChartDataEntity[]> {
@@ -93,13 +99,6 @@ export class ProcessedChartDataStore extends BaseDataStore {
 			}
 		}
 		return tempArray;
-	}
-
-	public removeSubscriptions(exgSym: [string, string]): void {
-		if (this.subscription$) {
-			this.subscription$.unsubscribe();
-		}
-		this.priceService.removeChartOHLCRequest(exgSym);
 	}
 
 	private filterChartData(dataArray: ChartDataEntity[], period: string, factor: number): ChartDataEntity[] {

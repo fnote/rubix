@@ -22,10 +22,6 @@ export class WidgetLoaderService {
 		return url.join('');
 	}
 
-	private getLayoutObj(): any {
-		return this.layoutObj;
-	}
-
 	public getTabs(): Promise<any> {
 		return new Promise((resolve, reject) => {
 			if (!this.layoutObj) {
@@ -45,6 +41,9 @@ export class WidgetLoaderService {
 			const staticUrl = '/' + layoutObj.routes[0].path + '/(' + sideBar.outlet + ':' + sideBar.path;
 			this.router.navigateByUrl(staticUrl + this.getUrlforTab(layoutObj.routes[0].model[1].model[0]) + ')');
 		});
+	}
 
+	private getLayoutObj(): any {
+		return this.layoutObj;
 	}
 }

@@ -61,6 +61,28 @@ export class MapSelectorComponent extends BaseWidgetComponent {
 		}
 	}
 
+	public onChartSelection (event: any): void {
+		// Not implemented yet
+	}
+
+	public onUnselect (event: any): void {
+		// Not implemented yet
+	}
+
+	public onMouseOver (event: any): void {
+		if (event.context) {
+			this.setIndicesForCountry(event);
+		}
+	}
+
+	public onMouseOut (event: any): void {
+		this.setIndicesForCountry(null);
+	}
+
+	public onMouseOverChart (event: any): void {
+		// Not implemented yet
+	}
+
 	private onDataLoad(): void {
 		this.selectedIndexList = this.indexDataStore.getAllIndexList();
 		this.loadMap();
@@ -144,27 +166,5 @@ export class MapSelectorComponent extends BaseWidgetComponent {
 			},
 			],
 		};
-	}
-
-	public onChartSelection (event: any): void {
-		// Not implemented yet
-	}
-
-	public onUnselect (event: any): void {
-		// Not implemented yet
-	}
-
-	public onMouseOver (event: any): void {
-		if (event.context) {
-			this.setIndicesForCountry(event);
-		}
-	}
-
-	public onMouseOut (event: any): void {
-		this.setIndicesForCountry(null);
-	}
-
-	public onMouseOverChart (event: any): void {
-		// Not implemented yet
 	}
 }

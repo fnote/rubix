@@ -26,10 +26,6 @@ export class StorageService {
 		}
 	}
 
-	private getCurrentDate(): number {// TODO : [Malindu] use function in utils
-		return new Date().getTime();
-	}
-
 	public saveData(key: string , dataObj: any): void {
 		if (typeof localStorage !== 'undefined') {
 			dataObj.persistTime = this.getCurrentDate();
@@ -55,6 +51,10 @@ export class StorageService {
 	public clearAllData(key: string): void {
 		localStorage.clear();
 		this.persistTimeObj.arr = [];
+	}
+
+	private getCurrentDate(): number {// TODO : [Malindu] use function in utils
+		return new Date().getTime();
 	}
 
 	private addToPersistTimeArr(key: string , persistTime: number): void {

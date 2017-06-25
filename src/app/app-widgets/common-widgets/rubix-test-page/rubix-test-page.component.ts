@@ -29,15 +29,6 @@ export class RubixTestPageComponent {
 		this.updatePriceResponse();
 	}
 
-	private updatePriceResponse(): void {
-		this.priceService.getPriceResponseStream().subscribe(response => {
-			this.response.push(response);
-			if (response && response[0] && response[0].MT === '-1') {
-				this.session = response[0].SESSION;
-			}
-		});
-	}
-
 	public convert(): void {
 		// console.log(this.commonHelperService.getMonth('Jan'));
 		// this.result = this.utilsService.formatDate('20170218142324' , 'YYYY-MM-DD hh:mm:ss' , {});
@@ -115,5 +106,14 @@ export class RubixTestPageComponent {
 
 	public sendMarketMetaRequest(): void {
 		this.priceService.requestSymbolMeta(['TDWL', '1010']);
+	}
+
+	private updatePriceResponse(): void {
+		this.priceService.getPriceResponseStream().subscribe(response => {
+			this.response.push(response);
+			if (response && response[0] && response[0].MT === '-1') {
+				this.session = response[0].SESSION;
+			}
+		});
 	}
 }

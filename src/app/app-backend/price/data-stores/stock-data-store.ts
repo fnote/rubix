@@ -13,7 +13,7 @@ export class StockDataStore extends BaseDataStore {
 	}
 
 	public getOrAddStock(exgSym: [string, string]): StockEntity {
-        // TODO: [Amila] implement a common "keyGenerator" in utils package
+		// TODO: [Amila] implement a common "keyGenerator" in utils package
 		const key: string = exgSym[0] + '~' + exgSym[1]; // utils.keyGenerator.getKey(exchange, stockCode);
 		let stockObj = this.allStockStore[key];
 

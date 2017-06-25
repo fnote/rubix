@@ -18,6 +18,10 @@ export class TradeStreamingResponseHandler {
 		this.updateTradeResponseStream();
 	}
 
+	public getAuthenticationResponseStream(): Subject<any> {
+		return this.authenticationResponseStream$;
+	}
+
 	private updateTradeResponseStream(): void {
 		this.streamRouteService.getTradeResponseStream().map(response => {
 			return this.processTradeResponse(response.data);
@@ -64,9 +68,4 @@ export class TradeStreamingResponseHandler {
 			}
 		}
 	}
-
-	public getAuthenticationResponseStream(): Subject<any> {
-		return this.authenticationResponseStream$;
-	}
-
 }

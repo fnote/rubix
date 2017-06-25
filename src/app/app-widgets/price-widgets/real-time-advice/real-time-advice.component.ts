@@ -27,6 +27,19 @@ export class RealTimeAdviceComponent implements OnInit {
 		this.subscribeForRealTimeRTA();
 	}
 
+	public onDestroy(): void {
+		const exg =  ['ADSM', 'DIFX', 'DFM'];
+		const apm = {
+			BKL: 0,
+			GL2: '',
+		};
+		this.priceService.removeRealTimeAdviceRequest(apm, exg);
+	}
+
+	public onEventEmit(testString: string): void {
+		alert(testString);
+	}
+
 	private subscribeForRealTimeRTA(): void {
 		const exg =  ['ADSM', 'DIFX', 'DFM'];
 		const apm = {
@@ -54,18 +67,5 @@ export class RealTimeAdviceComponent implements OnInit {
 		};
 		this.priceService.addBacklogRTARequest(trackRcrdRqstParms);
 		this.priceService.addBacklogRTARequest(blRtaRqstParms);
-	}
-
-	public onDestroy(): void {
-		const exg =  ['ADSM', 'DIFX', 'DFM'];
-		const apm = {
-			BKL: 0,
-			GL2: '',
-		};
-		this.priceService.removeRealTimeAdviceRequest(apm, exg);
-	}
-
-	public onEventEmit(testString: string): void {
-		alert(testString);
 	}
 }
