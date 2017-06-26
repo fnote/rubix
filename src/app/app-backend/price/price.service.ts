@@ -564,4 +564,20 @@ export class PriceService {
 			this.dataService.sendToWs(request);
 		}
 	}
+
+	public requestSysMeta(): void {
+		const req = new PriceRequest();
+		req.mt = PriceRequestTypes.MarketMeta;
+		req.tkn = '1';
+		req.lan = this.localizationService.getshortCode();
+		req.seg = ['NPD', 'CAT', 'CNT', 'TZD', 'GMS', 'RD', 'DCAT', 'DSCAT', 'DCSCM', 'DCSCM', 'AST', 'INS', 'GICSL2', 'NEWSEDIT', 'DCAT'];
+
+		const request = {
+			channel: Channels.PriceMeta,
+			data: PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
+		};
+		this.dataService.sendToWs(request);
+
+	}
+
 }

@@ -3,7 +3,7 @@ import { BaseDataStore } from './base-data-store';
 import { ChartDataEntity } from '../business-entities/chart-data-entity';
 import { ChartDataStore } from './chart-data-store';
 import { Injectable } from '@angular/core';
-import { PriceService } from '../../../app-backend/price/price.service';
+import { PriceService } from '../price.service';
 
 const TIME_RATIO = 86400000; // 24 * 60 * 60 * 1000
 const OHLC_TIME_RATIO = 60000; // 60 * 1000
