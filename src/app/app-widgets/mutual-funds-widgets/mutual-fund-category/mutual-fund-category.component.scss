@@ -1,0 +1,164 @@
+.takawud_body {
+	background-color: #eeeeee;
+	font-family:'OpenSans-Regular', sans-serif;
+}
+.strategies {
+	margin: 10px 0;
+}
+.strategies span {
+	display: inline-block;
+	width: 100%;
+	padding-bottom: 10px;
+}
+.strategies_title {
+	border-bottom: 1.5px solid #bfbfbf;
+}
+.strategies ul li {
+	list-style: none;
+	border-bottom: 1px solid #dddddd;
+}
+.strategies ul {
+	padding-left: 0;
+}
+.strategies_inner {
+	width: 100%;
+	background: white;
+	padding: 15px 10px;
+	border-bottom: 1px solid #bababa;
+}
+.strategies_inner il li img {
+	text-align: center;
+}
+.line_content {
+	padding: 10px 0;
+}
+.line_content p {
+	font-size: 12px;
+	height: 22px;
+}
+.line_content div:nth-of-type(1) {
+	text-align: center;
+}
+.strategies_blue {
+	color: #81b6e3;
+}
+.strategies_green {
+	color: #6aa76e;
+}
+.strategies_yellow {
+	color: #ecb127;
+}
+.strategies_table tr:nth-of-type(1) {
+	background: #ececec;
+	font-size: 12px;
+	    border-bottom: 2px solid #dcdcdc;
+}
+.strategies_table,.chart_note {
+	font-size: 12px;
+}
+.strategies_table tr td:nth-of-type(2), .strategies_table tr td:nth-of-type(3),.strategies_table tr td:nth-of-type(4),
+.strategies_table tr th:nth-of-type(3),.strategies_table tr th:nth-of-type(2),.strategies_table tr th:nth-of-type(4) {
+	text-align: right;
+}
+.strategies_table tr td {
+	padding: 3px 10px;
+}
+.strategies_table tbody tr th{
+	    padding: 5px;
+} 
+.more_button {
+	text-align: center;
+	background: #45beec;
+	padding: 5px 0px;
+	color: white;
+	font-weight: bold;
+}
+.green_up {
+	background: #ecf5dd;
+	color: #289628;
+}
+.red_down {
+	background: #ffe5e5;
+	color: #fb1e28
+}
+.strategies_duration div {
+	width: 35px;
+	text-align: center;
+	font-size: 12px;
+	padding: 5px 0;
+	background: #38d0e8;
+	color: white;
+	margin-right: 5px;
+	float: right;
+}
+.strategies_dot {
+	width: 12px !important;
+	height: 12px;
+	border-radius: 12px;
+	margin: 1px 10px 0 0;
+}
+.strategies_blue .strategies_dot {
+	background-color: #81b6e3
+}
+.strategies_green .strategies_dot {
+	background-color: #6aa76e
+}
+.strategies_yellow .strategies_dot {
+	background-color: #ecb127
+}
+.strategies_chart {
+	padding: 7px 0;
+}
+.line_content p {
+	margin-bottom: 0
+}
+
+@media (max-width: 768px) {
+.xs-center {
+	text-align: center;
+}
+.strategies span {
+	padding: 10px;
+}
+.strategies_duration div {
+	float: initial;
+	display: inline-block;
+	margin-top: 10px !important;
+}
+.strategies_green:before {
+	margin-right: 8px;
+}
+.strategies_dot{
+	float: left;
+	padding:0 !important;
+}
+.strategies_table tr td {
+    padding: 5px 10px;
+}
+.strategies span.pl-0{
+	padding-left: 0;
+}
+.strategies span.pt-0{
+	padding-top: 0;
+}
+.strategies span.pt-0{
+	padding-top: 0;
+}
+.line_content span.pl-0.pt-0{
+	padding-bottom: 0
+}
+.line_content img{
+	margin-top: 5px;
+}
+}
+
+@media (max-width: 992px) {
+.strategies_table th, .strategies_table td {
+	padding: 10px 0;
+	font-size: 10px;
+	text-align: center;
+}
+.strategies_duration div {
+	margin: 0 5px 5px 0;
+}
+}
