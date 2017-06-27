@@ -12,59 +12,59 @@ export class LoggerService {
 	private systemLogLevel = environment.appLogLevel;
 	private serverLogLevel = environment.serverLogLevel;
 
-	public logError (logEntry: string, module?: string): void {
-		this.amendLog(logEntry, LogLevels.LogError, module);
+	public logError (logEntry: string, module: string, logEvent: any = { defult: 'no event object provided' }): void {
+		this.amendLog(logEntry, logEvent, LogLevels.LogError, module);
 	}
 
-	public logWarning (logEntry: string, module?: string): void {
-		this.amendLog(logEntry, LogLevels.LogWarning, module);
+	public logWarning (logEntry: string, module: string, logEvent: any = { defult: 'no event object provided' }): void {
+		this.amendLog(logEntry, logEvent, LogLevels.LogWarning, module);
 	}
 
-	public logInfo (logEntry: string, module?: string): void {
-		this.amendLog(logEntry, LogLevels.LogInfo, module);
+	public logInfo (logEntry: string, module: string, logEvent: any = { defult: 'no event object provided' }): void {
+		this.amendLog(logEntry, logEvent, LogLevels.LogInfo, module);
 	}
 
-	public logDebug (logEntry: string, module?: string): void {
-		this.amendLog(logEntry, LogLevels.LogDebug, module);
+	public logDebug (logEntry: string, module: string, logEvent: any = { defult: 'no event object provided' }): void {
+		this.amendLog(logEntry, logEvent, LogLevels.LogDebug, module);
 	}
 
-	public LogData (logEntry: string, module?: string): void {
-		this.amendLog(logEntry, LogLevels.LogData, module);
+	public LogData (logEntry: string, module: string, logEvent: any = { defult: 'no event object provided' }): void {
+		this.amendLog(logEntry, logEvent,  LogLevels.LogData, module);
 	}
 
-	private amendLog (logEntry: string, logType: LogLevels, module?: string): void {
+	private amendLog (logEntry: string, logEvent: Object, logType: LogLevels, module: string): void {
 		const logStr = module ? ['[', module, '] ', logEntry].join('') : logEntry;
 
 		try {
 			if (this.systemLogLevel >= logType) {
-				this.amendLogConsole(logStr, logType);
+				this.amendLogConsole(logStr, logEvent, logType);
 			}
 
 			if (this.serverLogLevel >= logType) {
 				this.amendLogToBuffer(logStr, logType);
 			}
 		} catch (e) {
-			this.amendLogConsole(['Logger error: ', e].join(''), LogLevels.LogError);
+			this.amendLogConsole(['Logger error: ', e].join(''), e, LogLevels.LogError);
 		}
 	}
 
-	private amendLogConsole (logEntry: string, logType: LogLevels): void {
+	private amendLogConsole (logEntry: string, logEvent: Object, logType: LogLevels): void {
 		/* tslint:disable */
 		switch (logType) {
 			case LogLevels.LogError:
-				console.error(logEntry);
+				console.error(logEntry, logEvent);
 				break;
 
 			case LogLevels.LogWarning:
-				console.warn(logEntry);
+				console.warn(logEntry, logEvent);
 				break;
 
 			case LogLevels.LogInfo:
-				console.info(logEntry);
+				console.info(logEntry, logEvent);
 				break;
 
 			default:
-				console.log(logEntry);
+				console.log(logEntry, logEvent);
 				break;
 		}
 		/* tslint:enable */

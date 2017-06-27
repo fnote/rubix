@@ -52,7 +52,7 @@ export class RubixTestPageComponent {
 	}
 
 	public getPrice(): void {
-		this.loggerService.logInfo(this.inputValues);
+		this.loggerService.logInfo(this.inputValues, 'RubixTestPageComponent');
 		this.priceService.addSymbolRequest(['TDWL', '1010']);
 		// this.priceService.addExchangeRequest('TDWL');
 		// this.priceService.addSymbolListRequest([['TDWL', '1010'], ['TDWL', '1020'], ['DFM', 'EMAAR']]);

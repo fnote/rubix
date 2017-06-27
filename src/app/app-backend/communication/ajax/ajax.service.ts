@@ -46,7 +46,7 @@ export class AjaxService {
 					},
 					err => {
 						if (routeToResponseHandler) {
-							this.loggerService.logError(err + ' AjaxService');
+							this.loggerService.logError(err, 'AjaxService');
 						} else {
 							reject(err);
 						}
