@@ -1,5 +1,5 @@
 import { BasicTableComponent } from '../widget-util/sub-components/basic-table/basic-table.component';
-import { C3ChartComponent } from '../widget-util/sub-components/depth-bar-chart/depth-bar-chart.component';
+import { C3ChartComponent } from '../widget-util/sub-components/c3-bar-chart/c3-bar-chart.component';
 import { ChartComponent } from './chart/chart.component';
 import { ChartModule } from 'angular2-highcharts';
 import { CommonModule } from '@angular/common';

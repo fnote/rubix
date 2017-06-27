@@ -16,7 +16,7 @@
 
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<app-depth-bar-chart-component [bidData]="depthObj.bidQtyArray" [offerData]="depthObj.offerQtyArray" [totalBid]="depthObj.displayTotalBidQty" [totalOffer]="depthObj.displayTotalOfferQty" [depthType]= "isPriceSelected"></app-depth-bar-chart-component>
+				<app-c3-bar-chart-component [bidData]="depthObj.bidQtyArray" [offerData]="depthObj.offerQtyArray" [totalBid]="depthObj.displayTotalBidQty" [totalOffer]="depthObj.displayTotalOfferQty" [depthType]= "isPriceSelected"></app-c3-bar-chart-component>
 			</div>
 			<div class="col-xs-12 col-sm-4 text-center">
 				<span>{{localizationService.language.TOTAL_OFFER_QTY}}</span>

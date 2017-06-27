@@ -2,8 +2,8 @@ import * as c3 from 'c3';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-	selector: 'app-depth-bar-chart-component',
-	templateUrl: './depth-bar-chart.component.html',
+	selector: 'app-c3-bar-chart-component',
+	templateUrl: './c3-bar-chart.component.html',
 })
 export class C3ChartComponent implements OnChanges {
 	@Input() public bidData;

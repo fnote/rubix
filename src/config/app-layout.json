@@ -249,6 +249,29 @@
 									}
 								}
 							]
+						},
+						{
+							"title": "Takaud Mutual Funds",
+							"path": "two-by-two-layout",
+							"outlet": "outlet2",
+							"model": [
+								{
+									"path": "mutual-fund-performance",
+									"outlet": "outlet1"
+								},
+								{
+									"path": "mutual-fund-category",
+									"outlet": "outlet2"
+								},
+								{
+									"path": "mutual-fund-category",
+									"outlet": "outlet3"
+								},
+								{
+									"path": "mutual-fund-category",
+									"outlet": "outlet4"
+								}
+							]
 						}
 					]
 				}
