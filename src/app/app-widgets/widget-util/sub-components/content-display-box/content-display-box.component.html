@@ -1,20 +1,18 @@
 
-<div *ngIf="imageUrl">
-    <img src={{imageUrl}}>
-</div>
-<div *ngIf="title">
-    <h4>Title is: {{title}}</h4>
-</div>
-<div *ngIf="discription">
-    <p>{{discription}}<p>
-</div>
-<div *ngIf="fotterDis">
-    <p>{{contentData.fotterDis}}<p>
-</div>
-<div *ngIf="action1=='BUY'">
-    <button (click)="onActionBubble($event, {data: contentData, action: action1})">{{contentData.action1}}</button>
-</div>
+<div class="row line_content">
+    <div *ngIf="imageUrl" class="col-md-3 col-3">
+        <img src={{imageUrl}}>
+    </div>
+    <div class="col-md-9 col-9" *ngIf="title">
+        <span class="strategies_blue pl-0 pt-0">{{title}}</span>
+        <p *ngIf="discription">{{discription}}</p>
+        <p *ngIf="fotterDis">{{contentData.fotterDis}}<p>
+	</div>
+    <div *ngIf="action1=='BUY'">
+        <button (click)="onActionBubble($event, {data: contentData, action: action1})">{{contentData.action1}}</button>
+    </div>
 
-<div *ngIf="action2=='SELL'">
-    <button (click)="onActionBubble($event, {data: contentData, action: action2 })">{{contentData.action2}}</button>
+    <div *ngIf="action2=='SELL'">
+        <button (click)="onActionBubble($event, {data: contentData, action: action2 })">{{contentData.action2}}</button>
+    </div>
 </div>

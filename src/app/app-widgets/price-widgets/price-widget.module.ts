@@ -3,7 +3,6 @@ import { C3ChartComponent } from '../widget-util/sub-components/c3-bar-chart/c3-
 import { ChartComponent } from './chart/chart.component';
 import { ChartModule } from 'angular2-highcharts';
 import { CommonModule } from '@angular/common';
-import { ContentDisplayBoxComponent } from '../widget-util/sub-components/content-display-box/content-display-box.component';
 import { DetailQuoteComponent } from './detail-quote/detail-quote.component';
 import { DispBoxComponent } from '../widget-util/sub-components/disp-box/disp-box.component';
 import { FormsModule } from '@angular/forms';
@@ -33,7 +32,6 @@ import { UtilsModule } from '../../app-utils/utils.module';
 		MiniChartComponent,
 		MapSelectorComponent,
 		RealTimeAdviceComponent,
-		ContentDisplayBoxComponent,
 		BasicTableComponent,
 	],
 })
