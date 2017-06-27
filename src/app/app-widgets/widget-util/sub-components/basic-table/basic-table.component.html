@@ -1,0 +1,13 @@
+<table>
+  <tr>
+    <th *ngFor="let header of tableContent.headerContent">{{header}}</th>
+  </tr>
+  <tr *ngFor='let content of tableContent.contentBody'>
+    <td *ngFor='let subContent of content'>
+      <div *ngIf="subContent.specialAction">
+        <button (click)="onSpecialActionCliked($event,content,subContent)">testButton</button>
+      </div>
+      <p class={{subContent.class}}>{{subContent.content}}</p>
+    </td>
+  </tr>
+</table>
