@@ -7,7 +7,7 @@
 			"url" : "wss://mtplusglobal-uat.mubashertrade.com"
 		},
 		"price" : {
-			"url" : "wss://mfg-uat-phoenix.mubashertrade.com",
+			"url" : "ws://mfg-dev-phoenix.mubashertrade.com:9090",
 			"ajax_url" : "https://mfg-uat-phoenix.mubashertrade.com"
 		}
 	},

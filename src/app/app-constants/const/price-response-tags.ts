@@ -94,7 +94,8 @@ export const priceResponseTags = {
 	SHORT: 'shortDescription',
 	CUR: 'currency',
 	BENM: 'benchMark',
-
+	PCT1M: 'percentageOneMonth',
+	PCT3M: 'percentageThreeMonth',
 	// refatcor below
 	/*0: 'NODATA',
 	5: 'EXC',

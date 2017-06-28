@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DepthDataStore } from './data-stores/depth-data-store';
 import { ExchangeDataStore } from './data-stores/exchange-data-store';
 import { IndexDataStore } from './data-stores/index-data-store';
+import { MutualFundsDataStore } from './data-stores/mutual-funds-data-store';
 import { NgModule } from '@angular/core';
 import { PriceService } from './price.service';
 import { PriceStreamingResponseHandler } from './protocols/streaming/price-streaming-response-handler';
@@ -25,6 +26,7 @@ import { TimeAndSalesDataStore } from './data-stores/time-and-sales-data-store';
 		ExchangeDataStore,
 		ChartDataStore,
 		AdviceDataStore,
+		MutualFundsDataStore,
 	],
 })
 export class PriceModule { }

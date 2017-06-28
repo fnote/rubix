@@ -4,6 +4,7 @@ import { DepthDataStore } from '../../data-stores/depth-data-store';
 import { ExchangeDataStore } from '../../data-stores/exchange-data-store';
 import { IndexDataStore } from '../../data-stores/index-data-store';
 import { Injectable } from '@angular/core';
+import { MutualFundsDataStore } from '../../data-stores/mutual-funds-data-store';
 import { PriceRequestTypes } from '../../../../app-constants/enums/price-request-types.enum';
 import { PriceResponse } from '../price-response';
 import { StockDataStore } from '../../data-stores/stock-data-store';
@@ -28,6 +29,7 @@ export class PriceStreamingResponseHandler {
 		private exchangeDataStore: ExchangeDataStore,
 		private indexDataStore: IndexDataStore,
 		private adviceDataStore: AdviceDataStore,
+		private mutualFundsDataStore: MutualFundsDataStore,
 	) {
 		this.priceResponseStream$ = new Subject();
 		this.metaAuthResponseStream$ = new Subject();
@@ -100,6 +102,9 @@ export class PriceStreamingResponseHandler {
 				break;
 			case PriceRequestTypes.TradingAdvices:
 				this.adviceDataStore.updateTradingAdvices(response);
+				break;
+			case PriceRequestTypes.MutualFund:
+				this.mutualFundsDataStore.updateMutualFunds(response);
 				break;
 			default:
 				// code here
