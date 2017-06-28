@@ -1,6 +1,7 @@
 import * as c3 from 'c3';
+import { Component, Injector } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
-import { Component } from '@angular/core';
+import { PriceService } from '../../../app-backend/price/price.service';
 
 @Component({
 	selector: 'app-mutual-fund-performance',
@@ -10,10 +11,13 @@ import { Component } from '@angular/core';
 export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 
 	// TODO: [Amila] Refactor the code once Malindu implement the chart properly
-	// constructor() { }
+	constructor(private priceService: PriceService, private injector: Injector) {
+		super(injector);
+	}
 
 	public onInit(): void {
 		this.drawAreaChart();
+		this.subscribeForMutualFund();
 	}
 
 	private drawAreaChart(): void {
@@ -38,5 +42,10 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 				},
 			},
 		});
+	}
+
+	private subscribeForMutualFund(): void {
+		const seg = ['MASTER', 'PERFORM', 'ANNUAL'];
+		this.priceService.addMutualFundRequest(seg);
 	}
 }

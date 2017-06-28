@@ -321,6 +321,18 @@ export class PriceService {
 		this.dataService.sendToWs(request);
 	}
 
+	public addMutualFundRequest(seg: Array<string>): void {
+		const req = new PriceRequest();
+		req.mt = PriceRequestTypes.MutualFund;
+		req.lan = this.localizationService.getshortCode();
+		req.seg = seg;
+		const request = {
+			channel : Channels.PriceMeta,
+			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+		};
+		this.dataService.sendToWs(request);
+	}
+
 	public addTimeAndSalesRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.TimeAndSalesSymbol, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
