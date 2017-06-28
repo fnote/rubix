@@ -71,3 +71,42 @@ body.theme1{
 .theme1 .up-down-slider-row-2 {
     border-color: $theme1-up-down-slider-row-2-border-color;
 }
+
+.theme1 .widget-title{
+	border-color: $theme1-widget-title-border-color;
+}
+
+
+.theme1 .data-table th{
+	border-top: 1px solid $theme1-data-table-th-border-color;
+	border-bottom: 2px solid $theme1-data-table-th-border-color;
+	background-color: $theme1-data-table-th-bg-color;
+}
+.theme1 .data-table td{
+	border-bottom: 1px solid $theme1-data-table-td-border-color;
+}
+.theme1 .data-table tr:nth-child(odd) {
+	background-color: $theme1-data-table-odd-row-bg-color;
+}
+.theme1 .data-table tr:nth-child(even) {
+	background-color: $theme1-data-table-even-row-bg-color;
+}
+
+.theme1 .strategies-1 {
+	color: $theme1-chart-color-1;
+}
+.theme1 .strategies-2 {
+	color: $theme1-chart-color-2;
+}
+.theme1 .strategies-3 {
+	color: $theme1-chart-color-3;
+}
+.theme1 .strategies-1 .dot{
+	background-color: $theme1-chart-color-1;
+}
+.theme1 .strategies-2 .dot{
+	background-color: $theme1-chart-color-2;
+}
+.theme1 .strategies-3 .dot{
+	background-color: $theme1-chart-color-3;
+}

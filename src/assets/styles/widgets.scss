@@ -921,6 +921,9 @@ body.nav-expanded {
 	padding:15px 0;
 	margin-bottom:15px;
 }
+.inner-wrapper{
+	padding: 0 $padding-small;
+}
 
 .nav-menu-close:after {
   font-family: 'FontAwesome';
@@ -1388,12 +1391,9 @@ float: right;
 	//Detail quote V2 end
 
 
-/*
----
-------
---------- C3 chart
-*/
 
+
+/*-- C3 Chart custom css start --*/
 .c3-axis-x, .c3-axis-y {
 	fill:none;
 	stroke:#648afd;
@@ -1408,8 +1408,70 @@ float: right;
 	fill: none !important;
 }
 
-/*
----
-------
---------- C3 Chart custom css end
-*/
+/*-- C3 Chart custom css end --*/
+
+/*-- Title styles start --*/
+.title-font{
+
+}
+.page-title{
+	margin-top:0;
+}
+.widget-title{
+	border-bottom: solid 1px;
+	margin-top:0;
+	display: inline-block;
+	width: 100%;
+	font-size: 1.38em;
+}
+.widget-title .title{
+	float: $float-1;
+	margin-bottom: $padding-small;
+}
+.ar .widget-title .title{
+	float: $float-2;
+}
+.widget-title .extra-controllers{
+	float: $float-2;
+	margin-bottom: $padding-small;
+}
+.ar .widget-title .extra-controllers{
+	float: $float-1;
+}
+/*-- Title styles end --*/
+
+
+/*--Table styles start--*/
+.data-table{
+	font-size: 0.9em;
+}
+.data-table th{
+	padding: $padding-medium $padding-small;
+}
+.data-table td{
+	padding: $padding-medium $padding-small;
+}
+
+/*--Table styles end--*/
+
+.strategies_duration div {
+	width: 35px;
+	text-align: center;
+	font-size: 12px;
+	padding: 5px 0;
+	background: #38d0e8;
+	color: white;
+	margin-right: 5px;
+	float: right;
+}
+
+.strategies_table .dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	margin: 2px 5px 0 0;
+}
+.ar .strategies_table .dot {
+	margin: 2px 0 0 5px;
+}
+
