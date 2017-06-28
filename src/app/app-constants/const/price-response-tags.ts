@@ -83,6 +83,17 @@ export const priceResponseTags = {
 	SRATE: 'successRate',
 	ARTN: 'averageReturn',
 	MIP: 'marketIndex',
+	EXG: 'exchangeCode',
+	SYM: 'symbolCode',
+	DUR: 'duration',
+	VALUE: 'value',
+	CLASS: 'region',
+	GEO: 'riskType',
+	DESCR: 'description',
+	FULL: 'fullDescription',
+	SHORT: 'shortDescription',
+	CUR: 'currency',
+	BENM: 'benchMark',
 
 	// refatcor below
 	/*0: 'NODATA',
