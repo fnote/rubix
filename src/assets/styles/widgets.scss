@@ -1454,24 +1454,27 @@ float: right;
 
 /*--Table styles end--*/
 
-.strategies_duration div {
+.strategies-duration .button{
 	width: 35px;
-	text-align: center;
-	font-size: 12px;
+	text-align: $text-align-2;
+	font-size: 11px;
 	padding: 5px 0;
-	background: #38d0e8;
-	color: white;
-	margin-right: 5px;
-	float: right;
+	margin: 0 0 0 5px;
+	float: $float-2;
 }
 
-.strategies_table .dot {
+.ar .strategies-duration .button{
+	margin: 0 5px 0 0;
+	float: $float-1;
+}
+
+.strategies-table .dot {
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
 	margin: 2px 5px 0 0;
 }
-.ar .strategies_table .dot {
+.ar .strategies-table .dot {
 	margin: 2px 0 0 5px;
 }
 

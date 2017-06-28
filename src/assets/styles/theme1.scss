@@ -110,3 +110,8 @@ body.theme1{
 .theme1 .strategies-3 .dot{
 	background-color: $theme1-chart-color-3;
 }
+
+.theme1 .strategies-duration .button{
+	color:$theme1-strategies-duration-btn-text-color;
+	background-color: $theme1-strategies-duration-btn-bg-color;
+}
