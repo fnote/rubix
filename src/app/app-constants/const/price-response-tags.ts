@@ -95,7 +95,6 @@ export const priceResponseTags = {
 	CUR: 'currency',
 	BENM: 'benchMark',
 
-
 	// refatcor below
 	/*0: 'NODATA',
 	5: 'EXC',

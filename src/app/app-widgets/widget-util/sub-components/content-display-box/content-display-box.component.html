@@ -8,11 +8,10 @@
         <p *ngIf="discription">{{discription}}</p>
         <p *ngIf="fotterDis">{{contentData.fotterDis}}<p>
 	</div>
-    <div *ngIf="action1=='BUY'">
-        <button (click)="onActionBubble($event, {data: contentData, action: action1})">{{contentData.action1}}</button>
-    </div>
+    <div *ngFor="let action of actions">
 
-    <div *ngIf="action2=='SELL'">
-        <button (click)="onActionBubble($event, {data: contentData, action: action2 })">{{contentData.action2}}</button>
+        <button *ngIf="action==0" (click)="onActionBubble($event, {data: contentData, action: action})">BUY</button>
+        <button *ngIf="action==1" (click)="onActionBubble($event, {data: contentData, action: action})">SELL</button>
+        <button *ngIf="action==2" (click)="onActionBubble($event, {data: contentData, action: action})">CHART</button>
     </div>
 </div>

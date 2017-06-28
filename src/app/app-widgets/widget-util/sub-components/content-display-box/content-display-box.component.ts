@@ -11,8 +11,7 @@ export class ContentDisplayBoxComponent implements OnInit {
 	@Input() public title: string;
 	@Input() public discription: string;
 	@Input() public fotterDis: string;
-	@Input() public action1: string;
-	@Input() public action2: string;
+	@Input() public actions: Array<number>;
 	@Output() public testEventEmitter: EventEmitter<string> = new EventEmitter();
 
 	constructor() {
