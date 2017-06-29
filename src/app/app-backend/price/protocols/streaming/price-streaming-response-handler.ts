@@ -1,4 +1,6 @@
 import { AdviceDataStore } from '../../data-stores/advice-data-store';
+import { CacheService } from '../../../cache/cache.service';
+import { Channels } from '../../../../app-constants/enums/channels.enum';
 import { ChartDataStore } from '../../data-stores/chart-data-store';
 import { DepthDataStore } from '../../data-stores/depth-data-store';
 import { ExchangeDataStore } from '../../data-stores/exchange-data-store';
@@ -8,7 +10,6 @@ import { MutualFundsDataStore } from '../../data-stores/mutual-funds-data-store'
 import { PriceRequestTypes } from '../../../../app-constants/enums/price-request-types.enum';
 import { PriceResponse } from '../price-response';
 import { StockDataStore } from '../../data-stores/stock-data-store';
-import { StockEntity } from '../../business-entities/stock-entity';
 import { StreamRouteService } from '../../../communication/stream-route.service';
 import { Subject } from 'rxjs/Rx';
 import { TimeAndSalesDataStore } from '../../data-stores/time-and-sales-data-store';
@@ -16,11 +17,12 @@ import { TimeAndSalesDataStore } from '../../data-stores/time-and-sales-data-sto
 @Injectable()
 export class PriceStreamingResponseHandler {
 
-	private priceResponseStream$: Subject<Object>;
+	private processedPriceResponseStream$: Subject<any>;
 	private metaAuthResponseStream$: Subject<any>;
 	private priceAuthResponseStream$: Subject<any>;
 
 	constructor(
+		private cache: CacheService,
 		private chartDataStore: ChartDataStore,
 		private streamRouteService: StreamRouteService,
 		private depthDataStore: DepthDataStore,
@@ -31,14 +33,14 @@ export class PriceStreamingResponseHandler {
 		private adviceDataStore: AdviceDataStore,
 		private mutualFundsDataStore: MutualFundsDataStore,
 	) {
-		this.priceResponseStream$ = new Subject();
 		this.metaAuthResponseStream$ = new Subject();
 		this.priceAuthResponseStream$ = new Subject();
-		this.updatePriceResponseStream();
+		this.processedPriceResponseStream$ = new Subject();
+		this.initiatePriceResponseStream();
 	}
 
 	public getPriceResponseStream(): Subject<Object> {
-		return this.priceResponseStream$;
+		return this.processedPriceResponseStream$;
 	}
 
 	public getMetaAuthResponseStream(): Subject<any> {
@@ -49,15 +51,37 @@ export class PriceStreamingResponseHandler {
 		return this.priceAuthResponseStream$;
 	}
 
-	private updatePriceResponseStream(): void {
+	private initiatePriceResponseStream(): void {
 		this.streamRouteService.getPriceResponseStream().map(response => {
 			return this.processPriceResponseStream(response);
 		}).subscribe(response => {
-			this.priceResponseStream$.next(response);
-			for (const res of response) {
-				this.updatePriceModel(res);
-			}
+			this.processedPriceResponseStream$.next(response);
 		});
+
+		this.processedPriceResponseStream$   // merge with cacheresponse stream and update the model
+			.subscribe(response => {
+				for (const res of response) {
+					this.updateCache(res);
+					this.updatePriceModel(res);
+				}
+			});
+
+		this.cache.getCacheResponseStream().subscribe(res => {
+			this.updatePriceModel(res);
+		});
+	}
+
+	private updateCache(response: any): void {
+		switch (parseInt(response.MT, 10)) {
+			case PriceRequestTypes.MarketMeta:
+				this.cache.put(this.cache.generateRequest({ channel: Channels.PriceMeta, data: response, req: response }));
+				break;
+			case PriceRequestTypes.SymbolMeta:
+				this.cache.put(this.cache.generateRequest({ channel: Channels.PriceMeta, data: response, req: response }));
+				break;
+			default:
+			// code here
+		}
 	}
 
 	private updatePriceModel(response: any): void {

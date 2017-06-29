@@ -1,10 +1,11 @@
 import { CachePolicy } from '../app-constants/enums/cache-policy.enum';
+import { CacheRequest } from '../app-backend/cache/cache-request';
 
 export class CacheConfig {
 
 	private _classes = {
 		upToDate: {
-			cachePolicy: CachePolicy.NetWorkOnly,
+			cachePolicy: CachePolicy.CacheOrNetwork,
 		},
 		cacheOneDay: {
 			ttl: 86400000,  // (1000*3600*24)
@@ -24,16 +25,23 @@ export class CacheConfig {
 	};
 
 	private _keys = {
-		rt80Request : { name: 'rt_80_req', category: 'cacheVersionCheck' },
+		PriceMeta_46 : { name: 'symbolMeta', category: 'upToDate', store: 'rubix1' },
 		/*cash_account: { name: 'cash_accountOne', category: 'upToDate' },
 		cash_account2: { name: 'cash_accountTwo', category: 'cacheOneDay' },
 		cash_account3: { name: 'cash_accountThree', category: 'cacheOneWeek' },*/
 	};
 
-	public get(key: any): {} {
-		const keyData = this._keys[key];
-		keyData.ttl = this._classes[keyData.category].ttl;
-		keyData.cachePolicy = this._classes[keyData.category].cachePolicy;
-		return keyData;
+	public get(req: CacheRequest): CacheRequest {
+		const keyData = this._keys[req.name];
+		req.name = keyData.name;
+		req.ttl = this._classes[keyData.category].ttl;
+		req.cachePolicy = this._classes[keyData.category].cachePolicy;
+		req.storeName = keyData.store;
+		return req;
+	}
+
+	public has(req: CacheRequest): boolean {
+		const keyData = this._keys[req.name];
+		return keyData !== undefined;
 	}
 }

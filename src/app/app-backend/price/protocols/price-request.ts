@@ -2,108 +2,109 @@ import { PriceRequestTypes } from '../../../app-constants/enums/price-request-ty
 
 export class PriceRequest {
 
-	private _mt: PriceRequestTypes = null;
-	private _rt: number = null;
-	private _lan: string = null;
-	private _sym: string[] = null;
-	private _tkn: string = null;
-	private _typ: number = null;
+	private _MT: PriceRequestTypes = null;
+	private _RT: number = null;
+	private _LAN: string = null;
+	private _SYM: string[] = null;
+	private _TKN: string = null;
+	private _TYP: number = null;
 	private _param: [string, string][];
-	private _seg: string[];
-	private _exg: string[];
-	private _apm: Object;
-	private _pgi: number;
-	private _pgs: number;
+	private _SEG: string[];
+	private _EXG: string[];
+	private _APM: Object;
+	private _PGI: number;
+	private _PGS: number;
 
 	constructor() {
 		this._param = [];
 	}
-	public get mt(): PriceRequestTypes  {
-		return this._mt;
+
+	public get MT(): PriceRequestTypes {
+		return this._MT;
 	}
 
-	public set mt(value: PriceRequestTypes) {
-		this._mt = value;
+	public set MT(value: PriceRequestTypes) {
+		this._MT = value;
 	}
 
-	public get rt(): number  {
-		return this._rt;
+	public get RT(): number {
+		return this._RT;
 	}
 
-	public set rt(value: number) {
-		this._rt = value;
+	public set RT(value: number) {
+		this._RT = value;
 	}
 
-	public get lan(): string  {
-		return this._lan;
+	public get LAN(): string {
+		return this._LAN;
 	}
 
-	public set lan(value: string) {
-		this._lan = value;
+	public set LAN(value: string) {
+		this._LAN = value;
 	}
 
-	public get sym(): string[]  {
-		return this._sym;
+	public get SYM(): string[] {
+		return this._SYM;
 	}
 
-	public set sym(value: string[]) {
-		this._sym = value;
+	public set SYM(value: string[]) {
+		this._SYM = value;
 	}
 
-	public get tkn(): string  {
-		return this._tkn;
+	public get TKN(): string {
+		return this._TKN;
 	}
 
-	public set tkn(value: string) {
-		this._tkn = value;
+	public set TKN(value: string) {
+		this._TKN = value;
 	}
 
-	public get typ(): number  {
-		return this._typ;
+	public get TYP(): number {
+		return this._TYP;
 	}
 
-	public set typ(value: number) {
-		this._typ = value;
+	public set TYP(value: number) {
+		this._TYP = value;
 	}
 
-	public get seg(): string[] {
-		return this._seg;
+	public get SEG(): string[] {
+		return this._SEG;
 	}
 
-	public set seg(value: string[]) {
-		this._seg = value;
+	public set SEG(value: string[]) {
+		this._SEG = value;
 	}
 
-	public get exg(): string[] {
-		return this._exg;
+	public get EXG(): string[] {
+		return this._EXG;
 	}
 
-	public set exg(value: string[]) {
-		this._exg = value;
+	public set EXG(value: string[]) {
+		this._EXG = value;
 	}
 
-	public get apm(): Object {
-		return this._apm;
+	public get APM(): Object {
+		return this._APM;
 	}
 
-	public set apm(value: Object) {
-		this._apm = value;
+	public set APM(value: Object) {
+		this._APM = value;
 	}
 
-	public get pgi(): number {
-		return this._pgi;
+	public get PGI(): number {
+		return this._PGI;
 	}
 
-	public set pgi(value: number) {
-		this._pgi = value;
+	public set PGI(value: number) {
+		this._PGI = value;
 	}
 
-	public get pgs(): number {
-		return this._pgs;
+	public get PGS(): number {
+		return this._PGS;
 	}
 
-	public set pgs(value: number){
-		this._pgs = value;
+	public set PGS(value: number) {
+		this._PGS = value;
 	}
 
 	public addParam(exg: string, sym?: string): void {
@@ -114,46 +115,46 @@ export class PriceRequest {
 		const arrBuild: string[] = [];
 		arrBuild.push('{');
 
-		if (this.rt) {
+		if (this.RT) {
 			arrBuild.push('"RT":');
-			arrBuild.push(String(this.rt));
+			arrBuild.push(String(this.RT));
 			arrBuild.push(',');
 		}
 
-		if (this.tkn) {
+		if (this.TKN) {
 			arrBuild.push('"TKN":"');
-			arrBuild.push(this.tkn);
+			arrBuild.push(this.TKN);
 			arrBuild.push('",');
 		}
 
-		if (this.typ) {
+		if (this.TYP) {
 			arrBuild.push('"TYP":');
-			arrBuild.push(this.typ.toString());
+			arrBuild.push(this.TYP.toString());
 			arrBuild.push(',');
 		}
 
-		if (this.lan) {
+		if (this.LAN) {
 			arrBuild.push('"LAN":');
-			arrBuild.push(String(this.lan));
+			arrBuild.push(String(this.LAN));
 			arrBuild.push(',');
 		}
 
-		if (this.sym) {
+		if (this.SYM) {
 			arrBuild.push('"SYM":["');
-			arrBuild.push(this.sym.join('","'));
+			arrBuild.push(this.SYM.join('","'));
 			arrBuild.push('"]');
 			arrBuild.push(',');
 		}
 
-		if (this.seg) {
+		if (this.SEG) {
 			arrBuild.push('"SEG":["');
-			arrBuild.push(this.seg.join('","'));
+			arrBuild.push(this.SEG.join('","'));
 			arrBuild.push('"],');
 		}
 
-		if (this.exg) {
+		if (this.EXG) {
 			arrBuild.push('"EXG":["');
-			arrBuild.push(this.exg.join('","'));
+			arrBuild.push(this.EXG.join('","'));
 			arrBuild.push('"],');
 		}
 
@@ -164,21 +165,21 @@ export class PriceRequest {
 			arrBuild.push('"],');
 		}
 
-		if (this.pgi) {
+		if (this.PGI) {
 			arrBuild.push('"PGI":');
-			arrBuild.push(this.pgi.toString() + ',');
+			arrBuild.push(this.PGI.toString() + ',');
 		}
 
-		if (this.pgs) {
+		if (this.PGS) {
 			arrBuild.push('"PGS":');
-			arrBuild.push(this.pgs.toString() + ',');
+			arrBuild.push(this.PGS.toString() + ',');
 		}
 
-		if (this.apm) {
+		if (this.APM) {
 			arrBuild.push('"APM":{');
-			for (const key in this.apm) {
-				if (this.apm.hasOwnProperty(key)) {
-					arrBuild.push('"' + key + '":"' + this.apm[key] + '"');
+			for (const key in this.APM) {
+				if (this.APM.hasOwnProperty(key)) {
+					arrBuild.push('"' + key + '":"' + this.APM[key] + '"');
 					arrBuild.push(',');
 				}
 			}
@@ -186,9 +187,9 @@ export class PriceRequest {
 			arrBuild.push('},');
 		}
 
-		if (this.mt) {
+		if (this.MT) {
 			arrBuild.push('"MT":');
-			arrBuild.push(String(this.mt));
+			arrBuild.push(String(this.MT));
 		}
 
 		arrBuild.push('}');

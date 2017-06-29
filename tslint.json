@@ -266,7 +266,7 @@
 		"ter-max-len": [
 			true,
 			{
-				"code": 140,
+				"code": 160,
 				"ignoreImports": true,
 				"ignoreUrls": true,
 				"ignoreStrings": true,

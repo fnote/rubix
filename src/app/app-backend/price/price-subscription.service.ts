@@ -280,7 +280,7 @@ export class PriceSubscriptionService {
 	 */
 	private addSymbolRequest (exgSym: [string, string]): void {
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.SnapshotSymbol;
+		req.MT = PriceRequestTypes.SnapshotSymbol;
 		req.addParam(exgSym[0], exgSym[1]);
 
 		const request = {
@@ -292,7 +292,7 @@ export class PriceSubscriptionService {
 
 	private removeSymbolRequest (exgSym: [string, string]): void {
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.SnapshotSymbol;
+		req.MT = PriceRequestTypes.SnapshotSymbol;
 		req.addParam(exgSym[0], exgSym[1]);
 
 		const request = {

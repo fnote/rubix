@@ -1,4 +1,5 @@
 import { BaseDataStore } from './data-stores/base-data-store';
+import { CacheService } from '../cache/cache.service';
 import { Channels } from '../../app-constants/enums/channels.enum';
 import { ChartDataStore } from './data-stores/chart-data-store';
 import { ConfigService } from '../../app-config/config.service';
@@ -19,6 +20,7 @@ import { Subject } from 'rxjs/Rx';
 export class PriceService {
 
 	constructor(
+		private cache: CacheService,
 		private chartDataStore: ChartDataStore,
 		private configService: ConfigService,
 		private dataService: DataService,
@@ -92,7 +94,7 @@ export class PriceService {
 	public addExchangeRequest (exchange: string): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.Exchange, exchange)) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.Exchange;
+			req.MT = PriceRequestTypes.Exchange;
 			req.addParam(exchange);
 
 			const request = {
@@ -106,7 +108,7 @@ export class PriceService {
 	public removeExchangeRequest (exchange: string): void {
 		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.Exchange, exchange)) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.Exchange;
+			req.MT = PriceRequestTypes.Exchange;
 			req.addParam(exchange);
 
 			const request = {
@@ -120,7 +122,7 @@ export class PriceService {
 	public addExchangeListRequest (exchange: string[]): void {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.Exchange;
+		req.MT = PriceRequestTypes.Exchange;
 
 		for (const exg of exchange) {
 			if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.Exchange, exg)) {
@@ -141,7 +143,7 @@ export class PriceService {
 	public removeExchangeListRequest (exchange: string[]): void {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.Exchange;
+		req.MT = PriceRequestTypes.Exchange;
 
 		for (const exg of exchange) {
 			if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.Exchange, exg)) {
@@ -166,7 +168,7 @@ export class PriceService {
 	public addSymbolRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.SnapshotSymbol, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.SnapshotSymbol;
+			req.MT = PriceRequestTypes.SnapshotSymbol;
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
@@ -180,7 +182,7 @@ export class PriceService {
 	public removeSymbolRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.SnapshotSymbol, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.SnapshotSymbol;
+			req.MT = PriceRequestTypes.SnapshotSymbol;
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
@@ -196,9 +198,9 @@ export class PriceService {
 			if (history.length === 0) {
 				const key: string = exgSym[0] + '~' + exgSym[1];
 				const req = new PriceRequest();
-				req.mt = PriceRequestTypes.PriceHistory;
-				req.tkn = key;
-				req.sym = [key];
+				req.MT = PriceRequestTypes.PriceHistory;
+				req.TKN = key;
+				req.SYM = [key];
 				req.addParam(exgSym[0], exgSym[1]);
 
 				const request = {
@@ -213,10 +215,10 @@ export class PriceService {
 	public addChartOHLCBacklogRequest (exgSym: [string, string]): void {
 		const key: string = exgSym[0] + '~' + exgSym[1];
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.OHLCBacklog;
-		req.tkn = key;
-		req.typ = 1;
-		req.sym = [key];
+		req.MT = PriceRequestTypes.OHLCBacklog;
+		req.TKN = key;
+		req.TYP = 1;
+		req.SYM = [key];
 		req.addParam(exgSym[0], exgSym[1]);
 
 		const request = {
@@ -232,7 +234,7 @@ export class PriceService {
 	public removeChartOHLCRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.OHLCSymbol, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.OHLCSymbol;
+			req.MT = PriceRequestTypes.OHLCSymbol;
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
@@ -247,9 +249,9 @@ export class PriceService {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.OHLCSymbol, exgSym[0], exgSym[1])) {
 			const key: string = exgSym[0] + '~' + exgSym[1];
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.OHLCSymbol;
-			req.tkn = key;
-			req.sym = [key];
+			req.MT = PriceRequestTypes.OHLCSymbol;
+			req.TKN = key;
+			req.SYM = [key];
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
@@ -269,10 +271,10 @@ export class PriceService {
 		}
 		if (subExgList.length > 0) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.TradingAdvices;
-			req.lan = this.localizationService.getshortCode();
-			req.apm = apm;
-			req.sym = subExgList;
+			req.MT = PriceRequestTypes.TradingAdvices;
+			req.LAN = this.localizationService.getshortCode();
+			req.APM = apm;
+			req.SYM = subExgList;
 			const request = {
 				channel : Channels.Price,
 				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
@@ -290,10 +292,10 @@ export class PriceService {
 		}
 		if (unsubExgList.length > 0) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.TradingAdvices;
-			req.lan = this.localizationService.getshortCode();
-			req.apm = apm;
-			req.sym = unsubExgList;
+			req.MT = PriceRequestTypes.TradingAdvices;
+			req.LAN = this.localizationService.getshortCode();
+			req.APM = apm;
+			req.SYM = unsubExgList;
 			const request = {
 				channel : Channels.Price,
 				data : PriceStreamingRequestHandler.getInstance().generateRemoveRequest(req),
@@ -307,12 +309,12 @@ export class PriceService {
 		pgi: number,
 		pgs: number}): void {
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.TradingAdvices;
-		req.lan = this.localizationService.getshortCode();
-		req.exg = requestParms.exg;
-		req.apm = requestParms.apm;
-		req.pgi = requestParms.pgi;
-		req.pgs = requestParms.pgs;
+		req.MT = PriceRequestTypes.TradingAdvices;
+		req.LAN = this.localizationService.getshortCode();
+		req.EXG = requestParms.exg;
+		req.APM = requestParms.apm;
+		req.PGI = requestParms.pgi;
+		req.PGS = requestParms.pgs;
 
 		const request = {
 			channel : Channels.PriceMeta,
@@ -323,9 +325,9 @@ export class PriceService {
 
 	public addMutualFundRequest(seg: Array<string>): void {
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.MutualFund;
-		req.lan = this.localizationService.getshortCode();
-		req.seg = seg;
+		req.MT = PriceRequestTypes.MutualFund;
+		req.LAN = this.localizationService.getshortCode();
+		req.SEG = seg;
 		const request = {
 			channel : Channels.PriceMeta,
 			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
@@ -336,7 +338,7 @@ export class PriceService {
 	public addTimeAndSalesRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.TimeAndSalesSymbol, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.TimeAndSalesSymbol;
+			req.MT = PriceRequestTypes.TimeAndSalesSymbol;
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
@@ -350,7 +352,7 @@ export class PriceService {
 	public removeTimeAndSalesRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.TimeAndSalesSymbol, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.TimeAndSalesSymbol;
+			req.MT = PriceRequestTypes.TimeAndSalesSymbol;
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
@@ -364,7 +366,7 @@ export class PriceService {
 	public addRealTimeExchangeRequest (exchangeCode: string): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.ExchangeAndSubmarket, exchangeCode)) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.ExchangeAndSubmarket;
+			req.MT = PriceRequestTypes.ExchangeAndSubmarket;
 			req.addParam(exchangeCode);
 
 			const request = {
@@ -378,7 +380,7 @@ export class PriceService {
 	public removeRealTimeExchangeRequest (exchangeCode: string): void {
 		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.ExchangeAndSubmarket, exchangeCode)) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.ExchangeAndSubmarket;
+			req.MT = PriceRequestTypes.ExchangeAndSubmarket;
 			req.addParam(exchangeCode);
 
 			const request = {
@@ -396,7 +398,7 @@ export class PriceService {
 	public removeMarketDepthByPriceRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketDepthByPrice, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.MarketDepthByPrice;
+			req.MT = PriceRequestTypes.MarketDepthByPrice;
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
@@ -410,7 +412,7 @@ export class PriceService {
 	public addMarketDepthByPriceRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.MarketDepthByPrice, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.MarketDepthByPrice;
+			req.MT = PriceRequestTypes.MarketDepthByPrice;
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
@@ -424,7 +426,7 @@ export class PriceService {
 	public addMarketDepthByOrderRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.MarketDepthByOrder, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.MarketDepthByOrder;
+			req.MT = PriceRequestTypes.MarketDepthByOrder;
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
@@ -438,7 +440,7 @@ export class PriceService {
 	public removeMarketDepthByOrderRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.MarketDepthByOrder, exgSym[0], exgSym[1])) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.MarketDepthByOrder;
+			req.MT = PriceRequestTypes.MarketDepthByOrder;
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
@@ -455,7 +457,7 @@ export class PriceService {
 	public addSymbolListRequest (exgSym: [string, string][]): void {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.SnapshotSymbol;
+		req.MT = PriceRequestTypes.SnapshotSymbol;
 
 		for (const sym of exgSym) {
 			if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.SnapshotSymbol, sym[0], sym[1])) {
@@ -479,11 +481,11 @@ export class PriceService {
 
 		for (const exg of exgs) {
 			if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.MarketMeta, exg)) {
-				req.mt = PriceRequestTypes.MarketMeta;
-				req.exg = exgs;
-				req.seg = segs;
-				req.tkn = '1';
-				req.lan = this.localizationService.getshortCode();
+				req.MT = PriceRequestTypes.MarketMeta;
+				req.EXG = exgs;
+				req.SEG = segs;
+				req.TKN = '1';
+				req.LAN = this.localizationService.getshortCode();
 				isValidItemsAvailable = true;
 			}
 		}
@@ -492,19 +494,21 @@ export class PriceService {
 			const request = {
 				channel : Channels.PriceMeta,
 				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+				req : req,
 			};
-			this.dataService.sendToWs(request);
+			// this.dataService.sendToWs(request);
+			this.cache.get(this.cache.generateRequest(request));
 		}
 	}
 
 	public addIndexListAjax (exgs: string[], segs: string[], sessionID: string): void {
 		this.configService.getStringConfigVal('connectionConfig', 'price', 'ajax_url').then(url => {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.MarketMeta;
-			req.exg = exgs;
-			req.seg = segs;
-			req.tkn = '1';
-			req.lan = this.localizationService.getshortCode();
+			req.MT = PriceRequestTypes.MarketMeta;
+			req.EXG = exgs;
+			req.SEG = segs;
+			req.TKN = '1';
+			req.LAN = this.localizationService.getshortCode();
 			const reqURL = PriceStreamingRequestHandler.getInstance().generateAddAjaxRequest(url, sessionID, req);
 			const request = {
 				url: reqURL,
@@ -517,7 +521,7 @@ export class PriceService {
 	public removeSymbolListRequest (exgSym: [string, string][]): void {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.SnapshotSymbol;
+		req.MT = PriceRequestTypes.SnapshotSymbol;
 
 		for (const sym of exgSym) {
 			if (this.priceSubscriptionService.unSubscribeFor(PriceRequestTypes.SnapshotSymbol, sym[0], sym[1])) {
@@ -541,25 +545,27 @@ export class PriceService {
 	public requestSymbolMeta (exgSym: [string, string]): void {
 		if (!this.stockDataStore.getOrAddStock(exgSym).isMetaDataLoaded) {
 			const req = new PriceRequest();
-			req.mt = PriceRequestTypes.SymbolMeta;
-			req.tkn = '1';
-			req.lan = this.localizationService.getshortCode();
+			req.MT = PriceRequestTypes.SymbolMeta;
+			req.TKN = '1';
+			req.LAN = this.localizationService.getshortCode();
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
 				channel : Channels.PriceMeta,
 				data : PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
+				req: req,
 			};
-			this.dataService.sendToWs(request);
+			// this.dataService.sendToWs(request);
+			this.cache.get(this.cache.generateRequest(request));
 		}
 	}
 
 	public requestSymbolListMeta (exgSym: [string, string][]): void {
 		let isValidItemsAvailable = false;
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.SymbolMeta;
-		req.tkn = '1';
-		req.lan = this.localizationService.getshortCode();
+		req.MT = PriceRequestTypes.SymbolMeta;
+		req.TKN = '1';
+		req.LAN = this.localizationService.getshortCode();
 
 		for (const sym of exgSym) {
 			if (!this.stockDataStore.getOrAddStock(sym).isMetaDataLoaded) {
@@ -579,10 +585,10 @@ export class PriceService {
 
 	public requestSysMeta(): void {
 		const req = new PriceRequest();
-		req.mt = PriceRequestTypes.MarketMeta;
-		req.tkn = '1';
-		req.lan = this.localizationService.getshortCode();
-		req.seg = ['NPD', 'CAT', 'CNT', 'TZD', 'GMS', 'RD', 'DCAT', 'DSCAT', 'DCSCM', 'DCSCM', 'AST', 'INS', 'GICSL2', 'NEWSEDIT', 'DCAT'];
+		req.MT = PriceRequestTypes.MarketMeta;
+		req.TKN = '1';
+		req.LAN = this.localizationService.getshortCode();
+		req.SEG = ['NPD', 'CAT', 'CNT', 'TZD', 'GMS', 'RD', 'DCAT', 'DSCAT', 'DCSCM', 'DCSCM', 'AST', 'INS', 'GICSL2', 'NEWSEDIT', 'DCAT'];
 
 		const request = {
 			channel: Channels.PriceMeta,

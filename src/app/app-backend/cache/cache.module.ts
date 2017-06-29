@@ -1,3 +1,4 @@
+import { CacheRequestGenerator } from './cache-request-generator';
 import { CacheService } from './cache.service';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -7,6 +8,9 @@ import { NgModule } from '@angular/core';
 		CommonModule,
 	],
 	declarations: [],
-	providers: [CacheService],
+	providers: [
+		CacheRequestGenerator,
+		CacheService,
+	],
 })
 export class CacheModule {}

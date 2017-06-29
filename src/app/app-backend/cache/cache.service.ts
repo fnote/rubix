@@ -1,25 +1,26 @@
-import { CacheKeyGenerator } from './cache-key-generator';
 import { CachePolicy } from '../../app-constants/enums/cache-policy.enum';
+import { CacheRequest } from './cache-request';
+import { CacheRequestGenerator } from './cache-request-generator';
+import { Channels } from '../../app-constants/enums/channels.enum';
+import { DataService } from '../communication/data.service';
 import { DbController } from './db-controller';
 import { Injectable } from '@angular/core';
 import { LoggerService } from '../../app-utils/logger.service';
-import { NetworkService } from '../network/network.service';
 import { Observable } from 'rxjs/Observable';
+import { PriceRequest } from '../price/protocols/price-request';
 import { Subject } from 'rxjs/Subject';
 import { Subscriber } from 'rxjs/Subscriber';
 
 @Injectable()
 export class CacheService {
 
-	private _version = 7;
+	private _version = 1;
 	private _dbController: DbController;
-	private _keygen: CacheKeyGenerator;
 	private cacheResponseStream$: Subject<any>;
 
-	constructor(private network: NetworkService, private logger: LoggerService) {
+	constructor(private network: DataService, private logger: LoggerService, private reqGen: CacheRequestGenerator) {
 		this._dbController = new DbController(this._version, logger);
 		this.cacheResponseStream$ = new Subject();
-		this._keygen = new CacheKeyGenerator();
 	}
 
 	public search(key: string): Observable<number|string | Blob> {
@@ -34,19 +35,28 @@ export class CacheService {
 		this._dbController.clean();
 	}
 
-	public get(key: string): void {
+	public generateRequest(request: {channel: Channels, data: any, req: PriceRequest}): CacheRequest {
+		return this.reqGen.getRequest(request);
+	}
 
-		const keyData: {name: string, storeName: string, cachePolicy: CachePolicy, ttl: number} = this._dbController.getStore('keyMap').get(key);
+	public getCacheResponseStream(): Subject<any> {
+		return this.cacheResponseStream$;
+	}
+
+	public get(keyData: CacheRequest): void {
+
+		// const keyData: {name: string, storeName: string, cachePolicy: CachePolicy, ttl: number} = this._dbController.getStore('keyMap').get(key);
 
 		if (keyData.cachePolicy === CachePolicy.NetWorkOnly) {
-			this.network.get(keyData.name).subscribe(
-				x => {
-					this.cacheResponseStream$.next(x);
-				},
-				e => {
-					this.cacheResponseStream$.error('value for ' + key + 'was not received from network');
-				},
-			);
+			this.network.sendToWs({ channel: keyData.channel, data: keyData.data });
+			/*this.network.get(keyData).subscribe(
+			 x => {
+			 this.cacheResponseStream$.next(x);
+			 },
+			 e => {
+			 this.cacheResponseStream$.error('value for ' + keyData.name + 'was not received from network');
+			 },
+			 ); */
 		} else {
 
 			const store = this._dbController.getStore(keyData.storeName);
@@ -54,92 +64,100 @@ export class CacheService {
 			store.get(keyData.name).then(
 				(val) => {
 
+					if (val === null) {
+						throw new Error(keyData.name + ' not found in Cache!');
+					}
+
 					if (keyData.cachePolicy === CachePolicy.CacheOrNetwork) {
 
 						if (!this._isExpired(val.persistTime, keyData.ttl)) {
 							this.cacheResponseStream$.next(val.value);
 						} else {
-							this.network.get(keyData.name).subscribe(
-								x => {
-									this.cacheResponseStream$.next(x);
-									this.put(key, x);
-								},
-								e => {
-									this.cacheResponseStream$.error('value for ' + key + 'was not received from network');
-								},
-								() => {
-									// observer.complete();
-								},
-							);
+							this.network.sendToWs({ channel: keyData.channel, data: keyData.data });
+							/*this.network.get(keyData).subscribe(
+							 x => {
+							 this.cacheResponseStream$.next(x);
+							 this.put(keyData.name, x);
+							 },
+							 e => {
+							 this.cacheResponseStream$.error('value for ' + keyData.name + 'was not received from network');
+							 },
+							 () => {
+							 // observer.complete();
+							 },
+							 );*/
 						}
 
-					} else if (keyData.cachePolicy === CachePolicy.CacheUpdate) {
+					} else if (keyData.cachePolicy === CachePolicy.CacheUpdate) { // todo: mihil-will not work due to refactoring
 
 						this.cacheResponseStream$.next(val.value);
 
-						this.network.get(keyData.name).subscribe(
-							x => {
-								this.put(key, x);
-							},
-							e => {
-								this.logger.logError('value for ' + key + 'was not received from network', 'CacheService');
-							},
-							() => {
-								this.logger.logInfo('value for ' + key + 'received from network', 'CacheService');
-							},
-						);
-
+						/*this.network.get(keyData).subscribe(
+						 x => {
+						 this.put(keyData.name, x);
+						 },
+						 e => {
+						 this.logger.logError('value for ' + keyData.name + 'was not received from network', 'CacheService');
+						 },
+						 () => {
+						 this.logger.logInfo('value for ' + keyData.name + 'received from network', 'CacheService');
+						 },
+						 );
+						 */
 					} else if (keyData.cachePolicy === CachePolicy.CacheUpdateRefresh) {
 
 						this.cacheResponseStream$.next(val.value);
+						this.network.sendToWs({ channel: keyData.channel, data: keyData.data });
 
-						this.network.get(keyData.name).subscribe(
-							x => {
-								this.cacheResponseStream$.next(x);
-								this.put(key, x);
-							},
-							e => {
-								this.logger.logError('value for ' + key + 'was not received from network', 'CacheService');
-								this.cacheResponseStream$.error('value for ' + key + 'was not received from network');
-							},
-							() => {
-								// observer.complete();
-							},
-						);
+						/*this.network.get(keyData).subscribe(
+						 x => {
+						 this.cacheResponseStream$.next(x);
+						 this.put(keyData.name, x);
+						 },
+						 e => {
+						 this.logger.logError('value for ' + keyData.name + 'was not received from network', 'CacheService');
+						 this.cacheResponseStream$.error('value for ' + keyData.name + 'was not received from network');
+						 },
+						 () => {
+						 // observer.complete();
+						 },
+						 );  */
 					}
 				},
 			).catch((evt) => {
-				this.logger.logError('value for ' + key + 'not found in cache', 'CacheService', evt);
+				this.logger.logError('value for ' + keyData.name + ' not found in cache', 'CacheService', evt);
 
-				this.network.get(keyData.name).subscribe(
-					x => {
-						this.put(key, x);
-						this.cacheResponseStream$.next(x);
-					},
-					e => {
-						this.logger.logError('value for ' + key + 'was not received from network', 'CacheService');
-						this.cacheResponseStream$.error('value for ' + key + 'was not received from network');
-					},
-					() => {
-						// observer.complete();
-					},
-				);
+				this.network.sendToWs({ channel: keyData.channel, data: keyData.data });
+
+				/*this.network.get(keyData).subscribe(
+				 x => {
+				 this.put(keyData.name, x);
+				 this.cacheResponseStream$.next(x);
+				 },
+				 e => {
+				 this.logger.logError('value for ' + keyData.name + 'was not received from network', 'CacheService');
+				 this.cacheResponseStream$.error('value for ' + keyData.name + 'was not received from network');
+				 },
+				 () => {
+				 // observer.complete();
+				 },
+				 );*/
 			});
 		}
 	}
 
-	public put(key: string, value: any): void {
+	public put(keyData: CacheRequest): void {
 
-		const keyData: {name: string, storeName: string, cachePolicy: CachePolicy, ttl: number} = this._dbController.getStore('keyMap').get(key);
+		// const keyData: {name: string, storeName: string, cachePolicy: CachePolicy, ttl: number} = this._dbController.getStore('keyMap').get(key);
 
 		const store = this._dbController.getStore(keyData.storeName);
 
-		const val = { persistTime: this._getTimeStamp(), ttl: keyData.ttl, value: value };
+		const val = { persistTime: this._getTimeStamp(), ttl: keyData.ttl, value: keyData.data };
 
 		store.add(keyData.name, val).then(() => {
-			this.logger.logInfo('value for ' + key + 'added in cache', 'CacheService');
+			this.logger.logInfo('value for ' + keyData.name + ' added in cache', 'CacheService');
 		}).catch((evt) => {
-			this.logger.logError('value for ' + key + 'cache update failed', 'CacheService', evt);
+			this.logger.logError('value for ' + keyData.name + ' cache update failed', 'CacheService', evt);
 			this.logger.logInfo('Running garbage collection', 'CacheService');
 
 			this._dbController.garbageCollect();

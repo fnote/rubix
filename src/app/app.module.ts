@@ -5,6 +5,7 @@ import { AuthGuardService } from './app-widgets/widget-util/auth-guard-service';
 import { AuthModule } from './app-backend/auth/auth.module';
 import { BaseWidgetComponent } from './app-widgets/widget-util/base-widget/base-widget.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { CacheModule } from './app-backend/cache/cache.module';
 import { ChartModule } from 'angular2-highcharts';
 import { ChartWidgetModule } from './app-widgets/chart-widgets/chart-widget.module';
 import { CommonWidgetModule } from './app-widgets/common-widgets/common-widget.module';
@@ -15,6 +16,7 @@ import { FdPageWidgetModule } from './app-widgets/fd-page-widgets/fd-page-widget
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { HttpModule } from '@angular/http';
 import { MutualFundsWidgetModule } from './app-widgets/mutual-funds-widgets/mutual-funds-widget.module';
+import { NetworkModule } from './app-backend/network/network.module';
 import { NetworkService } from './app-backend/network/network.service';
 import { NgModule } from '@angular/core';
 import { PriceModule } from './app-backend/price/price.module';
@@ -49,16 +51,17 @@ export function highchartsFactory(): any {
 		AppRoutingModule,
 		UtilsModule,
 		CommunicationModule,
+		CacheModule,
 		PriceModule,
 		PriceWidgetModule,
 		ChartWidgetModule,
 		FdPageWidgetModule,
 		CommonWidgetModule,
 		MutualFundsWidgetModule,
-
 		AuthModule,
 		TradeModule,
 		ChartModule,
+		NetworkModule,
 	],
 	providers: [
 		ConfigService,

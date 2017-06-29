@@ -71,7 +71,7 @@ export class LocalforageController implements StorageController, CacheController
 
 	private init(): void {
 		localForage.config({
-			driver: [localForage.LOCALSTORAGE, localForage.INDEXEDDB, localForage.WEBSQL], // Force WebSQL; same as using setDriver()
+			driver: [localForage.INDEXEDDB, localForage.LOCALSTORAGE, localForage.WEBSQL], // Force WebSQL; same as using setDriver()
 			name: 'rubix',
 			version: this._version,
 			size: 5242880, // Size of database, in bytes. WebSQL-only for now. 5242880= 5MB/1024x1024x5 B
