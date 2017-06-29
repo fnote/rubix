@@ -96,6 +96,7 @@ export const priceResponseTags = {
 	BENM: 'benchMark',
 	PCT1M: 'percentageOneMonth',
 	PCT3M: 'percentageThreeMonth',
+	ID: 'id',
 	// refatcor below
 	/*0: 'NODATA',
 	5: 'EXC',

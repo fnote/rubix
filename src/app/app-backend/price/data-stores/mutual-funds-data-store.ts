@@ -9,19 +9,19 @@ export class MutualFundsDataStore extends BaseDataStore {
 	private fundByRegionStore = {};
 	private fundByRiskTypeStore = {};
 	private fundBySymbolStore = {};
-	private _regionArray = [];
-	private _riskTypeArray = [];
+	private _regionMetaMap = {};
+	private _riskTypeMetaMap = {};
 
 	constructor(private commonHelperService: CommonHelperService) {
 		super();
 	}
 
-	public get regionArray(): Array<string> {
-		return this._regionArray;
+	public get regionMetaMap(): any {
+		return this._regionMetaMap;
 	}
 
-	public get riskTypeArray(): Array<string> {
-		return this._riskTypeArray;
+	public get riskTypeMetaMap(): any {
+		return this._riskTypeMetaMap;
 	}
 
 	public getItemsByRegion(region: string): Array<MutualFundEntity> {
@@ -51,10 +51,28 @@ export class MutualFundsDataStore extends BaseDataStore {
 	}
 
 	public updateMutualFunds(response: any): void {
+		if (response.GEO) {// TODO [Malindu] Remove this when protocol is fully implemented
+			this.updateRegionData(response.GEO);
+		}
+		if (response.CLASS) {
+			this.updateRiskTypeData(response.CLASS);
+		}
 
 		this.updateMasterData(response.MASTER);
 		this.addChartData(response.ANNUAL);
 		this.addPerformanceData(response.PERFORM);
+	}
+
+	public updateRegionData(values: {id: string, description: string}[]): void {
+		for (const item of values){
+			this._regionMetaMap[item.id] = item.description;
+		}
+	}
+
+	public updateRiskTypeData(values: {id: string, description: string}[]): void {
+		for (const item of values){
+			this._riskTypeMetaMap[item.id] = item.description;
+		}
 	}
 
 	public updateMasterData(values: {
@@ -74,12 +92,6 @@ export class MutualFundsDataStore extends BaseDataStore {
 			let mutualFundDataEntity = itemsByRegion[masterDataItem.riskType];
 
 			if (!mutualFundDataEntity) {
-				if (this._regionArray.indexOf(masterDataItem.region) < 0) {
-					this._regionArray.push(masterDataItem.region);
-				}
-				if (this._riskTypeArray.indexOf(masterDataItem.riskType) < 0) {
-					this._riskTypeArray.push(masterDataItem.riskType);
-				}
 				mutualFundDataEntity = new MutualFundEntity();
 				mutualFundDataEntity.commonHelperService = this.commonHelperService;
 				itemsByRegion[masterDataItem.riskType] = mutualFundDataEntity;
