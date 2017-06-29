@@ -23,7 +23,16 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 		if (this.strategy && this.strategy.type) {
 			region = this._strategy.type;
 		}
-		this.mutualFundCategoryObj = this.mutualFundsDataStore.getItemsByRegion(region);
+		this.mutualFundsDataStore.dataLoadedObserver.subscribe(isDataLoaded => {
+			const dataObj: any = this.mutualFundsDataStore.getItemsByRegion(region);
+			for (const key in dataObj) {
+				if (dataObj.hasOwnProperty(key)) {
+					dataObj[key].headerClass = 'headerClass' + dataObj[key].riskType;
+					dataObj[key].imageUrl = '../assets/images/bg.png';
+				}
+			}
+			this.mutualFundCategoryObj = dataObj;
+		});
 	}
 
 	public get strategy(): {type: number} {
