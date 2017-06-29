@@ -3,10 +3,12 @@ import { ContentDisplayBoxComponent } from '../widget-util/sub-components/conten
 import { MutualFundCategoryComponent } from './mutual-fund-category/mutual-fund-category.component';
 import { MutualFundPerformanceComponent } from './mutual-fund-performance/mutual-fund-performance.component';
 import { NgModule } from '@angular/core';
+import { UtilsModule } from '../../app-utils/utils.module';
 
 @NgModule({
 	imports: [
 		CommonModule,
+		UtilsModule,
 	],
 	declarations: [
 		MutualFundCategoryComponent,
