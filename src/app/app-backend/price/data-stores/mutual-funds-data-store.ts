@@ -2,6 +2,7 @@ import { BaseDataStore } from './base-data-store';
 import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
 import { Injectable } from '@angular/core';
 import { MutualFundEntity } from '../business-entities/mutual-fund-entity';
+import { Subject } from 'rxjs/Rx';
 
 @Injectable()
 export class MutualFundsDataStore extends BaseDataStore {
@@ -11,9 +12,14 @@ export class MutualFundsDataStore extends BaseDataStore {
 	private fundBySymbolStore = {};
 	private _regionMetaMap = {};
 	private _riskTypeMetaMap = {};
+	private $dataLoaded = new Subject();
 
 	constructor(private commonHelperService: CommonHelperService) {
 		super();
+	}
+
+	public get dataLoadedObserver(): Subject<boolean> {
+		return this.$dataLoaded;
 	}
 
 	public get regionMetaMap(): any {
@@ -50,17 +56,21 @@ export class MutualFundsDataStore extends BaseDataStore {
 		return dataArray;
 	}
 
-	public updateMutualFunds(response: any): void {
-		if (response.GEO) {// TODO [Malindu] Remove this when protocol is fully implemented
-			this.updateRegionData(response.GEO);
+	public getItemsByRegionAndRiskType(region: string, riskType: string): MutualFundEntity {
+		if (this.fundByRegionStore[region] && this.fundByRegionStore[region][riskType]) {
+			return this.fundByRegionStore[region][riskType];
+		} else {
+			return null;
 		}
-		if (response.CLASS) {
-			this.updateRiskTypeData(response.CLASS);
-		}
+	}
 
+	public updateMutualFunds(response: any): void {
+		this.updateRegionData(response.GEO);
+		this.updateRiskTypeData(response.CLASS);
 		this.updateMasterData(response.MASTER);
 		this.addChartData(response.ANNUAL);
 		this.addPerformanceData(response.PERFORM);
+		this.$dataLoaded.next(true);
 	}
 
 	public updateRegionData(values: {id: string, description: string}[]): void {
