@@ -5,17 +5,20 @@
 
 		<div class="full-width">
 			<ul class="content-display-box-wrapper margin-medium-bottom">
-				<li *ngFor="let contentItem of contentData" class="strat-1">
+				<li *ngFor="let content of mutualFundCategoryObj | keys">
 					<app-content-display-box
-						[contentData]="contentItem"
-						[imageUrl]= "contentItem.imageUrl"
-						[title]= "contentItem.title"
-						[discription]= "contentItem.discription"
-						[fotterDis]= "contentItem.fotterDis"
+						[title]= "Title"
+						[description]= "content.value.description"
+						[fullDescription]= "content.value.fullDescription"
+						[imageUrl]= ""
+						[headerClass]= ""
+						[bodyClass]= ""
+						[title]= "content.value.title"
+						[footerDes]= "content.value.footerDes"
+						[content] = "content.value"
 					></app-content-display-box>
 				</li>
 			</ul>
-
 		</div>
 
 

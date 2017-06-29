@@ -11,11 +11,6 @@ import { StrategyTypes } from '../../../app-constants/enums/strategy-typs.enum';
 
 export class MutualFundCategoryComponent extends BaseWidgetComponent {
 
-	public contentData = [
-		{ imageUrl: 'img/img_one.png', title: 'Growth Strategy', discription: 'For Aggressive investors who wish to Sharia Compliant mutual funds' },
-		{ imageUrl: 'img/img_two.png', title: 'Growth Strategy', discription: 'For Aggressive investors who wish to Sharia Compliant mutual funds' },
-		{ imageUrl: 'img/img_three.png', title: 'Growth Strategy', discription: 'For Aggressive investors who wish to Sharia Compliant mutual funds' },
-	];
 	public mutualFundCategoryObj: Object;
 	private _strategy: {type: number};
 
@@ -24,19 +19,9 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 	}
 
 	public onInit(): void {
-		let region: string;
-		switch (this._strategy.type) {
-			case StrategyTypes.Global:
-				region = 'Global';
-				break;
-			case StrategyTypes.Regional:
-				region = 'Regional';
-				break;
-			case StrategyTypes.ShariaCompliant:
-				region = 'Sharia';
-				break;
-			default:
-				region = '';
+		let region: number;
+		if (this.strategy && this.strategy.type) {
+			region = this._strategy.type;
 		}
 		this.mutualFundCategoryObj = this.mutualFundsDataStore.getItemsByRegion(region);
 	}

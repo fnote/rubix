@@ -30,7 +30,7 @@ export class MutualFundsDataStore extends BaseDataStore {
 		return this._riskTypeMetaMap;
 	}
 
-	public getItemsByRegion(region: string): Array<MutualFundEntity> {
+	public getItemsByRegion(region: number): Array<MutualFundEntity> {
 
 		let dataArray = this.fundByRegionStore[region];
 
@@ -88,7 +88,7 @@ export class MutualFundsDataStore extends BaseDataStore {
 	public updateMasterData(values: {
 		exchangeCode: string,
 		symbolCode: string,
-		region: string,
+		region: number,
 		riskType: string,
 		description: string,
 		fullDescription: string,
