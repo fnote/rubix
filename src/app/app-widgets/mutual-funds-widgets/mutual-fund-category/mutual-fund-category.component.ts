@@ -15,8 +15,6 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 		{ imageUrl: 'img/img_one.png', title: 'Growth Strategy', discription: 'For Aggressive investors who wish to Sharia Compliant mutual funds' },
 		{ imageUrl: 'img/img_two.png', title: 'Growth Strategy', discription: 'For Aggressive investors who wish to Sharia Compliant mutual funds' },
 		{ imageUrl: 'img/img_three.png', title: 'Growth Strategy', discription: 'For Aggressive investors who wish to Sharia Compliant mutual funds' },
-		{ imageUrl: 'img/img_four.png', title: 'Growth Strategy', discription: 'For Aggressive investors who wish to Sharia Compliant mutual funds' },
-		{ imageUrl: 'img/img_five.png', title: 'Growth Strategy', discription: 'For Aggressive investors who wish to Sharia Compliant mutual funds' },
 	];
 	public mutualFundCategoryObj: Object;
 	private _strategy: {type: number};
