@@ -1,11 +1,13 @@
-import { Component/**, OnInit */ } from '@angular/core';
+import { Component, Injector } from '@angular/core';
+import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
 
 @Component({
 	selector: 'app-mutual-fund-category',
 	templateUrl: './mutual-fund-category.component.html',
 	styleUrls: ['./mutual-fund-category.component.scss'],
 })
-export class MutualFundCategoryComponent { // } implements OnInit {
+
+export class MutualFundCategoryComponent extends BaseWidgetComponent {
 
 	public contentData = [
 		{ imageUrl: 'img/img_one.png', title: 'Growth Strategy', discription: 'For Aggressive investors who wish to Sharia Compliant mutual funds' },
@@ -15,7 +17,19 @@ export class MutualFundCategoryComponent { // } implements OnInit {
 		{ imageUrl: 'img/img_five.png', title: 'Growth Strategy', discription: 'For Aggressive investors who wish to Sharia Compliant mutual funds' },
 	];
 
-	// constructor() { }
+	private _strategy: Object;
+
+	constructor(private injector: Injector) {
+		super(injector);
+	}
+
+	public get strategy(): Object {
+		return this._strategy;
+	}
+
+	public set strategy(value: Object) {
+		this._strategy = value;
+	}
 
 	// ngOnInit() {
 	// }
