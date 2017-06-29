@@ -1,5 +1,5 @@
 export enum StrategyTypes {
-	Global = 0,
+	Regional = 1,
+	Global,
 	ShariaCompliant,
-	Regional,
 }
