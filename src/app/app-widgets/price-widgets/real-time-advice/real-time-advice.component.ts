@@ -11,13 +11,13 @@ export class RealTimeAdviceComponent implements OnInit {
 
 	public contentData = [
 		{ imageUrl: 'http://placehold.it/120x120&text=image4',
-			title: 'Test Title1', discription: 'sample description1', fotterDis: '1 days ago', action1: 'BUY', action2: 'SELL' },
-		{ imageUrl: '', title: 'Test Title2', discription: 'this is a sample description2', fotterDis: '2 days ago', action1: 'BUY' },
-		{ imageUrl: '', title: 'Test Title3', discription: 'this is a sample description3', fotterDis: '3 days ago', action2: 'SELL' },
-		{ imageUrl: '', title: 'Test Title4', discription: 'this is a sample description4', action1: 'BUY', action2: 'SELL' },
-		{ imageUrl: '', title: 'Test Title5', discription: 'this is a sample description5', action1: 'BUY', action2: 'SELL' },
-		{ imageUrl: '', title: 'Test Title6', discription: 'this is a sample description6', fotterDis: '4 days ago' },
-		{ imageUrl: '', discription: 'this is a sample description7', fotterDis: '5 days ago' },
+			title: 'Test Title1', description: 'sample description1', footerDes: '1 days ago', action1: 'BUY', action2: 'SELL' },
+		{ imageUrl: '', title: 'Test Title2', description: 'this is a sample description2', footerDes: '2 days ago', action1: 'BUY' },
+		{ imageUrl: '', title: 'Test Title3', description: 'this is a sample description3', footerDes: '3 days ago', action2: 'SELL' },
+		{ imageUrl: '', title: 'Test Title4', description: 'this is a sample description4', action1: 'BUY', action2: 'SELL' },
+		{ imageUrl: '', title: 'Test Title5', description: 'this is a sample description5', action1: 'BUY', action2: 'SELL' },
+		{ imageUrl: '', title: 'Test Title6', description: 'this is a sample description6', footerDes: '4 days ago' },
+		{ imageUrl: '', description: 'this is a sample description7', footerDes: '5 days ago' },
 	];
 
 	constructor(private priceService: PriceService) {}
