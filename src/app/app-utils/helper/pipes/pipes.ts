@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CommonHelperService } from './common-helper.service';
+import { CommonHelperService } from '../common-helper.service';
 
 @Pipe({ name: 'formatArrowForBidAskDif' })
 export class FormatArrowForBidAskDifPipe implements PipeTransform {
