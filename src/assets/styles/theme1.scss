@@ -92,6 +92,13 @@ body.theme1{
 	background-color: $theme1-data-table-even-row-bg-color;
 }
 
+.theme1 .tbl-cell-bg-highlight .green-text{
+	background-color: $theme1-tbl-cell-bg-green;
+}
+.theme1 .tbl-cell-bg-highlight .red-text{
+	background-color: $theme1-tbl-cell-bg-red;
+}
+
 .theme1 .strategies-1 {
 	color: $theme1-chart-color-1;
 }
@@ -115,3 +122,5 @@ body.theme1{
 	color:$theme1-strategies-duration-btn-text-color;
 	background-color: $theme1-strategies-duration-btn-bg-color;
 }
+
+

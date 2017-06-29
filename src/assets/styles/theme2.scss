@@ -91,6 +91,13 @@ body.theme2{
 	background-color: $theme2-data-table-even-row-bg-color;
 }
 
+.theme2 .tbl-cell-bg-highlight .green-text{
+	background-color: $theme2-tbl-cell-bg-green;
+}
+.theme2 .tbl-cell-bg-highlight .red-text{
+	background-color: $theme2-tbl-cell-bg-red;
+}
+
 .theme2 .strategies-1 {
 	color: $theme2-chart-color-1;
 }

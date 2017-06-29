@@ -1411,9 +1411,7 @@ float: right;
 /*-- C3 Chart custom css end --*/
 
 /*-- Title styles start --*/
-.title-font{
 
-}
 .page-title{
 	margin-top:0;
 }
@@ -1450,6 +1448,21 @@ float: right;
 }
 .data-table td{
 	padding: $padding-medium $padding-small;
+}
+.data-table.btn-tbl td{
+	padding: $padding-small;
+}
+.data-table .btn-container{
+	text-align: $text-align-2;
+}
+.data-table .more-btn{
+	text-align: $text-align-2;
+	background: #45beec;
+	padding: $padding-small $padding-medium;
+	color: white;
+	font-weight: $font-bold;
+	border-radius: 0;
+	border: none;
 }
 
 /*--Table styles end--*/

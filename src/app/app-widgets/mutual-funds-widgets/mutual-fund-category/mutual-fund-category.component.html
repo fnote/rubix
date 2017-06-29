@@ -1,47 +1,52 @@
-<div class="strategies_inner">
-	
-<ul>
-  <li *ngFor="let contentItem of contentData">
-    <app-content-display-box
-      [contentData]="contentItem"
-      [imageUrl]= "contentItem.imageUrl"
-      [title]= "contentItem.title"
-      [discription]= "contentItem.discription"
-      [fotterDis]= "contentItem.fotterDis"
-    ></app-content-display-box>
-  </li>
-</ul>
+<div class="inner-wrapper container-fluid">
+	<h2 class="widget-title">
+		<div class="title">Title</div>
+	</h2>
 
-	<table width="100%" border="1" class="table table-bordered strategies_table">
+	<ul>
+		<li *ngFor="let contentItem of contentData">
+			<app-content-display-box
+				[contentData]="contentItem"
+				[imageUrl]= "contentItem.imageUrl"
+				[title]= "contentItem.title"
+				[discription]= "contentItem.discription"
+				[fotterDis]= "contentItem.fotterDis"
+			></app-content-display-box>
+		</li>
+	</ul>
+
+	<table width="100%" class="data-table strategies-table btn-tbl tbl-cell-bg-highlight margin-small-bottom">
 		<tr>
-			<th scope="col">Strategy</th>
-			<th scope="col">Last Month %</th>
-			<th scope="col">Last 3M %</th>
-			<th scope="col">&nbsp;</th>
+			<th scope="col" class="text-left">Strategy</th>
+			<th scope="col" class="text-right">Last Month %</th>
+			<th scope="col" class="text-right">Last 3M %</th>
+			<th scope="col" class="text-right">&nbsp;</th>
 		</tr>
 		<tr>
-			<td class="strategies_blue">Growth</td>
-			<td class="green_up">+10.2%</td>
-			<td class="red_down">-0.6%</td>
+			<td class="strategies_blue text-left strategies-1">Growth</td>
+			<td class="green-text text-right">+10.2%</td>
+			<td class="red-text text-right">-0.6%</td>
 			<td>
-				<div class="more_button">More ></div>
+				<div class="btn-container"><button type="button" class="more-btn">More &#187;</button></div>
 			</td>
 		</tr>
 		<tr>
-			<td class="strategies_green">Balanced</td>
-			<td class="red_down">-0.6%</td>
-			<td class="green_up">+0.6%</td>
+			<td class="strategies_green text-left strategies-2">Balanced</td>
+			<td class="red-text text-right">-0.6%</td>
+			<td class="green-text text-right">+0.6%</td>
 			<td>
-				<div class="more_button">More ></div>
+				<div class="btn-container"><button type="button" class="more-btn">More &#187;</button></div>
 			</td>
 		</tr>
 		<tr>
-			<td class="strategies_yellow">Prudent</td>
-			<td class="green_up">+0.6%</td>
-			<td class="green_up">+1.2%</td>
+			<td class="strategies_yellow text-left strategies-3">Prudent</td>
+			<td class="green-text text-right">+0.6%</td>
+			<td class="green-text text-right">+1.2%</td>
 			<td>
-				<div class="more_button">More ></div>
+				<div class="btn-container"><button type="button" class="more-btn">More &#187;</button></div>
 			</td>
 		</tr>
 	</table>
+
+
 </div>
