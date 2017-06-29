@@ -1,10 +1,11 @@
 
-<div class="row line_content">
-    <div *ngIf="imageUrl" class="col-md-3 col-3">
-        <img src={{imageUrl}}>
+<div class="row">
+    <div *ngIf="imageUrl" class="col-md-3 col-xs-3">
+       <!--<img src={{imageUrl}}>-->
+			<div class="img"></div>
     </div>
-    <div class="col-md-9 col-9" *ngIf="title">
-        <span class="strategies_blue pl-0 pt-0">{{title}}</span>
+    <div class="col-md-9 col-xs-9" *ngIf="title">
+        <span class="title pl-0 pt-0 margin-small-bottom full-width left">{{title}}</span>
         <p *ngIf="discription">{{discription}}</p>
         <p *ngIf="fotterDis">{{contentData.fotterDis}}<p>
 	</div>

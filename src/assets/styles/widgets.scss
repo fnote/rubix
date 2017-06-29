@@ -1457,12 +1457,10 @@ float: right;
 }
 .data-table .more-btn{
 	text-align: $text-align-2;
-	background: #45beec;
 	padding: $padding-small $padding-medium;
-	color: white;
-	font-weight: $font-bold;
 	border-radius: 0;
 	border: none;
+	font-size: 11px;
 }
 
 /*--Table styles end--*/
@@ -1490,6 +1488,28 @@ float: right;
 .ar .strategies-table .dot {
 	margin: 2px 0 0 5px;
 }
+
+.content-display-box-wrapper li{
+	padding: $padding-small 0;
+}
+.content-display-box-wrapper .img{
+	padding: 1px;
+	width:66px;
+	height:66px;
+}
+.content-display-box-wrapper p{
+	margin-bottom: 0;
+}
+.content-display-box-wrapper .strat-1 .img{
+	background: url("../assets/images/growth-strategy.svg") no-repeat center;
+}
+.content-display-box-wrapper .strat-2 .img{
+	background: url("../assets/images/balanced-strategy.svg") no-repeat center;
+}
+.content-display-box-wrapper .strat-3 .img{
+	background: url("../assets/images/prudent-strategy.svg") no-repeat center;
+}
+
 
 /*Overide padding & margin from bootstrap start */
 
