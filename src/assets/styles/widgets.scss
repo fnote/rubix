@@ -1478,3 +1478,23 @@ float: right;
 	margin: 2px 0 0 5px;
 }
 
+/*Overide padding & margin from bootstrap start */
+
+.gap-overide .iframe-container >{
+	.col-xs-12{
+		padding: 8px;
+	}
+	.col-sm-6{
+		padding: 8px;
+	}
+}
+
+.gap-overide{
+	padding: 0 8px;
+}
+.iframe-container{
+	padding-top: 8px;
+	margin: 0 -4px;
+}
+
+/*Overide padding & margin from bootstrap end */
