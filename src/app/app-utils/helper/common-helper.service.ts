@@ -237,7 +237,7 @@ export class CommonHelperService {
 
 		let wholeNumWthtMinus;
 		if (isNegative) {
-			wholeNumWthtMinus = (0 - wholeNum).toString(); //make number positive
+			wholeNumWthtMinus = (0 - wholeNum).toString(); // make number positive
 		} else {
 			wholeNumWthtMinus = wholeNum.toString();
 		}
