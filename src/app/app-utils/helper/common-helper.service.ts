@@ -197,7 +197,7 @@ export class CommonHelperService {
 	}
 
 	/*
-	* Convert a number to a fixed number
+	* Convert a number to a fixed number  todo: improve method description and change method name
 	* @param num Input number
 	*/
 	public toFixed(num: number): number {
@@ -223,40 +223,43 @@ export class CommonHelperService {
 	/**
 	* Format a number with comma seperators added
 	* @param {number} num Number to be formatted
-	* @param {number} dec Number of decimal places
+	* @param {number} dec Number of decimal places, if this is negative trailing zeroes will be removed from resulting decimal number
 	* @returns {string} Formatted number
 	*/
 	public formatNumber(num: number, dec: number): string {
-		const roundedNum = this.roundNumber(num, dec);
-		const wholeNum = (roundedNum.toString().split('.')[0]).toString();
+		const removeTrailingZeroes = dec < 0;
+		dec = Math.abs(dec);
+		const isNegative = num < 0;
+		const roundedNum = removeTrailingZeroes ? parseFloat(this.roundNumber(num, dec)).toString() : this.roundNumber(num, dec); // if dec is negative remove
+		// trailing zeroes
+		const numArr = roundedNum.split('.');
+		const wholeNum = parseInt(numArr[0], 10);
 
 		let wholeNumWthtMinus;
-		if (wholeNum.charAt(0) === '-') {
-			wholeNumWthtMinus = wholeNum.substring(1, wholeNum.length);
+		if (isNegative) {
+			wholeNumWthtMinus = (0 - wholeNum).toString(); //make number positive
 		} else {
-			wholeNumWthtMinus = wholeNum;
+			wholeNumWthtMinus = wholeNum.toString();
 		}
 
 		let formWholeNum = '';
 		let formNum = '';
-		for (let i = wholeNumWthtMinus.length; i > 0; i -= 3) {
-			formWholeNum = ',' + wholeNumWthtMinus.substring(i - 3, i) + formWholeNum;
-		}
-
-		if ((roundedNum.toString().split('.')).length !== 1) {
-			formNum = formWholeNum.substring(1, formWholeNum.length) + '.' + roundedNum.toString().split('.')[1];
-		} else {
-			formNum = formWholeNum.substring(1, formWholeNum.length);
-			if (dec > 0) {
-				formNum += '.';
-				while (dec > 0) {
-					formNum += '0';
-					dec--;
-				}
+		for (let i = wholeNumWthtMinus.length; i > 0; i -= 3) {    // add , to group numbers
+			if ((i - 3) <= 0) {
+				formWholeNum = wholeNumWthtMinus.substring(0, i) + formWholeNum;
+			} else {
+				formWholeNum = ',' + wholeNumWthtMinus.substring(i - 3, i) + formWholeNum;
 			}
 		}
 
-		if (wholeNum.charAt(0) === '-') {
+		if (numArr.length !== 1) {  // add decimal part
+			const decimalPart = numArr[1];
+			formNum = formWholeNum + '.' + decimalPart;
+		} else {
+			formNum = formWholeNum;
+		}
+
+		if (isNegative) {  // add negative mark
 			formNum = '-' + formNum;
 		}
 		if (formNum === 'NaN' || formNum.indexOf('NaN') >= 0) {
