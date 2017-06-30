@@ -12,10 +12,10 @@ import { performanceChartDurations } from '../../../app-constants/const/performa
 })
 export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 
-	private regionsArray = [];
-	private riskTypesArray = [];
+	public regionsArray = [];
+	public riskTypesArray = [];
+	public chartData = [];
 	private dataLoaded = false;
-	private chartData = [];
 	private chartPeriod = performanceChartDurations.sixMonths;
 	private dataLoadedSubscription;
 
@@ -48,6 +48,8 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 
 	private loadChartData(): void {
 		let chartDataRaw;
+
+		this.chartData = [];
 
 		for (const riskType of this.riskTypesArray) {
 			chartDataRaw = [riskType.description];

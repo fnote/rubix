@@ -18,28 +18,16 @@
 		<thead>
 		<tr>
 			<th scope="col">&nbsp;</th>
-			<th scope="col" class="text-right">Global</th>
-			<th scope="col" class="text-right">Region</th>
-			<th scope="col" class="text-right">Sharia Comp.</th>
+			<th *ngFor='let header of regionsArray' scope="col" class="text-right">
+				{{header.description}}
+			</th>
 		</tr>
 		</thead>
-		<tr>
-			<td class="strategies-1 text-left"><span class="dot left"></span>Growth</td>
-			<td class="text-right">17.0</td>
-			<td class="text-right">1108</td>
-			<td class="text-right">4.6</td>
-		</tr>
-		<tr>
-			<td class="strategies-2 text-left"><span class="dot left"></span>Balanced</td>
-			<td class="text-right">17.0</td>
-			<td class="text-right">1108</td>
-			<td class="text-right">4.6</td>
-		</tr>
-		<tr>
-			<td class="strategies-3 text-left"><span class="dot left"></span>Prudent</td>
-			<td class="text-right">17.0</td>
-			<td class="text-right">1108</td>
-			<td class="text-right">4.6</td>
+
+		<tr *ngFor='let dataRow of chartData'>
+			<td *ngFor='let dataItem of dataRow'  class="text-right">
+			{{dataItem}}
+			</td>
 		</tr>
 	</table>
 	<span class="snap-note">* Performance is annualized. Past performance is not guarantee for future performance</span>
