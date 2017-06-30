@@ -499,7 +499,7 @@ export class PriceService {
 				req : req,
 			};
 			// this.dataService.sendToWs(request);
-			this.cache.get(this.cache.generateRequest(request));
+			this.cache.get(this.cache.generateGetRequest(request));
 		}
 	}
 
@@ -558,7 +558,7 @@ export class PriceService {
 				req: req,
 			};
 			// this.dataService.sendToWs(request);
-			this.cache.get(this.cache.generateRequest(request));
+			this.cache.get(this.cache.generateGetRequest(request));
 		}
 	}
 

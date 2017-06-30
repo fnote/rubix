@@ -5,14 +5,16 @@ export class CacheRequest {
 	private _channel: Channels;
 	private _data: any;
 	private _name: string;
+	private _category: string;
 	private _cachePolicy: CachePolicy;
 	private _ttl: number;
 	private _storeName: string;
 
-	constructor(channel: Channels, data: any, name: string) {
+	constructor(channel: Channels, data: any, name: string, category: string) {
 		this._channel = channel;
 		this._data = data;
 		this._name = name;
+		this._category = category;
 	}
 
 	public get channel(): Channels {
@@ -37,6 +39,14 @@ export class CacheRequest {
 
 	public set name(value: string) {
 		this._name = value;
+	}
+
+	public get category(): string {
+		return this._category;
+	}
+
+	public set category(value: string) {
+		this._category = value;
 	}
 
 	public get cachePolicy(): CachePolicy {

@@ -211,7 +211,7 @@ export class PriceRequest {
 		return arrBuild.join('').trim();
 	}
 
-	private getParam(): string[] {
+	public getParam(): string[] {
 		const arrParam: string[] = [];
 
 		for (const item of this._param) {

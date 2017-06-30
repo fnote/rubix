@@ -25,15 +25,13 @@ export class CacheConfig {
 	};
 
 	private _keys = {
-		PriceMeta_46 : { name: 'symbolMeta', category: 'upToDate', store: 'rubix1' },
-		/*cash_account: { name: 'cash_accountOne', category: 'upToDate' },
-		cash_account2: { name: 'cash_accountTwo', category: 'cacheOneDay' },
-		cash_account3: { name: 'cash_accountThree', category: 'cacheOneWeek' },*/
+		PriceMeta_46 : { alias: 'symbolMeta', category: 'cacheOneDay', store: 'rubix' },
+		PriceMeta_96 : { alias: 'mutfundMore', category: 'cacheOneDay', store: 'rubix' },
 	};
 
 	public get(req: CacheRequest): CacheRequest {
-		const keyData = this._keys[req.name];
-		req.name = keyData.name;
+		const keyData = this._keys[req.category];
+		req.category = keyData.alias;
 		req.ttl = this._classes[keyData.category].ttl;
 		req.cachePolicy = this._classes[keyData.category].cachePolicy;
 		req.storeName = keyData.store;

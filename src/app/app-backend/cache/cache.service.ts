@@ -35,8 +35,12 @@ export class CacheService {
 		this._dbController.clean();
 	}
 
-	public generateRequest(request: {channel: Channels, data: any, req: PriceRequest}): CacheRequest {
+	public generateGetRequest(request: {channel: Channels, data: any, req: PriceRequest}): CacheRequest {
 		return this.reqGen.getRequest(request);
+	}
+
+	public generatePutRequest(request: {channel: Channels, data: any, req: any}): CacheRequest {
+		return this.reqGen.putRequest(request);
 	}
 
 	public getCacheResponseStream(): Subject<any> {
@@ -65,7 +69,9 @@ export class CacheService {
 				(val) => {
 
 					if (val === null) {
-						throw new Error(keyData.name + ' not found in Cache!');
+						this.logger.logWarning('value for ' + keyData.name + ' not found in cache', 'CacheService', keyData.data);
+						this.network.sendToWs({ channel: keyData.channel, data: keyData.data });
+						return;
 					}
 
 					if (keyData.cachePolicy === CachePolicy.CacheOrNetwork) {
@@ -125,9 +131,7 @@ export class CacheService {
 					}
 				},
 			).catch((evt) => {
-				this.logger.logError('value for ' + keyData.name + ' not found in cache', 'CacheService', evt);
-
-				this.network.sendToWs({ channel: keyData.channel, data: keyData.data });
+				this.logger.logError('Getting value for ' + keyData.name + ' raised an exception', 'CacheService', evt);
 
 				/*this.network.get(keyData).subscribe(
 				 x => {
@@ -155,7 +159,7 @@ export class CacheService {
 		const val = { persistTime: this._getTimeStamp(), ttl: keyData.ttl, value: keyData.data };
 
 		store.add(keyData.name, val).then(() => {
-			this.logger.logInfo('value for ' + keyData.name + ' added in cache', 'CacheService');
+			this.logger.logInfo('value for ' + keyData.name + ' added in cache', 'CacheService', val);
 		}).catch((evt) => {
 			this.logger.logError('value for ' + keyData.name + ' cache update failed', 'CacheService', evt);
 			this.logger.logInfo('Running garbage collection', 'CacheService');

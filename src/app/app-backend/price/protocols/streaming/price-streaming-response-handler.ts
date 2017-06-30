@@ -74,10 +74,12 @@ export class PriceStreamingResponseHandler {
 	private updateCache(response: any): void {
 		switch (parseInt(response.MT, 10)) {
 			case PriceRequestTypes.MarketMeta:
-				this.cache.put(this.cache.generateRequest({ channel: Channels.PriceMeta, data: response, req: response }));
+				this.cache.put(this.cache.generatePutRequest({ channel: Channels.PriceMeta, data: response, req: response}));
 				break;
 			case PriceRequestTypes.SymbolMeta:
-				this.cache.put(this.cache.generateRequest({ channel: Channels.PriceMeta, data: response, req: response }));
+				for (const symObj of response.SYMS) {
+					this.cache.put(this.cache.generatePutRequest({ channel: Channels.PriceMeta, data: response, req: {MT:PriceRequestTypes.SymbolMeta, EXG : symObj.exchangeCode, SYM : symObj.symbolCode}}));
+				}
 				break;
 			default:
 			// code here
