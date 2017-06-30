@@ -16,7 +16,7 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 	public titleKey = 'REGION_TITLE_1';
 	private _strategy: {type: number};
 
-	constructor(private injector: Injector, private mutualFundsDataStore: MutualFundsDataStore, private localizationService: LocalizationService) {
+	constructor(private injector: Injector, private mutualFundsDataStore: MutualFundsDataStore, public localizationService: LocalizationService) {
 		super(injector);
 	}
 
