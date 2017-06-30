@@ -323,11 +323,13 @@ export class PriceService {
 		this.dataService.sendToWs(request);
 	}
 
-	public addMutualFundRequest(seg: Array<string>): void {
+	public addMutualFundRequest(segments: Array<string>, exchanges: Array<string>, providers: Array<string>): void {
 		const req = new PriceRequest();
 		req.MT = PriceRequestTypes.MutualFund;
 		req.LAN = this.localizationService.getshortCode();
-		req.SEG = seg;
+		req.SEG = segments;
+		req.EXG = exchanges;
+		req.PRV = providers;
 		const request = {
 			channel : Channels.PriceMeta,
 			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),

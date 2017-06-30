@@ -17,6 +17,7 @@ export class MutualFundEntity extends BaseEntity {
 	private _benchMark: string =  userSettings.marketData.defaultStringInitializer;
 	private _percentageOneMonth: string =  userSettings.marketData.defaultStringInitializer;
 	private _percentageThreeMonth: string =  userSettings.marketData.defaultStringInitializer;
+	private _decimalPlaces: number =  userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 
 	constructor(values: Object = {}) {
 		super();
@@ -92,7 +93,7 @@ export class MutualFundEntity extends BaseEntity {
 	}
 
 	public set percentageOneMonth(value: string) {
-		this._percentageOneMonth = this._commonHelperService.formatNumber(parseFloat(value), 1) + '%';
+		this._percentageOneMonth = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces) + '%';
 	}
 
 	public get percentageThreeMonth(): string {
@@ -100,7 +101,15 @@ export class MutualFundEntity extends BaseEntity {
 	}
 
 	public set percentageThreeMonth(value: string) {
-		this._percentageThreeMonth = this._commonHelperService.formatNumber(parseFloat(value), 1) + '%';
+		this._percentageThreeMonth = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces) + '%';
+	}
+
+	public get decimalPlaces(): number {
+		return this._decimalPlaces;
+	}
+
+	public set decimalPlaces(value: number) {
+		this._decimalPlaces = value;
 	}
 
 	public addchartData(duration: string, value: number): void {

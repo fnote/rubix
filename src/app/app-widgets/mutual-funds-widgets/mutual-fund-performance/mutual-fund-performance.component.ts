@@ -81,8 +81,11 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 	}
 
 	private subscribeForMutualFund(): void {
-		const seg = ['MASTER', 'PERFORM', 'ANNUAL', 'CLASS', 'GEO'];
-		this.priceService.addMutualFundRequest(seg);
+		const segment = ['MASTER', 'PERFORM', 'ANNUAL', 'CLASS', 'GEO'];
+		const exchanges = ['MFS_FS'];
+		const providers = ['TAKAUD'];
+
+		this.priceService.addMutualFundRequest(segment, exchanges, providers);
 	}
 
 }

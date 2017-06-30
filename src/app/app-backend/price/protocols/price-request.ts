@@ -14,6 +14,7 @@ export class PriceRequest {
 	private _APM: Object;
 	private _PGI: number;
 	private _PGS: number;
+	private _PRV: string[];
 
 	constructor() {
 		this._param = [];
@@ -107,6 +108,14 @@ export class PriceRequest {
 		this._PGS = value;
 	}
 
+	public get PRV(): string[] {
+		return this._PRV;
+	}
+
+	public set PRV(value: string[]) {
+		this._PRV = value;
+	}
+
 	public addParam(exg: string, sym?: string): void {
 		this._param.push([exg, sym]);
 	}
@@ -173,6 +182,12 @@ export class PriceRequest {
 		if (this.PGS) {
 			arrBuild.push('"PGS":');
 			arrBuild.push(this.PGS.toString() + ',');
+		}
+
+		if (this.PRV) {
+			arrBuild.push('"PRV":["');
+			arrBuild.push(this.PRV.join('","'));
+			arrBuild.push('"],');
 		}
 
 		if (this.APM) {

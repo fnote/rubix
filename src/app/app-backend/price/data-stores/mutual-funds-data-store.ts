@@ -95,6 +95,7 @@ export class MutualFundsDataStore extends BaseDataStore {
 		fullDescription: string,
 		shortDescription: string,
 		currency: string,
+		decimalPlaces: number,
 		benchMark: string}[]): void {
 
 		for (const masterDataItem of values){
@@ -109,7 +110,7 @@ export class MutualFundsDataStore extends BaseDataStore {
 				itemsByRiskType[masterDataItem.region] = mutualFundDataEntity;
 				this.fundBySymbolStore[masterDataItem.symbolCode] = mutualFundDataEntity;
 			}
-
+			mutualFundDataEntity.decimalPlaces = masterDataItem.decimalPlaces;
 			mutualFundDataEntity.setValues(masterDataItem);
 
 		}
