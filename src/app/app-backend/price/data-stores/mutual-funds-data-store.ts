@@ -74,12 +74,15 @@ export class MutualFundsDataStore extends BaseDataStore {
 	}
 
 	public updateRegionData(values: {id: string, description: string}[]): void {
+		this._regionArray.length = 0;
+
 		for (const item of values){
 			this._regionArray.push(item);
 		}
 	}
 
 	public updateRiskTypeData(values: {id: string, description: string}[]): void {
+		this._riskTypeArray.length = 0;
 
 		for (const item of values){
 			this._riskTypeArray.push(item);
@@ -98,6 +101,8 @@ export class MutualFundsDataStore extends BaseDataStore {
 		decimalPlaces: number,
 		benchMark: string}[]): void {
 
+		let description;
+
 		for (const masterDataItem of values){
 			const itemsByRegion = this.getItemsByRegion(masterDataItem.region);
 			const itemsByRiskType = this.getItemsByRiskType(masterDataItem.riskType);
@@ -112,6 +117,15 @@ export class MutualFundsDataStore extends BaseDataStore {
 			}
 			mutualFundDataEntity.decimalPlaces = masterDataItem.decimalPlaces;
 			mutualFundDataEntity.setValues(masterDataItem);
+			description = this.riskTypeArray.filter(function(item: {id: number, description: string}): boolean{
+				return item.id === parseInt(masterDataItem.riskType, 10);
+			});
+			mutualFundDataEntity.riskTypeDescription = description[0].description;
+
+			description = this.regionArray.filter(function(item: {id: number, description: string}): boolean{
+				return item.id === masterDataItem.region;
+			});
+			mutualFundDataEntity.regionDescription = description[0].description;
 
 		}
 

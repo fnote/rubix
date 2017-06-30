@@ -56,6 +56,13 @@ export const EN = {
   SEP: '[9444]',
   OCT: '[4166]',
   NOV: '[4167]',
-  DEC: '[4168]'
+  DEC: '[4168]',
+  STRAT_PERF: '[]',
+  ANNUAL_PER: '[]',
+  MUT_FUND_PERF_DESC: '[]',
+  6M: '[]',
+  1Y: '[]',
+  3Y: '[]',
+  5Y: '[]',
 };
 

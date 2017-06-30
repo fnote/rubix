@@ -18,6 +18,8 @@ export class MutualFundEntity extends BaseEntity {
 	private _percentageOneMonth: string =  userSettings.marketData.defaultStringInitializer;
 	private _percentageThreeMonth: string =  userSettings.marketData.defaultStringInitializer;
 	private _decimalPlaces: number =  userSettings.marketData.defaultNumberInitializer.zeroInitializer;
+	private _regionDescription: string = userSettings.marketData.defaultStringInitializer;
+	private _riskTypeDescription: string = userSettings.marketData.defaultStringInitializer;
 
 	constructor(values: Object = {}) {
 		super();
@@ -110,6 +112,22 @@ export class MutualFundEntity extends BaseEntity {
 
 	public set decimalPlaces(value: number) {
 		this._decimalPlaces = value;
+	}
+
+	public get regionDescription(): string {
+		return this._regionDescription;
+	}
+
+	public set regionDescription(value: string) {
+		this._regionDescription = value;
+	}
+
+	public get riskTypeDescription(): string {
+		return this._riskTypeDescription;
+	}
+
+	public set riskTypeDescription(value: string) {
+		this._riskTypeDescription = value;
 	}
 
 	public addchartData(duration: string, value: number): void {
