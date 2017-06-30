@@ -30,30 +30,30 @@ export class MutualFundsDataStore extends BaseDataStore {
 		return this._riskTypeArray;
 	}
 
-	public getItemsByRegion(region: string): Array<MutualFundEntity> {
+	public getItemsByRegion(region: string): any {
 
-		let dataArray = this.fundByRegionStore[region];
+		let data = this.fundByRegionStore[region];
 
-		if (!dataArray) {
-			dataArray = {};
-			this.fundByRegionStore[region] = dataArray;
+		if (!data) {
+			data = {};
+			this.fundByRegionStore[region] = data;
 
 		}
 
-		return dataArray;
+		return data;
 	}
 
-	public getItemsByRiskType(riskType: string): Array<MutualFundEntity> {
+	public getItemsByRiskType(riskType: string): any {
 
-		let dataArray = this.fundByRiskTypeStore[riskType];
+		let data = this.fundByRiskTypeStore[riskType];
 
-		if (!dataArray) {
-			dataArray = {};
-			this.fundByRiskTypeStore[riskType] = dataArray;
+		if (!data) {
+			data = {};
+			this.fundByRiskTypeStore[riskType] = data;
 
 		}
 
-		return dataArray;
+		return data;
 	}
 
 	public getItemsByRegionAndRiskType(region: string, riskType: string): MutualFundEntity {
