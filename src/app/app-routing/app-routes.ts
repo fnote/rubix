@@ -5,8 +5,11 @@ import { FdDetailQuoteComponent } from '../app-widgets/fd-page-widgets/fd-detail
 import { FdLayoutComponent } from '../app-layouts/fd-layout/fd-layout.component';
 import { LoginComponent } from '../app-widgets/common-widgets/login-widget/login.component';
 import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/map-selector.component';
+import { MutualFundBenchmarkComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-benchmark/mutual-fund-benchmark.component';
 import { MutualFundCategoryComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-category/mutual-fund-category.component';
+import { MutualFundOverviewComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-overview/mutual-fund-overview.component';
 import { MutualFundPerformanceComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-performance/mutual-fund-performance.component';
+import { MutualFundReportComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-report/mutual-fund-report.component';
 import { OrderBookComponent } from '../app-widgets/price-widgets/order-book/order-book.component';
 import { PrimaryLayoutOneComponent } from '../app-layouts/primary-layout-one/primary-layout-one.component';
 import { Routes } from '@angular/router';
@@ -17,6 +20,7 @@ import { SecondaryLayoutTwoComponent } from '../app-layouts/secondary-layout-two
 import { SideBarComponent } from '../app-widgets/common-widgets/side-bar/side-bar.component';
 import { StrategyTypes } from '../app-constants/enums/strategy-typs.enum';
 import { TimeAndSalesComponent } from '../app-widgets/price-widgets/time-and-sales/time-and-sales.component';
+import { TwoByOneLayoutComponent } from '../app-layouts/two-by-one-layout/two-by-one-layout.component';
 import { TwoByTwoLayoutComponent } from '../app-layouts/two-by-two-layout/two-by-two-layout.component';
 // { path: 'map', component: MapSelectorComponent },
 
@@ -45,7 +49,7 @@ export const routes: Routes = [
 					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet1', data: { exgStock: ['TDWL', '1090'], chartOutletID: 'outlet1' } },
 				],
 			},
-			{ path: 'secondary-layout-one', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
+			{ path: 'two-by-two-layout', component: SecondaryLayoutOneComponent, outlet: 'outlet2',
 				children: [
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet1', data: { exgStock: ['ADSM', 'ALDAR'] } },
 					{ path: 'detail-quote', component: DetailQuoteComponent, outlet: 'outlet2', data: { exgStock: ['PFX', 'EURUSD'] } },
@@ -105,6 +109,14 @@ export const routes: Routes = [
 			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2' },
 			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3' },
 			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4' },
+		],
+	},
+	{ path: 'mutual-fund-overview', component: MutualFundOverviewComponent },
+	{ path: 'two-by-one-layout', component: TwoByOneLayoutComponent,
+		children: [
+			{ path: 'mutual-fund-overview', component: MutualFundOverviewComponent, outlet: 'outlet1' },
+			{ path: 'mutual-fund-benchmark', component: MutualFundBenchmarkComponent, outlet: 'outlet2' },
+			{ path: 'mutual-fund-report', component: MutualFundReportComponent, outlet: 'outlet3' },
 		],
 	},
 ];

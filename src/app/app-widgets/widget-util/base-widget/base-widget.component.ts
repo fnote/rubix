@@ -1,5 +1,6 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
+import { NavigationService } from '../navigation-service';
 
 @Component({
 	selector: 'app-base-widget',
@@ -8,11 +9,13 @@ import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 export class BaseWidgetComponent implements OnInit, OnDestroy {
 
 	private queryParameters: {};
-	private route;
 	private _exgStock: [string, string];
+	protected route;
+	protected navigationService;
 
 	constructor(injector: Injector) {
 		this.route = injector.get(ActivatedRoute);
+		this.navigationService = injector.get(NavigationService);
 		this.route.data
 			.subscribe((values: Object = {}) => {
 				Object.assign(this, values);

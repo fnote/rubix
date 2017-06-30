@@ -16,6 +16,7 @@ import { FdPageWidgetModule } from './app-widgets/fd-page-widgets/fd-page-widget
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { HttpModule } from '@angular/http';
 import { MutualFundsWidgetModule } from './app-widgets/mutual-funds-widgets/mutual-funds-widget.module';
+import { NavigationService } from './app-widgets/widget-util/navigation-service';
 import { NetworkModule } from './app-backend/network/network.module';
 import { NetworkService } from './app-backend/network/network.service';
 import { NgModule } from '@angular/core';
@@ -26,6 +27,7 @@ import { SecondaryLayoutOneComponent } from './app-layouts/secondary-layout-one/
 import { SecondaryLayoutThreeComponent } from './app-layouts/secondary-layout-three/secondary-layout-three.component';
 import { SecondaryLayoutTwoComponent } from './app-layouts/secondary-layout-two/secondary-layout-two.component';
 import { TradeModule } from './app-backend/trade/trade.module';
+import { TwoByOneLayoutComponent } from './app-layouts/two-by-one-layout/two-by-one-layout.component';
 import { TwoByTwoLayoutComponent } from './app-layouts/two-by-two-layout/two-by-two-layout.component';
 import { UtilsModule } from './app-utils/utils.module';
 import { WidgetLoaderService } from './app-widgets/widget-util/widget-loader.service';
@@ -44,6 +46,7 @@ export function highchartsFactory(): any {
 		SecondaryLayoutThreeComponent,
 		FdLayoutComponent,
 		TwoByTwoLayoutComponent,
+		TwoByOneLayoutComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -72,6 +75,7 @@ export function highchartsFactory(): any {
 			provide: HighchartsStatic,
 			useFactory: highchartsFactory,
 		},
+		NavigationService,
 	],
 	bootstrap: [AppComponent],
 })

@@ -42,4 +42,17 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 	public set strategy(value: {type: number}) {
 		this._strategy = value;
 	}
+
+	public loadDetailedView(category: string): void {
+		const data = { strategy : this.strategy.type, category: category };
+		const pathArray = [
+			'/two-by-one-layout', { outlets: {
+				outlet1 : ['mutual-fund-overview'],
+				outlet2 : ['mutual-fund-benchmark'],
+				outlet3 : ['mutual-fund-report'],
+			}},
+		];
+		this.navigationService.goToChildView(pathArray , data);
+	}
+
 }
