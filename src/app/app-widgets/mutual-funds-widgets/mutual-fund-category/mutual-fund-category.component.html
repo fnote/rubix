@@ -7,7 +7,7 @@
 			<ul class="content-display-box-wrapper margin-medium-bottom">
 				<li *ngFor="let content of mutualFundCategoryObj | keys">
 					<app-content-display-box
-						[title]= ""
+						[title]= "content.value.title"
 						[description]= "content.value.description"
 						[fullDescription]= "content.value.fullDescription"
 						[imageUrl]= "content.value.imageUrl"

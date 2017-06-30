@@ -27,6 +27,7 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 			const dataObj: any = this.mutualFundsDataStore.getItemsByRegion(region);
 			for (const key in dataObj) {
 				if (dataObj.hasOwnProperty(key)) {
+					dataObj[key].title = 'Growth Strategy'; // [todo] get the title according to the risk type from localization service
 					dataObj[key].headerClass = 'strat-' + dataObj[key].riskType;
 					dataObj[key].imageUrl = '../../../../assets/assets/images/strat-' + dataObj[key].riskType + '.svg';
 					dataObj[key].classLastLstOneM = (dataObj[key].percentageOneMonth >= 0) ? 'green-text' : 'red-text';
