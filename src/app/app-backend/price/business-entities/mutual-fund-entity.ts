@@ -93,7 +93,7 @@ export class MutualFundEntity extends BaseEntity {
 	}
 
 	public set percentageOneMonth(value: string) {
-		this._percentageOneMonth = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces) + '%';
+		this._percentageOneMonth = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get percentageThreeMonth(): string {
@@ -101,7 +101,7 @@ export class MutualFundEntity extends BaseEntity {
 	}
 
 	public set percentageThreeMonth(value: string) {
-		this._percentageThreeMonth = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces) + '%';
+		this._percentageThreeMonth = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get decimalPlaces(): number {

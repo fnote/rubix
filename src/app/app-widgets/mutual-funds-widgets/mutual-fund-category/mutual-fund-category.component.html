@@ -20,8 +20,6 @@
 			</ul>
 		</div>
 
-
-
 	<table width="100%" class="data-table strategies-table btn-tbl tbl-cell-bg-highlight margin-small-bottom">
 		<tr>
 			<th scope="col" class="text-left">Strategy</th>
@@ -29,26 +27,10 @@
 			<th scope="col" class="text-right">Last 3M %</th>
 			<th scope="col" class="text-right">&nbsp;</th>
 		</tr>
-		<tr>
-			<td class="strategies_blue text-left strategies-1">Growth</td>
-			<td class="green-text text-right">+10.2%</td>
-			<td class="red-text text-right">-0.6%</td>
-			<td>
-				<div class="btn-container"><button type="button" class="more-btn" (click)="loadDetailedView('Growth')">More &#187;</button></div>
-			</td>
-		</tr>
-		<tr>
-			<td class="strategies_green text-left strategies-2">Balanced</td>
-			<td class="red-text text-right">-0.6%</td>
-			<td class="green-text text-right">+0.6%</td>
-			<td>
-				<div class="btn-container"><button type="button" class="more-btn" (click)="loadDetailedView('Balanced')">More &#187;</button></div>
-			</td>
-		</tr>
-		<tr>
-			<td class="strategies_yellow text-left strategies-3">Prudent</td>
-			<td class="green-text text-right">+0.6%</td>
-			<td class="green-text text-right">+1.2%</td>
+		<tr *ngFor="let content of mutualFundCategoryObj | keys">
+			<td class="text-left strategies-{{content.value.riskType}}">{{content.value.description}}</td>
+			<td class="{{content.value.classLastLstOneM}} text-right ">{{content.value.percentageOneMonth}} %</td>
+			<td class="{{content.value.classLastLstThreeM}} text-right">{{content.value.percentageThreeMonth}} %</td>
 			<td>
 				<div class="btn-container"><button type="button" class="more-btn" (click)="loadDetailedView('Prudent')">More &#187;</button></div>
 			</td>
