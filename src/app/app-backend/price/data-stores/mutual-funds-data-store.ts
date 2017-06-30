@@ -22,7 +22,7 @@ export class MutualFundsDataStore extends BaseDataStore {
 		return this.$dataLoaded;
 	}
 
-	public get regionArray(): Array<{id: number, description: 'string'}> {
+	public get regionArray(): Array<{id: number, description: string}> {
 		return this._regionArray;
 	}
 
