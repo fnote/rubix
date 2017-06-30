@@ -14,7 +14,8 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 
 	public regionsArray = [];
 	public riskTypesArray = [];
-	public chartData = [];
+	private chartData = [];
+	private chartYAxisLables = [];
 	private dataLoaded = false;
 	private chartPeriod = performanceChartDurations.sixMonths;
 	private dataLoadedSubscription;
@@ -50,12 +51,14 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 		let chartDataRaw;
 
 		this.chartData = [];
+		this.chartYAxisLables = [];
 
 		for (const riskType of this.riskTypesArray) {
 			chartDataRaw = [riskType.description];
 
 			for (const region of this.regionsArray) {
 				chartDataRaw.push(this.mutualFundsDataStore.getItemsByRegionAndRiskType(region.id, riskType.id).chartDataMap[this.chartPeriod] || 0);
+				this.chartYAxisLables.push(region.description);
 			}
 			this.chartData.push(chartDataRaw);
 
@@ -63,18 +66,35 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 	}
 
 	private drawChart(): void {
-		const areaChart = c3.generate({
+		const anuualizedChart = c3.generate({
 			bindto: '#fundPerformanceC3Chart',
-			legend: {
-				show: false,
-			},
 			data: {
 				columns: this.chartData,
 				type: 'bar',
 			},
 			bar: {
 				width: {
-					ratio: 0.5,
+					ratio: 0.75,
+				},
+			},
+			axis: {
+				x: {
+					type: 'category',
+					categories: this.chartYAxisLables,
+				},
+				y: {
+					label: {
+						text: 'Annualized %',
+						position: 'outer-middle',
+					},
+				},
+			},
+			legend: {
+				show: false,
+			},
+			grid: {
+				y: {
+					show: true,
 				},
 			},
 		});
