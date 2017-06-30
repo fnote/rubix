@@ -10,8 +10,8 @@ export class MutualFundsDataStore extends BaseDataStore {
 	private fundByRegionStore = {};
 	private fundByRiskTypeStore = {};
 	private fundBySymbolStore = {};
-	private _regionMetaMap = {};
-	private _riskTypeMetaMap = {};
+	private  _regionArray = [];
+	private  _riskTypeArray = [];
 	private $dataLoaded = new Subject();
 
 	constructor(private commonHelperService: CommonHelperService) {
@@ -22,12 +22,12 @@ export class MutualFundsDataStore extends BaseDataStore {
 		return this.$dataLoaded;
 	}
 
-	public get regionMetaMap(): any {
-		return this._regionMetaMap;
+	public get regionArray(): Array<{id: number, description: 'string'}> {
+		return this._regionArray;
 	}
 
-	public get riskTypeMetaMap(): any {
-		return this._riskTypeMetaMap;
+	public get riskTypeArray(): Array<{id: number, description: 'string'}> {
+		return this._riskTypeArray;
 	}
 
 	public getItemsByRegion(region: number): Array<MutualFundEntity> {
@@ -75,13 +75,14 @@ export class MutualFundsDataStore extends BaseDataStore {
 
 	public updateRegionData(values: {id: string, description: string}[]): void {
 		for (const item of values){
-			this._regionMetaMap[item.id] = item.description;
+			this._regionArray.push(item);
 		}
 	}
 
 	public updateRiskTypeData(values: {id: string, description: string}[]): void {
+
 		for (const item of values){
-			this._riskTypeMetaMap[item.id] = item.description;
+			this._riskTypeArray.push(item);
 		}
 	}
 

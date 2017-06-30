@@ -12,8 +12,8 @@ import { performanceChartDurations } from '../../../app-constants/const/performa
 })
 export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 
-	private regionMetaMap;
-	private riskTypeMetaMap;
+	private regionsArray = [];
+	private riskTypesArray = [];
 	private dataLoaded = false;
 	private chartData = [];
 	private chartPeriod = performanceChartDurations.sixMonths;
@@ -31,8 +31,8 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 				this.drawChart();
 			}
 		});
-		this.regionMetaMap = this.mutualFundsDataStore.regionMetaMap;
-		this.riskTypeMetaMap = this.mutualFundsDataStore.riskTypeMetaMap;
+		this.regionsArray = this.mutualFundsDataStore.regionArray;
+		this.riskTypesArray = this.mutualFundsDataStore.riskTypeArray;
 		this.subscribeForMutualFund();
 	}
 
@@ -49,16 +49,14 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 	private loadChartData(): void {
 		let chartDataRaw;
 
-		for (const riskType in this.riskTypeMetaMap) {
-			if (this.riskTypeMetaMap.hasOwnProperty(riskType)) {
-				chartDataRaw = [this.riskTypeMetaMap[riskType]];
-				for (const region in this.regionMetaMap) {
-					if (this.regionMetaMap.hasOwnProperty(region)) {
-						chartDataRaw.push(this.mutualFundsDataStore.getItemsByRegionAndRiskType(region, riskType).chartDataMap[this.chartPeriod] || 0);
-					}
-				}
-				this.chartData.push(chartDataRaw);
+		for (const riskType of this.riskTypesArray) {
+			chartDataRaw = [riskType.description];
+
+			for (const region of this.regionsArray) {
+				chartDataRaw.push(this.mutualFundsDataStore.getItemsByRegionAndRiskType(region.id, riskType.id).chartDataMap[this.chartPeriod] || 0);
 			}
+			this.chartData.push(chartDataRaw);
+
 		}
 	}
 
