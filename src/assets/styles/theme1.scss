@@ -72,66 +72,89 @@ body.theme1{
     border-color: $theme1-up-down-slider-row-2-border-color;
 }
 
-.theme1 .widget-title{
-	border-color: $theme1-widget-title-border-color;
+.theme1 {
+	.widget-title {
+		border-color: $theme1-widget-title-border-color;
+	}
+	.page-title {
+		border-color: $theme1-widget-title-border-color;
+	}
 }
 
 
-.theme1 .data-table th{
-	border-top: 1px solid $theme1-data-table-th-border-color;
-	border-bottom: 2px solid $theme1-data-table-th-border-color;
-	background-color: $theme1-data-table-th-bg-color;
-}
-.theme1 .data-table td{
-	border-bottom: 1px solid $theme1-data-table-td-border-color;
-}
-.theme1 .data-table tr:nth-child(odd) {
-	background-color: $theme1-data-table-odd-row-bg-color;
-}
-.theme1 .data-table tr:nth-child(even) {
-	background-color: $theme1-data-table-even-row-bg-color;
-}
-
-.theme1 .tbl-cell-bg-highlight .green-text{
-	background-color: $theme1-tbl-cell-bg-green;
-}
-.theme1 .tbl-cell-bg-highlight .red-text{
-	background-color: $theme1-tbl-cell-bg-red;
-}
-.theme1 .data-table .more-btn{
-	color:$theme1-data-table-more-btn-text-color;
-	background-color: $theme1-data-table-more-btn-bg-color;
-}
 
 
-.theme1 .strategies-1 ,.theme1 .strat-1 .title{
-	color: $theme1-chart-color-1;
+	.theme1 .data-table th{
+		border-top: 1px solid $theme1-data-table-th-border-color;
+		border-bottom: 2px solid $theme1-data-table-th-border-color;
+		background-color: $theme1-data-table-th-bg-color;
+	}
+	.theme1 .data-table td{
+		border-bottom: 1px solid $theme1-data-table-td-border-color;
+	}
+	.theme1 .data-table tr:nth-child(odd) {
+		background-color: $theme1-data-table-odd-row-bg-color;
+	}
+	.theme1 .data-table tr:nth-child(even) {
+		background-color: $theme1-data-table-even-row-bg-color;
+	}
+
+	.theme1 .tbl-cell-bg-highlight .green-text{
+		background-color: $theme1-tbl-cell-bg-green;
+	}
+	.theme1 .tbl-cell-bg-highlight .red-text{
+		background-color: $theme1-tbl-cell-bg-red;
+	}
+	.theme1 .data-table .more-btn{
+		color:$theme1-data-table-more-btn-text-color;
+		background-color: $theme1-data-table-more-btn-bg-color;
+	}
+
+
+	.theme1 .strategies-1 ,.theme1 .strat-1 .title{
+		color: $theme1-chart-color-1;
+	}
+	.theme1 .strategies-2 ,.theme1 .strat-2 .title{
+		color: $theme1-chart-color-2;
+	}
+	.theme1 .strategies-3 ,.theme1 .strat-3 .title{
+		color: $theme1-chart-color-3;
+	}
+	.theme1 .strategies-1 .dot{
+		background-color: $theme1-chart-color-1;
+	}
+	.theme1 .strategies-2 .dot{
+		background-color: $theme1-chart-color-2;
+	}
+	.theme1 .strategies-3 .dot{
+		background-color: $theme1-chart-color-3;
+	}
+
+	.theme1 .strategies-duration .button{
+		color:$theme1-strategies-duration-btn-text-color;
+		background-color: $theme1-strategies-duration-btn-bg-color;
+	}
+
+	.theme1 .content-display-box-wrapper li{
+		border-bottom: 1px solid $theme1-content-display-box-border-color;
+	}
+	.theme1 .content-display-box-wrapper li .img {
+		border: 1px solid $theme1-content-display-box-img-border-color;
+	}
+
+
+/*--common button colors start--*/
+.button-green{
+	background-color: $theme1-btn-green;
 }
-.theme1 .strategies-2 ,.theme1 .strat-2 .title{
-	color: $theme1-chart-color-2;
+.button-blue{
+	background-color: $theme1-btn-blue;
 }
-.theme1 .strategies-3 ,.theme1 .strat-3 .title{
-	color: $theme1-chart-color-3;
-}
-.theme1 .strategies-1 .dot{
-	background-color: $theme1-chart-color-1;
-}
-.theme1 .strategies-2 .dot{
-	background-color: $theme1-chart-color-2;
-}
-.theme1 .strategies-3 .dot{
-	background-color: $theme1-chart-color-3;
+.common-button{
+	color: white;
 }
 
-.theme1 .strategies-duration .button{
-	color:$theme1-strategies-duration-btn-text-color;
-	background-color: $theme1-strategies-duration-btn-bg-color;
-}
 
-.theme1 .content-display-box-wrapper li{
-	border-bottom: 1px solid $theme1-content-display-box-border-color;
-}
-.theme1 .content-display-box-wrapper li .img {
-	border: 1px solid $theme1-content-display-box-img-border-color;
-}
+/*--common button colors end--*/
+
 

@@ -1409,6 +1409,24 @@ float: right;
 
 /*-- C3 Chart custom css end --*/
 
+/*--Page Title styles start --*/
+.page-title{
+	border-bottom: solid 1.5px;
+	margin-top:0;
+	display: inline-block;
+	width: 100%;
+	font-size: 1.69em;
+}
+.page-title .title{
+	float: $float-1;
+	margin-bottom: $padding-small;
+}
+.ar .page-title .title{
+	float: $float-2;
+}
+
+/*--Page Title styles end --*/
+
 /*-- Title styles start --*/
 
 .page-title{
@@ -1542,6 +1560,15 @@ float: right;
 	width: 100%;
   	min-height: 227px;
 }
+
+.info-perfor-details span{
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
+
+
+
 
 .c3-axis-y text {
    fill: red;
