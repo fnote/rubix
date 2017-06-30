@@ -14,14 +14,14 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 
 	public mutualFundCategoryObj: Object;
 	public titleKey = 'REGION_TITLE_1';
-	private _strategy: {type: number};
+	private _strategy: {type: string};
 
 	constructor(private injector: Injector, private mutualFundsDataStore: MutualFundsDataStore, private localizationService: LocalizationService) {
 		super(injector);
 	}
 
 	public onInit(): void {
-		let region: number;
+		let region: string;
 		if (this.strategy && this.strategy.type) {
 			region = this._strategy.type;
 			this.titleKey = 'REGION_TITLE_' + region.toString();
@@ -41,11 +41,11 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 		});
 	}
 
-	public get strategy(): {type: number} {
+	public get strategy(): {type: string} {
 		return this._strategy;
 	}
 
-	public set strategy(value: {type: number}) {
+	public set strategy(value: {type: string}) {
 		this._strategy = value;
 	}
 

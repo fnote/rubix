@@ -22,15 +22,15 @@ export class MutualFundsDataStore extends BaseDataStore {
 		return this.$dataLoaded;
 	}
 
-	public get regionArray(): Array<{id: number, description: string}> {
+	public get regionArray(): Array<{id: string, description: string}> {
 		return this._regionArray;
 	}
 
-	public get riskTypeArray(): Array<{id: number, description: 'string'}> {
+	public get riskTypeArray(): Array<{id: string, description: string}> {
 		return this._riskTypeArray;
 	}
 
-	public getItemsByRegion(region: number): Array<MutualFundEntity> {
+	public getItemsByRegion(region: string): Array<MutualFundEntity> {
 
 		let dataArray = this.fundByRegionStore[region];
 
@@ -92,7 +92,7 @@ export class MutualFundsDataStore extends BaseDataStore {
 	public updateMasterData(values: {
 		exchangeCode: string,
 		symbolCode: string,
-		region: number,
+		region: string,
 		riskType: string,
 		description: string,
 		fullDescription: string,
@@ -117,12 +117,12 @@ export class MutualFundsDataStore extends BaseDataStore {
 			}
 			mutualFundDataEntity.decimalPlaces = masterDataItem.decimalPlaces;
 			mutualFundDataEntity.setValues(masterDataItem);
-			description = this.riskTypeArray.filter(function(item: {id: number, description: string}): boolean{
-				return item.id === parseInt(masterDataItem.riskType, 10);
+			description = this.riskTypeArray.filter(function(item: {id: string, description: string}): boolean{
+				return item.id === masterDataItem.riskType;
 			});
 			mutualFundDataEntity.riskTypeDescription = description[0].description;
 
-			description = this.regionArray.filter(function(item: {id: number, description: string}): boolean{
+			description = this.regionArray.filter(function(item: {id: string, description: string}): boolean{
 				return item.id === masterDataItem.region;
 			});
 			mutualFundDataEntity.regionDescription = description[0].description;
