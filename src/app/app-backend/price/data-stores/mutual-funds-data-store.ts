@@ -134,13 +134,18 @@ export class MutualFundsDataStore extends BaseDataStore {
 	public addChartData(values: {
 		exchangeCode: string,
 		symbolCode: string,
-		duration: string,
-		value: number,
+		M6: number,
+		Y1: number,
+		Y3: number,
+		Y5: number,
 	}[]): void {
 		for (const item of values){
 
 			const mutualFundDataEntity = this.fundBySymbolStore[item.symbolCode];
-			mutualFundDataEntity.addchartData(item.duration, item.value);
+			mutualFundDataEntity.addchartData('6M', item.M6);
+			mutualFundDataEntity.addchartData('1Y', item.Y1);
+			mutualFundDataEntity.addchartData('3Y', item.Y3);
+			mutualFundDataEntity.addchartData('5Y', item.Y5);
 		}
 	}
 

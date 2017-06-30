@@ -90,6 +90,7 @@ export const priceResponseTags = {
 	GEO: 'region',
 	CLASS : 'riskType',
 	DESCR: 'description',
+	DESC: 'description',
 	FULL: 'fullDescription',
 	SHORT: 'shortDescription',
 	CUR: 'currency',
@@ -97,6 +98,10 @@ export const priceResponseTags = {
 	PCT1M: 'percentageOneMonth',
 	PCT3M: 'percentageThreeMonth',
 	ID: 'id',
+	M6: 'M6',
+	Y1: 'Y1',
+	Y3: 'Y3',
+	Y5: 'Y5',
 	// refatcor below
 	/*0: 'NODATA',
 	5: 'EXC',
