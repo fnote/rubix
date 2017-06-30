@@ -58,4 +58,7 @@ export const EN = {
 	OCT: 'Oct',
 	NOV: 'Nov',
 	DEC: 'Dec',
+	STRATEGY_1: 'Growth Strategy',
+	STRATEGY_2: 'Balanced Strategy',
+	STRATEGY_3: 'Pruedent  Strategy',
 };

@@ -58,4 +58,7 @@ export const AR = {
 	OCT: '\u0623\u0643\u062a\u0648\u0628\u0631',
 	NOV: '\u0646\u0648\u0641\u0645\u0628\u0631',
 	DEC: '\u062f\u064a\u0633\u0645\u0628\u0631',
+	STRATEGY_1: 'AR_Growth Strategy',
+	STRATEGY_2: 'AR_Balanced Strategy',
+	STRATEGY_3: 'AR_Pruedent  Strategy',
 };
