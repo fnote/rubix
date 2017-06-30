@@ -1,10 +1,10 @@
-<div>
+<div class="{{headerClass}}">
     <div *ngIf="imageUrl" class="left">
 			<img src={{imageUrl}}>
     </div>
     <div class="left detail-col margin-medium-left  margin-medium-right" *ngIf="description">
 			<div class="content">
-				<span class="title pl-0 pt-0 margin-small-bottom full-width left {{headerClass}}">{{description}}</span>
+				<span class="title pl-0 pt-0 margin-small-bottom full-width left">{{description}}</span>
 				<p *ngIf="fullDescription">{{fullDescription}}</p>
 				<p *ngIf="footerDes">{{footerDes}}<p>
 			</div>
