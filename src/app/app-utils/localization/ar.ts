@@ -61,4 +61,7 @@ export const AR = {
 	STRATEGY_1: 'AR_Growth Strategy',
 	STRATEGY_2: 'AR_Balanced Strategy',
 	STRATEGY_3: 'AR_Pruedent  Strategy',
+	REGION_TITLE_1: 'ar_Mubasher Regional Strategie',
+	REGION_TITLE_2: 'ar_Mubasher Global Strategies',
+	REGION_TITLE_3: 'ar_Mubasher Sharia Compliant Strategies',
 };

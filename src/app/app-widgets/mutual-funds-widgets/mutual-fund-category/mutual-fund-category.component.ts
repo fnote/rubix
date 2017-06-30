@@ -13,6 +13,7 @@ import { StrategyTypes } from '../../../app-constants/enums/strategy-typs.enum';
 export class MutualFundCategoryComponent extends BaseWidgetComponent {
 
 	public mutualFundCategoryObj: Object;
+	public titleKey = 'REGION_TITLE_1';
 	private _strategy: {type: number};
 
 	constructor(private injector: Injector, private mutualFundsDataStore: MutualFundsDataStore, private localizationService: LocalizationService) {
@@ -23,6 +24,7 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 		let region: number;
 		if (this.strategy && this.strategy.type) {
 			region = this._strategy.type;
+			this.titleKey = 'REGION_TITLE_' + region.toString();
 		}
 		this.mutualFundsDataStore.dataLoadedObserver.subscribe(isDataLoaded => {
 			const dataObj: any = this.mutualFundsDataStore.getItemsByRegion(region);

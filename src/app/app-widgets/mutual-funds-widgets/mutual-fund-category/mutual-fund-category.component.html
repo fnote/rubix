@@ -1,6 +1,6 @@
 <div class="inner-wrapper container-fluid">
 	<h2 class="widget-title">
-		<div class="title">Title</div>
+		<div class="title">{{localizationService.language[titleKey]}}</div>
 	</h2>
 
 		<div class="full-width">
@@ -28,7 +28,7 @@
 			<th scope="col" class="text-right">&nbsp;</th>
 		</tr>
 		<tr *ngFor="let content of mutualFundCategoryObj | keys">
-			<td class="text-left strategies-{{content.value.riskType}}">{{content.value.description}}</td>
+			<td class="text-left strategies-{{content.value.riskType}}">{{content.value.riskTypeDescription}}</td>
 			<td class="{{content.value.classLastLstOneM}} text-right ">{{content.value.percentageOneMonth}} %</td>
 			<td class="{{content.value.classLastLstThreeM}} text-right">{{content.value.percentageThreeMonth}} %</td>
 			<td>

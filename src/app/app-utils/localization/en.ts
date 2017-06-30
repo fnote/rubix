@@ -61,4 +61,7 @@ export const EN = {
 	STRATEGY_1: 'Growth Strategy',
 	STRATEGY_2: 'Balanced Strategy',
 	STRATEGY_3: 'Pruedent  Strategy',
+	REGION_TITLE_1: 'Mubasher Regional Strategie',
+	REGION_TITLE_2: 'Mubasher Global Strategies',
+	REGION_TITLE_3: 'Mubasher Sharia Compliant Strategies',
 };
