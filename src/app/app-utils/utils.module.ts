@@ -1,7 +1,7 @@
 import { CommonHelperService } from './helper/common-helper.service';
 import { CommonModule } from '@angular/common';
-import { FormatArrowForBidAskDifPipe } from './helper/pipes/pipes';
-import { KeysPipe } from './helper/pipes/keysPipe';
+import { FormatArrowForBidAskDifPipe } from './helper/pipes';
+import { KeysPipe } from './helper/pipes';
 import { LocalizationService } from './localization/localization.service';
 import { LoggerService } from './logger.service';
 import { NgModule } from '@angular/core';

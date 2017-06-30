@@ -27,8 +27,8 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 			const dataObj: any = this.mutualFundsDataStore.getItemsByRegion(region);
 			for (const key in dataObj) {
 				if (dataObj.hasOwnProperty(key)) {
-					dataObj[key].headerClass = 'headerClass' + dataObj[key].riskType;
-					dataObj[key].imageUrl = '../assets/images/bg.png';
+					dataObj[key].headerClass = 'start-' + dataObj[key].riskType;
+					dataObj[key].imageUrl = '../../../../assets/assets/images/growth-strategy.svg';
 				}
 			}
 			this.mutualFundCategoryObj = dataObj;
