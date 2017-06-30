@@ -1,6 +1,6 @@
 <div class="inner-wrapper container-fluid">
 	<h2 class="widget-title">
-		<div class="col-md-7 no-padding title">Strategies Performance</div>
+		<div class="col-md-7 no-padding title">{{localizationService.language.BEST_BID}}Strategies Performance</div>
 		<div class="col-md-5 no-padding extra-controllers strategies-duration">
 
 			<div class="button"  (click)="onChartPeriodChange('5Y')">5Y</div>
@@ -24,9 +24,20 @@
 		</tr>
 		</thead>
 
-		<tr *ngFor='let dataRow of chartData'>
-			<td *ngFor='let dataItem of dataRow'  class="text-right">
-			{{dataItem}}
+		<tr *ngFor='let dataRow of chartData; index as j'>
+			<td *ngFor='let dataItem of dataRow; first as isFirst; index as i' [ngClass]="{'text-right': i > 0, 'text-left': isFirst}">
+				<div *ngIf="isFirst" class="left strategies-{{j+1}}">
+					<span class="dot left">
+					</span>
+					<span>
+						{{dataItem}}
+					</span>
+
+				</div>
+				<span *ngIf="!isFirst">
+					{{dataItem}}
+				</span>
+
 			</td>
 		</tr>
 	</table>

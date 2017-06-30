@@ -1,6 +1,7 @@
 import * as c3 from 'c3';
 import { Component, Injector } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
+import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { MutualFundsDataStore } from '../../../app-backend/price/data-stores/mutual-funds-data-store';
 import { PriceService } from '../../../app-backend/price/price.service';
 import { performanceChartDurations } from '../../../app-constants/const/performance-chart-durations';
@@ -20,7 +21,10 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 	private chartPeriod = performanceChartDurations.sixMonths;
 	private dataLoadedSubscription;
 
-	constructor(private priceService: PriceService, private injector: Injector, private mutualFundsDataStore: MutualFundsDataStore) {
+	constructor(private priceService: PriceService,
+		private injector: Injector,
+		private mutualFundsDataStore: MutualFundsDataStore,
+		public localizationService: LocalizationService) {
 		super(injector);
 	}
 
