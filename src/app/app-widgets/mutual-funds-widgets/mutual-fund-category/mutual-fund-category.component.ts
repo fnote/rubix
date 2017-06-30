@@ -28,7 +28,7 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 			for (const key in dataObj) {
 				if (dataObj.hasOwnProperty(key)) {
 					dataObj[key].headerClass = 'strat-' + dataObj[key].riskType;
-					dataObj[key].imageUrl = '../../../../assets/assets/images/growth-strategy.svg';
+					dataObj[key].imageUrl = '../../../../assets/assets/images/strat-' + dataObj[key].riskType + '.svg';
 				}
 			}
 			this.mutualFundCategoryObj = dataObj;
