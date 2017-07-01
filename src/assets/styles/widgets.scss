@@ -1556,6 +1556,8 @@ float: right;
 }
 
 /*Overide padding & margin from bootstrap end */
+
+// TODO: [Amila] Dinushka, please re-factor below code
 .strategies_chart {
 	width: 100%;
   	min-height: 226px;
@@ -1567,11 +1569,24 @@ float: right;
 	width: 100%;
 }
 
+.c3-axis-y {
+    fill: none;
+    stroke: #757575;
+}
+
+.c3-axis-x {
+    fill: none;
+    stroke: #757575;
+}
+
 .c3-axis-y text {
-   fill: red;
-   font-size:12px;
+   fill: #757575;
+   font-size:11px;
+   stroke: none;
 }
 .c3-axis-x text {
-    font-size:12px;
-    fill:red;
+    font-size:11px;
+    fill:#757575;
+	stroke: none;
 }
+
