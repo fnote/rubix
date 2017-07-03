@@ -5,6 +5,7 @@ import { MutualFundCategoryComponent } from './mutual-fund-category/mutual-fund-
 import { MutualFundOverviewComponent } from './mutual-fund-overview/mutual-fund-overview.component';
 import { MutualFundPerformanceComponent } from './mutual-fund-performance/mutual-fund-performance.component';
 import { MutualFundReportComponent } from './mutual-fund-report/mutual-fund-report.component';
+import { MutulFundDetailLayoutComponent } from './mutul-fund-detail-layout/mutul-fund-detail-layout.component';
 import { NgModule } from '@angular/core';
 import { UtilsModule } from '../../app-utils/utils.module';
 
@@ -20,6 +21,7 @@ import { UtilsModule } from '../../app-utils/utils.module';
 		MutualFundBenchmarkComponent,
 		MutualFundReportComponent,
 		MutualFundOverviewComponent,
+		MutulFundDetailLayoutComponent,
 	],
 })
 export class MutualFundsWidgetModule { }
