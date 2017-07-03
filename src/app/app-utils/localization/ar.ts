@@ -66,4 +66,5 @@ export const AR = {
 	MUTUAL_FUND_REGION_TITLE_3: 'ar_Mubasher Sharia Compliant Strategies',
 	MUTUAL_FUND_STRT_PERFOM: 'ar_Strategies Performance',
 	ANNUALIZED_PCNT: 'ar_Annualized %',
+	MF_CHART_FOOTER_DES: '* ar_Performance is annualized. Past performance is not guarantee for future performance',
 };
