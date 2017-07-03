@@ -64,6 +64,24 @@ var getComponent = function (id) {
 		case 'mutual-fund-category':
 			component = 'MutualFundCategoryComponent';
 			break;
+		case 'mutual-fund-detail-layout':
+			component = 'MutualFundDetailLayoutComponent';
+			break;
+		case 'mutual-fund-detail-header':
+			component = 'MutualFundDetailHeaderComponent';
+			break;
+		case 'mutual-fund-overview':
+			component = 'MutualFundOverviewComponent';
+			break;
+		case 'mutual-fund-detail-performance':
+			component = 'MutualFundDetailPerformanceComponent';
+			break;
+		case 'mutual-fund-benchmark':
+			component = 'MutualFundBenchmarkComponent';
+			break;
+		case 'mutual-fund-report':
+			component = 'MutualFundReportComponent';
+			break;
 		default:
 			console.log('An error occurred');
 	}

@@ -461,6 +461,32 @@
 					}
 				}
 			]
-		}
+		},
+		{
+			"title": "Takaud Mutual Funds - Detail View",
+			"path": "mutual-fund-detail-layout",
+			"model": [
+				{
+				  "path": "mutual-fund-detail-header",
+				  "outlet": "outlet1"
+				},
+				{
+				  "path": "mutual-fund-overview",
+				  "outlet": "outlet2"
+				},
+				{
+				  "path": "mutual-fund-detail-performance",
+				  "outlet": "outlet3"
+				},
+				{
+				  "path": "mutual-fund-benchmark",
+				  "outlet": "outlet4"
+				},
+				{
+				  "path": "mutual-fund-report",
+				  "outlet": "outlet5"
+				}
+			]
+		  }
 	]
 }

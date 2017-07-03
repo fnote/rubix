@@ -7,6 +7,9 @@ import { LoginComponent } from '../app-widgets/common-widgets/login-widget/login
 import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/map-selector.component';
 import { MutualFundBenchmarkComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-benchmark/mutual-fund-benchmark.component';
 import { MutualFundCategoryComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-category/mutual-fund-category.component';
+import { MutualFundDetailHeaderComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-detail-header/mutual-fund-detail-header.component';
+import { MutualFundDetailLayoutComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-detail-layout/mutual-fund-detail-layout.component';
+import { MutualFundDetailPerformanceComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-detail-performance/mutual-fund-detail-performance.component';
 import { MutualFundOverviewComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-overview/mutual-fund-overview.component';
 import { MutualFundPerformanceComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-performance/mutual-fund-performance.component';
 import { MutualFundReportComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-report/mutual-fund-report.component';
@@ -110,6 +113,15 @@ export const routes: Routes = [
 			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2', data: { strategy: { type: StrategyTypes.Regional } } },
 			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3', data: { strategy: { type: StrategyTypes.ShariaCompliant } } },
 			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4', data: { strategy: { type: StrategyTypes.Global } } },
+		],
+	},
+	{ path: 'mutual-fund-detail-layout', component: MutualFundDetailLayoutComponent,
+		children: [
+			{ path: 'mutual-fund-detail-header', component: MutualFundDetailHeaderComponent, outlet: 'outlet1' },
+			{ path: 'mutual-fund-overview', component: MutualFundOverviewComponent, outlet: 'outlet2' },
+			{ path: 'mutual-fund-detail-performance', component: MutualFundDetailPerformanceComponent, outlet: 'outlet3' },
+			{ path: 'mutual-fund-benchmark', component: MutualFundBenchmarkComponent, outlet: 'outlet4' },
+			{ path: 'mutual-fund-report', component: MutualFundReportComponent, outlet: 'outlet5' },
 		],
 	},
 ];
