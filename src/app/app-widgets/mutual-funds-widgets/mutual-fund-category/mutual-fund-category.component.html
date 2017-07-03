@@ -1,13 +1,13 @@
 <div class="inner-wrapper container-fluid">
 	<h2 class="widget-title">
-		<div class="title">{{localizationService.language['REGION_TITLE_' + strategy.type]}}</div>
+		<div class="title">{{localizationService.language['MUTUAL_FUND_REGION_TITLE_' + strategy.type]}}</div>
 	</h2>
 
 		<div class="full-width">
 			<ul class="content-display-box-wrapper margin-medium-bottom">
 				<li *ngFor="let content of mutualFundCategoryObj | keys">
 					<app-content-display-box
-						[title]= "localizationService.language['STRATEGY_' + content.value.riskType]"
+						[title]= "localizationService.language['MUTUAL_FUND_STRATEGY_' + content.value.riskType]"
 						[description]= "content.value.description"
 						[fullDescription]= "content.value.fullDescription"
 						[imageUrl]= '"../../../../assets/assets/images/strat-" + content.value.riskType + ".svg"'
