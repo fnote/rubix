@@ -16,7 +16,7 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 	public regionsArray = [];
 	public riskTypesArray = [];
 	public chartData = [];
-	public chartYAxisLables = [];
+	public chartXAxisLables = [];
 	private dataLoaded = false;
 	private chartPeriod = performanceChartDurations.sixMonths;
 	private dataLoadedSubscription;
@@ -55,36 +55,54 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 		let chartDataRaw;
 
 		this.chartData = [];
-		this.chartYAxisLables = [];
+		this.chartXAxisLables = [];
 
 		for (const riskType of this.riskTypesArray) {
 			chartDataRaw = [riskType.description];
 
 			for (const region of this.regionsArray) {
 				chartDataRaw.push(this.mutualFundsDataStore.getItemsByRegionAndRiskType(region.id, riskType.id).chartDataMap[this.chartPeriod] || 0);
-				this.chartYAxisLables.push(region.description);
+				this.chartXAxisLables.push(region.description);
 			}
-			this.chartData.push(chartDataRaw);
 
+			this.chartData.push(chartDataRaw);
 		}
 	}
 
 	private drawChart(): void {
+		// TODO: [Amila] Discuss withe Dinushka and refactor below bar coloring algorithm. It must be picked from the theme files.
 		const anuualizedChart = c3.generate({
 			bindto: '#fundPerformanceC3Chart',
 			data: {
 				columns: this.chartData,
 				type: 'bar',
+					/*color: function (color, d) {
+					if (d === 'Growth') {
+						return '#81b6e3';
+					} else if (d === 'Balanced') {
+						return '#6aa76e';
+					} else if (d === 'Prudent') {
+						return '#ecb127';
+					}
+				},*/
+				colors: {
+					Growth: '#81b6e3',
+					Balanced: '#6aa76e',
+					Prudent: '#ecb127',
+				},
 			},
 			bar: {
 				width: {
 					ratio: 0.75,
 				},
 			},
+			// $theme2-chart-color-1: #81b6e3;
+			// $theme2-chart-color-2: #6aa76e;
+			// $theme2-chart-color-3: #ecb127;
 			axis: {
 				x: {
 					type: 'category',
-					categories: this.chartYAxisLables,
+					categories: this.chartXAxisLables,
 				},
 				y: {
 					label: {
