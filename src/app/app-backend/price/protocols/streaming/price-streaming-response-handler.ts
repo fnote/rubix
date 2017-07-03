@@ -135,6 +135,9 @@ export class PriceStreamingResponseHandler {
 			case PriceRequestTypes.MutualFund:
 				this.mutualFundsDataStore.updateMutualFunds(response);
 				break;
+			case PriceRequestTypes.MutualFundDS:
+				this.mutualFundsDataStore.updateMutualFundsDetails(response);
+				break;
 			default:
 				// code here
 		}

@@ -37,8 +37,8 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 		this._strategy = value;
 	}
 
-	public loadDetailedView(category: string): void {
-		const data = { strategy : this.strategy.type, category: category };
+	public loadDetailedView(symbolCode: string, exchangeCode: string): void {
+		const data = { symbolCode: symbolCode, exchangeCode: exchangeCode };
 		const pathArray = [
 			'/mutual-fund-detail-layout', { outlets: {
 				outlet1 : ['mutual-fund-detail-header'],

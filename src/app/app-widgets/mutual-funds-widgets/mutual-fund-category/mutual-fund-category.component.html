@@ -31,7 +31,7 @@
 			<td class=" text-right {{ content.value.percentageOneMonth | conditionalClasses: 'green-text': 'red-text'}} ">{{content.value.percentageOneMonth}} %</td>
 			<td class="text-right {{content.value.percentageThreeMonth | conditionalClasses: 'green-text': 'red-text'}}">{{content.value.percentageThreeMonth}} %</td>
 			<td>
-				<div class="btn-container"><button type="button" class="more-btn" (click)="loadDetailedView(content.value.riskTypeDescription)">{{localizationService.language.MORE}} &#187;</button></div>
+				<div class="btn-container"><button type="button" class="more-btn" (click)="loadDetailedView(content.value.symbolCode, content.value.exchangeCode)">{{localizationService.language.MORE}} &#187;</button></div>
 			</td>
 		</tr>
 	</table>
