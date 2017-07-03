@@ -67,4 +67,8 @@ export const AR = {
 	MUTUAL_FUND_STRT_PERFOM: 'ar_Strategies Performance',
 	ANNUALIZED_PCNT: 'ar_Annualized %',
 	MF_CHART_FOOTER_DES: '* ar_Performance is annualized. Past performance is not guarantee for future performance',
+	YEAR_5: '5Y',
+	YEAR_3: '3Y',
+	YEAR_1: '1Y',
+	MONTHS_6: '6M',
 };

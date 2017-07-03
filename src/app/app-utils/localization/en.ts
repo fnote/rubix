@@ -67,4 +67,8 @@ export const EN = {
 	MUTUAL_FUND_STRT_PERFOM: 'Strategies Performance',
 	ANNUALIZED_PCNT: 'Annualized %',
 	MF_CHART_FOOTER_DES: '* Performance is annualized. Past performance is not guarantee for future performance',
+	YEAR_5: '5Y',
+	YEAR_3: '3Y',
+	YEAR_1: '1Y',
+	MONTHS_6: '6M',
 };
