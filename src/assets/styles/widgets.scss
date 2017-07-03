@@ -1524,6 +1524,13 @@ float: right;
 	margin: 2px 0 0 5px;
 }
 
+.strategies-table .legend-column{
+	width: 25%;
+}
+.strategies-table .data-column{
+	width: 24%;
+}
+
 .content-display-box-wrapper li{
 	padding: $padding-small 0;
 	display: inline-block;
