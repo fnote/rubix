@@ -1,5 +1,6 @@
 import { CommonHelperService } from './helper/common-helper.service';
 import { CommonModule } from '@angular/common';
+import { ConditionalClassesPipe } from './helper/pipes';
 import { FormatArrowForBidAskDifPipe } from './helper/pipes';
 import { KeysPipe } from './helper/pipes';
 import { LocalizationService } from './localization/localization.service';
@@ -16,6 +17,7 @@ import { TradeHelperService } from './helper/trade-helper.service';
 	declarations: [
 		FormatArrowForBidAskDifPipe,
 		KeysPipe,
+		ConditionalClassesPipe,
 	],
 	providers: [
 		StorageService,
@@ -28,6 +30,7 @@ import { TradeHelperService } from './helper/trade-helper.service';
 	exports: [
 		FormatArrowForBidAskDifPipe,
 		KeysPipe,
+		ConditionalClassesPipe,
 	],
 })
 export class UtilsModule { }
