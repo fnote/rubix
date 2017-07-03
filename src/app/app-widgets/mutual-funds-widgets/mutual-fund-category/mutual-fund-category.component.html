@@ -1,25 +1,24 @@
 <div class="inner-wrapper container-fluid">
 	<h2 class="widget-title">
-		<div class="title">{{localizationService.language[titleKey]}}</div>
+		<div class="title">{{localizationService.language['REGION_TITLE_' + strategy.type]}}</div>
 	</h2>
 
 		<div class="full-width">
 			<ul class="content-display-box-wrapper margin-medium-bottom">
 				<li *ngFor="let content of mutualFundCategoryObj | keys">
 					<app-content-display-box
-						[title]= "content.value.title"
+						[title]= "localizationService.language['STRATEGY_' + content.value.riskType]"
 						[description]= "content.value.description"
 						[fullDescription]= "content.value.fullDescription"
-						[imageUrl]= "content.value.imageUrl"
-						[headerClass]= "content.value.headerClass"
-						[title]= "content.value.title"
+						[imageUrl]= '"../../../../assets/assets/images/strat-" + content.value.riskType + ".svg"'
+						[headerClass]= '"strat-" + content.value.riskType '
 						[footerDes]= "content.value.footerDes"
 						[content] = "content.value"
 					></app-content-display-box>
 				</li>
 			</ul>
 		</div>
-
+	
 	<table width="100%" class="data-table strategies-table btn-tbl tbl-cell-bg-highlight margin-small-bottom">
 		<tr>
 			<th scope="col" class="text-left">Strategy</th>

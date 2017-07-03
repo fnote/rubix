@@ -13,7 +13,6 @@ import { StrategyTypes } from '../../../app-constants/enums/strategy-typs.enum';
 export class MutualFundCategoryComponent extends BaseWidgetComponent {
 
 	public mutualFundCategoryObj: Object;
-	public titleKey = 'REGION_TITLE_1';
 	private _strategy: {type: string};
 
 	constructor(private injector: Injector, private mutualFundsDataStore: MutualFundsDataStore, public localizationService: LocalizationService) {
@@ -24,15 +23,11 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 		let region: string;
 		if (this.strategy && this.strategy.type) {
 			region = this._strategy.type;
-			this.titleKey = 'REGION_TITLE_' + region.toString();
 		}
 		this.mutualFundsDataStore.dataLoadedObserver.subscribe(isDataLoaded => {
 			const dataObj: any = this.mutualFundsDataStore.getItemsByRegion(region);
 			for (const key in dataObj) {
 				if (dataObj.hasOwnProperty(key)) {
-					dataObj[key].title = this.localizationService.language['STRATEGY_' + dataObj[key].riskType];
-					dataObj[key].headerClass = 'strat-' + dataObj[key].riskType;
-					dataObj[key].imageUrl = '../../../../assets/assets/images/strat-' + dataObj[key].riskType + '.svg';
 					dataObj[key].classLastLstOneM = (dataObj[key].percentageOneMonth >= 0) ? 'green-text' : 'red-text';
 					dataObj[key].classLastLstThreeM = (dataObj[key].percentageThreeMonth >= 0) ? 'green-text' : 'red-text';
 				}
