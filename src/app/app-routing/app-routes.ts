@@ -79,9 +79,9 @@ export const routes: Routes = [
 			{ path: 'mutual-fund-summary-layout', component: MutualFundSummaryLayoutComponent, outlet: 'outlet2',
 				children: [
 					{ path: 'mutual-fund-performance', component: MutualFundPerformanceComponent, outlet: 'outlet1' },
-					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2', data: { strategy: { type: StrategyTypes.Regional } } },
-					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3', data: { strategy: { type: StrategyTypes.ShariaCompliant } } },
-					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4', data: { strategy: { type: StrategyTypes.Global } } },
+					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2', data: { strategy: { type: 'StrategyTypes.Regional' } } },
+					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3', data: { strategy: { type: 'StrategyTypes.ShariaCompliant' } } },
+					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4', data: { strategy: { type: 'StrategyTypes.Global' } } },
 				],
 			},
 		],
@@ -107,9 +107,9 @@ export const routes: Routes = [
 	{ path: 'mutual-fund-summary-layout', component: MutualFundSummaryLayoutComponent,
 		children: [
 			{ path: 'mutual-fund-performance', component: MutualFundPerformanceComponent, outlet: 'outlet1' },
-			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2' },
-			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3' },
-			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4' },
+			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2', data: { strategy: { type: 'StrategyTypes.Regional' } } },
+			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3', data: { strategy: { type: 'StrategyTypes.ShariaCompliant' } } },
+			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4', data: { strategy: { type: 'StrategyTypes.Global' } } },
 		],
 	},
 ];
