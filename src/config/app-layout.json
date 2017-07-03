@@ -261,15 +261,30 @@
 								},
 								{
 									"path": "mutual-fund-category",
-									"outlet": "outlet2"
+									"outlet": "outlet2",
+									"args": {
+										"strategy": {
+											"type": "StrategyTypes.Regional"
+										}
+									}
 								},
 								{
 									"path": "mutual-fund-category",
-									"outlet": "outlet3"
+									"outlet": "outlet3",
+									"args": {
+										"strategy": {
+											"type": "StrategyTypes.ShariaCompliant"
+										}
+									}
 								},
 								{
 									"path": "mutual-fund-category",
-									"outlet": "outlet4"
+									"outlet": "outlet4",
+									"args": {
+										"strategy": {
+											"type": "StrategyTypes.Global"
+										}
+									}
 								}
 							]
 						}
@@ -420,15 +435,30 @@
 				},
 				{
 					"path": "mutual-fund-category",
-					"outlet": "outlet2"
+					"outlet": "outlet2",
+					"args": {
+						"strategy": {
+							"type": "StrategyTypes.Regional"
+						}
+					}
 				},
 				{
 					"path": "mutual-fund-category",
-					"outlet": "outlet3"
+					"outlet": "outlet3",
+					"args": {
+						"strategy": {
+							"type": "StrategyTypes.ShariaCompliant"
+						}
+					}
 				},
 				{
 					"path": "mutual-fund-category",
-					"outlet": "outlet4"
+					"outlet": "outlet4",
+					"args": {
+						"strategy": {
+							"type": "StrategyTypes.Global"
+						}
+					}
 				}
 			]
 		}
