@@ -65,4 +65,5 @@ export const EN = {
 	MUTUAL_FUND_REGION_TITLE_2: 'Mubasher Global Strategies',
 	MUTUAL_FUND_REGION_TITLE_3: 'Mubasher Sharia Compliant Strategies',
 	MUTUAL_FUND_STRT_PERFOM: 'Strategies Performance',
+	ANNUALIZED_PCNT: 'Annualized %',
 };

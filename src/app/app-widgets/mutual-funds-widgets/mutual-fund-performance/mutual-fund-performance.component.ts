@@ -88,7 +88,7 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 				},
 				y: {
 					label: {
-						text: 'Annualized %',
+						text: this.localizationService.language.ANNUALIZED_PCNT,
 						position: 'outer-middle',
 					},
 				},
