@@ -71,4 +71,8 @@ export const EN = {
 	YEAR_3: '3Y',
 	YEAR_1: '1Y',
 	MONTHS_6: '6M',
+	STRATEGY: 'Strategy',
+	LAST_MONTH_PCNT : 'Last Month %',
+	LAST_3MONTH_PCNT: 'Last 3M %',
+	MORE: 'More',
 };

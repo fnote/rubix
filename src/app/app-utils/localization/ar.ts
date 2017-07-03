@@ -71,4 +71,8 @@ export const AR = {
 	YEAR_3: '3Y',
 	YEAR_1: '1Y',
 	MONTHS_6: '6M',
+	STRATEGY: 'ar_Strategy',
+	LAST_MONTH_PCNT: 'ar_Last Month %',
+	LAST_3MONTH_PCNT: 'ar_Last 3M %',
+	MORE: 'ar_More',
 };
