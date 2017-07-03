@@ -25,14 +25,7 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 			region = this._strategy.type;
 		}
 		this.mutualFundsDataStore.dataLoadedObserver.subscribe(isDataLoaded => {
-			const dataObj: any = this.mutualFundsDataStore.getItemsByRegion(region);
-			for (const key in dataObj) {
-				if (dataObj.hasOwnProperty(key)) {
-					dataObj[key].classLastLstOneM = (dataObj[key].percentageOneMonth >= 0) ? 'green-text' : 'red-text';
-					dataObj[key].classLastLstThreeM = (dataObj[key].percentageThreeMonth >= 0) ? 'green-text' : 'red-text';
-				}
-			}
-			this.mutualFundCategoryObj = dataObj;
+			this.mutualFundCategoryObj = this.mutualFundsDataStore.getItemsByRegion(region);
 		});
 	}
 

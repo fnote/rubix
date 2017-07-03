@@ -27,3 +27,16 @@ export class KeysPipe implements PipeTransform {
 		return keys;
 	}
 }
+
+@Pipe({ name: 'conditionalClasses' })
+export class ConditionalClassesPipe implements PipeTransform {
+	public transform(value: any): string {
+		if (value > 0) {
+			return 'green-text';
+		} else if (value < 0) {
+			return 'red-text';
+		}else {
+			return '';
+		}
+	}
+}
