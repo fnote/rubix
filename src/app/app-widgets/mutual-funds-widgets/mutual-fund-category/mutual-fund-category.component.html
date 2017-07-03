@@ -28,8 +28,8 @@
 		</tr>
 		<tr *ngFor="let content of mutualFundCategoryObj | keys">
 			<td class="text-left strategies-{{content.value.riskType}}">{{content.value.riskTypeDescription}}</td>
-			<td class=" text-right {{ content.value.percentageOneMonth | conditionalClasses}} ">{{content.value.percentageOneMonth}} %</td>
-			<td class="text-right {{content.value.percentageThreeMonth | conditionalClasses }}">{{content.value.percentageThreeMonth}} %</td>
+			<td class=" text-right {{ content.value.percentageOneMonth | conditionalClasses: 'green-text': 'red-text'}} ">{{content.value.percentageOneMonth}} %</td>
+			<td class="text-right {{content.value.percentageThreeMonth | conditionalClasses: 'green-text': 'red-text'}}">{{content.value.percentageThreeMonth}} %</td>
 			<td>
 				<div class="btn-container"><button type="button" class="more-btn" (click)="loadDetailedView(content.value.riskTypeDescription)">{{localizationService.language.MORE}} &#187;</button></div>
 			</td>

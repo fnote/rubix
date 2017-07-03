@@ -30,11 +30,11 @@ export class KeysPipe implements PipeTransform {
 
 @Pipe({ name: 'conditionalClasses' })
 export class ConditionalClassesPipe implements PipeTransform {
-	public transform(value: any): string {
+	public transform(value: any, class1: string, class2: string): string {
 		if (value > 0) {
-			return 'green-text';
+			return class1;
 		} else if (value < 0) {
-			return 'red-text';
+			return class2;
 		}else {
 			return '';
 		}
