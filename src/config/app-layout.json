@@ -264,7 +264,7 @@
 									"outlet": "outlet2",
 									"args": {
 										"strategy": {
-											"type": "Regional"
+											"type": "StrategyTypes.Regional"
 										}
 									}
 								},
@@ -273,7 +273,7 @@
 									"outlet": "outlet3",
 									"args": {
 										"strategy": {
-											"type": "ShariaCompliant"
+											"type": "StrategyTypes.ShariaCompliant"
 										}
 									}
 								},
@@ -282,7 +282,7 @@
 									"outlet": "outlet4",
 									"args": {
 										"strategy": {
-											"type": "Global"
+											"type": "StrategyTypes.Global"
 										}
 									}
 								}
@@ -438,7 +438,7 @@
 					"outlet": "outlet2",
 					"args": {
 						"strategy": {
-							"type": "Regional"
+							"type": "StrategyTypes.Regional"
 						}
 					}
 				},
@@ -447,7 +447,7 @@
 					"outlet": "outlet3",
 					"args": {
 						"strategy": {
-							"type": "ShariaCompliant"
+							"type": "StrategyTypes.ShariaCompliant"
 						}
 					}
 				},
@@ -456,7 +456,7 @@
 					"outlet": "outlet4",
 					"args": {
 						"strategy": {
-							"type": "Global"
+							"type": "StrategyTypes.Global"
 						}
 					}
 				}

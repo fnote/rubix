@@ -19,6 +19,7 @@ import { SecondaryLayoutOneComponent } from '../app-layouts/secondary-layout-one
 import { SecondaryLayoutThreeComponent } from '../app-layouts/secondary-layout-three/secondary-layout-three.component';
 import { SecondaryLayoutTwoComponent } from '../app-layouts/secondary-layout-two/secondary-layout-two.component';
 import { SideBarComponent } from '../app-widgets/common-widgets/side-bar/side-bar.component';
+import { StrategyTypes } from '../app-constants/enums/strategy-typs.enum';
 import { TimeAndSalesComponent } from '../app-widgets/price-widgets/time-and-sales/time-and-sales.component';
 import { TwoByOneLayoutComponent } from '../app-layouts/two-by-one-layout/two-by-one-layout.component';
 import { TwoByTwoLayoutComponent } from '../app-layouts/two-by-two-layout/two-by-two-layout.component';
@@ -78,9 +79,9 @@ export const routes: Routes = [
 			{ path: 'mutual-fund-summary-layout', component: MutualFundSummaryLayoutComponent, outlet: 'outlet2',
 				children: [
 					{ path: 'mutual-fund-performance', component: MutualFundPerformanceComponent, outlet: 'outlet1' },
-					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2', data: { strategy: { type: 'Regional' } } },
-					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3', data: { strategy: { type: 'ShariaCompliant' } } },
-					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4', data: { strategy: { type: 'Global' } } },
+					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2', data: { strategy: { type: StrategyTypes.Regional } } },
+					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3', data: { strategy: { type: StrategyTypes.ShariaCompliant } } },
+					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4', data: { strategy: { type: StrategyTypes.Global } } },
 				],
 			},
 		],
@@ -106,9 +107,9 @@ export const routes: Routes = [
 	{ path: 'mutual-fund-summary-layout', component: MutualFundSummaryLayoutComponent,
 		children: [
 			{ path: 'mutual-fund-performance', component: MutualFundPerformanceComponent, outlet: 'outlet1' },
-			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2', data: { strategy: { type: 'Regional' } } },
-			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3', data: { strategy: { type: 'ShariaCompliant' } } },
-			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4', data: { strategy: { type: 'Global' } } },
+			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2', data: { strategy: { type: StrategyTypes.Regional } } },
+			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3', data: { strategy: { type: StrategyTypes.ShariaCompliant } } },
+			{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4', data: { strategy: { type: StrategyTypes.Global } } },
 		],
 	},
 ];
