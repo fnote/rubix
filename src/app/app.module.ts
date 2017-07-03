@@ -15,6 +15,7 @@ import { FdLayoutComponent } from './app-layouts/fd-layout/fd-layout.component';
 import { FdPageWidgetModule } from './app-widgets/fd-page-widgets/fd-page-widget.module';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { HttpModule } from '@angular/http';
+import { MutualFundSummaryLayoutComponent } from './app-widgets/mutual-funds-widgets/mutual-fund-summary-layout/mutual-fund-summary-layout.component';
 import { MutualFundsWidgetModule } from './app-widgets/mutual-funds-widgets/mutual-funds-widget.module';
 import { NavigationService } from './app-widgets/widget-util/navigation-service';
 import { NetworkModule } from './app-backend/network/network.module';
@@ -47,6 +48,7 @@ export function highchartsFactory(): any {
 		FdLayoutComponent,
 		TwoByTwoLayoutComponent,
 		TwoByOneLayoutComponent,
+		MutualFundSummaryLayoutComponent,
 	],
 	imports: [
 		BrowserModule,

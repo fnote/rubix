@@ -252,7 +252,7 @@
 						},
 						{
 							"title": "Takaud Mutual Funds",
-							"path": "two-by-two-layout",
+							"path": "mutual-fund-summary-layout",
 							"outlet": "outlet2",
 							"model": [
 								{
@@ -412,7 +412,7 @@
 		},
 		{
 			"title": "Takaud Mutual Funds",
-			"path": "two-by-two-layout",
+			"path": "mutual-fund-summary-layout",
 			"model": [
 				{
 					"path": "mutual-fund-performance",
