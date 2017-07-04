@@ -60,7 +60,7 @@ export const EN = {
 	DEC: 'Dec',
 	MF_STRATEGY_1: 'Growth Strategy',
 	MF_STRATEGY_2: 'Balanced Strategy',
-	MF_STRATEGY_3: 'Pruedent  Strategy',
+	MF_STRATEGY_3: 'Prudent  Strategy',
 	MF_REGION_TITLE_1: 'Mubasher Regional Strategies',
 	MF_REGION_TITLE_2: 'Mubasher Global Strategies',
 	MF_REGION_TITLE_3: 'Mubasher Sharia Compliant Strategies',

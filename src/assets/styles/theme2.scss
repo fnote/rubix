@@ -121,11 +121,13 @@ body.theme2{
 	background-color: $theme2-chart-color-3;
 }
 
-.theme2 .strategies-duration .button{
+.theme2 .strategies-duration .act-btn{
 	color:$theme2-strategies-duration-btn-text-color;
 	background-color: $theme2-strategies-duration-btn-bg-color;
 }
-
+.theme2 .strategies-duration .act-btn.active{
+	background-color: $theme2-strategies-duration-btn-active-bg-color;
+}
 .theme2 .content-display-box-wrapper li{
 	border-bottom: 1px solid $theme2-content-display-box-border-color;
 }

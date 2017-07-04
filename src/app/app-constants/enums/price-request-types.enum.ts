@@ -24,4 +24,5 @@ export enum PriceRequestTypes {
 	TradingAdvices = 60,
 	MarketMeta = 80,
 	MutualFund = 95,
+	MutualFundDS = 96,
 }

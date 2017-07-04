@@ -73,6 +73,10 @@ export class MutualFundsDataStore extends BaseDataStore {
 		this.$dataLoaded.next(true);
 	}
 
+	public updateMutualFundsDetails(response: any): void {
+		const data = response;
+	}
+
 	public updateRegionData(values: {id: string, description: string}[]): void {
 		this._regionArray.length = 0;
 

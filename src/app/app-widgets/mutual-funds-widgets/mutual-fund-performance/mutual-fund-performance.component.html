@@ -1,12 +1,17 @@
 <div class="inner-wrapper container-fluid">
 	<h2 class="widget-title">
 		<div class="col-md-7 no-padding title">{{localizationService.language.MF_STRT_PERFOM}}</div>
-		<div class="col-md-5 no-padding extra-controllers strategies-duration">
-
+		<div class="col-md-5 no-padding extra-controllers strategies-duration text-right">
+			<!--
 			<div class="button"  (click)="onChartPeriodChange('5Y')">{{localizationService.language.YEAR_5}}</div>
 			<div class="button"  (click)="onChartPeriodChange('3Y')">{{localizationService.language.YEAR_3}}</div>
 			<div class="button"  (click)="onChartPeriodChange('1Y')">{{localizationService.language.YEAR_1}}</div>
-			<div class="button"  (click)="onChartPeriodChange('6M')">{{localizationService.language.MONTHS_6}}</div>
+			<div class="button"  (click)="onChartPeriodChange('6M')">{{localizationService.language.MONTHS_6}}</div>-->
+
+			<button type="button" class="act-btn" (click)="onChartPeriodChange('5Y')">{{localizationService.language.YEAR_5}}</button>
+			<button type="button" class="act-btn" (click)="onChartPeriodChange('3Y')">{{localizationService.language.YEAR_3}}</button>
+			<button type="button" class="act-btn" (click)="onChartPeriodChange('1Y')">{{localizationService.language.YEAR_1}}</button>
+			<button type="button" class="act-btn" (click)="onChartPeriodChange('6M')">{{localizationService.language.MONTHS_6}}</button>
 
 		</div>
 	</h2>
@@ -17,8 +22,8 @@
 	<table width="100%"  class="data-table strategies-table margin-small-bottom">
 		<thead>
 		<tr>
-			<th scope="col">&nbsp;</th>
-			<th *ngFor='let header of regionsArray' scope="col" class="text-right">
+			<th scope="col" class="legend-column">&nbsp;</th>
+			<th *ngFor='let header of regionsArray' scope="col" class="text-right data-column">
 				{{header.description}}
 			</th>
 		</tr>
@@ -41,7 +46,7 @@
 			</td>
 		</tr>
 	</table>
-	<span class="snap-note">{{localizationService.language.MF_CHART_FOOTER_DES}}</span>
+	<p class="snap-note ellipsis_sm no-margin">{{localizationService.language.MF_CHART_FOOTER_DES}}</p>
 
 
 </div>

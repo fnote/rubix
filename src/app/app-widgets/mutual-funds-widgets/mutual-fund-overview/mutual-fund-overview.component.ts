@@ -1,5 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
+import { PriceService } from '../../../app-backend/price/price.service';
 
 @Component({
 	selector: 'app-mutual-fund-overview',
@@ -7,15 +8,22 @@ import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.c
 	styleUrls: ['./mutual-fund-overview.component.scss'],
 })
 export class MutualFundOverviewComponent extends BaseWidgetComponent {
-	public category;
-	public strategy;
+	private symbolCode;
 
-	constructor(injector: Injector) {
+	constructor(injector: Injector, private priceService: PriceService) {
 		super(injector);
 	}
 
 	public onInit(): void {
-		this.category = this.route.snapshot.queryParams['category'];
-		this.strategy = this.route.snapshot.queryParams['strategy'];
+		const symbolCode = this.route.snapshot.queryParams['symbolCode'];
+		const exchangeCode = this.route.snapshot.queryParams['exchangeCode'];
+		this.symbolCode = [exchangeCode, symbolCode].join('~');
+		this.subscribeForMutualFundDetail();
+	}
+
+	private subscribeForMutualFundDetail(): void {
+		const segment = ['MASTER', 'PERFORM', 'MONTHLY', 'FACTS'];
+
+		this.priceService.addMutualFundDetailsRequest(segment, [this.symbolCode]);
 	}
 }

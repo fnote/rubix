@@ -9,7 +9,7 @@ import { WebsocketService } from './websocket.service';
 
 @Injectable()
 export class QueueMannagerService {
-	private TIME_INTERVAL = 300; // 1000 * 3
+	private TIME_INTERVAL = 300;
 	private connectedSocketPool: Array<Connection> = [];
 	private response$: Rx.Subject<any> ;
 	private isConfigLoaded = false;
@@ -42,12 +42,11 @@ export class QueueMannagerService {
 		this.getConnectionByChannel(channel).then(connection => {
 			if (connection.isConnected && connection.subscription) {
 				connection.isConnected = false;
+				connection.isConnecting = false;
 				connection.subscription.unsubscribe();
 				connection.subscription = null;
 				connection.sendMessageQueue = [];
-				// connection.recivedMessageQueue =  [];
 				clearInterval(connection.sendQueueProcessInterval);
-				// clearInterval(connection.recivedQueueProcessInterval);
 				connection.sendQueueProcessInterval = null;
 			}
 		});
@@ -56,8 +55,9 @@ export class QueueMannagerService {
 	public addMessageToQueue(data: any): void {
 		this.getConnectionByChannel(data.channel).then(connection => {
 			this.enQueueMessage(data.data, connection.sendMessageQueue);
-			if (!connection.isConnected) {
+			if (!connection.isConnected && !connection.isConnecting) {
 				this.connect(data);
+				connection.isConnecting = true;
 			}
 		});
 	}
@@ -70,10 +70,9 @@ export class QueueMannagerService {
 					url: connection.url,
 					connectedSocket: null,
 					sendMessageQueue: [],
-					// recivedMessageQueue: [],
 					isConnected: false,
+					isConnecting: false,
 					sendQueueProcessInterval: null,
-					// recivedQueueProcessInterval: null,
 					subscription: null,
 					pulseService: null,
 				};
@@ -99,6 +98,7 @@ export class QueueMannagerService {
 					const socket: Rx.Subject<MessageEvent> = this.websocketService.createConnection(sockt);
 					connection.connectedSocket = socket;
 					connection.isConnected = true;
+					connection.isConnecting = false;
 					this.subscribeForConnected(connectionConfig.channel);
 					this.activateSentFromQueue(
 						connection.sendMessageQueue,
