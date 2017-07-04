@@ -345,9 +345,12 @@ export class PriceService {
 		req.SYM = symbol;
 		const request = {
 			channel : Channels.PriceMeta,
-			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+			data : req,
+			req_gen : PriceStreamingRequestHandler.getInstance().generateAddRequest,
 		};
-		this.dataService.sendToWs(request);
+		this.cache.get(this.cache.generateGetRequest(request));
+		// this.dataService.sendToWs(request);
+
 	}
 
 	public addTimeAndSalesRequest (exgSym: [string, string]): void {
@@ -508,8 +511,8 @@ export class PriceService {
 		if (isValidItemsAvailable) {
 			const request = {
 				channel : Channels.PriceMeta,
-				data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
-				req : req,
+				data : req,
+				req_gen : PriceStreamingRequestHandler.getInstance().generateAddRequest,
 			};
 			// this.dataService.sendToWs(request);
 			this.cache.get(this.cache.generateGetRequest(request));
@@ -561,14 +564,13 @@ export class PriceService {
 		if (!this.stockDataStore.getOrAddStock(exgSym).isMetaDataLoaded) {
 			const req = new PriceRequest();
 			req.MT = PriceRequestTypes.SymbolMeta;
-			req.TKN = '1';
 			req.LAN = this.localizationService.getshortCode();
 			req.addParam(exgSym[0], exgSym[1]);
 
 			const request = {
 				channel : Channels.PriceMeta,
-				data : PriceStreamingRequestHandler.getInstance().generateMetaRequest(req),
-				req: req,
+				data : req,
+				req_gen: PriceStreamingRequestHandler.getInstance().generateMetaRequest,
 			};
 			// this.dataService.sendToWs(request);
 			this.cache.get(this.cache.generateGetRequest(request));

@@ -102,6 +102,9 @@ export const priceResponseTags = {
 	Y1: 'Y1',
 	Y3: 'Y3',
 	Y5: 'Y5',
+	YEAR: 'year',
+	MONTH: 'month',
+	FILE: 'file',
 	// refatcor below
 	/*0: 'NODATA',
 	5: 'EXC',

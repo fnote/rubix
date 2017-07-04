@@ -35,7 +35,7 @@ export class CacheService {
 		this._dbController.clean();
 	}
 
-	public generateGetRequest(request: {channel: Channels, data: any, req: PriceRequest}): CacheRequest {
+	public generateGetRequest(request: {channel: Channels, data: PriceRequest, req_gen: (req: PriceRequest) => string}): CacheRequest {
 		return this.reqGen.getRequest(request);
 	}
 

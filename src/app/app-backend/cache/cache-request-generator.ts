@@ -14,24 +14,39 @@ export class CacheRequestGenerator {
 		this.cacheConfig = new CacheConfig();
 	}
 
-	public getRequest(request: {channel: Channels, data: any, req: PriceRequest}): CacheRequest {
-		const category = Channels[request.channel] + '_' + request.req.MT;
+	public getRequest(request: {channel: Channels, data: PriceRequest, req_gen: (req: PriceRequest) => string}): CacheRequest {
+		const category = Channels[request.channel] + '_' + request.data.MT;
 		let name = '';
-		switch (request.req.MT) {
-			case PriceRequestTypes.SymbolMeta:
-				name = request.req.getParam()[0];
-				break;
+		if (request.data.TKN === null) {
+			switch (request.data.MT) {
+				case PriceRequestTypes.SymbolMeta:
+					name = request.data.getParam()[0];
+					break;
+				case PriceRequestTypes.MutualFundDS:
+					name = request.data.SYM[0];
+					break;
+			}
+			request.data.TKN = name;  // set cache value name to the TKN value which will be returned from Price
+		} else {
+			name = request.data.TKN;
 		}
-		return this.applyCacheConfig(new CacheRequest(request.channel, request.data, category + '_' + name, category));
+		return this.applyCacheConfig(new CacheRequest(request.channel, request.req_gen(request.data), category + '_' + name, category));
 	}
 
 	public putRequest(request: {channel: Channels, data: any, req: any}): CacheRequest {
 		const category = Channels[request.channel] + '_' + request.req.MT;
 		let name = '';
-		switch (request.req.MT) {
-			case PriceRequestTypes.SymbolMeta:
-				name = request.req.EXG + '~' + request.req.SYM;
-				break;
+		if (request.req.TKN === null || request.req.TKN === undefined) {
+			switch (request.req.MT) {
+				case PriceRequestTypes.SymbolMeta:
+					name = request.req.EXG + '~' + request.req.SYM;
+					break;
+				case PriceRequestTypes.MutualFundDS:
+					name = request.data.EXG + '~' + request.data.SYM;
+					break;
+			}
+		} else {
+			name = request.req.TKN;
 		}
 		return this.applyCacheConfig(new CacheRequest(request.channel, request.data, category + '_' + name, category));
 	}

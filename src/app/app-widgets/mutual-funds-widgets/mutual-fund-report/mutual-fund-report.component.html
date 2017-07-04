@@ -1,16 +1,15 @@
 <div class="inner-wrapper container-fluid">
 	<h2 class="widget-title">
 		<div class="title">Fact Sheet </div>
+		<select>
+			<option *ngFor="let year of years" [value]="year">{{ year }}</option>
+		</select>
+		<select>
+			<option *ngFor="let month of months" [value]="month">{{ month }}</option>
+		</select>
 	</h2>
 
 	<div class="row info-perfor-details" style="height:515px">
 
-
-
 	</div>
-
-
-
 </div>
-
-
