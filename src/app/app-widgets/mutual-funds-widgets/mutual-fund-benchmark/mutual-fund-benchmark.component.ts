@@ -39,7 +39,6 @@ export class MutualFundBenchmarkComponent extends BaseWidgetComponent {
 				json: this.mutualFundEntityObj['benchmarkData'],
 				keys: {
 					x: 'date',
-					// xFormat: '%Y%m%d',
 					value: ['benchMark', 'value'],
 				},
 			},
@@ -49,10 +48,8 @@ export class MutualFundBenchmarkComponent extends BaseWidgetComponent {
 					tick: {
 						format: '%Y-%m-%d',
 						culling: {
-							max: 2, // the number of tick texts will be adjusted to less than this value
+							max: 2,
 						},
-						// for normal axis, default on
-						// for category axis, default off
 					},
 				},
 			},
