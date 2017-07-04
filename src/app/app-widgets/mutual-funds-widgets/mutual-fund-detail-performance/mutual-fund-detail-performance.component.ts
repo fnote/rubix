@@ -21,6 +21,7 @@ export class MutualFundDetailPerformanceComponent extends BaseWidgetComponent {
 		this.drawChart();
 	}
 
+	// TODO: [Amila] Fill with real data
 	private drawChart(): void {
 		const chart = c3.generate({
 			bindto: '#assetAllocationC3Chart',
