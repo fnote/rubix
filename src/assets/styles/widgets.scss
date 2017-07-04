@@ -1471,6 +1471,11 @@ float: right;
 .ar .widget-title .extra-controllers{
 	float: $float-1;
 }
+.widget-title .extra-controllers .act-btn{
+	font-size: $font-small;
+	padding: $padding-small $padding-medium;
+	border: none;
+}
 /*-- Title styles end --*/
 
 
