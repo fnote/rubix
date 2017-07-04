@@ -16,8 +16,8 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 	public riskTypesArray = [];
 	public chartData = [];
 	public chartXAxisLables = [];
+	public chartPeriod = performanceChartDurations.sixMonths;
 	private dataLoaded = false;
-	private chartPeriod = performanceChartDurations.sixMonths;
 	private dataLoadedSubscription;
 
 	constructor(private priceService: PriceService,
