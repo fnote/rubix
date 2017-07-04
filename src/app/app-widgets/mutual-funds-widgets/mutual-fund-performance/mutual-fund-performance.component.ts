@@ -9,7 +9,6 @@ import { performanceChartDurations } from '../../../app-constants/const/performa
 @Component({
 	selector: 'app-mutual-fund-performance',
 	templateUrl: './mutual-fund-performance.component.html',
-	styleUrls: ['./mutual-fund-performance.component.scss'],
 })
 export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 

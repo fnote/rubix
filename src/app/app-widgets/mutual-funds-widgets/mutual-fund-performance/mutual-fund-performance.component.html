@@ -8,11 +8,10 @@
 			<div class="button"  (click)="onChartPeriodChange('1Y')">{{localizationService.language.YEAR_1}}</div>
 			<div class="button"  (click)="onChartPeriodChange('6M')">{{localizationService.language.MONTHS_6}}</div>-->
 
-			<button type="button" class="act-btn" (click)="onChartPeriodChange('5Y')">{{localizationService.language.YEAR_5}}</button>
-			<button type="button" class="act-btn" (click)="onChartPeriodChange('3Y')">{{localizationService.language.YEAR_3}}</button>
-			<button type="button" class="act-btn" (click)="onChartPeriodChange('1Y')">{{localizationService.language.YEAR_1}}</button>
-			<button type="button" class="act-btn" (click)="onChartPeriodChange('6M')">{{localizationService.language.MONTHS_6}}</button>
-
+			<button type="button" class="act-btn" (click)="onChartPeriodChange('6M')" [ngClass]="{'active': (chartPeriod === '6M') ? true : false }">{{localizationService.language.MONTHS_6}}</button>
+			<button type="button" class="act-btn" (click)="onChartPeriodChange('1Y')" [ngClass]="{'active': (chartPeriod === '1Y') ? true : false }">{{localizationService.language.YEAR_1}}</button>
+			<button type="button" class="act-btn" (click)="onChartPeriodChange('3Y')" [ngClass]="{'active': (chartPeriod === '3Y') ? true : false }">{{localizationService.language.YEAR_3}}</button>
+			<button type="button" class="act-btn" (click)="onChartPeriodChange('5Y')" [ngClass]="{'active': (chartPeriod === '5Y') ? true : false }">{{localizationService.language.YEAR_5}}</button>
 		</div>
 	</h2>
 	<div class="col-md-12">
