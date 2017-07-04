@@ -1,6 +1,7 @@
 import { Component, Injector } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
-import { PriceService } from '../../../app-backend/price/price.service';
+import { LocalizationService } from '../../../app-utils/localization/localization.service';
+import { MutualFundsDataStore } from '../../../app-backend/price/data-stores/mutual-funds-data-store';
 
 @Component({
 	selector: 'app-mutual-fund-overview',
@@ -9,8 +10,9 @@ import { PriceService } from '../../../app-backend/price/price.service';
 })
 export class MutualFundOverviewComponent extends BaseWidgetComponent {
 	private symbolCode;
+	public mutualFundEntityObj: Object;
 
-	constructor(injector: Injector, private priceService: PriceService) {
+	constructor(injector: Injector,  private mutualFundsDataStore: MutualFundsDataStore, public localizationService: LocalizationService) {
 		super(injector);
 	}
 
@@ -18,12 +20,10 @@ export class MutualFundOverviewComponent extends BaseWidgetComponent {
 		const symbolCode = this.route.snapshot.queryParams['symbolCode'];
 		const exchangeCode = this.route.snapshot.queryParams['exchangeCode'];
 		this.symbolCode = [exchangeCode, symbolCode].join('~');
-		this.subscribeForMutualFundDetail();
+		this.mutualFundsDataStore.detailDataLoadedObserver.subscribe(isDataLoaded => {
+			this.mutualFundEntityObj = this.mutualFundsDataStore.getMutualFundSymbol(symbolCode);
+		});
+
 	}
 
-	private subscribeForMutualFundDetail(): void {
-		const segment = ['MASTER', 'PERFORM', 'MONTHLY', 'FACTS'];
-
-		this.priceService.addMutualFundDetailsRequest(segment, [this.symbolCode]);
-	}
 }

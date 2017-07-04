@@ -13,6 +13,7 @@ export class MutualFundsDataStore extends BaseDataStore {
 	private  _regionArray = [];
 	private  _riskTypeArray = [];
 	private $dataLoaded = new Subject();
+	private $detaildataLoaded = new Subject();
 
 	constructor(private commonHelperService: CommonHelperService) {
 		super();
@@ -20,6 +21,10 @@ export class MutualFundsDataStore extends BaseDataStore {
 
 	public get dataLoadedObserver(): Subject<boolean> {
 		return this.$dataLoaded;
+	}
+
+	public get detailDataLoadedObserver(): Subject<boolean> {
+		return this.$detaildataLoaded;
 	}
 
 	public get regionArray(): Array<{id: string, description: string}> {
@@ -56,6 +61,12 @@ export class MutualFundsDataStore extends BaseDataStore {
 		return data;
 	}
 
+	public getMutualFundSymbol(symbolCode: string): MutualFundEntity {
+
+		return this.fundBySymbolStore[symbolCode];
+
+	}
+
 	public getItemsByRegionAndRiskType(region: string, riskType: string): MutualFundEntity {
 		if (this.fundByRegionStore[region] && this.fundByRegionStore[region][riskType]) {
 			return this.fundByRegionStore[region][riskType];
@@ -78,6 +89,7 @@ export class MutualFundsDataStore extends BaseDataStore {
 		this.updateSymbolStaticsData(response.MONTHLY, symbolCode);
 		this.setReportData(response.FACTS, symbolCode);
 		this.setBenchMarkData(response.PERFORM, symbolCode);
+		this.$detaildataLoaded.next(true);
 	}
 
 	public updateRegionData(values: {id: string, description: string}[]): void {
