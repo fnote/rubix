@@ -12,11 +12,12 @@ describe('Price Subscription Service Test ', () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			providers: [{ provide: DataService, useClass: MockDataService }],
+			providers: [{ provide: DataService, useClass: MockDataService },
+				{ provide: LoggerService, useClass: LoggerService }],
 		});
 
 		dataService = TestBed.get(DataService);
-		loggerService = loggerService as LoggerService;
+		loggerService = TestBed.get(LoggerService);
 		priceSubscriptionService = new PriceSubscriptionService(dataService, loggerService);
 	});
 
@@ -153,8 +154,9 @@ describe('Price Subscription Service Test ', () => {
 
 @Injectable()
 class MockDataService {
+
 	public sendToWs(data: any): void {
-		// tslint:disable-next-line:no-console
-		console.log('Mock Data Service Received Data : ' + data);
+		return;
 	}
+
 }

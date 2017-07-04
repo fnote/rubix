@@ -54,19 +54,17 @@ export class PriceSubscriptionService {
 	*/
 	private isSubscribeRequest(messageType: PriceRequestTypes, exchange: string, symbol?: string): boolean {
 		let exchangeNodeObject: NodeObject;
-
-		// tslint:disable-next-line:no-console
-		console.log('Subscription request received : Message Type - ' + messageType + ' Exchange - ' + exchange + ' Symbol - ' + symbol);
+		this.loggerService.logInfo('Subscription request received : ' + messageType + ' - ' + exchange + ' - ' + symbol, 'Price-SubscriptionService');
 
 		// check message type already exists. if not create new map entry with default values
 		if (!this.isKeyExistsInMap(messageType, this.subscriptionMap)) {
 			const newExchangeMap: Map<string, NodeObject> = new Map();
-			exchangeNodeObject = new NodeObject({ exchange: exchange, isExchangeSubscribed: false });
+			exchangeNodeObject = new NodeObject({ exchange: exchange, isExchangeSubscribed: false }, this.loggerService);
 			newExchangeMap.set(exchange, exchangeNodeObject);
 			this.subscriptionMap.set(messageType, newExchangeMap);
 		} else {
 			if (!this.isKeyExistsInMap(exchange, this.subscriptionMap.get(messageType))) {
-				exchangeNodeObject = new NodeObject({ exchange: exchange, isExchangeSubscribed: false });
+				exchangeNodeObject = new NodeObject({ exchange: exchange, isExchangeSubscribed: false }, this.loggerService);
 				this.subscriptionMap.get(messageType).set(exchange, exchangeNodeObject);
 			}else {
 				exchangeNodeObject = this.subscriptionMap.get(messageType).get(exchange);
@@ -76,7 +74,7 @@ export class PriceSubscriptionService {
 		if (symbol) {
 			// if symbol subscription and symbol not exists, create new symbol entry with default values
 			if (!this.isKeyExistsInMap(symbol, exchangeNodeObject.subscribedSymbolInfo)) {
-				const newSymbolInfo: SymbolNodeObject = new SymbolNodeObject({ isSymbolSubscribed: false });
+				const newSymbolInfo: SymbolNodeObject = new SymbolNodeObject({ isSymbolSubscribed: false }, this.loggerService);
 				exchangeNodeObject.subscribedSymbolInfo.set(symbol, newSymbolInfo);
 			}
 		}
@@ -98,9 +96,7 @@ export class PriceSubscriptionService {
 	*/
 	private isUnsubscribeRequest(messageType: PriceRequestTypes, exchange: string, symbol?: string): boolean {
 		let exchangeNodeObject: NodeObject;
-
-		// tslint:disable-next-line:no-console
-		console.log('Unsubscription requierd received : Message Type - ' + messageType + ' Exchange - ' + exchange + ' Symbol - ' + symbol);
+		this.loggerService.logInfo('Unsubscription requierd received : ' + messageType + ' - ' + exchange + ' - ' + symbol, 'Price-SubscriptionService');
 		if (!this.isKeyExistsInMap(messageType, this.subscriptionMap)) {
 			// unsubscription for not subscribed message type
 			return false;
@@ -255,22 +251,17 @@ export class PriceSubscriptionService {
 // testing only
 	private logSubscriptionTree(): void {
 		this.subscriptionMap.forEach((value: Map<string, NodeObject>, key: PriceRequestTypes) => {
-			// tslint:disable-next-line:no-console
-			console.log('===========================');
-			// tslint:disable-next-line:no-console
-			console.log('Level 1 Map key :  Request Type : ' + key);
+			this.loggerService.logInfo('================ Price Subscription Service Start ================', 'Price-SubscriptionService');
+			this.loggerService.logInfo('Level 1 Map key :  Request Type : ' + key, 'Price-SubscriptionService');
 			value.forEach((exchangeNode: NodeObject, exchangeCode: string) => {
-				// tslint:disable-next-line:no-console
-				console.log('Level 2 Map key : exchange code : ' + exchangeCode);
+				this.loggerService.logInfo('Level 2 Map key : exchange code : ' + exchangeCode, 'Price-SubscriptionService');
 				exchangeNode.printObj();
 				exchangeNode.subscribedSymbolInfo.forEach((symbolNode: SymbolNodeObject, symbolCode: string) => {
-						// tslint:disable-next-line:no-console
-					console.log('Level 3 Map key : symbol code : ' + symbolCode);
+					this.loggerService.logInfo('Level 3 Map key : symbol code : ' + symbolCode, 'Price-SubscriptionService');
 					symbolNode.printObj();
 				});
 			});
-			// tslint:disable-next-line:no-console
-			console.log('===========================');
+			this.loggerService.logInfo('================ Price Subscription Service End ================', 'Price-SubscriptionService');
 		});
 	}
 
@@ -313,7 +304,7 @@ class NodeObject {
 	private _exchangeSubscriptionCount = 0;
 	private _subscribedSymbolInfo: Map<string, SymbolNodeObject> = new Map();
 
-	constructor(values: Object = {}) {
+	constructor(values: Object = {}, private loggerService: LoggerService) {
 		this.setValues(values);
 	}
 
@@ -356,8 +347,7 @@ class NodeObject {
 	public printObj(): void {
 		for (const key in this) {
 			if (this.hasOwnProperty(key)) {
-				// tslint:disable-next-line:no-console
-				console.log(key + ' : ' + this[key]);
+				this.loggerService.logInfo(key + ' : ' + this[key], 'Price-SubscriptionService');
 			}
 		}
 	}
@@ -371,7 +361,7 @@ class SymbolNodeObject {
 	private _isSymbolSubscribed = false;
 	private _symbolSubscriptionCount = 0;
 
-	constructor(values: Object = {}) {
+	constructor(values: Object = {}, private loggerService: LoggerService) {
 		this.setValues(values);
 	}
 
@@ -398,8 +388,7 @@ class SymbolNodeObject {
 	public printObj(): void {
 		for (const key in this) {
 			if (this.hasOwnProperty(key)) {
-				// tslint:disable-next-line:no-console
-				console.log(key + ' : ' + this[key]);
+				this.loggerService.logInfo(key + ' : ' + this[key], 'Price-SubscriptionService');
 			}
 		}
 	}
