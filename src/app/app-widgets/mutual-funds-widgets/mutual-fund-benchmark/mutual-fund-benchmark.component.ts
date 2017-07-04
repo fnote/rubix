@@ -24,16 +24,12 @@ export class MutualFundBenchmarkComponent extends BaseWidgetComponent {
 			if (isDataLoaded) {
 				this.mutualFundEntityObj = this.mutualFundsDataStore.getMutualFundSymbol(symbolCode);
 				this.drawChart();
-
-				/**
-				 * {
-				 * 		benchmark: 10.23
-				 * 		date: 20120701
-				 * 		value 10.54
-				 * }
-				 */
 			}
 		});
+	}
+
+	public onDestroy(): void {
+		this.dataLoadedSubscription.unsubscribe();
 	}
 
 	private drawChart(): void {
