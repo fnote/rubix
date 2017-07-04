@@ -7,6 +7,9 @@ export class MutualFundEntity extends BaseEntity {
 	private _commonHelperService: CommonHelperService;
 
 	private _chartDataMap = {};
+	private _assetData = {};
+	private _reportData = {};
+	private _benchmarkData =  {};
 
 	private _region: string = userSettings.marketData.defaultStringInitializer;
 	private _riskType: string = userSettings.marketData.defaultStringInitializer;
@@ -20,6 +23,18 @@ export class MutualFundEntity extends BaseEntity {
 	private _decimalPlaces: number =  userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _regionDescription: string = userSettings.marketData.defaultStringInitializer;
 	private _riskTypeDescription: string = userSettings.marketData.defaultStringInitializer;
+	private _expenseRatio: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
+	private _averageMarketCap: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
+	private _profitEarnings: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
+	private _return: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
+	private _informationRatio: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
+	private _excessReturn: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
+	private _trackingError: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
+	private _sharpeRatio: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
+	private _stock: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
+	private _bond: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
+	private _cash: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
+	private _other: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 
 	constructor(values: Object = {}) {
 		super();
@@ -132,6 +147,115 @@ export class MutualFundEntity extends BaseEntity {
 
 	public addchartData(duration: string, value: number): void {
 		this._chartDataMap[duration] = value;
+	}
+
+	public get assetData(): {} {
+		return this._assetData;
+	}
+
+	public set assetData(value: {}) {
+		this._assetData = value;
+	}
+	public get sharpeRatio(): number {
+		return this._sharpeRatio;
+	}
+
+	public set sharpeRatio(value: number) {
+		this._sharpeRatio = value;
+	}
+	public get trackingError(): number {
+		return this._trackingError;
+	}
+
+	public set trackingError(value: number) {
+		this._trackingError = value;
+	}
+	public get excessReturn(): number {
+		return this._excessReturn;
+	}
+
+	public set excessReturn(value: number) {
+		this._excessReturn = value;
+	}
+	public get informationRatio(): number {
+		return this._informationRatio;
+	}
+
+	public set informationRatio(value: number) {
+		this._informationRatio = value;
+	}
+	public get return(): number {
+		return this._return;
+	}
+
+	public set return(value: number) {
+		this._return = value;
+	}
+	public get profitEarnings(): number {
+		return this._profitEarnings;
+	}
+
+	public set profitEarnings(value: number) {
+		this._profitEarnings = value;
+	}
+	public get averageMarketCap(): number {
+		return this._averageMarketCap;
+	}
+
+	public set averageMarketCap(value: number) {
+		this._averageMarketCap = value;
+	}
+	public get expenseRatio(): number {
+		return this._expenseRatio;
+	}
+
+	public set expenseRatio(value: number) {
+		this._expenseRatio = value;
+	}
+
+	public get reportData(): {} {
+		return this._reportData;
+	}
+
+	public set reportData(value: {}) {
+		this._reportData = value;
+	}
+
+	public get other(): number {
+		return this._other;
+	}
+
+	public set other(value: number) {
+		this._other = value;
+	}
+	public get cash(): number {
+		return this._cash;
+	}
+
+	public set cash(value: number) {
+		this._cash = value;
+	}
+	public get bond(): number {
+		return this._bond;
+	}
+
+	public set bond(value: number) {
+		this._bond = value;
+	}
+	public get stock(): number {
+		return this._stock;
+	}
+
+	public set stock(value: number) {
+		this._stock = value;
+	}
+
+	public get benchmarkData(): {} {
+		return this._benchmarkData;
+	}
+
+	public set benchmarkData(value: {}) {
+		this._benchmarkData = value;
 	}
 
 }

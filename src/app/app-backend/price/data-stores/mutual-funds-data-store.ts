@@ -74,7 +74,10 @@ export class MutualFundsDataStore extends BaseDataStore {
 	}
 
 	public updateMutualFundsDetails(response: any): void {
-		const data = response;
+		const symbolCode = response.MASTER[0].symbolCode;
+		this.updateSymbolStaticsData(response.MONTHLY, symbolCode);
+		this.setReportData(response.FACTS, symbolCode);
+		this.setBenchMarkData(response.PERFORM, symbolCode);
 	}
 
 	public updateRegionData(values: {id: string, description: string}[]): void {
@@ -164,5 +167,39 @@ export class MutualFundsDataStore extends BaseDataStore {
 			const mutualFundDataEntity = this.fundBySymbolStore[item.symbolCode];
 			mutualFundDataEntity.setValues(item);
 		}
+	}
+
+	public updateSymbolStaticsData(values: {
+		averageMarketCap: number,
+		bond: number,
+		cash: number,
+		excessReturn: number,
+		expenseRatio: number,
+	}[], symbolCode: string): void {
+		for (const item of values){
+			const mutualFundDataEntity = this.fundBySymbolStore[symbolCode];
+			mutualFundDataEntity.setValues(item);
+		}
+
+	}
+
+	public setReportData(values: {
+		file: string,
+		month: string,
+		year: number,
+	}[], symbolCode: string): void {
+		for (const item of values){
+			const mutualFundDataEntity = this.fundBySymbolStore[symbolCode];
+			mutualFundDataEntity.reportData = item;
+		}
+	}
+
+	public setBenchMarkData(values: {
+		benchMark: number,
+		date: number,
+		value: number,
+	}[], symbolCode: string): void {
+		const mutualFundDataEntity = this.fundBySymbolStore[symbolCode];
+		mutualFundDataEntity.benchmarkData = values;
 	}
 }
