@@ -1,28 +1,32 @@
 <div class="row iframe-container">
-	<div class="col-xs-12 col-sm-12">
+	<h1 class="page-title">
+		<div class="title" style="padding-right: 10px;font-weight: 700;" (click)="BackToParent()"><</div>
+		<div class="title">MUBASHER REGIONAL GROWTH STRATEGY</div>
+		<div class="right">
+			<button class="common-button button-green">BUY</button>
+
+			<button class="common-button button-blue"><i class="fa fa-phone margin-small-right"></i>I need to ask, Call me</button>
+		</div>
+	</h1>
+	<div class="col-xs-12 col-sm-6">
 		<div class="widget-wrapper">
 			<router-outlet name="outlet1"></router-outlet>
 		</div>
-	</div>
-	<div class="col-xs-12 col-sm-6">
-		<div class="widget-wrapper">
-			<router-outlet name="outlet2"></router-outlet>
-		</div>
 
 
-				<router-outlet name="outlet3"></router-outlet>
+		<router-outlet name="outlet2"></router-outlet>
 
 
 		<div class="col-sm-6">
 			<div class="widget-wrapper">
-				<router-outlet name="outlet4"></router-outlet>
+				<router-outlet name="outlet3"></router-outlet>
 			</div>
 		</div>
 
 	</div>
 	<div class="col-xs-12 col-sm-6">
 		<div class="widget-wrapper">
-			<router-outlet name="outlet5"></router-outlet>
+			<router-outlet name="outlet4"></router-outlet>
 		</div>
 	</div>
 </div>

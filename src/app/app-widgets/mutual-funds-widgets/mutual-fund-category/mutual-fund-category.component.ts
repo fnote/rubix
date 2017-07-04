@@ -41,11 +41,10 @@ export class MutualFundCategoryComponent extends BaseWidgetComponent {
 		const data = { symbolCode: symbolCode, exchangeCode: exchangeCode };
 		const pathArray = [
 			'/mutual-fund-detail-layout', { outlets: {
-				outlet1 : ['mutual-fund-detail-header'],
-				outlet2 : ['mutual-fund-overview'],
-				outlet3 : ['mutual-fund-detail-performance'],
-				outlet4 : ['mutual-fund-benchmark'],
-				outlet5 : ['mutual-fund-report'],
+				outlet1 : ['mutual-fund-overview'],
+				outlet2 : ['mutual-fund-detail-performance'],
+				outlet3 : ['mutual-fund-benchmark'],
+				outlet4 : ['mutual-fund-report'],
 			}},
 		];
 		this.navigationService.goToChildView(pathArray , data);
