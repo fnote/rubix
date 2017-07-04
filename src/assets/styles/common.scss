@@ -435,3 +435,17 @@ button{
 }
 
 /*--widget-height end--*/
+
+.twobytwo-pl{
+	padding: $child-twobytwo-padding-left;
+}
+.twobytwo-pr{
+	padding: $child-twobytwo-padding-right;
+}
+
+.twobytwo-pl-mobile{
+	padding: $child-twobytwo-padding-left;
+}
+.twobytwo-pr-mobile{
+	padding: $child-twobytwo-padding-right;
+}
