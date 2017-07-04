@@ -6,7 +6,6 @@ import { MutualFundsDataStore } from '../../../app-backend/price/data-stores/mut
 @Component({
 	selector: 'app-mutual-fund-overview',
 	templateUrl: './mutual-fund-overview.component.html',
-	styleUrls: ['./mutual-fund-overview.component.scss'],
 })
 export class MutualFundOverviewComponent extends BaseWidgetComponent {
 	private symbolCode;

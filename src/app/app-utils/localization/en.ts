@@ -1,4 +1,4 @@
-﻿
+﻿// tslint:disable:max-line-length
 export const EN = {
 	VWAP: 'VWAP',
 	PREV_CLOSE: 'Prev. Close',
@@ -75,4 +75,8 @@ export const EN = {
 	LAST_MONTH_PCNT : 'Last Month %',
 	LAST_3MONTH_PCNT: 'Last 3M %',
 	MORE: 'More',
+	STOCK: 'Stock',
+	BOND: 'Bond',
+	CASH: 'Cash',
+	OTHER: 'Other',
 };

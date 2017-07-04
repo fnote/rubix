@@ -1,4 +1,4 @@
-﻿	// tslint:disable:max-line-length
+﻿// tslint:disable:max-line-length
 export const AR = {
 	VWAP: '\u0645\u062a\u0648\u0633\u0637 \u0627\u0644\u0633\u0639\u0631 \u0627\u0644\u0645\u0631\u062c\u062d',
 	PREV_CLOSE: '\u0627\u063a\u0644\u0627\u0642 \u0633\u0627\u0628\u0642',
@@ -75,4 +75,8 @@ export const AR = {
 	LAST_MONTH_PCNT: '% \u0627\u062E\u0631 \u0634\u0647\u0631',
 	LAST_3MONTH_PCNT: '% \u0627\u062E\u0631 \u062B\u0644\u0627\u062B\u0629 \u0627\u0634\u0647\u0631',
 	MORE: '\u0627\u0644\u0645\u0632\u064A\u062F',
+	STOCK: '\u0631\u0645\u0632',
+	BOND: 'Ar_Bond',
+	CASH: '\u0627\u0644\u0646\u0642\u062F',
+	OTHER: '\u0623\u062e\u0631\u0649',
 };

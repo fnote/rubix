@@ -75,29 +75,25 @@ export class MutualFundPerformanceComponent extends BaseWidgetComponent {
 			data: {
 				columns: this.chartData,
 				type: 'bar',
-					/*color: function (color, d) {
-					if (d === 'Growth') {
-						return '#81b6e3';
-					} else if (d === 'Balanced') {
-						return '#6aa76e';
-					} else if (d === 'Prudent') {
-						return '#ecb127';
-					}
-				},*/
-				colors: {
-					Growth: '#81b6e3',
-					Balanced: '#6aa76e',
-					Prudent: '#ecb127',
-				},
+				/*color: function (color, d) {
+				if (d === 'Growth') {
+					return '#81b6e3';
+				} else if (d === 'Balanced') {
+					return '#6aa76e';
+				} else if (d === 'Prudent') {
+					return '#ecb127';
+				}
+			},*/
+			},
+			color: {
+				// TODO: [Amila] find a way to load below form CSS
+				pattern: ['#81b6e3', '#6aa76e', '#ecb127', '#a35dba'],
 			},
 			bar: {
 				width: {
 					ratio: 0.75,
 				},
 			},
-			// $theme2-chart-color-1: #81b6e3;
-			// $theme2-chart-color-2: #6aa76e;
-			// $theme2-chart-color-3: #ecb127;
 			axis: {
 				x: {
 					type: 'category',
