@@ -67,9 +67,6 @@ var getComponent = function (id) {
 		case 'mutual-fund-detail-layout':
 			component = 'MutualFundDetailLayoutComponent';
 			break;
-		case 'mutual-fund-detail-header':
-			component = 'MutualFundDetailHeaderComponent';
-			break;
 		case 'mutual-fund-overview':
 			component = 'MutualFundOverviewComponent';
 			break;
