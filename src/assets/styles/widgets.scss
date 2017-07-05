@@ -1467,6 +1467,20 @@ float: right;
 	float: $float-1;
 	margin-bottom: $padding-small;
 }
+.widget-title .dropdown{
+	float: $float-2;
+	margin-bottom: $padding-small;
+}
+.widget-title .dropdown select {
+	width: 120px;
+	padding: 2px 0;
+	border: 1px solid #cecece;
+	color: #777777;
+	font-size: 14px;
+}
+.ar .widget-title .dropdown{
+	float: $float-1;
+}
 .ar .widget-title .title{
 	float: $float-2;
 }

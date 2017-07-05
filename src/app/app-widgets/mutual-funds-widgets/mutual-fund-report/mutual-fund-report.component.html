@@ -1,6 +1,7 @@
 <div class="inner-wrapper container-fluid">
 	<h2 class="widget-title">
 		<div class="title">Fact Sheet </div>
+		<div class="dropdown">
 		<select (change)="onYearChange($event)">
 			<option *ngFor="let datum of data" [value]="datum[0]">{{ datum[0] }}</option>
 		</select>
@@ -8,13 +9,15 @@
 		<select (change)="onMonthChange($event)">
 			<option *ngFor="let file of files" [value]="file.month">{{ file.month }}</option>
 		</select>
+		</div>
 	</h2>
 
-	<div class="row info-perfor-details" style="height:515px">
+	<div>
 		<pdf-viewer [src]="pdfUrl"
-								[original-size]="true"
 								[show-all]="true"
 								[render-text]="true"
+								[original-size]="false"
+								style="display: block;"
 		></pdf-viewer>
 	</div>
 </div>
