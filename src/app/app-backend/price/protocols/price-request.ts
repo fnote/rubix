@@ -144,7 +144,7 @@ export class PriceRequest {
 
 		if (this.LAN) {
 			arrBuild.push('"LAN":');
-			arrBuild.push(String(this.LAN));
+			arrBuild.push('"' + String(this.LAN) + '"');
 			arrBuild.push(',');
 		}
 
