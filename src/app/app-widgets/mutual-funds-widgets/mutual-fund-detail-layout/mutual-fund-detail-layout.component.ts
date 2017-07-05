@@ -1,6 +1,7 @@
 import { Component, Injector } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
+import { MutualFundEntity } from '../../../app-backend/price/business-entities/mutual-fund-entity';
 import { MutualFundsDataStore } from '../../../app-backend/price/data-stores/mutual-funds-data-store';
 import { PriceService } from '../../../app-backend/price/price.service';
 
@@ -10,7 +11,7 @@ import { PriceService } from '../../../app-backend/price/price.service';
 })
 export class MutualFundDetailLayoutComponent extends BaseWidgetComponent {
 	private symbolCode;
-	public mutualFundEntityObj: Object;
+	public mutualFundEntityObj: MutualFundEntity;
 
 	constructor(injector: Injector, private priceService: PriceService, private mutualFundsDataStore: MutualFundsDataStore) {
 		super(injector);

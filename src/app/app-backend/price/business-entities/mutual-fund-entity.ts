@@ -35,6 +35,8 @@ export class MutualFundEntity extends BaseEntity {
 	private _bond: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _cash: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _other: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
+	private _stdDeviation: string = userSettings.marketData.defaultStringInitializer;
+	private _r2: string = userSettings.marketData.defaultStringInitializer;
 
 	constructor(values: Object = {}) {
 		super();
@@ -156,61 +158,69 @@ export class MutualFundEntity extends BaseEntity {
 	public set assetData(value: {}) {
 		this._assetData = value;
 	}
-	public get sharpeRatio(): number {
+
+	public get sharpeRatio(): string {
 		return this._sharpeRatio;
 	}
 
-	public set sharpeRatio(value: number) {
-		this._sharpeRatio = value;
+	public set sharpeRatio(value: string) {
+		this._sharpeRatio = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
-	public get trackingError(): number {
+
+	public get trackingError(): string {
 		return this._trackingError;
 	}
 
-	public set trackingError(value: number) {
-		this._trackingError = value;
+	public set trackingError(value: string) {
+		this._trackingError = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
-	public get excessReturn(): number {
+
+	public get excessReturn(): string {
 		return this._excessReturn;
 	}
 
-	public set excessReturn(value: number) {
-		this._excessReturn = value;
+	public set excessReturn(value: string) {
+		this._excessReturn = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
-	public get informationRatio(): number {
+
+	public get informationRatio(): string {
 		return this._informationRatio;
 	}
 
-	public set informationRatio(value: number) {
-		this._informationRatio = value;
+	public set informationRatio(value: string) {
+		this._informationRatio = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
-	public get return(): number {
+
+	public get return(): string {
 		return this._return;
 	}
 
-	public set return(value: number) {
-		this._return = value;
+	public set return(value: string) {
+		this._return = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
-	public get profitEarnings(): number {
+
+	public get profitEarnings(): string {
 		return this._profitEarnings;
 	}
 
-	public set profitEarnings(value: number) {
-		this._profitEarnings = value;
+	public set profitEarnings(value: string) {
+		this._profitEarnings = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
-	public get averageMarketCap(): number {
+
+	public get averageMarketCap(): string {
 		return this._averageMarketCap;
 	}
 
-	public set averageMarketCap(value: number) {
-		this._averageMarketCap = value;
+	public set averageMarketCap(value: string) {
+		this._averageMarketCap = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
-	public get expenseRatio(): number {
+
+	public get expenseRatio(): string {
 		return this._expenseRatio;
 	}
 
-	public set expenseRatio(value: number) {
-		this._expenseRatio = value;
+	public set expenseRatio(value: string) {
+		this._expenseRatio = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
 	}
 
 	public get reportData(): {} {
@@ -228,6 +238,7 @@ export class MutualFundEntity extends BaseEntity {
 	public set other(value: number) {
 		this._other = value;
 	}
+
 	public get cash(): number {
 		return this._cash;
 	}
@@ -235,6 +246,7 @@ export class MutualFundEntity extends BaseEntity {
 	public set cash(value: number) {
 		this._cash = value;
 	}
+
 	public get bond(): number {
 		return this._bond;
 	}
@@ -242,6 +254,7 @@ export class MutualFundEntity extends BaseEntity {
 	public set bond(value: number) {
 		this._bond = value;
 	}
+
 	public get stock(): number {
 		return this._stock;
 	}
@@ -256,6 +269,23 @@ export class MutualFundEntity extends BaseEntity {
 
 	public set benchmarkData(value: {}) {
 		this._benchmarkData = value;
+	}
+
+	public get r2(): string {
+		return this._r2;
+	}
+
+	public set r2(value: string) {
+		this._r2 = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+	}
+
+	public get stdDeviation(): string {
+		return this._stdDeviation;
+	}
+
+	public set stdDeviation(value: string) {
+		this._stdDeviation = this._commonHelperService.formatNumber(parseFloat(value), this.decimalPlaces);
+
 	}
 
 }

@@ -104,7 +104,7 @@ export const priceResponseTags = {
 	PE: 'profitEarnings',
 	RET: 'return',
 	IR: 'informationRatio',
-	R2: 'excessReturn',
+	R2: 'R2',
 	TE: 'trackingError',
 	SHP: 'sharpeRatio',
 	STOK: 'stock',

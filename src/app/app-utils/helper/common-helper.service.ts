@@ -331,4 +331,9 @@ export class CommonHelperService {
 			default:
 		}
 	}
+
+	public getDisplaySymbolCode(symbolCode: string): string {
+		const symArr = symbolCode.split('~');
+		return [symArr[1], symArr[0]].join('.');
+	}
 }
