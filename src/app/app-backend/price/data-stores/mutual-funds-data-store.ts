@@ -200,10 +200,8 @@ export class MutualFundsDataStore extends BaseDataStore {
 		month: string,
 		year: number,
 	}[], symbolCode: string): void {
-		for (const item of values){
-			const mutualFundDataEntity = this.fundBySymbolStore[symbolCode];
-			mutualFundDataEntity.reportData = item;
-		}
+		const mutualFundDataEntity = this.fundBySymbolStore[symbolCode];
+		mutualFundDataEntity.reportData = values;
 	}
 
 	public setBenchMarkData(values: {
@@ -213,5 +211,22 @@ export class MutualFundsDataStore extends BaseDataStore {
 	}[], symbolCode: string): void {
 		const mutualFundDataEntity = this.fundBySymbolStore[symbolCode];
 		mutualFundDataEntity.benchmarkData = values;
+	}
+
+	public getMutualFundReportData(symbolCode: string): [number, { file: string, month: string}[]][] {
+		const files: [number, { file: string, month: string}[]][] = [];
+		const reportData: { file: string, month: string, year: number}[] = this.fundBySymbolStore[symbolCode].reportData;
+
+		reportData.forEach((item) => {
+			const filesForYear = files.find((entry) => { return entry[0] === item.year; });
+			if (filesForYear === undefined) {
+				files.push([item.year, [{ month: item.month, file: item.file }] ]);
+			} else {
+				filesForYear[1].push({ month: item.month, file: item.file });
+			}
+			// files.find((entry)=>{ return entry[0] === item.year})[1].push({month : '08', file: 'efefefe'});
+		});
+		// files.push([2018, [{month : '08', file: 'fgfrgrgr'}]]);
+		return files;
 	}
 }

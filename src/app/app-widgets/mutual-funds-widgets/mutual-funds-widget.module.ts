@@ -7,6 +7,7 @@ import { MutualFundOverviewComponent } from './mutual-fund-overview/mutual-fund-
 import { MutualFundPerformanceComponent } from './mutual-fund-performance/mutual-fund-performance.component';
 import { MutualFundReportComponent } from './mutual-fund-report/mutual-fund-report.component';
 import { NgModule } from '@angular/core';
+import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { UtilsModule } from '../../app-utils/utils.module';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { UtilsModule } from '../../app-utils/utils.module';
 		MutualFundReportComponent,
 		MutualFundOverviewComponent,
 		MutualFundDetailPerformanceComponent,
+		PdfViewerComponent,
 	],
 })
 export class MutualFundsWidgetModule { }
