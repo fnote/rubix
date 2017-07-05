@@ -78,8 +78,7 @@
 										"exgStock": [
 											"TDWL",
 											"1090"
-										],
-										"chartOutletID": "outlet1"
+										]
 									}
 								}
 							]
@@ -143,8 +142,7 @@
 										"exgStock": [
 											"TDWL",
 											"1090"
-										],
-										"chartOutletID": "outlet2"
+										]
 									}
 								},
 								{
@@ -154,8 +152,7 @@
 										"exgStock": [
 											"TDWL",
 											"1010"
-										],
-										"chartOutletID": "outlet3"
+										]
 									}
 								},
 								{
@@ -165,8 +162,7 @@
 										"exgStock": [
 											"CASE",
 											"OTMT"
-										],
-										"chartOutletID": "outlet4"
+										]
 									}
 								},
 								{
@@ -176,8 +172,7 @@
 										"exgStock": [
 											"DFM",
 											"EMAAR"
-										],
-										"chartOutletID": "outlet5"
+										]
 									}
 								},
 								{
@@ -187,8 +182,7 @@
 										"exgStock": [
 											"CASE",
 											"OTMT"
-										],
-										"chartOutletID": "outlet6"
+										]
 									}
 								}
 							]

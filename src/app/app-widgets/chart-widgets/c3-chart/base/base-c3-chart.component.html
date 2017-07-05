@@ -1,6 +1,6 @@
 <div>
 	<div class="short-name ellipsis">{{stockObj.dispCode}}</div>
 	<div>
-		<svg id={{this.chartOutletID}}></svg>
+		<app-c3-line-chart-component [initialChartData]="[chartData]" [options]="chartOptions" [chartAppendData]="null" ></app-c3-line-chart-component>
 	</div>
 </div>

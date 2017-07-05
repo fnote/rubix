@@ -18,7 +18,19 @@ export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnCha
 	@Input() public data;
 
 	public stockObj;
-	public chartOutletID;
+	public chartData;
+	public chartOptions = {
+		legend: {
+			show: false,
+		},
+		data: {
+			color: null,
+		},
+		axis: {
+			x: { show: false },
+			y: { show: false },
+		},
+	};
 
 	private period = '1m'; // TODO [Malindu]:put these in constants
 	private isOHLC = true;
@@ -51,6 +63,7 @@ export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnCha
 	public getDataAndDrawChart(exgStock: [string, string], period: string): void {
 		this.exgStock = exgStock;
 		let chartData = [];
+		chartData.push('chartData');
 		if (this.isOHLC) {
 			if (this.subscription$) {
 				this.subscription$.unsubscribe();
@@ -58,6 +71,7 @@ export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnCha
 
 			this.subscription$ = this.processedChartDataStore.getOHLC(exgStock, period).subscribe(data => {
 				chartData = [];
+				chartData.push('chartData');
 				if (data.length !== 0) {
 					for (const item of data) {
 						chartData.push(item.rawClosePrice);
@@ -85,23 +99,8 @@ export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnCha
 		this.processedChartDataStore.removeSubscriptions(this.exgStock); // this should be OHLC subscribed symbol
 	}
 
-	private drawChart(data: number[]): void {
-		const areaChart = c3.generate({
-			bindto: '#' + this.chartOutletID,
-			legend: {
-				show: false,
-			},
-			data: {
-				columns: [
-					data,
-				],
-				type: 'line',
-			},
-			axis: {
-				x: { show: false },
-				y: { show: false },
-			},
-		});
+	private drawChart(data: Array<number>): void {
+		this.chartData = data;
 	}
 
 }
