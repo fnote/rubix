@@ -195,13 +195,27 @@ export class MutualFundsDataStore extends BaseDataStore {
 
 	}
 
-	public setReportData(values: {
+	public setReportData(reportData: {
 		file: string,
 		month: string,
 		year: number,
 	}[], symbolCode: string): void {
 		const mutualFundDataEntity = this.fundBySymbolStore[symbolCode];
-		mutualFundDataEntity.reportData = values;
+		const files: [number, { file: string, month: string}[]][] = [];
+
+		reportData.forEach((item) => {
+			const filesForYear = files.find((entry) => { return entry[0] === item.year; });
+			if (filesForYear === undefined) {
+				files.push([item.year, [{ month: item.month, file: item.file }] ]);
+			} else {
+				filesForYear[1].push({ month: item.month, file: item.file });
+			}
+			// files.find((entry)=>{ return entry[0] === item.year})[1].push({month : '08', file: 'efefefe'});
+		});
+
+		// files.push([2018, [{month : '08', file: 'fgfrgrgr'}]]);
+
+		mutualFundDataEntity.reportData = files;
 	}
 
 	public setBenchMarkData(values: {
@@ -214,19 +228,6 @@ export class MutualFundsDataStore extends BaseDataStore {
 	}
 
 	public getMutualFundReportData(symbolCode: string): [number, { file: string, month: string}[]][] {
-		const files: [number, { file: string, month: string}[]][] = [];
-		const reportData: { file: string, month: string, year: number}[] = this.fundBySymbolStore[symbolCode].reportData;
-
-		reportData.forEach((item) => {
-			const filesForYear = files.find((entry) => { return entry[0] === item.year; });
-			if (filesForYear === undefined) {
-				files.push([item.year, [{ month: item.month, file: item.file }] ]);
-			} else {
-				filesForYear[1].push({ month: item.month, file: item.file });
-			}
-			// files.find((entry)=>{ return entry[0] === item.year})[1].push({month : '08', file: 'efefefe'});
-		});
-		// files.push([2018, [{month : '08', file: 'fgfrgrgr'}]]);
-		return files;
+		return this.fundBySymbolStore[symbolCode].reportData;
 	}
 }

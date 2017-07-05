@@ -75,7 +75,7 @@ export class LocalforageController implements StorageController, CacheController
 			name: 'rubix',
 			version: this._version,
 			size: 5242880, // Size of database, in bytes. WebSQL-only for now. 5242880= 5MB/1024x1024x5 B
-			storeName: 'rubix1', // Should be alphanumeric, with underscores.
+			storeName: 'default', // Should be alphanumeric, with underscores.
 			description: 'some description',
 		});
 	}

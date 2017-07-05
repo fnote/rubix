@@ -20,13 +20,13 @@ export class CacheRequestGenerator {
 		if (request.data.TKN === null) {
 			switch (request.data.MT) {
 				case PriceRequestTypes.SymbolMeta:
-					name = request.data.getParam()[0];
+					name = request.data.LAN + '_' + request.data.getParam()[0];
 					break;
 				case PriceRequestTypes.MutualFund:
-					name = request.data.EXG + '~' + request.data.PRV;
+					name = request.data.LAN + '_' + request.data.EXG + '_' + request.data.PRV;
 					break;
 				case PriceRequestTypes.MutualFundDS:
-					name = request.data.SYM[0];
+					name = request.data.LAN + '_' + request.data.SYM[0];
 					break;
 			}
 			request.data.TKN = name;  // set cache value name to the TKN value which will be returned from Price
@@ -42,11 +42,9 @@ export class CacheRequestGenerator {
 		if (request.req.TKN === null || request.req.TKN === undefined) {
 			switch (request.req.MT) {
 				case PriceRequestTypes.SymbolMeta:
-					name = request.req.EXG + '~' + request.req.SYM;
-					break;
+				case PriceRequestTypes.MutualFund:
 				case PriceRequestTypes.MutualFundDS:
-					name = request.data.EXG + '~' + request.data.SYM;
-					break;
+				default: break;
 			}
 		} else {
 			name = request.req.TKN;

@@ -133,6 +133,8 @@ export class CacheService {
 			).catch((evt) => {
 				this.logger.logError('Getting value for ' + keyData.name + ' raised an exception', 'CacheService', evt);
 
+				this.network.sendToWs({ channel: keyData.channel, data: keyData.data });
+
 				/*this.network.get(keyData).subscribe(
 				 x => {
 				 this.put(keyData.name, x);
