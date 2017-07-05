@@ -22,6 +22,9 @@ export class CacheRequestGenerator {
 				case PriceRequestTypes.SymbolMeta:
 					name = request.data.getParam()[0];
 					break;
+				case PriceRequestTypes.MutualFund:
+					name = request.data.EXG + '~' + request.data.PRV;
+					break;
 				case PriceRequestTypes.MutualFundDS:
 					name = request.data.SYM[0];
 					break;

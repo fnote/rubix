@@ -84,6 +84,7 @@ export class PriceStreamingResponseHandler {
 					}));
 				}
 				break;
+			case PriceRequestTypes.MutualFund:
 			case PriceRequestTypes.MutualFundDS:
 				this.cache.put(this.cache.generatePutRequest({ channel: Channels.PriceMeta, data: response, req: response }));
 				break;

@@ -26,6 +26,7 @@ export class CacheConfig {
 
 	private _keys = {
 		PriceMeta_46 : { alias: 'symbolMeta', category: 'cacheOneDay', store: 'rubix' },
+		PriceMeta_95 : { alias: 'mutfund', category: 'cacheOneDay', store: 'rubix' },
 		PriceMeta_96 : { alias: 'mutfundMore', category: 'cacheOneDay', store: 'rubix' },
 	};
 

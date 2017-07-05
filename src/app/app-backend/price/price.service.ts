@@ -332,9 +332,10 @@ export class PriceService {
 		req.PRV = providers;
 		const request = {
 			channel : Channels.PriceMeta,
-			data : PriceStreamingRequestHandler.getInstance().generateAddRequest(req),
+			data : req,
+			req_gen : PriceStreamingRequestHandler.getInstance().generateAddRequest,
 		};
-		this.dataService.sendToWs(request);
+		this.cache.get(this.cache.generateGetRequest(request));
 	}
 
 	public addMutualFundDetailsRequest(segments: Array<string>, symbol: Array<string>): void {

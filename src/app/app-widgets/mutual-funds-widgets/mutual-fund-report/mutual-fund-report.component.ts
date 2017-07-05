@@ -1,8 +1,8 @@
+import { Component, Injector, OnInit } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
-import { Component, OnInit, Injector } from '@angular/core';
-import { MutualFundsDataStore } from '../../../app-backend/price/data-stores/mutual-funds-data-store';
 import { ConfigService } from '../../../app-config/config.service';
 import { LoggerService } from '../../../app-utils/logger.service';
+import { MutualFundsDataStore } from '../../../app-backend/price/data-stores/mutual-funds-data-store';
 import { UserState } from '../../../app-backend/auth/user-state';
 
 @Component({
@@ -11,19 +11,18 @@ import { UserState } from '../../../app-backend/auth/user-state';
 	styleUrls: ['./mutual-fund-report.component.scss'],
 })
 export class MutualFundReportComponent extends BaseWidgetComponent implements OnInit {
+	public pdfUrl: string;
+	public data: [number, { file: string, month: string}[]][];
+	public files: { file: string, month: string}[];
+
+	private symbolCode: string;
+	private exchangeCode: string;
+	private selectedYear: number;
+	private selectedMonth: string;
 
 	constructor(injector: Injector, private configService: ConfigService, private mutDataStore: MutualFundsDataStore, private logger: LoggerService) {
 		super(injector);
 	}
-
-	public pdfUrl: string;
-	public symbolCode: string;
-	public exchangeCode: string;
-
-	public data: [number, { file: string ,month: string}[]][];
-	public files: { file: string ,month: string}[];
-	public selectedYear: number;
-	public selectedMonth: string;
 
 	public ngOnInit(): void {
 
@@ -38,17 +37,15 @@ export class MutualFundReportComponent extends BaseWidgetComponent implements On
 		});
 	}
 
-	public onYearChange(evt): void {
+	public onYearChange(evt: any): void {
 		this.selectedYear = parseInt(evt.target.value, 10);
-		this.files = this.data.find((entry) => { return entry[0] === this.selectedYear })[1];
+		this.files = this.data.find((entry) => { return entry[0] === this.selectedYear; })[1];
 		this.loadPdf(this.selectedYear, this.files[0].month, this.files[0].file);
 	}
 
-	public onMonthChange(evt): void {
+	public onMonthChange(evt: any): void {
 		this.selectedMonth = evt.target.value;
-		const file = this.files.find((entry) => {
-			return entry.month === this.selectedMonth
-		});
+		const file = this.files.find((entry) => { return entry.month === this.selectedMonth; });
 		this.loadPdf(this.selectedYear, file.month, file.file);
 	}
 
@@ -57,7 +54,7 @@ export class MutualFundReportComponent extends BaseWidgetComponent implements On
 
 		this.configService.getStringConfigVal('connectionConfig', 'price', 'ajax_url').then(url => {
 			this.pdfUrl = url + '/download/factsheet/' + this.exchangeCode + '/' + this.symbolCode + '/' + year + '/' + month + '/' + fileName + '?22=' + SESSION_ID;
-			//this.dataService.sendAjaxRequest(request);
+			// this.dataService.sendAjaxRequest(request);
 		});
 	}
 }
