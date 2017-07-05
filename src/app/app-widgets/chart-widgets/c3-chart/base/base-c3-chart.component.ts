@@ -86,7 +86,6 @@ export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnCha
 	}
 
 	private drawChart(data: number[]): void {
-		const pos = data.length - 1;
 		const areaChart = c3.generate({
 			bindto: '#' + this.chartOutletID,
 			legend: {
@@ -96,12 +95,7 @@ export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnCha
 				columns: [
 					data,
 				],
-				types: {
-					values: 'bar',
-				},
-				color: function (color: any, d: any): any {
-					return d.id && d.x > pos ? '#f86c6b' : '#4dbd73';
-				},
+				type: 'line',
 			},
 			axis: {
 				x: { show: false },

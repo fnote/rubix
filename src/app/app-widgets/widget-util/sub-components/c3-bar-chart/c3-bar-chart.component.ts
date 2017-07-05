@@ -20,9 +20,7 @@ export class C3ChartComponent implements OnChanges {
 
 		options.bindto = '#c3Chart';
 		options.data.columns = this.chartData;
-		options.data.types = {
-			values: 'bar',
-		};
+		options.data.type = 'bar';
 
 		const areaChart = c3.generate(options);
 	}
