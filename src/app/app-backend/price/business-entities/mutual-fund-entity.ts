@@ -23,20 +23,20 @@ export class MutualFundEntity extends BaseEntity {
 	private _decimalPlaces: number =  userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _regionDescription: string = userSettings.marketData.defaultStringInitializer;
 	private _riskTypeDescription: string = userSettings.marketData.defaultStringInitializer;
-	private _expenseRatio: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
-	private _averageMarketCap: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
-	private _profitEarnings: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
-	private _return: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
-	private _informationRatio: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
-	private _excessReturn: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
-	private _trackingError: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
-	private _sharpeRatio: number = userSettings.marketData.defaultNumberInitializer.minusOneInitializer;
+	private _expenseRatio: string =  userSettings.marketData.defaultStringInitializer;
+	private _averageMarketCap: string =  userSettings.marketData.defaultStringInitializer;
+	private _profitEarnings: string =  userSettings.marketData.defaultStringInitializer;
+	private _return: string =  userSettings.marketData.defaultStringInitializer;
+	private _informationRatio: string =  userSettings.marketData.defaultStringInitializer;
+	private _excessReturn: string =  userSettings.marketData.defaultStringInitializer;
+	private _trackingError: string =  userSettings.marketData.defaultStringInitializer;
+	private _sharpeRatio: string =  userSettings.marketData.defaultStringInitializer;
 	private _stock: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _bond: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _cash: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
 	private _other: number = userSettings.marketData.defaultNumberInitializer.zeroInitializer;
-	private _stdDeviation: string = userSettings.marketData.defaultStringInitializer;
-	private _r2: string = userSettings.marketData.defaultStringInitializer;
+	private _stdDeviation: string =  userSettings.marketData.defaultStringInitializer;
+	private _r2: string =  userSettings.marketData.defaultStringInitializer;
 
 	constructor(values: Object = {}) {
 		super();
@@ -104,7 +104,7 @@ export class MutualFundEntity extends BaseEntity {
 	}
 
 	public set benchMark(value: string) {
-		this._benchMark = value;
+		this._benchMark = this._commonHelperService.getDisplaySymbolCode(value);
 	}
 
 	public get percentageOneMonth(): string {
