@@ -119,6 +119,9 @@ export const priceResponseTags = {
 	YEAR: 'year',
 	MONTH: 'month',
 	FILE: 'file',
+	STDEV: 'stdDeviation',
+	EXRAT: 'excessReturn',
+
 	// refatcor below
 	/*0: 'NODATA',
 	5: 'EXC',
