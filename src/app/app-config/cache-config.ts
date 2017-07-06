@@ -1,7 +1,17 @@
 import { CachePolicy } from '../app-constants/enums/cache-policy.enum';
 import { CacheRequest } from '../app-backend/cache/cache-request';
+import { StorageType } from '../app-constants/enums/storage-type.enum';
 
 export class CacheConfig {
+
+	public dataStores = [
+		{
+			driver: [StorageType.INDEXEDDB, StorageType.LOCALSTORAGE, StorageType.WEBSQL], // add in order of significance
+			name: 'Rubix Requests',
+			size: 5242880, // Size of database, in bytes. WebSQL-only for now. 5242880= 5MB/1024x1024x5 Bytes
+			storeName: 'rubix_requests', // Should be alphanumeric, with underscores.
+			description: 'Contains requests and responses for rubix framework',
+		}];
 
 	private _classes = {
 		upToDate: {
@@ -25,9 +35,9 @@ export class CacheConfig {
 	};
 
 	private _keys = {
-		PriceMeta_46 : { alias: 'symbolMeta', category: 'cacheOneDay', store: 'rubix' },
-		PriceMeta_95 : { alias: 'mutfund', category: 'cacheOneDay', store: 'rubix' },
-		PriceMeta_96 : { alias: 'mutfundMore', category: 'cacheOneDay', store: 'rubix' },
+		PriceMeta_46 : { alias: 'symbolMeta', category: 'cacheOneDay', store: 'rubix_requests' },
+		PriceMeta_95 : { alias: 'mutfund', category: 'cacheOneDay', store: 'rubix_requests' },
+		PriceMeta_96 : { alias: 'mutfundMore', category: 'cacheOneDay', store: 'rubix_requests' },
 	};
 
 	public get(req: CacheRequest): CacheRequest {

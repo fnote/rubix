@@ -1,19 +1,23 @@
 import { CacheController } from './interfaces/cache-controller';
 import { LoggerService } from '../../app-utils/logger.service';
 import { StorageController } from './interfaces/storage-controller';
+import { StorageType } from '../../app-constants/enums/storage-type.enum';
 import localForage from 'localforage';
 
 export class LocalforageController implements StorageController, CacheController {
 
-	private _version: number;
+	private storeObj: any;
 
-	constructor(public version: number, private logger: LoggerService) {
-		this._version = version;
+	constructor(
+		private version: number,
+		private store: { driver: StorageType[], name: string, size: number, storeName: string, description: string },
+		private logger: LoggerService,
+	) {
 		this.init();
 	}
 
 	public getStore(storeName: string): any {
-		return this;
+		return this.storeObj;
 	}
 
 	public clean(): void {
@@ -21,28 +25,28 @@ export class LocalforageController implements StorageController, CacheController
 	}
 
 	public garbageCollect(): void {
-		const self = this;
-		localForage.iterate(function(value: any, key: any): any {
+
+		this.storeObj.iterate(function (value: any, key: any): any {
 			if (Date.now() > value.persistTime + value.ttl) {
-				self.remove(key);
+				this.remove(key);
 			}
 		}).then(() => {
-			self.logger.logInfo('Garbage collection completed', 'LocalforageController');
+			this.logger.logInfo('Garbage collection completed', 'LocalforageController');
 		}).catch((err: Error) => {
-			self.logger.logError('Garbage collection failed : ' + err.message , 'LocalforageController');
+			this.logger.logError('Garbage collection failed : ' + err.message, 'LocalforageController');
 		});
 	}
 
 	public add(key: any, value: any): any {
-		return localForage.setItem(key, value);
+		return this.storeObj.setItem(key, value);
 	}
 
 	public get(key: any): any {
-		return localForage.getItem(key);
+		return this.storeObj.getItem(key);
 	}
 
 	public update(key: any, value: any): any {
-		return localForage.setItem(key, value);
+		return this.storeObj.setItem(key, value);
 	}
 
 	public addAll(values: any[], prefix?: string | number): any {
@@ -50,11 +54,11 @@ export class LocalforageController implements StorageController, CacheController
 	}
 
 	public getKeys(): any {
-		localForage.keys();
+		this.storeObj.keys();
 	}
 
 	public search(searchKey: any): any {
-		return localForage.iterate((item, key, iterationNumber) => {
+		return this.storeObj.iterate((item, key, iterationNumber) => {
 			if (searchKey === key) {
 				return [key, item];
 			}
@@ -62,21 +66,35 @@ export class LocalforageController implements StorageController, CacheController
 	}
 
 	public remove(key: any): any {
-		return localForage.removeItem(key);
+		return this.storeObj.removeItem(key);
 	}
 
 	public removeAll(): any {
-		return localForage.clear();
+		return this.storeObj.clear();
 	}
 
 	private init(): void {
-		localForage.config({
-			driver: [localForage.INDEXEDDB, localForage.LOCALSTORAGE, localForage.WEBSQL], // Force WebSQL; same as using setDriver()
-			name: 'rubix',
-			version: this._version,
-			size: 5242880, // Size of database, in bytes. WebSQL-only for now. 5242880= 5MB/1024x1024x5 B
-			storeName: 'default', // Should be alphanumeric, with underscores.
-			description: 'some description',
+		this.storeObj = localForage.createInstance({
+			driver: this.getDrivers(this.store.driver), // Force WebSQL; same as using setDriver()
+			name: this.store.name,
+			version: this.version,
+			size: this.store.size, // Size of database, in bytes. WebSQL-only for now. 5242880= 5MB/1024x1024x5 B
+			storeName: this.store.storeName, // Should be alphanumeric, with underscores.
+			description: this.store.description,
 		});
+	}
+
+	private getDrivers(drivers: StorageType[]): string[] {
+		const driversArr: any = [];
+		drivers.forEach((item): void => {
+			if (StorageType[item] === StorageType[StorageType.INDEXEDDB]) {
+				driversArr.push(localForage.INDEXEDDB);
+			} else if (StorageType[item] === StorageType[StorageType.LOCALSTORAGE]) {
+				driversArr.push(localForage.LOCALSTORAGE);
+			} else if (StorageType[item] === StorageType[StorageType.WEBSQL]) {
+				driversArr.push(localForage.WEBSQL);
+			}
+		});
+		return driversArr;
 	}
 }
