@@ -3,6 +3,7 @@ export const priceResponseTypes = {
 	number: 2,
 	boolean: 3,
 };
+
 export const priceResponseTags = {
 	3: { tag: 'symbolCode', type: priceResponseTypes.string },
 	4: { tag: 'exchangeCode', type: priceResponseTypes.string },
