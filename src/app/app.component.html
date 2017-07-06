@@ -1,4 +1,4 @@
 <div class="container-fluid gap-overide">
     <router-outlet></router-outlet>
-	<div class="col-xs-12 font-small text-right">Ver:1.0</div>
+	<div *ngIf="isAuthenticated" class="col-xs-12 font-small text-right">{{version}}</div>
 </div>

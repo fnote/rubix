@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ThemeService } from './app-utils/theme.service';
+import { UserState } from './app-backend/auth/user-state';
+import { environment } from '../environments/environment';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 })
 export class AppComponent {
-
-	constructor(private themeService: ThemeService) {
-	}
+	public version = environment.version;
+	public isAuthenticated = UserState.getInstance().isAuthenticated;
 }
