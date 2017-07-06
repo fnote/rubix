@@ -38,10 +38,6 @@
 		],
 		"interface-over-type-literal": true,
 		"label-position": true,
-		"max-line-length": [
-			true,
-			160
-		],
 		"member-access": [
 			true,
 			"check-accessor"
