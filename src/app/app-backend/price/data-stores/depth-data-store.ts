@@ -104,7 +104,6 @@ export class DepthDataStore extends BaseDataStore {
 	}
 
 	private  processMarketDepthRecord (depObject: DepthEntity, exgSym: [string, string], type: boolean): void {
-		// TODO: [Chaamini] Implement a key generation function at the common helper and use it here.
 		const key = this.commonHelperService.generateKey(exgSym[0], exgSym[1]);
 		const depthDisplayObj = type ? this.depthPriceStore[key] : this.depthOrderStore[key];
 		const bidArray = depthDisplayObj.bidDisplayPoints;
