@@ -20,6 +20,7 @@ export class MutualFundBenchmarkComponent extends BaseWidgetComponent {
 		const symbolCode = this.route.snapshot.queryParams['symbolCode'];
 		const exchangeCode = this.route.snapshot.queryParams['exchangeCode'];
 		this.symbolCode = [exchangeCode, symbolCode].join('~');
+
 		this.dataLoadedSubscription = this.mutualFundsDataStore.detailDataLoadedObserver.subscribe(isDataLoaded => {
 			if (isDataLoaded) {
 				this.mutualFundEntityObj = this.mutualFundsDataStore.getMutualFundSymbol(symbolCode);
@@ -37,6 +38,7 @@ export class MutualFundBenchmarkComponent extends BaseWidgetComponent {
 			bindto: '#strategyPerformanceC3Chart',
 			data: {
 				json: this.mutualFundEntityObj['benchmarkData'],
+				xFormat: '%Y%m%d',
 				keys: {
 					x: 'date',
 					value: ['benchMark', 'value'],
@@ -44,11 +46,11 @@ export class MutualFundBenchmarkComponent extends BaseWidgetComponent {
 			},
 			axis: {
 				x: {
-					type: 'category',
+					type: 'timeseries',
 					tick: {
-						format: '%Y-%m-%d',
+						format: '%Y-%m',
 						culling: {
-							max: 2,
+							max: 5,
 						},
 					},
 				},
@@ -56,9 +58,6 @@ export class MutualFundBenchmarkComponent extends BaseWidgetComponent {
 			point: {
 				show: false,
 			},
-			// color: {
-			// 	pattern: ['#81b6e3', '#6aa76e', '#ecb127', '#a35dba'],
-			// },
 		});
 	}
 }
