@@ -1,4 +1,5 @@
 import { BaseDataStore } from './base-data-store';
+import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
 import { IndexEntity } from '../business-entities/index-entity';
 import { Injectable } from '@angular/core';
 import { StockDataStore } from './stock-data-store';
@@ -11,12 +12,12 @@ export class IndexDataStore extends BaseDataStore {
 	private symtTypeIndex = 8;
 	public indicesLodingState: Subject<any> = new Subject();
 
-	constructor(private stockDataStore: StockDataStore) {
+	constructor(private stockDataStore: StockDataStore, private commonHelperService: CommonHelperService) {
 		super();
 	}
 
 	public getOrAddIndex(cat: string, des: string): IndexEntity {
-		const key: string = cat + '~' + des;
+		const key = this.commonHelperService.generateKey(cat, des);
 		let indexObj = this.allIndexStore[key];
 		if (!indexObj) {
 			indexObj = new IndexEntity({
@@ -49,6 +50,7 @@ export class IndexDataStore extends BaseDataStore {
 			if (this.allIndexStore.hasOwnProperty(key)) {
 
 				const entity = this.allIndexStore[key];
+				// TODO: [Malinda] Amila reviewed the code and please refactor with the suggested improvement
 				const symbolIndexCode = entity.indexSymbolCode.split('~');
 				const stock = this.stockDataStore.getOrAddStock([symbolIndexCode[0], symbolIndexCode[2]]);
 				const country = {

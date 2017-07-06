@@ -17,8 +17,7 @@ export class ChartDataStore extends BaseDataStore {
 	}
 
 	public getHistory(exgSym: [string, string]): ReplaySubject<ChartDataEntity[]> {
-
-		const key: string = exgSym[0] + '~' + exgSym[1];
+		const key = this.commonHelperService.generateKey(exgSym[0], exgSym[1]);
 		let historyArray$ = this.historyStore[key];
 
 		if (!historyArray$) {
@@ -30,8 +29,7 @@ export class ChartDataStore extends BaseDataStore {
 	}
 
 	public getOHLC(exgSym: [string, string]): ReplaySubject<ChartDataEntity[]> {
-
-		const key: string = exgSym[0] + '~' + exgSym[1];
+		const key = this.commonHelperService.generateKey(exgSym[0], exgSym[1]);
 		let historyArray$ = this.ohlcStore[key];
 
 		if (!historyArray$) {
@@ -110,7 +108,7 @@ export class ChartDataStore extends BaseDataStore {
 		turnOver: string,
 		vwap: string,
 	}): void {
-		const key = values.exchangeCode + '~' + values.symbolCode;
+		const key = this.commonHelperService.generateKey(values.exchangeCode, values.symbolCode);
 		const exgSym = [values.exchangeCode, values.symbolCode];
 		const ohlcArray$ = this.ohlcStore[key];
 		const dataEntity = new ChartDataEntity();

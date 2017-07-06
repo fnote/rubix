@@ -15,8 +15,7 @@ export class DepthDataStore extends BaseDataStore {
 	}
 
 	public getDepthByPriceSymbol (exgSym: [string, string]): DepthDisplayEntity {
-		// TODO: [Chaamini] Get a common "keyGenerator" in utils package
-		const key: string = exgSym[0] + '~' + exgSym[1]; // utils.keyGenerator.getKey(exchange, stockCode);
+		const key = this.commonHelperService.generateKey(exgSym[0], exgSym[1]);
 		let depthObj = this.depthPriceStore[key];
 
 		if (!depthObj) {
@@ -27,8 +26,7 @@ export class DepthDataStore extends BaseDataStore {
 	}
 
 	public getDepthByOrderSymbol (exgSym: [string, string]): DepthDisplayEntity {
-		// TODO: [Chaamini] Get a common "keyGenerator" in utils package
-		const key: string = exgSym[0] + '~' + exgSym[1]; // utils.keyGenerator.getKey(exchange, stockCode);
+		const key = this.commonHelperService.generateKey(exgSym[0], exgSym[1]);
 		let depthObj = this.depthOrderStore[key];
 
 		if (!depthObj) {
@@ -107,7 +105,7 @@ export class DepthDataStore extends BaseDataStore {
 
 	private  processMarketDepthRecord (depObject: DepthEntity, exgSym: [string, string], type: boolean): void {
 		// TODO: [Chaamini] Implement a key generation function at the common helper and use it here.
-		const key: string = exgSym[0] + '~' + exgSym[1];
+		const key = this.commonHelperService.generateKey(exgSym[0], exgSym[1]);
 		const depthDisplayObj = type ? this.depthPriceStore[key] : this.depthOrderStore[key];
 		const bidArray = depthDisplayObj.bidDisplayPoints;
 		const offerArray = depthDisplayObj.offerDisplayPoints;
@@ -134,7 +132,7 @@ export class DepthDataStore extends BaseDataStore {
 	}
 
 	private processMarketDepthReset(exgSym: [string, string], type: boolean): void {
-		const key: string = exgSym[0] + '~' + exgSym[1];
+		const key = this.commonHelperService.generateKey(exgSym[0], exgSym[1]);
 		const depthDisplayObj = type ? this.depthPriceStore[key] : this.depthOrderStore[key];
 		const bidArray = depthDisplayObj.bidDisplayPoints;
 		const offerArray = depthDisplayObj.offerDisplayPoints;

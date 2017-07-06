@@ -336,4 +336,13 @@ export class CommonHelperService {
 		const symArr = symbolCode.split('~');
 		return [symArr[1], symArr[0]].join('.');
 	}
+
+	/**
+	* Generate key concatenated with '~'
+	* @param { any } param Variable set of arguments
+	* @returns { string } Generated key
+	*/
+	public generateKey(...param: any[]): string {
+		return param.join('~');
+	}
 }

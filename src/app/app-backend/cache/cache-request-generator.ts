@@ -15,6 +15,7 @@ export class CacheRequestGenerator {
 	}
 
 	public getRequest(request: {channel: Channels, data: PriceRequest, req_gen: (req: PriceRequest) => string}): CacheRequest {
+		// TODO: [Mihil] Refactor using array join concatenation
 		const category = Channels[request.channel] + '_' + request.data.MT;
 		let name = '';
 		if (request.data.TKN === null) {

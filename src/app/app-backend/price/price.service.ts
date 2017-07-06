@@ -2,6 +2,7 @@ import { BaseDataStore } from './data-stores/base-data-store';
 import { CacheService } from '../cache/cache.service';
 import { Channels } from '../../app-constants/enums/channels.enum';
 import { ChartDataStore } from './data-stores/chart-data-store';
+import { CommonHelperService } from '../../app-utils/helper/common-helper.service';
 import { ConfigService } from '../../app-config/config.service';
 import { DataManagers } from '../../app-constants/enums/data-managers.enum';
 import { DataService } from '../communication/data.service';
@@ -28,6 +29,7 @@ export class PriceService {
 		private priceSubscriptionService: PriceSubscriptionService,
 		private localizationService: LocalizationService,
 		private stockDataStore: StockDataStore,
+		private commonHelperService: CommonHelperService,
 	) {}
 
 	/**
@@ -196,7 +198,7 @@ export class PriceService {
 	public addChartHistoryRequest (exgSym: [string, string]): void {
 		this.chartDataStore.getHistory(exgSym).subscribe(history => {
 			if (history.length === 0) {
-				const key: string = exgSym[0] + '~' + exgSym[1];
+				const key = this.commonHelperService.generateKey(exgSym[0], exgSym[1]);
 				const req = new PriceRequest();
 				req.MT = PriceRequestTypes.PriceHistory;
 				req.TKN = key;
@@ -213,7 +215,7 @@ export class PriceService {
 	}
 
 	public addChartOHLCBacklogRequest (exgSym: [string, string]): void {
-		const key: string = exgSym[0] + '~' + exgSym[1];
+		const key = this.commonHelperService.generateKey(exgSym[0], exgSym[1]);
 		const req = new PriceRequest();
 		req.MT = PriceRequestTypes.OHLCBacklog;
 		req.TKN = key;
@@ -247,7 +249,7 @@ export class PriceService {
 
 	public addChartOHLCRequest (exgSym: [string, string]): void {
 		if (this.priceSubscriptionService.subscribeFor(PriceRequestTypes.OHLCSymbol, exgSym[0], exgSym[1])) {
-			const key: string = exgSym[0] + '~' + exgSym[1];
+			const key = this.commonHelperService.generateKey(exgSym[0], exgSym[1]);
 			const req = new PriceRequest();
 			req.MT = PriceRequestTypes.OHLCSymbol;
 			req.TKN = key;

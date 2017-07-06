@@ -1,6 +1,7 @@
 import * as c3 from 'c3';
 import { Component, Injector } from '@angular/core';
 import { BaseWidgetComponent } from '../../widget-util/base-widget/base-widget.component';
+import { CommonHelperService } from '../../../app-utils/helper/common-helper.service';
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { MutualFundsDataStore } from '../../../app-backend/price/data-stores/mutual-funds-data-store';
 @Component({
@@ -12,18 +13,18 @@ export class MutualFundBenchmarkComponent extends BaseWidgetComponent {
 	public mutualFundEntityObj: Object;
 	private dataLoadedSubscription;
 
-	constructor(private injector: Injector, private mutualFundsDataStore: MutualFundsDataStore, public localizationService: LocalizationService) {
+	constructor(private injector: Injector,
+		private commonHelperService: CommonHelperService,
+		private mutualFundsDataStore: MutualFundsDataStore,
+		public localizationService: LocalizationService) {
 		super(injector);
 	}
 
 	public onInit(): void {
-		const symbolCode = this.route.snapshot.queryParams['symbolCode'];
-		const exchangeCode = this.route.snapshot.queryParams['exchangeCode'];
-		this.symbolCode = [exchangeCode, symbolCode].join('~');
-
+		this.symbolCode = this.commonHelperService.generateKey(this.route.snapshot.queryParams['exchangeCode'], this.route.snapshot.queryParams['symbolCode']);
 		this.dataLoadedSubscription = this.mutualFundsDataStore.detailDataLoadedObserver.subscribe(isDataLoaded => {
 			if (isDataLoaded) {
-				this.mutualFundEntityObj = this.mutualFundsDataStore.getMutualFundSymbol(symbolCode);
+				this.mutualFundEntityObj = this.mutualFundsDataStore.getMutualFundSymbol(this.route.snapshot.queryParams['symbolCode']);
 				this.drawChart();
 			}
 		});
