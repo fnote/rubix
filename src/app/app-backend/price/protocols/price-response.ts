@@ -1,6 +1,7 @@
 import { Channels } from '../../../app-constants/enums/channels.enum';
 import { PriceRequestTypes } from '../../../app-constants/enums/price-request-types.enum';
 import { priceResponseTags } from '../../../app-constants/const/price-response-tags';
+import { priceResponseTypes } from '../../../app-constants/const/price-response-tags';
 
 export class PriceResponse {
 
@@ -50,10 +51,8 @@ export class PriceResponse {
 						if (priceResponseTags[headerFieldsArr[k][key][p]]) {
 							const objKey = priceResponseTags[headerFieldsArr[k][key][p]];
 							const objProp = dataFieldArr[k][key][m][p];
-							responseOb[objKey] = this.convertStringToValues(objProp);
-						}/** else {
-							responseOb[headerFieldsArr[k][key][p]] = dataFieldArr[k][key][m][p];
-						}*/
+							responseOb[objKey.tag] = this.convertStringToValues(objProp, objKey.type);
+						}
 					}
 					processedResponseOb[key].push(responseOb);
 				}
@@ -75,7 +74,7 @@ export class PriceResponse {
 	}
 
 	private buildPriceResponse(response: {HED: string, DAT: string, MT: any}): Object {
-		let processedResponse = {};
+		const processedResponse = {};
 		const arrBuild: string[] = [];
 		if (parseInt(response.MT, 10) !== PriceRequestTypes.MarketDepthByPrice &&
 			parseInt(response.MT, 10) !== PriceRequestTypes.MarketDepthByOrder) {
@@ -86,33 +85,27 @@ export class PriceResponse {
 
 				for (let i = 0; i < arrHed.length; i++) {
 					if (priceResponseTags[arrHed[i]]) {
-						arrBuild.push('"' + priceResponseTags[arrHed[i]] + '"');
-						arrBuild.push(':');
-						arrBuild.push('"' + arrDat[i].toString() + '"');
-						arrBuild.push(',');
+						processedResponse[priceResponseTags[arrHed[i]].tag] = this.convertStringToValues(arrDat[i], priceResponseTags[arrHed[i]].type);
 					}
 				}
-
-				arrBuild.splice(-1, 1);
-				arrBuild.push('}');
-				processedResponse = JSON.parse(arrBuild.join(''));
-				Object.keys(processedResponse).forEach(key => {
-					processedResponse[key] = this.convertStringToValues(processedResponse[key]);
-				});
-				processedResponse['MT'] = this.convertStringToValues(response.MT);
+				processedResponse['MT'] = this.convertStringToValues(response.MT , priceResponseTypes.number);
 				return processedResponse;
 			}
-			response['MT'] = this.convertStringToValues(response.MT);
+			response['MT'] = this.convertStringToValues(response.MT, priceResponseTypes.number);
 		}
 		return response;
 	}
 
-	private convertStringToValues(strVal: string): any {
+	private convertStringToValues(strVal: string, type?: number): string | number | boolean {
 		let parsedVal;
-		try {
-			parsedVal = JSON.parse(strVal);
-		} catch (e) {
+		if (!type || type === priceResponseTypes.string) {
 			parsedVal = strVal;
+		} else {
+			try {
+				parsedVal = JSON.parse(strVal);
+			} catch (e) {
+				parsedVal = strVal;
+			}
 		}
 		return parsedVal;
 	}
