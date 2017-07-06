@@ -31,6 +31,14 @@ import { TwoByTwoLayoutComponent } from '../app-layouts/two-by-two-layout/two-by
 export const routes: Routes = [
 	{ path: 'primary-layout-one', component: PrimaryLayoutOneComponent, canActivate: [AuthGuardService],
 		children: [
+			{ path: 'mutual-fund-summary-layout', component: MutualFundSummaryLayoutComponent, outlet: 'outlet2',
+				children: [
+					{ path: 'mutual-fund-performance', component: MutualFundPerformanceComponent, outlet: 'outlet1' },
+					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2', data: { strategy: { type: StrategyTypes.Regional } } },
+					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3', data: { strategy: { type: StrategyTypes.ShariaCompliant } } },
+					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4', data: { strategy: { type: StrategyTypes.Global } } },
+				],
+			},
 			{ path: 'side-bar', component: SideBarComponent, outlet: 'outlet1' },
 			{ path: 'secondary-layout-two', component: SecondaryLayoutTwoComponent, outlet: 'outlet2',
 				children: [
@@ -76,14 +84,6 @@ export const routes: Routes = [
 					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet3', data: { exgStock: ['TDWL', '1090'] } },
 					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet4', data: { exgStock: ['TDWL', '1090'] } },
 					{ path: 'chart', component: BaseC3ChartComponent, outlet: 'outlet5', data: { exgStock: ['TDWL', '1090'] } },
-				],
-			},
-			{ path: 'mutual-fund-summary-layout', component: MutualFundSummaryLayoutComponent, outlet: 'outlet2',
-				children: [
-					{ path: 'mutual-fund-performance', component: MutualFundPerformanceComponent, outlet: 'outlet1' },
-					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet2', data: { strategy: { type: StrategyTypes.Regional } } },
-					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet3', data: { strategy: { type: StrategyTypes.ShariaCompliant } } },
-					{ path: 'mutual-fund-category', component: MutualFundCategoryComponent, outlet: 'outlet4', data: { strategy: { type: StrategyTypes.Global } } },
 				],
 			},
 		],

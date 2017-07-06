@@ -1,3 +1,7 @@
+export const VAR_TYPE_STRING = 1;
+export const VAR_TYPE_NUMBER = 1;
+export const VAR_TYPE_BOOL = 1;
+
 export const priceResponseTags = {
 	3: 'symbolCode',
 	4: 'exchangeCode',
@@ -86,7 +90,7 @@ export const priceResponseTags = {
 	EXG: 'exchangeCode',
 	SYM: 'symbolCode',
 	DUR: 'duration',
-	VALUE: 'value',
+	VALUE: { tag: 'value', type: VAR_TYPE_NUMBER },
 	GEO: 'region',
 	CLASS : 'riskType',
 	DESCR: 'description',
@@ -94,10 +98,10 @@ export const priceResponseTags = {
 	FULL: 'fullDescription',
 	SHORT: 'shortDescription',
 	CUR: 'currency',
-	BENM: 'benchMark',
+	BENM: { tag: 'benchMark', type: VAR_TYPE_NUMBER },
 	PCT1M: 'percentageOneMonth',
 	PCT3M: 'percentageThreeMonth',
-	DATE: 'date',
+	DATE: { tag: 'date', type: VAR_TYPE_STRING },
 	EXPR: 'expenseRatio',
 	HOLD: 'holdings',
 	MCAP: 'averageMarketCap',
