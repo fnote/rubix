@@ -4,6 +4,7 @@ import { ChartDataEntity } from '../business-entities/chart-data-entity';
 import { ChartDataStore } from './chart-data-store';
 import { Injectable } from '@angular/core';
 import { PriceService } from '../price.service';
+import { chartDurations } from '../../../app-constants/enums/chart-durations';
 
 const TIME_RATIO = 86400000; // 24 * 60 * 60 * 1000
 const OHLC_TIME_RATIO = 60000; // 60 * 1000
@@ -33,7 +34,7 @@ export class ProcessedChartDataStore extends BaseDataStore {
 		this.priceService.removeChartOHLCRequest(exgSym);
 	}
 
-	public getHistory(exgSym: [string, string], period: string): ReplaySubject<ChartDataEntity[]> {
+	public getHistory(exgSym: [string, string], period: number): ReplaySubject<ChartDataEntity[]> {
 		this.priceService.requestSymbolMeta(exgSym);
 		this.priceService.addChartHistoryRequest(exgSym);
 		if (this.subscription$) {
@@ -50,7 +51,7 @@ export class ProcessedChartDataStore extends BaseDataStore {
 		return this.history$;
 	}
 
-	public getOHLC(exgSym: [string, string], period: string): ReplaySubject<ChartDataEntity[]> {
+	public getOHLC(exgSym: [string, string], period: number): ReplaySubject<ChartDataEntity[]> {
 
 		if (this.subscription$) {
 			this.subscription$.unsubscribe();
@@ -66,7 +67,7 @@ export class ProcessedChartDataStore extends BaseDataStore {
 				this.exgSym = exgSym;
 				this.ohlc$ = new ReplaySubject(1);
 			}
-		}else {
+		} else {
 			this.priceService.requestSymbolMeta(exgSym);
 			this.priceService.addChartOHLCRequest(exgSym);
 			this.priceService.addChartOHLCBacklogRequest(exgSym);
@@ -101,7 +102,7 @@ export class ProcessedChartDataStore extends BaseDataStore {
 		return tempArray;
 	}
 
-	private filterChartData(dataArray: ChartDataEntity[], period: string, factor: number): ChartDataEntity[] {
+	private filterChartData(dataArray: ChartDataEntity[], period: number, factor: number): ChartDataEntity[] {
 		// Data comes in date ascending order
 		let periodMills = 0;
 		let fromDate = 0;
@@ -109,16 +110,16 @@ export class ProcessedChartDataStore extends BaseDataStore {
 		let fromIndex = 0;
 
 		switch (period) {
-			case '1d':
+			case chartDurations.oneDay:
 				periodMills = 1;
 				break;
-			case '1w':
+			case chartDurations.oneWeek:
 				periodMills = DAYS_PER_WEEK;
 				break;
-			case '1m':
+			case chartDurations.oneMonth:
 				periodMills = DAYS_PER_MONTH;
 				break;
-			case '3m':
+			case chartDurations.threeMonths:
 				periodMills = 3 * DAYS_PER_MONTH;
 				break;
 		}

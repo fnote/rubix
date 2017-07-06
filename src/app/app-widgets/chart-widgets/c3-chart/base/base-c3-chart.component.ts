@@ -7,6 +7,7 @@ import { ChartDataStore } from '../../../../app-backend/price/data-stores/chart-
 import { PriceService } from '../../../../app-backend/price/price.service';
 import { ProcessedChartDataStore } from '../../../../app-backend/price/data-stores/processed-chart-data-store';
 import { StockDataStore } from '../../../../app-backend/price/data-stores/stock-data-store';
+import { chartDurations } from '../../../../app-constants/enums/chart-durations';
 import { widgetQueryParams } from '../../../../app-constants/const/widget-query-params';
 
 @Component({
@@ -32,7 +33,7 @@ export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnCha
 		},
 	};
 
-	private period = '1m'; // TODO [Malindu]:put these in constants
+	private period = chartDurations.oneMonth;
 	private isOHLC = true;
 	private subscription$;
 
@@ -60,7 +61,7 @@ export class BaseC3ChartComponent extends BaseWidgetComponent /*implements OnCha
 		this.getDataAndDrawChart(this.exgStock, this.period);
 	}
 
-	public getDataAndDrawChart(exgStock: [string, string], period: string): void {
+	public getDataAndDrawChart(exgStock: [string, string], period: number): void {
 		this.exgStock = exgStock;
 		let chartData = [];
 		chartData.push('chartData');
