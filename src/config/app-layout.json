@@ -16,6 +16,44 @@
 				{
 					"model": [
 						{
+							"title": "Takaud Mutual Funds",
+							"path": "mutual-fund-summary-layout",
+							"outlet": "outlet2",
+							"model": [
+								{
+									"path": "mutual-fund-performance",
+									"outlet": "outlet1"
+								},
+								{
+									"path": "mutual-fund-category",
+									"outlet": "outlet2",
+									"args": {
+										"strategy": {
+											"type": "StrategyTypes.Regional"
+										}
+									}
+								},
+								{
+									"path": "mutual-fund-category",
+									"outlet": "outlet3",
+									"args": {
+										"strategy": {
+											"type": "StrategyTypes.ShariaCompliant"
+										}
+									}
+								},
+								{
+									"path": "mutual-fund-category",
+									"outlet": "outlet4",
+									"args": {
+										"strategy": {
+											"type": "StrategyTypes.Global"
+										}
+									}
+								}
+							]
+						},
+						{
 							"title": "Detail Quote",
 							"path": "secondary-layout-two",
 							"outlet": "outlet2",
@@ -240,44 +278,6 @@
 											"TDWL",
 											"1090"
 										]
-									}
-								}
-							]
-						},
-						{
-							"title": "Takaud Mutual Funds",
-							"path": "mutual-fund-summary-layout",
-							"outlet": "outlet2",
-							"model": [
-								{
-									"path": "mutual-fund-performance",
-									"outlet": "outlet1"
-								},
-								{
-									"path": "mutual-fund-category",
-									"outlet": "outlet2",
-									"args": {
-										"strategy": {
-											"type": "StrategyTypes.Regional"
-										}
-									}
-								},
-								{
-									"path": "mutual-fund-category",
-									"outlet": "outlet3",
-									"args": {
-										"strategy": {
-											"type": "StrategyTypes.ShariaCompliant"
-										}
-									}
-								},
-								{
-									"path": "mutual-fund-category",
-									"outlet": "outlet4",
-									"args": {
-										"strategy": {
-											"type": "StrategyTypes.Global"
-										}
 									}
 								}
 							]
