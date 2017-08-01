@@ -20,6 +20,7 @@ export class PulseService {
 			this.heartbeats++;
 			const pulseObj = this.genaratePulseMessage(this.channel);
 
+//close the socket if heartbeats> max heart beats 
 			if (this.heartbeats >= this.MAX_HEARTBEATS) {
 				this.wsService.closeWebSocket(this.ws);
 				clearInterval(this.pulseInterval);
@@ -38,6 +39,7 @@ export class PulseService {
 
 	private genaratePulseMessage(channel: number): Object {
 		let pulseRequest: Object;
+		//change pulse request according to channel
 		switch (channel) {
 			case Channels.Trade:
 				pulseRequest = TradeStreamingRequestHandler.getInstance().genaratePulseRequest();

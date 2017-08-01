@@ -5,10 +5,12 @@ import { LoggerService } from '../../../app-utils/logger.service';
 import { PulseService } from './pulse.service';
 
 @Injectable()
+//another service 
+//inititate connection ,create connection,close web socket , send to web socket 
 export class WebsocketService {
 
 	constructor(private loggerService: LoggerService) { }
-
+//:promise <type>
 	public initConnection(connection: Connection): Promise<WebSocket> {
 		const ws: WebSocket = new WebSocket(connection.url);
 		const promise: Promise<WebSocket> = new Promise((resolve, reject): void => {

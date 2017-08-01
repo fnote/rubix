@@ -21,6 +21,7 @@ export class TradeAuthHandler extends BaseAuthHandler {
 		}
 	}
 
+//buildinng an authentication request to send to trade
 	public buildAuthRequest(userName: string, password: string): any {
 
 		const authRequest = {

@@ -15,6 +15,8 @@ export class MutualFundsDataStore extends BaseDataStore {
 	private $dataLoaded = new Subject();
 	private $detaildataLoaded = new Subject();
 
+	//variables 
+
 	constructor(private commonHelperService: CommonHelperService) {
 		super();
 	}
@@ -74,6 +76,7 @@ export class MutualFundsDataStore extends BaseDataStore {
 			return null;
 		}
 	}
+	//getters 
 
 	public updateMutualFunds(response: any): void {
 		this.updateRegionData(response.GEO);

@@ -4,6 +4,8 @@ import { userSettings } from '../../../app-config/user-settings';
 
 export class MutualFundEntity extends BaseEntity {
 
+//setter and getters of mutual fund entity
+
 	private _commonHelperService: CommonHelperService;
 
 	private _chartDataMap = {};

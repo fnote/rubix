@@ -3,7 +3,11 @@ import { BaseC3ChartComponent } from '../app-widgets/chart-widgets/c3-chart/base
 import { DetailQuoteComponent } from '../app-widgets/price-widgets/detail-quote/detail-quote.component';
 import { FdDetailQuoteComponent } from '../app-widgets/fd-page-widgets/fd-detail-quote/fd-detail-quote.component';
 import { FdLayoutComponent } from '../app-layouts/fd-layout/fd-layout.component';
+import { HeaderComponent } from '../app-widgets/common-widgets/header-widget/header.component';
+import { HomeComponent } from '../app-widgets/common-widgets/home-widget/home.component';
+import { LoginATComponent } from '../app-widgets/common-widgets/login-AT-widget/login-AT.component';
 import { LoginComponent } from '../app-widgets/common-widgets/login-widget/login.component';
+
 import { MapSelectorComponent } from '../app-widgets/price-widgets/map-selector/map-selector.component';
 import { MutualFundBenchmarkComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-benchmark/mutual-fund-benchmark.component';
 import { MutualFundCategoryComponent } from '../app-widgets/mutual-funds-widgets/mutual-fund-category/mutual-fund-category.component';
@@ -89,7 +93,10 @@ export const routes: Routes = [
 		],
 	},
 	{ path: 'login', component: LoginComponent },
-	{ path: '', pathMatch: 'full', redirectTo: 'login' },
+	{ path: '', pathMatch: 'full', redirectTo: 'loginAT' },
+	{ path: 'loginAT', component: LoginATComponent },
+	{ path: 'at/home', component: HomeComponent },
+	{ path: 'at/dashboard', component: HeaderComponent },
 	{ path: 'detail-quote', component: DetailQuoteComponent, canActivate: [AuthGuardService], data: { exgStock: ['PFX', 'EURUSD'] } },
 	{ path: 'time-and-sales', component: TimeAndSalesComponent, canActivate: [AuthGuardService], data: { exgStock: ['TDWL', '1010'] } },
 	{ path: 'order-book', component: OrderBookComponent, canActivate: [AuthGuardService], data: { exgStock: ['TDWL', '1010'] } },

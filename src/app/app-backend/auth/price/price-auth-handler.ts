@@ -3,11 +3,12 @@ import { Channels } from '../../../app-constants/enums/channels.enum';
 import { RequestTags } from '../../../app-constants/enums/request-tags.enum';
 import { UserState } from '../../../app-backend/auth/user-state';
 
+//there are authentication handlers that inherits from a base auth handler 
 export class PriceAuthHandler extends BaseAuthHandler {
 
 	private static instance: PriceAuthHandler;
-	private _isPriceAuthenticated = false;
-	private _isMetaAuthenticated = false;
+	private _isPriceAuthenticated = false;  //price not authenticated at the beginning
+	private _isMetaAuthenticated = false; 
 
 	public static getInstance(): PriceAuthHandler {
 		PriceAuthHandler.instance = PriceAuthHandler.instance || new PriceAuthHandler();
@@ -21,22 +22,25 @@ export class PriceAuthHandler extends BaseAuthHandler {
 		}
 	}
 
+//getter 
 	public get isPriceAuthenticated(): boolean {
 		return this._isPriceAuthenticated;
 	}
 
+//setter
 	public set isPriceAuthenticated(value: boolean) {
 		this._isPriceAuthenticated = value;
 	}
-
+//setter
 	public set isMetaAuthenticated(value: boolean) {
 		this._isMetaAuthenticated = value;
 	}
 
+
 	public buildAuthRequest(userName: string, password: string): void {
 		// code
 	}
-
+//getter
 	public getPrimarySSORequest(): Object {
 		const primarySSOReq = {
 			channel: Channels.Price,
@@ -44,7 +48,7 @@ export class PriceAuthHandler extends BaseAuthHandler {
 		};
 		return primarySSOReq;
 	}
-
+//setter
 	public getSecondarySSORequest(): Object {
 		const secoundaySSOReq = {
 			channel: Channels.PriceMeta,
@@ -52,7 +56,7 @@ export class PriceAuthHandler extends BaseAuthHandler {
 		};
 		return secoundaySSOReq;
 	}
-
+//building request
 	public buildSecondarySSORequest(): string {
 		const fs = '\u001C'; const ds = '\u0002';
 		return [
@@ -70,6 +74,7 @@ export class PriceAuthHandler extends BaseAuthHandler {
 		// code here
 	}
 
+//building request
 	public buildPrimarySSORequest(): string {
 		const fs = '\u001C';
 		const ds = '\u0002';

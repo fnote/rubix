@@ -12,5 +12,7 @@ import { TradeStreamingResponseHandler } from './protocols/streaming/trade-strea
 		TradeService,
 		TradeStreamingResponseHandler,
 	],
+
+	//providers are services 
 })
 export class TradeModule { }

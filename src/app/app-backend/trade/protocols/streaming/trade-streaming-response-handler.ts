@@ -6,8 +6,8 @@ import { Subject } from 'rxjs/Rx';
 import { SystemResponseTypes } from '../../../../app-constants/enums/trade-meta/system/system-response-types.enum';
 import { TradeMetaGroups } from '../../../../app-constants/enums/trade-meta/trade-meta-groups.enum';
 
-@Injectable()
-export class TradeStreamingResponseHandler {
+@Injectable() //service 
+export class TradeStreamingResponseHandler {  //handles two response types trade details ,and auth request reply
 
 	private tradeResponseStream$: Subject<Object>;
 	private authenticationResponseStream$: Subject<Object>;
@@ -18,10 +18,12 @@ export class TradeStreamingResponseHandler {
 		this.updateTradeResponseStream();
 	}
 
+//response for auth request
 	public getAuthenticationResponseStream(): Subject<any> {
 		return this.authenticationResponseStream$;
 	}
 
+//this continuously updates 
 	private updateTradeResponseStream(): void {
 		this.streamRouteService.getTradeResponseStream().map(response => {
 			return this.processTradeResponse(response.data);
@@ -30,6 +32,7 @@ export class TradeStreamingResponseHandler {
 			this.updateTradeModel(response);
 		});
 	}
+
 
 	private processTradeResponse(response: string): Object {
 		let processResponse = {};

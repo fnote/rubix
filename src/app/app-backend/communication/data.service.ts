@@ -5,11 +5,13 @@ import { QueueMannagerService } from './websocket/queue-mannager.service';
 import { Subject } from 'rxjs/Rx';
 
 @Injectable()
+// a service ;
 export class DataService {
 
 	private responseStream$: Subject<any> ;
 	private responseAjaxStream$: Subject<any> ;
 
+//constrcutir has services
 	constructor(private queueMannagerService: QueueMannagerService, private ajaxService: AjaxService,
 		private loggerService: LoggerService) {
 		this.init();
@@ -21,6 +23,7 @@ export class DataService {
 	 * 						index	: Value Defined at Connection configuration index. Mandatory
      *                      data    : Data to send. Mandatory.
      */
+	//send to web socket any type of data but this message added to the queue
 	public sendToWs(data: any): void {
 		this.queueMannagerService.addMessageToQueue(data);
 	}
@@ -29,6 +32,7 @@ export class DataService {
      * Un-subscribe websocket connection
      * @param {number| Array<number>} channels - Value Defined at Connection configuration index
      */
+
 	public unsubscribeWsConnections(channels: number|Array<number>): void {
 		if (channels instanceof Array) {
 			channels.forEach(channel => {
@@ -52,7 +56,7 @@ export class DataService {
      * @returns {Promise<any>} Response
      */
 	public sendAjaxRequest(requestOptions: any): Promise<any> {
-		return this.ajaxService.send(requestOptions, true);
+		return this.ajaxService.send(requestOptions, false);
 	}
 
 	public getResponseSteam(): Subject<any> {

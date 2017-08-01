@@ -5,8 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ExchangeDataStore extends BaseDataStore {
 
-	private allExchangeStore = {};
+	private allExchangeStore = {}; //stores all exchange 
 
+//type =exchange entity ,code is passed as an argument 
 	public getOrAddExchange(exchangeCode: string): ExchangeEntity {
 		let exgObj: ExchangeEntity = this.allExchangeStore[exchangeCode];
 
@@ -18,6 +19,6 @@ export class ExchangeDataStore extends BaseDataStore {
 			this.allExchangeStore[exchangeCode] = exgObj;
 		}
 
-		return exgObj;
+		return exgObj; //returning an exchange object
 	}
 }

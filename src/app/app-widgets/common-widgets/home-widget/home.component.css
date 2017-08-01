@@ -1,0 +1,48 @@
+.example-container {
+	width: 500px;
+}
+
+.example-button-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+
+
+/*//table*/
+
+/* Structure */
+.example-container2 {
+	display: flex;
+	flex-direction: column;
+	max-height: 500px;
+	min-width: 300px;
+}
+
+.example-header2 {
+	min-height: 64px;
+	display: flex;
+	align-items: center;
+	padding-left: 24px;
+	font-size: 20px;
+}
+
+.example-header2 {
+	min-height: 64px;
+	display: flex;
+	align-items: baseline;
+	padding: 8px 24px 0;
+	font-size: 20px;
+	justify-content: space-between;
+}
+
+.mat-input-container {
+	font-size: 14px;
+	flex-grow: 1;
+	margin-left: 32px;
+}
+
+.mat-table {
+	overflow: auto;
+}

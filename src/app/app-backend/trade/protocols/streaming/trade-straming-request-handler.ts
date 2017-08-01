@@ -18,6 +18,7 @@ export class TradeStreamingRequestHandler {
 		TradeStreamingRequestHandler._instance = this;
 	}
 
+//generate a pulse request object with header and data
 	public genaratePulseRequest(): Object {
 		const pulseRequet = {
 			HED: {

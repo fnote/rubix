@@ -5,7 +5,7 @@ import { LoggerService } from '../../app-utils/logger.service';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class StreamRouteService {
+export class StreamRouteService { //routes 2 types of responses 
 
 	private priceResponseStream$: Subject<Object>;
 	private tradeResponseStream$: Subject<Object>;

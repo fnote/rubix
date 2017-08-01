@@ -18,8 +18,8 @@ export class AjaxService {
 
 	public send(requestParams: any, routeToResponseHandler: boolean): Promise<any> {
 		const requestOptions: RequestOptions = new RequestOptions({
-			method: requestParams.method,
-			url: requestParams.url,
+			method: requestParams.method, //post or get
+			url: requestParams.url, //where should we go
 			body: requestParams.body ? requestParams.body : null ,
 			search: requestParams.search ? requestParams.search : null,
 			headers: requestParams.headers ? requestParams.headers : null,

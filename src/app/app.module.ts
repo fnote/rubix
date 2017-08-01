@@ -1,3 +1,4 @@
+import { MdButtonModule, MdCheckboxModule , MdTableModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -15,6 +16,7 @@ import { FdLayoutComponent } from './app-layouts/fd-layout/fd-layout.component';
 import { FdPageWidgetModule } from './app-widgets/fd-page-widgets/fd-page-widget.module';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 import { HttpModule } from '@angular/http';
+
 import { MutualFundDetailLayoutComponent } from './app-widgets/mutual-funds-widgets/mutual-fund-detail-layout/mutual-fund-detail-layout.component';
 import { MutualFundSummaryLayoutComponent } from './app-widgets/mutual-funds-widgets/mutual-fund-summary-layout/mutual-fund-summary-layout.component';
 import { MutualFundsWidgetModule } from './app-widgets/mutual-funds-widgets/mutual-funds-widget.module';
@@ -69,6 +71,10 @@ export function highchartsFactory(): any {
 		TradeModule,
 		ChartModule,
 		NetworkModule,
+		CommonWidgetModule,
+		MdButtonModule,
+		MdCheckboxModule,
+		MdTableModule,
 	],
 	providers: [
 		ConfigService,

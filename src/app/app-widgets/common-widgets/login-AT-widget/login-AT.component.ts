@@ -5,38 +5,38 @@ import { Languages } from '../../../app-constants/enums/languages.enum';
 import { LocalizationService } from '../../../app-utils/localization/localization.service';
 import { Router } from '@angular/router';
 import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
+import { CdkTableModule } from '@angular/cdk';
 
 //above is imports required and where they can be found relative paths
 
 @Component({
-	selector: 'app-login', //referred everywhere as app-login
-	templateUrl: './login.component.html', //templated used by login component
+	selector: 'app-login-at', //referred everywhere as app-login
+	templateUrl: './login-AT.component.html', //templated used by login component
 })
-export class LoginComponent implements OnInit {
-
-//assigning variables
+export class LoginATComponent implements OnInit {
 	public userName = '';
 	public password = '';
 	public rejectReson = '';
 	public isAuthenticating = false;
 	public authClass: {};
 
-//this is a dependency injection
 	constructor(private authService: AuthService, public router: Router,
-		private widgetLoaderService: WidgetLoaderService, public localizationService: LocalizationService) { }
+							private widgetLoaderService: WidgetLoaderService, public localizationService: LocalizationService) { }
 
 	public ngOnInit(): void {
 		this.testMethod().then(response => {
-			alert(response);
+			// alert(response);
 		}).catch(error => {
 			// err
 		});
 	}
 
 	public login(): void {
+		console.log('dbfdddhfd', this.password);
+
 		if (this.checkUserInputs()) { //if user has filled the fields
 			this.isAuthenticating = true; //starts authenticating
-			this.rejectReson = 'Authenticating....';
+			this.rejectReson = 'Authenticating....you';
 			this.authenticateUser();
 		}
 		this.setAuthClass();
@@ -74,13 +74,16 @@ export class LoginComponent implements OnInit {
 
 	private authenticateUser(): void {
 		//call authenticate user mtd in auth service pass username and passsword as arguments
-		this.authService.authenticateUser(this.userName, this.password);
+
+		this.authService.authenticateATUser(this.userName, this.password);
+
+
 
 		//send the user to see whether it s authenticated and check authentication
 
-		this.authService.checkAuthenticated().subscribe(authStatus => {
+		this.authService.checkATAuthenticated().subscribe(authStatus => {
 			if (authStatus.isAuthenticate) {
-				const redirectURL = this.authService.redirectURL;
+				const redirectURL = '/at/dashboard';
 				if (redirectURL) {
 					this.router.navigateByUrl(redirectURL);
 				} else {

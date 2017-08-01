@@ -21,6 +21,7 @@ export class AdviceDataStore extends BaseDataStore {
 		private commonHelperService: CommonHelperService,
 	) {
 		super();
+		
 		this.trackRecordEntity = new TrackRecordEntity();
 		this.trackRecordEntity.commonHelperService = commonHelperService;
 	}
@@ -28,6 +29,8 @@ export class AdviceDataStore extends BaseDataStore {
 	public getRTADataArray(): TradingAdviceEntity[] {
 		return this.rtaDataArray;
 	}
+
+	
 
 	public getRTATrackRecordDataArray(): TradingAdviceEntity[] {
 		return this.rtaTrackRecordDataArray;

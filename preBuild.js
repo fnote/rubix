@@ -13,6 +13,9 @@ var getComponent = function (id) {
 		case 'login':
 			component = 'LoginComponent'
 			break;
+		case 'login-AT':
+			component = 'LoginATComponent'
+			break;
 		case 'order-ticket':
 			component = 'OrderTicketComponent';
 			break;

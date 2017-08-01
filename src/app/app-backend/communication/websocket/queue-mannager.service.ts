@@ -11,9 +11,10 @@ import { WebsocketService } from './websocket.service';
 export class QueueMannagerService {
 	private TIME_INTERVAL = 300;
 	private connectedSocketPool: Array<Connection> = [];
-	private response$: Rx.Subject<any> ;
-	private isConfigLoaded = false;
-	private updateConfigurations$: Rx.Subject<boolean> ;
+	private response$: Rx.Subject<any> ;  //response can be any time 
+	private isConfigLoaded = false;   
+	private updateConfigurations$: Rx.Subject<boolean> ;//reactive extension of js takes type boolean yes or no
+	//subject is an active observable can be forced to emit the next value 
 
 	constructor(private configService: ConfigService, private websocketService: WebsocketService,
 		private loggerService: LoggerService) {
@@ -26,6 +27,7 @@ export class QueueMannagerService {
 		return this.response$;
 	}
 
+//a promise 
 	public getConnectionByChannel(channel: number): Promise<Connection> {
 		return new Promise((resolve, reject) => {
 			if (this.isConfigLoaded) {
@@ -83,10 +85,12 @@ export class QueueMannagerService {
 		});
 	}
 
+// add msgs to the queue push 
 	private enQueueMessage(message: Object, messageQueue: Array<any>): void {
 		messageQueue.push(message);
 	}
 
+//remove msgs from queue 
 	private deQueueMessage(messageQueue: Array<any>): any {
 		return messageQueue.shift();
 	}

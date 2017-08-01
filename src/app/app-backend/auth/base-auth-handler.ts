@@ -1,6 +1,7 @@
-
+//all auth handlers inherit from this
 export abstract class BaseAuthHandler {
 
+//all auth handlers auth is false originally
 	private _isAuthenticated= false;
 
 	constructor() {
