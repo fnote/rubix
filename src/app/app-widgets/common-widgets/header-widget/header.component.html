@@ -11,32 +11,52 @@
           The actual rendered columns are set as a property on the row definition" -->
 
 		<!-- ID Column -->
-		<ng-container cdkColumnDef="userId">
+		<ng-container cdkColumnDef="submarketCode">
 			<md-header-cell *cdkHeaderCellDef> submarket code </md-header-cell>
-			<md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
+			<md-cell *cdkCellDef="let row"> {{row.submarketCode}} </md-cell>
 		</ng-container>
 
 		<!-- Progress Column -->
-		<ng-container cdkColumnDef="progress">
+		<ng-container cdkColumnDef="submarketExchange">
 			<md-header-cell *cdkHeaderCellDef> exchange code </md-header-cell>
-			<md-cell *cdkCellDef="let row"> {{row.progress}}% </md-cell>
+			<md-cell *cdkCellDef="let row"> {{row.submarketExchange}} </md-cell>
 		</ng-container>
 
 		<!-- Name Column -->
-		<ng-container cdkColumnDef="userName">
-			<md-header-cell *cdkHeaderCellDef> cross orders </md-header-cell>
-			<md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
+		<ng-container cdkColumnDef="isActive">
+			<md-header-cell *cdkHeaderCellDef> is active </md-header-cell>
+			<md-cell *cdkCellDef="let row"> {{row.isActive}} </md-cell>
 		</ng-container>
 
 		<!-- Color Column -->
-		<ng-container cdkColumnDef="color">
+		<ng-container cdkColumnDef="isDefault">
 			<md-header-cell *cdkHeaderCellDef> is default </md-header-cell>
-			<md-cell *cdkCellDef="let row" [style.color]="row.color"> {{row.color}} </md-cell>
+			<md-cell *cdkCellDef="let row" [style.color]="row.color"> {{row.isDefault}} </md-cell>
 		</ng-container>
 
-		<ng-container cdkColumnDef="submarketlist">
-			<md-header-cell *cdkHeaderCellDef> submarketlist </md-header-cell>
-			<md-cell *cdkCellDef="let row"> {{row.submarketlist}} </md-cell>
+		<ng-container cdkColumnDef="crossOrders">
+			<md-header-cell *cdkHeaderCellDef> cross orders </md-header-cell>
+			<md-cell *cdkCellDef="let row"> {{row.crossOrders}} </md-cell>
+		</ng-container>
+
+		<ng-container cdkColumnDef="regularOrders">
+			<md-header-cell *cdkHeaderCellDef> regular orders </md-header-cell>
+			<md-cell *cdkCellDef="let row"> {{row.regularOrders}} </md-cell>
+		</ng-container>
+
+		<ng-container cdkColumnDef="TPlusNbuy">
+			<md-header-cell *cdkHeaderCellDef> T plus N buy </md-header-cell>
+			<md-cell *cdkCellDef="let row"> {{row.TplusNbuy}} </md-cell>
+		</ng-container>
+
+		<ng-container cdkColumnDef="TPlusNsell">
+			<md-header-cell *cdkHeaderCellDef> T plus N sell </md-header-cell>
+			<md-cell *cdkCellDef="let row"> {{row.TplusNsell}} </md-cell>
+		</ng-container>
+
+		<ng-container cdkColumnDef="minimumQuantity">
+			<md-header-cell *cdkHeaderCellDef> minimum quantity </md-header-cell>
+			<md-cell *cdkCellDef="let row"> {{row.minimumQuantity}} </md-cell>
 		</ng-container>
 
 		<md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>

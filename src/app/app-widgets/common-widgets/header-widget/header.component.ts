@@ -8,25 +8,25 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
-import { CdkTableModule } from '@angular/cdk';
-import { MdInputModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserState } from 'C:/Users/sithijat/rubix/src/app/app-backend/auth/user-state';
-import { DataService } from 'C:/Users/sithijat/rubix/src/app/app-backend/communication/data.service';
-import { AuthService } from '../../../app-backend/auth/auth.service';
-import { Channels } from '../../../app-constants/enums/channels.enum';
-import { Injectable } from '@angular/core';
-import { Languages } from '../../../app-constants/enums/languages.enum';
-import { LocalizationService } from '../../../app-utils/localization/localization.service';
-import { LoggerService } from '../../../app-utils/logger.service';
-import { MdButtonModule } from '@angular/material';
-import { MdTableModule } from '@angular/material';
-import { NumberValueAccessor } from '@angular/forms/src/directives/number_value_accessor';
-import { ResponseStatus } from '../../../app-constants/enums/response-status.enum';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs/Rx';
-import { WidgetLoaderService } from '../../widget-util/widget-loader.service';
-import { logger } from 'codelyzer/util/logger';
+import {CdkTableModule} from '@angular/cdk';
+import {MdInputModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {UserState} from 'C:/Users/sithijat/rubix/src/app/app-backend/auth/user-state';
+import {DataService} from 'C:/Users/sithijat/rubix/src/app/app-backend/communication/data.service';
+import {AuthService} from '../../../app-backend/auth/auth.service';
+import {Channels} from '../../../app-constants/enums/channels.enum';
+import {Injectable} from '@angular/core';
+import {Languages} from '../../../app-constants/enums/languages.enum';
+import {LocalizationService} from '../../../app-utils/localization/localization.service';
+import {LoggerService} from '../../../app-utils/logger.service';
+import {MdButtonModule} from '@angular/material';
+import {MdTableModule} from '@angular/material';
+import {NumberValueAccessor} from '@angular/forms/src/directives/number_value_accessor';
+import {ResponseStatus} from '../../../app-constants/enums/response-status.enum';
+import {Router} from '@angular/router';
+import {Subject} from 'rxjs/Rx';
+import {WidgetLoaderService} from '../../widget-util/widget-loader.service';
+import {logger} from 'codelyzer/util/logger';
 
 
 @Component({
@@ -36,8 +36,8 @@ import { logger } from 'codelyzer/util/logger';
 })
 
 export class HeaderComponent implements OnInit {
-	public displayedColumns = ['userId', 'userName', 'progress', 'color' , 'submarketlist'];
-	public  INDEXs = [];
+	public displayedColumns = ['submarketCode', 'submarketExchange', 'isActive', 'isDefault', 'crossOrders', 'regularOrders' , 'TPlusNbuy' , 'TPlusNsell', 'minimumQuantity'];
+	public INDEXs = [];
 
 
 	public filter = 1085;
@@ -50,11 +50,13 @@ export class HeaderComponent implements OnInit {
 	// public homeComponent = new HomeComponent();
 	public dataSource: ExampleDataSource | null;
 
+	public exampleDatabase;
 
 	public ngOnInit(): any {
 		this.fetch();
-		this.dataSource = new ExampleDataSource(this.exampleDatabase);
+		// this.dataSource = new ExampleDataSource(this.exampleDatabase);
 	}
+
 // export class HomeComponent implements OnInit {
 	constructor(public router: Router, public dataService: DataService) {
 	}
@@ -86,8 +88,11 @@ export class HeaderComponent implements OnInit {
 			console.log(response);
 			this.submarketlist = response.DAT.SUBMAR_LIST;
 			console.log(this.submarketlist);
+
 			this.myfun();
 
+			this.exampleDatabase = new ExampleDatabase(this.INDEXs);
+			this.dataSource = new ExampleDataSource(this.exampleDatabase);
 		});
 	}
 
@@ -142,85 +147,105 @@ export class HeaderComponent implements OnInit {
 		}
 		console.log('index');
 		console.log(this.INDEXs);
-		for (let x of this.INDEXs){
-			console.log(x.SUBMAR_CODE);
-			console.log(x.SUBMAR_EXCH);
-		}
+
+		0
+
+		// for (let x of this.INDEXs){
+		// 	console.log(x.SUBMAR_CODE);
+		// 	console.log(x.SUBMAR_EXCH);
+		// }
 	}
 
-	public getArray(): any{
+	public getArray(): any {
 		return this.INDEXs;
 	}
 
-	public exampleDatabase = new ExampleDatabase(this.getArray());
+	// public exampleDatabase = new ExampleDatabase(this.INDEXs);
 
 }
 
 
-/** Constants used to fill up our data base. */
-const COLORS = [];
-const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-	'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-	'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
-
 const submarketlist = this.submarketlist;
 
 export interface UserData {
-	id: string;
-	name: string;
-	progress: string;
-	color: string;
-	submarketlist: string;
+	submarketCode: string;
+	submarketExchange: string;
+	isActive: string;
+	isDefault: string;
+	crossOrders: string;
+	regularOrders: string;
+	TplusNsell: number;
+	TplusNbuy: number;
+	minimumQuantity: number;
 }
 
 /** An example database that the data source uses to retrieve data for the table. */
 export class ExampleDatabase {
 	/** Stream that emits whenever the data has been modified. */
-	// public submarketlist_length= NAMES.length;
- 	// public  foo: HomeComponent = new HomeComponent();
-	// public arr1: any[] = this.foo.submarketlist;
-	//  console.log(arr1);
-		public submarket_code = [];
-  public submarkets = [];
+		// public submarketlist_length= NAMES.length;
+		// public  foo: HomeComponent = new HomeComponent();
+		// public arr1: any[] = this.foo.submarketlist;
+		//  console.log(arr1);
+	public submarket_code = [];
+	public submarkets = [];
+
+	//behaviour subject holds a value and upon change broadcasts it to other parts of the app
 	public dataChange: BehaviorSubject<UserData[]> = new BehaviorSubject<UserData[]>([]);
-	public get data(): UserData[] { return this.dataChange.value; }
 
-
+	public get data(): UserData[] {
+		return this.dataChange.value;
+	}
 
 
 	constructor(index: Array<any>) {
 		// Fill up the database with 100 users.
+		console.log('gggggg');
 		this.submarkets = index;
-		for (let i = 0; i < 100; i++) { this.addUser(); }
+
+		const dummy = [
+			{id: 0, name: "Available", progress: "good", submarketlist: "1"},
+			{id: 1, name: "Ready", progress: "good", submarketlist: "1"},
+			{id: 2, name: "Started", progress: "good", submarketlist: "1"},
+		];
+
+		for (const iron of index) {
+			this.addUser(iron);
+		}
 	}
 
 
 	/** Adds a new user to the database. */
-	public addUser(): any {
-		const copiedData = this.data.slice();
-		copiedData.push(this.createNewUser());
+	public addUser(y: any): any {
+		console.log(y);
+		const copiedData = this.data.slice(y);
+		console.log('kill');
+		console.log(copiedData);
+		console.log('killed already');
+		copiedData.push(this.createNewUser(y));
+		console.log('jill');
+		console.log(copiedData);
 		this.dataChange.next(copiedData);
+		console.log('jack');
 	}
 
 	/** Builds and returns a new User. */
-	private createNewUser(): any {
+	private createNewUser(z: any): any {
 
 		console.log('bubahser');
 
-
-
-		const name =
-			NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-			NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+		const name = z.SUBMAR_EXCH;
 
 		return {
 
-
-			id: (this.data.length + 1).toString(),
-			name: this.submarket_code[0],
-			progress: Math.round(Math.random() * 100).toString(),
-			color: COLORS[Math.round(Math.random() * (COLORS.length - 1))],
-			submarketlist: 0,
+			submarketExchange: z.SUBMAR_EXCH,
+			submarketCode: z.SUBMAR_CODE,
+			minimumQuantity: z.MIN_QTY,
+			isActive: z.IS_ACT,
+			isDefault: z.IS_DEFAULT,
+			crossOrders: z.CRS_ORDERS_DISPLAY,
+			regularOrders: z.REG_ORDERS_DISPLAY,
+			TplusNbuy: z.TPLUSN_BUY,
+			TplusNsell: z.TPLUSN_SELL,
 		};
 	}
 }
@@ -242,5 +267,6 @@ export class ExampleDataSource extends DataSource<any> {
 		return this._exampleDatabase.dataChange;
 	}
 
-	public disconnect(): any {}
+	public disconnect(): any {
+	}
 }
